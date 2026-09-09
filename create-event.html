@@ -1,0 +1,636 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<title>Buat Acara | MoreMoments</title>
+
+<style>
+*{
+  margin:0;
+  padding:0;
+  box-sizing:border-box;
+}
+
+body{
+  font-family:Arial,Helvetica,sans-serif;
+  background:#f7f4f0;
+  color:#27231f;
+}
+
+a{
+  text-decoration:none;
+  color:inherit;
+}
+
+.header{
+  height:75px;
+  background:rgba(255,255,255,.9);
+  border-bottom:1px solid #e9e3dc;
+  display:flex;
+  align-items:center;
+  justify-content:space-between;
+  padding:0 30px;
+  position:sticky;
+  top:0;
+  z-index:100;
+  backdrop-filter:blur(12px);
+}
+
+.logo{
+  font-size:23px;
+  font-weight:800;
+}
+
+.logo span{
+  color:#a77852;
+}
+
+.back{
+  border:1px solid #ddd3ca;
+  border-radius:999px;
+  padding:10px 17px;
+  font-size:14px;
+  background:white;
+}
+
+.page{
+  max-width:850px;
+  margin:auto;
+  padding:55px 20px 100px;
+}
+
+.title{
+  margin-bottom:35px;
+}
+
+.title small{
+  color:#9a7255;
+  font-weight:700;
+  text-transform:uppercase;
+  letter-spacing:1.5px;
+}
+
+.title h1{
+  font-size:42px;
+  margin-top:9px;
+  letter-spacing:-2px;
+}
+
+.title p{
+  margin-top:12px;
+  color:#777;
+  line-height:1.6;
+}
+
+.card{
+  background:white;
+  border:1px solid #ebe4dc;
+  border-radius:25px;
+  padding:30px;
+  box-shadow:0 15px 45px rgba(67,52,39,.06);
+  margin-bottom:20px;
+}
+
+.section-title{
+  font-size:20px;
+  margin-bottom:22px;
+}
+
+.grid{
+  display:grid;
+  grid-template-columns:1fr 1fr;
+  gap:18px;
+}
+
+.full{
+  grid-column:1/-1;
+}
+
+label{
+  display:block;
+  font-size:13px;
+  font-weight:700;
+  margin-bottom:8px;
+}
+
+input,
+select{
+  width:100%;
+  height:50px;
+  border:1px solid #ddd6cf;
+  border-radius:13px;
+  padding:0 14px;
+  font-size:15px;
+  outline:none;
+  background:#fff;
+}
+
+input:focus,
+select:focus{
+  border-color:#9b755a;
+  box-shadow:0 0 0 3px rgba(155,117,90,.10);
+}
+
+.help{
+  font-size:12px;
+  color:#999;
+  margin-top:7px;
+  line-height:1.4;
+}
+
+.slug-box{
+  background:#f8f6f3;
+  border-radius:12px;
+  padding:13px 15px;
+  margin-top:8px;
+  color:#777;
+  font-size:13px;
+  word-break:break-all;
+}
+
+.cover-upload{
+  border:2px dashed #d8cec5;
+  border-radius:17px;
+  text-align:center;
+  padding:30px 20px;
+  cursor:pointer;
+  background:#fbfaf8;
+}
+
+.cover-upload input{
+  display:none;
+}
+
+.cover-upload strong{
+  display:block;
+  margin-bottom:6px;
+}
+
+.cover-upload span{
+  font-size:13px;
+  color:#888;
+}
+
+.preview{
+  display:none;
+  margin-top:18px;
+}
+
+.preview img{
+  width:100%;
+  max-height:350px;
+  object-fit:cover;
+  border-radius:16px;
+}
+
+.action{
+  display:flex;
+  justify-content:flex-end;
+  margin-top:25px;
+}
+
+.create-btn{
+  border:none;
+  min-width:190px;
+  height:54px;
+  border-radius:999px;
+  background:#29251f;
+  color:white;
+  font-size:15px;
+  font-weight:700;
+  cursor:pointer;
+}
+
+.create-btn:hover{
+  opacity:.9;
+}
+
+.result{
+  display:none;
+  background:#ecf6ed;
+  border:1px solid #cbe3ce;
+  border-radius:20px;
+  padding:25px;
+  margin-top:20px;
+}
+
+.result h2{
+  font-size:21px;
+  margin-bottom:10px;
+}
+
+.result p{
+  color:#617063;
+  font-size:14px;
+  line-height:1.5;
+}
+
+.event-link{
+  margin-top:15px;
+  background:white;
+  padding:13px 15px;
+  border-radius:12px;
+  font-size:13px;
+  word-break:break-all;
+}
+
+@media(max-width:650px){
+  .header{
+    padding:0 17px;
+  }
+
+  .page{
+    padding-top:35px;
+  }
+
+  .title h1{
+    font-size:34px;
+  }
+
+  .grid{
+    grid-template-columns:1fr;
+  }
+
+  .full{
+    grid-column:auto;
+  }
+
+  .card{
+    padding:22px;
+  }
+
+  .action{
+    display:block;
+  }
+
+  .create-btn{
+    width:100%;
+  }
+}
+</style>
+</head>
+
+<body>
+
+<header class="header">
+  <a href="index.html" class="logo">
+    more<span>moments</span>
+  </a>
+
+  <a href="index.html" class="back">
+    ← Kembali
+  </a>
+</header>
+
+
+<main class="page">
+
+  <div class="title">
+    <small>Acara baru</small>
+    <h1>Buat momen Anda.</h1>
+    <p>
+      Isi informasi acara. Nantinya setiap acara akan mempunyai
+      link dan QR Code sendiri untuk dibagikan kepada tamu.
+    </p>
+  </div>
+
+
+  <form id="eventForm">
+
+    <div class="card">
+
+      <h2 class="section-title">
+        Informasi acara
+      </h2>
+
+      <div class="grid">
+
+        <div class="full">
+          <label>Nama acara</label>
+
+          <input
+            id="eventName"
+            type="text"
+            placeholder="Contoh: Pernikahan May & Habi"
+            required
+          >
+        </div>
+
+
+        <div>
+          <label>Jenis acara</label>
+
+          <select id="eventType">
+            <option value="Pernikahan">Pernikahan</option>
+            <option value="Ulang Tahun">Ulang Tahun</option>
+            <option value="Wisuda">Wisuda</option>
+            <option value="Reuni">Reuni</option>
+            <option value="Gathering">Gathering</option>
+            <option value="Lainnya">Lainnya</option>
+          </select>
+        </div>
+
+
+        <div>
+          <label>Tanggal acara</label>
+          <input id="eventDate" type="date" required>
+        </div>
+
+
+        <div>
+          <label>Mulai</label>
+          <input id="startTime" type="time" required>
+        </div>
+
+
+        <div>
+          <label>Berakhir</label>
+          <input id="endTime" type="time" required>
+        </div>
+
+      </div>
+
+    </div>
+
+
+    <div class="card">
+
+      <h2 class="section-title">
+        Pengaturan tamu & kamera
+      </h2>
+
+      <div class="grid">
+
+        <div>
+          <label>Maksimal tamu</label>
+
+          <input
+            id="maxGuests"
+            type="number"
+            value="100"
+            min="1"
+            required
+          >
+
+          <div class="help">
+            Maksimal orang yang dapat bergabung.
+          </div>
+        </div>
+
+
+        <div>
+          <label>Jatah foto per tamu</label>
+
+          <select id="shots">
+            <option value="5">5 foto</option>
+            <option value="10">10 foto</option>
+            <option value="15" selected>15 foto</option>
+            <option value="20">20 foto</option>
+            <option value="25">25 foto</option>
+          </select>
+
+          <div class="help">
+            Setiap tamu mempunyai jumlah jepretan sendiri.
+          </div>
+        </div>
+
+
+        <div class="full">
+          <label>Link acara</label>
+
+          <input
+            id="slug"
+            type="text"
+            placeholder="may-habi"
+            required
+          >
+
+          <div class="slug-box" id="slugPreview">
+            .../event/may-habi
+          </div>
+        </div>
+
+      </div>
+
+    </div>
+
+
+    <div class="card">
+
+      <h2 class="section-title">
+        Cover acara
+      </h2>
+
+      <label class="cover-upload">
+
+        <input
+          type="file"
+          id="cover"
+          accept="image/*"
+        >
+
+        <strong>📷 Upload foto cover</strong>
+
+        <span>
+          JPG, PNG atau WebP
+        </span>
+
+      </label>
+
+      <div class="preview" id="preview">
+        <img id="previewImage">
+      </div>
+
+    </div>
+
+
+    <div class="action">
+
+      <button class="create-btn" type="submit">
+        Buat Acara →
+      </button>
+
+    </div>
+
+  </form>
+
+
+  <div class="result" id="result">
+
+    <h2>✓ Acara berhasil dibuat</h2>
+
+    <p>
+      Untuk sementara data tersimpan di browser.
+      Tahap berikutnya akan kita hubungkan ke database Cloudflare.
+    </p>
+
+    <div class="event-link" id="eventLink"></div>
+
+  </div>
+
+</main>
+
+
+<script>
+
+const eventName = document.getElementById("eventName");
+const slug = document.getElementById("slug");
+const slugPreview = document.getElementById("slugPreview");
+
+let slugManual = false;
+
+
+/* Membuat slug otomatis */
+
+function makeSlug(text){
+
+  return text
+    .toLowerCase()
+    .trim()
+    .replace(/&/g, "dan")
+    .replace(/[^a-z0-9]+/g, "-")
+    .replace(/^-+|-+$/g, "");
+
+}
+
+
+eventName.addEventListener("input", function(){
+
+  if(!slugManual){
+
+    slug.value = makeSlug(eventName.value);
+
+    updateSlugPreview();
+
+  }
+
+});
+
+
+slug.addEventListener("input", function(){
+
+  slugManual = true;
+
+  slug.value = makeSlug(slug.value);
+
+  updateSlugPreview();
+
+});
+
+
+function updateSlugPreview(){
+
+  let value = slug.value || "nama-acara";
+
+  slugPreview.textContent =
+    window.location.origin +
+    window.location.pathname
+      .replace("create-event.html","") +
+    "event/" +
+    value;
+
+}
+
+
+/* Preview cover */
+
+document
+.getElementById("cover")
+.addEventListener("change", function(e){
+
+  const file = e.target.files[0];
+
+  if(!file) return;
+
+  const url = URL.createObjectURL(file);
+
+  document.getElementById("previewImage").src = url;
+
+  document.getElementById("preview").style.display = "block";
+
+});
+
+
+/* Simpan event sementara */
+
+document
+.getElementById("eventForm")
+.addEventListener("submit", function(e){
+
+  e.preventDefault();
+
+
+  const eventData = {
+
+    id: Date.now(),
+
+    name:
+      document.getElementById("eventName").value,
+
+    type:
+      document.getElementById("eventType").value,
+
+    date:
+      document.getElementById("eventDate").value,
+
+    startTime:
+      document.getElementById("startTime").value,
+
+    endTime:
+      document.getElementById("endTime").value,
+
+    maxGuests:
+      Number(
+        document.getElementById("maxGuests").value
+      ),
+
+    shots:
+      Number(
+        document.getElementById("shots").value
+      ),
+
+    slug:
+      document.getElementById("slug").value,
+
+    createdAt:
+      new Date().toISOString()
+
+  };
+
+
+  localStorage.setItem(
+    "momentsEvent",
+    JSON.stringify(eventData)
+  );
+
+
+  const base =
+    window.location.origin +
+    window.location.pathname
+      .replace("create-event.html","");
+
+
+  document.getElementById("eventLink").textContent =
+    base + "event.html?e=" + eventData.slug;
+
+
+  document.getElementById("result").style.display =
+    "block";
+
+
+  document.getElementById("result")
+    .scrollIntoView({
+      behavior:"smooth"
+    });
+
+});
+
+
+updateSlugPreview();
+
+</script>
+
+</body>
+</html>
