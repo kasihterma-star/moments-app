@@ -1,0 +1,549 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<title>Acara | MoreMoments</title>
+
+<style>
+*{
+    margin:0;
+    padding:0;
+    box-sizing:border-box;
+}
+
+body{
+    min-height:100vh;
+    font-family:Arial, Helvetica, sans-serif;
+    background:#eee7df;
+    color:#27231f;
+}
+
+.page{
+    min-height:100vh;
+    display:flex;
+    align-items:center;
+    justify-content:center;
+    padding:25px;
+}
+
+.card{
+    width:100%;
+    max-width:420px;
+    background:#fff;
+    border-radius:32px;
+    overflow:hidden;
+    box-shadow:0 30px 80px rgba(65,48,35,.15);
+}
+
+/* COVER */
+
+.cover{
+    height:330px;
+    position:relative;
+    background:
+        linear-gradient(
+            to bottom,
+            rgba(0,0,0,.05),
+            rgba(0,0,0,.5)
+        ),
+        linear-gradient(
+            145deg,
+            #bda58f,
+            #745a48
+        );
+
+    display:flex;
+    flex-direction:column;
+    justify-content:flex-end;
+    padding:30px;
+    color:white;
+}
+
+.logo{
+    position:absolute;
+    top:22px;
+    left:25px;
+    font-size:17px;
+    font-weight:800;
+}
+
+.logo span{
+    opacity:.7;
+}
+
+.event-type{
+    font-size:11px;
+    font-weight:700;
+    letter-spacing:2px;
+    text-transform:uppercase;
+    margin-bottom:8px;
+}
+
+.event-name{
+    font-family:Georgia,serif;
+    font-size:36px;
+    font-weight:normal;
+    line-height:1.1;
+    margin-bottom:10px;
+}
+
+.event-date{
+    font-size:13px;
+    opacity:.9;
+}
+
+/* CONTENT */
+
+.content{
+    padding:30px;
+}
+
+.welcome{
+    text-align:center;
+    margin-bottom:28px;
+}
+
+.welcome h2{
+    font-size:24px;
+    margin-bottom:8px;
+}
+
+.welcome p{
+    color:#777;
+    font-size:14px;
+    line-height:1.6;
+}
+
+/* INFO */
+
+.info{
+    display:grid;
+    grid-template-columns:1fr 1fr;
+    gap:10px;
+    margin-bottom:27px;
+}
+
+.info-box{
+    padding:15px;
+    background:#f8f6f3;
+    border-radius:16px;
+}
+
+.info-box small{
+    display:block;
+    font-size:11px;
+    color:#999;
+    margin-bottom:5px;
+}
+
+.info-box strong{
+    font-size:14px;
+}
+
+/* FORM */
+
+label{
+    display:block;
+    font-size:13px;
+    font-weight:700;
+    margin-bottom:8px;
+}
+
+input{
+    width:100%;
+    height:54px;
+    border:1px solid #ddd5cd;
+    border-radius:15px;
+    padding:0 16px;
+    font-size:16px;
+    outline:none;
+    margin-bottom:14px;
+}
+
+input:focus{
+    border-color:#9c7457;
+    box-shadow:0 0 0 3px rgba(156,116,87,.1);
+}
+
+button{
+    width:100%;
+    height:55px;
+    border:0;
+    border-radius:999px;
+    background:#29251f;
+    color:white;
+    font-size:15px;
+    font-weight:700;
+    cursor:pointer;
+}
+
+button:hover{
+    opacity:.92;
+}
+
+.note{
+    text-align:center;
+    margin-top:17px;
+    color:#999;
+    font-size:11px;
+    line-height:1.5;
+}
+
+/* ERROR */
+
+.error{
+    width:100%;
+    max-width:420px;
+    padding:35px;
+    background:white;
+    border-radius:25px;
+    text-align:center;
+}
+
+.error h2{
+    margin-bottom:10px;
+}
+
+.error p{
+    color:#777;
+    line-height:1.6;
+}
+
+.error a{
+    display:inline-block;
+    margin-top:20px;
+    background:#29251f;
+    color:white;
+    padding:13px 20px;
+    border-radius:999px;
+    text-decoration:none;
+}
+
+@media(max-width:480px){
+
+    .page{
+        padding:0;
+        align-items:stretch;
+    }
+
+    .card{
+        max-width:none;
+        min-height:100vh;
+        border-radius:0;
+    }
+
+    .cover{
+        height:42vh;
+        min-height:300px;
+    }
+
+    .content{
+        padding:27px 22px 35px;
+    }
+}
+</style>
+</head>
+
+
+<body>
+
+<div class="page" id="app">
+
+    <div class="card">
+
+        <div class="cover">
+
+            <div class="logo">
+                more<span>moments</span>
+            </div>
+
+            <div class="event-type" id="eventType">
+                THE EVENT
+            </div>
+
+            <h1 class="event-name" id="eventName">
+                Memuat...
+            </h1>
+
+            <div class="event-date" id="eventDate">
+                -
+            </div>
+
+        </div>
+
+
+        <div class="content">
+
+            <div class="welcome">
+                <h2>Selamat datang 👋</h2>
+
+                <p>
+                    Abadikan momen dari sudut pandang Anda.
+                    Masukkan nama terlebih dahulu untuk mulai memotret.
+                </p>
+            </div>
+
+
+            <div class="info">
+
+                <div class="info-box">
+                    <small>Jatah foto</small>
+
+                    <strong id="shots">
+                        -
+                    </strong>
+                </div>
+
+
+                <div class="info-box">
+                    <small>Berakhir</small>
+
+                    <strong id="endTime">
+                        -
+                    </strong>
+                </div>
+
+            </div>
+
+
+            <form id="guestForm">
+
+                <label>
+                    Nama Anda
+                </label>
+
+                <input
+                    type="text"
+                    id="guestName"
+                    placeholder="Contoh: Ahmad"
+                    autocomplete="name"
+                    required
+                >
+
+                <button type="submit">
+                    📷 Mulai Memotret
+                </button>
+
+            </form>
+
+
+            <div class="note">
+                Dengan melanjutkan, foto yang Anda ambil
+                akan menjadi bagian dari galeri acara ini.
+            </div>
+
+        </div>
+
+    </div>
+
+</div>
+
+
+<script>
+
+/* ========================================
+   AMBIL SLUG DARI URL
+======================================== */
+
+const params =
+    new URLSearchParams(window.location.search);
+
+const slug =
+    params.get("e");
+
+
+/* ========================================
+   AMBIL EVENT DARI LOCAL STORAGE
+======================================== */
+
+const saved =
+    localStorage.getItem("momentsEvent");
+
+let eventData = null;
+
+if(saved){
+
+    try{
+
+        eventData = JSON.parse(saved);
+
+    }catch(error){
+
+        console.error(error);
+
+    }
+
+}
+
+
+/* ========================================
+   VALIDASI EVENT
+======================================== */
+
+if(
+    !eventData ||
+    !slug ||
+    eventData.slug !== slug
+){
+
+    document.getElementById("app").innerHTML = `
+
+        <div class="error">
+
+            <h2>Acara tidak ditemukan</h2>
+
+            <p>
+                Link acara tidak tersedia atau acara
+                belum tersimpan di perangkat ini.
+            </p>
+
+            <a href="index.html">
+                Kembali
+            </a>
+
+        </div>
+
+    `;
+
+}else{
+
+    loadEvent();
+
+}
+
+
+/* ========================================
+   TAMPILKAN DATA EVENT
+======================================== */
+
+function loadEvent(){
+
+    document.getElementById("eventName")
+        .textContent =
+        eventData.name;
+
+
+    document.getElementById("eventType")
+        .textContent =
+        eventData.type;
+
+
+    document.getElementById("shots")
+        .textContent =
+        eventData.shots + " foto";
+
+
+    document.getElementById("endTime")
+        .textContent =
+        eventData.endTime;
+
+
+    document.getElementById("eventDate")
+        .textContent =
+        formatDate(eventData.date);
+
+}
+
+
+/* ========================================
+   FORMAT TANGGAL INDONESIA
+======================================== */
+
+function formatDate(date){
+
+    if(!date) return "-";
+
+    const value =
+        new Date(date + "T00:00:00");
+
+    return value.toLocaleDateString(
+        "id-ID",
+        {
+            weekday:"long",
+            day:"numeric",
+            month:"long",
+            year:"numeric"
+        }
+    );
+
+}
+
+
+/* ========================================
+   TAMU MULAI
+======================================== */
+
+const form =
+    document.getElementById("guestForm");
+
+if(form){
+
+    form.addEventListener(
+        "submit",
+        function(e){
+
+            e.preventDefault();
+
+
+            const guestName =
+                document
+                .getElementById("guestName")
+                .value
+                .trim();
+
+
+            if(!guestName) return;
+
+
+            const guest = {
+
+                id:
+                    Date.now()
+                    .toString(36)
+                    +
+                    Math.random()
+                    .toString(36)
+                    .substring(2,8),
+
+                name:
+                    guestName,
+
+                eventSlug:
+                    eventData.slug,
+
+                shotsTaken:
+                    0,
+
+                joinedAt:
+                    new Date().toISOString()
+
+            };
+
+
+            localStorage.setItem(
+
+                "momentsGuest_" + eventData.slug,
+
+                JSON.stringify(guest)
+
+            );
+
+
+            window.location.href =
+                "camera.html?e="
+                +
+                encodeURIComponent(
+                    eventData.slug
+                );
+
+        }
+    );
+
+}
+
+</script>
+
+</body>
+</html>
