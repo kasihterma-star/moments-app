@@ -527,7 +527,8 @@ video{
 
 
 <script>
-
+const API_URL =
+  "https://moments-api.alavolaadza.workers.dev";
 /* =====================================================
    PARAMETER EVENT
 ===================================================== */
@@ -878,32 +879,273 @@ captureButton.addEventListener(
 );
 
 
-function capturePhoto(){
+async function capturePhoto(){
 
     const max =
         eventData.shots || 15;
 
-
     if(
         guest.shotsTaken >= max
     ){
-
         updateCounter();
-
         return;
-
     }
-
 
     if(
         !video.videoWidth ||
         !video.videoHeight
     ){
-
         return;
+    }
+
+    /* Cegah tombol ditekan berkali-kali */
+    captureButton.disabled = true;
+
+
+    try{
+
+        /* FLASH */
+
+        flash.classList.remove("active");
+
+        void flash.offsetWidth;
+
+        flash.classList.add("active");
+
+
+        /* UKURAN FOTO */
+
+        const maxWidth = 1600;
+
+        let width =
+            video.videoWidth;
+
+        let height =
+            video.videoHeight;
+
+
+        if(width > maxWidth){
+
+            const ratio =
+                maxWidth / width;
+
+            width =
+                maxWidth;
+
+            height =
+                Math.round(
+                    height * ratio
+                );
+
+        }
+
+
+        canvas.width =
+            width;
+
+        canvas.height =
+            height;
+
+
+        const ctx =
+            canvas.getContext("2d");
+
+
+        /* KAMERA DEPAN DIBALIK */
+
+        if(
+            facingMode === "user"
+        ){
+
+            ctx.save();
+
+            ctx.translate(
+                width,
+                0
+            );
+
+            ctx.scale(
+                -1,
+                1
+            );
+
+            ctx.drawImage(
+                video,
+                0,
+                0,
+                width,
+                height
+            );
+
+            ctx.restore();
+
+        }else{
+
+            ctx.drawImage(
+                video,
+                0,
+                0,
+                width,
+                height
+            );
+
+        }
+
+
+        /* UBAH CANVAS MENJADI FILE WEBP */
+
+        const photoBlob =
+            await new Promise(
+                (resolve, reject) => {
+
+                    canvas.toBlob(
+                        blob => {
+
+                            if(blob){
+                                resolve(blob);
+                            }else{
+                                reject(
+                                    new Error(
+                                        "Foto gagal diproses."
+                                    )
+                                );
+                            }
+
+                        },
+                        "image/webp",
+                        0.82
+                    );
+
+                }
+            );
+
+
+        /* PREVIEW FOTO */
+
+        const previewUrl =
+            URL.createObjectURL(
+                photoBlob
+            );
+
+        lastPhoto.src =
+            previewUrl;
+
+        lastPhoto.style.display =
+            "block";
+
+
+        /* DATA UNTUK WORKER */
+
+        const formData =
+            new FormData();
+
+        formData.append(
+            "photo",
+            photoBlob,
+            "photo.webp"
+        );
+
+        formData.append(
+            "eventId",
+            eventData.id
+        );
+
+        formData.append(
+            "guestId",
+            guest.id
+        );
+
+        formData.append(
+            "guestToken",
+            guest.guestToken
+        );
+
+        formData.append(
+            "width",
+            String(width)
+        );
+
+        formData.append(
+            "height",
+            String(height)
+        );
+
+
+        /* UPLOAD KE CLOUDFLARE */
+
+        const response =
+            await fetch(
+                API_URL +
+                "/api/photos",
+                {
+                    method:"POST",
+                    body:formData
+                }
+            );
+
+
+        const data =
+            await response.json();
+
+
+        if(
+            !response.ok ||
+            !data.success
+        ){
+
+            throw new Error(
+                data.error ||
+                "Foto gagal disimpan."
+            );
+
+        }
+
+
+        /* COUNTER DARI SERVER */
+
+        guest.shotsTaken =
+            Number(
+                data.shotsTaken
+            );
+
+
+        localStorage.setItem(
+
+            "momentsGuest_" + slug,
+
+            JSON.stringify(
+                guest
+            )
+
+        );
+
+
+        updateCounter();
+
+
+        console.log(
+            "Foto tersimpan:",
+            data.photo
+        );
+
+
+    }catch(error){
+
+        console.error(error);
+
+        alert(
+            "Foto gagal di-upload:\n" +
+            error.message
+        );
+
+    }finally{
+
+        captureButton.disabled =
+            false;
 
     }
 
+}
 
     /* FLASH */
 
