@@ -344,49 +344,34 @@ button:hover{
 <script>
 
 /* ========================================
+   KONFIGURASI API
+======================================== */
+
+const API_URL =
+    "https://moments-api.alavolaadza.workers.dev";
+
+
+/* ========================================
    AMBIL SLUG DARI URL
 ======================================== */
 
 const params =
-    new URLSearchParams(window.location.search);
+    new URLSearchParams(
+        window.location.search
+    );
 
 const slug =
     params.get("e");
 
 
-/* ========================================
-   AMBIL EVENT DARI LOCAL STORAGE
-======================================== */
-
-const saved =
-    localStorage.getItem("momentsEvent");
-
 let eventData = null;
 
-if(saved){
-
-    try{
-
-        eventData = JSON.parse(saved);
-
-    }catch(error){
-
-        console.error(error);
-
-    }
-
-}
-
 
 /* ========================================
-   VALIDASI EVENT
+   TAMPILKAN ERROR
 ======================================== */
 
-if(
-    !eventData ||
-    !slug ||
-    eventData.slug !== slug
-){
+function showError(message){
 
     document.getElementById("app").innerHTML = `
 
@@ -395,8 +380,7 @@ if(
             <h2>Acara tidak ditemukan</h2>
 
             <p>
-                Link acara tidak tersedia atau acara
-                belum tersimpan di perangkat ini.
+                ${message}
             </p>
 
             <a href="index.html">
@@ -407,42 +391,181 @@ if(
 
     `;
 
-}else{
+}
 
-    loadEvent();
+
+/* ========================================
+   AMBIL EVENT DARI CLOUDFLARE D1
+======================================== */
+
+async function getEvent(){
+
+    if(!slug){
+
+        showError(
+            "Link acara tidak valid."
+        );
+
+        return;
+
+    }
+
+
+    try{
+
+        const response =
+            await fetch(
+                API_URL +
+                "/api/events/" +
+                encodeURIComponent(slug)
+            );
+
+
+        const data =
+            await response.json();
+
+
+        if(
+            !response.ok ||
+            !data.success ||
+            !data.event
+        ){
+
+            throw new Error(
+                data.error ||
+                "Acara tidak ditemukan."
+            );
+
+        }
+
+
+        const raw =
+            data.event;
+
+
+        /*
+           UBAH DATA D1
+           KE FORMAT YANG DIPAKAI WEBSITE
+        */
+
+        eventData = {
+
+            id:
+                raw.id,
+
+            slug:
+                raw.slug,
+
+            name:
+                raw.name,
+
+            type:
+                raw.event_type,
+
+            date:
+                raw.event_date,
+
+            startTime:
+                raw.start_time,
+
+            endTime:
+                raw.end_time,
+
+            maxGuests:
+                Number(
+                    raw.max_guests
+                ),
+
+            shots:
+                Number(
+                    raw.shots_per_guest
+                ),
+
+            filter:
+                raw.filter ||
+                "original",
+
+            status:
+                raw.status,
+
+            coverKey:
+                raw.cover_key
+
+        };
+
+
+        /*
+           SIMPAN SEMENTARA DI HP TAMU.
+           CAMERA.HTML MASIH MEMBUTUHKAN INI.
+        */
+
+        localStorage.setItem(
+            "momentsEvent",
+            JSON.stringify(eventData)
+        );
+
+
+        loadEvent();
+
+
+    }catch(error){
+
+        console.error(error);
+
+        showError(
+            error.message ||
+            "Tidak dapat mengambil data acara."
+        );
+
+    }
 
 }
 
 
 /* ========================================
-   TAMPILKAN DATA EVENT
+   TAMPILKAN EVENT
 ======================================== */
 
 function loadEvent(){
 
-    document.getElementById("eventName")
+    document
+        .getElementById("eventName")
         .textContent =
         eventData.name;
 
 
-    document.getElementById("eventType")
+    document
+        .getElementById("eventType")
         .textContent =
-        eventData.type;
+        eventData.type ||
+        "ACARA";
 
 
-    document.getElementById("shots")
+    document
+        .getElementById("shots")
         .textContent =
-        eventData.shots + " foto";
+        eventData.shots +
+        " foto";
 
 
-    document.getElementById("endTime")
+    document
+        .getElementById("endTime")
         .textContent =
-        eventData.endTime;
+        eventData.endTime ||
+        "-";
 
 
-    document.getElementById("eventDate")
+    document
+        .getElementById("eventDate")
         .textContent =
-        formatDate(eventData.date);
+        formatDate(
+            eventData.date
+        );
+
+
+    document.title =
+        eventData.name +
+        " | MoreMoments";
 
 }
 
@@ -453,10 +576,17 @@ function loadEvent(){
 
 function formatDate(date){
 
-    if(!date) return "-";
+    if(!date){
+        return "-";
+    }
+
 
     const value =
-        new Date(date + "T00:00:00");
+        new Date(
+            date +
+            "T00:00:00"
+        );
+
 
     return value.toLocaleDateString(
         "id-ID",
@@ -472,76 +602,114 @@ function formatDate(date){
 
 
 /* ========================================
-   TAMU MULAI
+   TAMU MULAI MEMOTRET
 ======================================== */
 
 const form =
-    document.getElementById("guestForm");
-
-if(form){
-
-    form.addEventListener(
-        "submit",
-        function(e){
-
-            e.preventDefault();
-
-
-            const guestName =
-                document
-                .getElementById("guestName")
-                .value
-                .trim();
-
-
-            if(!guestName) return;
-
-
-            const guest = {
-
-                id:
-                    Date.now()
-                    .toString(36)
-                    +
-                    Math.random()
-                    .toString(36)
-                    .substring(2,8),
-
-                name:
-                    guestName,
-
-                eventSlug:
-                    eventData.slug,
-
-                shotsTaken:
-                    0,
-
-                joinedAt:
-                    new Date().toISOString()
-
-            };
-
-
-            localStorage.setItem(
-
-                "momentsGuest_" + eventData.slug,
-
-                JSON.stringify(guest)
-
-            );
-
-
-            window.location.href =
-                "camera.html?e="
-                +
-                encodeURIComponent(
-                    eventData.slug
-                );
-
-        }
+    document.getElementById(
+        "guestForm"
     );
 
-}
+
+form.addEventListener(
+    "submit",
+    function(e){
+
+        e.preventDefault();
+
+
+        if(!eventData){
+
+            alert(
+                "Data acara masih dimuat."
+            );
+
+            return;
+
+        }
+
+
+        const guestName =
+            document
+            .getElementById(
+                "guestName"
+            )
+            .value
+            .trim();
+
+
+        if(!guestName){
+            return;
+        }
+
+
+        const guest = {
+
+            id:
+                crypto.randomUUID
+                ?
+                crypto.randomUUID()
+                :
+                Date.now()
+                .toString(36) +
+                Math.random()
+                .toString(36)
+                .substring(2,8),
+
+            name:
+                guestName,
+
+            eventId:
+                eventData.id,
+
+            eventSlug:
+                eventData.slug,
+
+            shotsTaken:
+                0,
+
+            joinedAt:
+                new Date()
+                .toISOString()
+
+        };
+
+
+        /*
+           UNTUK SEKARANG DATA TAMU
+           MASIH DISIMPAN DI PERANGKAT.
+
+           TAHAP BERIKUTNYA AKAN KITA
+           SIMPAN JUGA KE D1.
+        */
+
+        localStorage.setItem(
+
+            "momentsGuest_" +
+            eventData.slug,
+
+            JSON.stringify(
+                guest
+            )
+
+        );
+
+
+        window.location.href =
+            "camera.html?e=" +
+            encodeURIComponent(
+                eventData.slug
+            );
+
+    }
+);
+
+
+/* ========================================
+   MULAI
+======================================== */
+
+getEvent();
 
 </script>
 
