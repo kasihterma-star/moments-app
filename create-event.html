@@ -553,26 +553,41 @@ document
 });
 
 
-/* Simpan event sementara */
+/* ========================================
+   SIMPAN EVENT KE CLOUDFLARE D1
+======================================== */
+
+const API_URL =
+  "https://moments-api.alavolaadza.workers.dev";
+
 
 document
 .getElementById("eventForm")
-.addEventListener("submit", function(e){
+.addEventListener("submit", async function(e){
 
   e.preventDefault();
 
 
+  const button =
+    document.querySelector(".create-btn");
+
+  const originalText =
+    button.textContent;
+
+
+  button.disabled = true;
+  button.textContent = "Membuat acara...";
+
+
   const eventData = {
 
-    id: Date.now(),
-
     name:
-      document.getElementById("eventName").value,
+      document.getElementById("eventName").value.trim(),
 
-    type:
+    eventType:
       document.getElementById("eventType").value,
 
-    date:
+    eventDate:
       document.getElementById("eventDate").value,
 
     startTime:
@@ -586,44 +601,145 @@ document
         document.getElementById("maxGuests").value
       ),
 
-    shots:
+    shotsPerGuest:
       Number(
         document.getElementById("shots").value
       ),
 
     slug:
-      document.getElementById("slug").value,
-
-    createdAt:
-      new Date().toISOString()
+      document.getElementById("slug").value.trim()
 
   };
 
 
-  localStorage.setItem(
-    "momentsEvent",
-    JSON.stringify(eventData)
-  );
+  try {
+
+    const response =
+      await fetch(
+        API_URL + "/api/events",
+        {
+          method: "POST",
+
+          headers: {
+            "Content-Type": "application/json"
+          },
+
+          body:
+            JSON.stringify(eventData)
+        }
+      );
 
 
-  const base =
-    window.location.origin +
-    window.location.pathname
-      .replace("create-event.html","");
+    const data =
+      await response.json();
 
 
-  document.getElementById("eventLink").textContent =
-    base + "event.html?e=" + eventData.slug;
+    if(!response.ok || !data.success){
+
+      throw new Error(
+        data.error ||
+        "Acara gagal dibuat."
+      );
+
+    }
 
 
-  document.getElementById("result").style.display =
-    "block";
+    /* sementara untuk kompatibilitas halaman event lama */
+
+    const localEvent = {
+
+      id:
+        data.event.id,
+
+      slug:
+        data.event.slug,
+
+      name:
+        data.event.name,
+
+      type:
+        data.event.eventType,
+
+      date:
+        data.event.eventDate,
+
+      startTime:
+        data.event.startTime,
+
+      endTime:
+        data.event.endTime,
+
+      maxGuests:
+        data.event.maxGuests,
+
+      shots:
+        data.event.shotsPerGuest
+
+    };
 
 
-  document.getElementById("result")
-    .scrollIntoView({
-      behavior:"smooth"
-    });
+    localStorage.setItem(
+      "momentsEvent",
+      JSON.stringify(localEvent)
+    );
+
+
+    const base =
+      window.location.origin +
+      window.location.pathname
+        .replace("create-event.html","");
+
+
+    const eventLink =
+      base +
+      "event.html?e=" +
+      encodeURIComponent(
+        data.event.slug
+      );
+
+
+    document
+      .getElementById("eventLink")
+      .textContent =
+      eventLink;
+
+
+    document
+      .getElementById("result")
+      .style.display =
+      "block";
+
+
+    document
+      .getElementById("result")
+      .scrollIntoView({
+        behavior:"smooth"
+      });
+
+
+    console.log(
+      "Event tersimpan ke D1:",
+      data.event
+    );
+
+
+  } catch(error) {
+
+    alert(
+      "Gagal membuat acara:\n" +
+      error.message
+    );
+
+    console.error(error);
+
+  } finally {
+
+    button.disabled = false;
+
+    button.textContent =
+      originalText;
+
+  }
 
 });
 
