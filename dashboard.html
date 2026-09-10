@@ -1,0 +1,676 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<title>Dashboard | MoreMoments</title>
+
+<style>
+*{
+    margin:0;
+    padding:0;
+    box-sizing:border-box;
+}
+
+body{
+    min-height:100vh;
+    font-family:Arial,Helvetica,sans-serif;
+    background:#f4f0eb;
+    color:#27231f;
+}
+
+a{
+    color:inherit;
+    text-decoration:none;
+}
+
+button{
+    font:inherit;
+}
+
+.topbar{
+    position:sticky;
+    top:0;
+    z-index:50;
+    background:rgba(250,248,245,.94);
+    border-bottom:1px solid #e6ddd5;
+    backdrop-filter:blur(12px);
+}
+
+.topbar-inner{
+    max-width:1180px;
+    min-height:72px;
+    margin:auto;
+    padding:0 20px;
+    display:flex;
+    align-items:center;
+    justify-content:space-between;
+    gap:16px;
+}
+
+.logo{
+    font-size:21px;
+    font-weight:800;
+}
+
+.logo span{
+    color:#a87854;
+}
+
+.new-event{
+    display:inline-flex;
+    align-items:center;
+    justify-content:center;
+    min-height:42px;
+    padding:0 18px;
+    border-radius:999px;
+    background:#29251f;
+    color:#fff;
+    font-size:13px;
+    font-weight:700;
+}
+
+.page{
+    max-width:1180px;
+    margin:auto;
+    padding:45px 20px 90px;
+}
+
+.hero{
+    display:flex;
+    align-items:flex-end;
+    justify-content:space-between;
+    gap:20px;
+    margin-bottom:30px;
+}
+
+.eyebrow{
+    color:#a87854;
+    font-size:11px;
+    font-weight:800;
+    letter-spacing:1.7px;
+    text-transform:uppercase;
+    margin-bottom:8px;
+}
+
+.hero h1{
+    font-family:Georgia,serif;
+    font-size:clamp(34px,5vw,54px);
+    font-weight:normal;
+    line-height:1.05;
+    margin-bottom:9px;
+}
+
+.hero p{
+    color:#746d66;
+    line-height:1.6;
+    font-size:14px;
+}
+
+.summary{
+    display:grid;
+    grid-template-columns:repeat(3,minmax(0,1fr));
+    gap:12px;
+    margin-bottom:28px;
+}
+
+.summary-card{
+    background:#fff;
+    border:1px solid #e5dcd3;
+    border-radius:20px;
+    padding:18px;
+}
+
+.summary-card small{
+    display:block;
+    color:#8b837c;
+    font-size:11px;
+    margin-bottom:8px;
+}
+
+.summary-card strong{
+    display:block;
+    font-size:26px;
+}
+
+.toolbar{
+    display:flex;
+    align-items:center;
+    justify-content:space-between;
+    gap:12px;
+    margin-bottom:16px;
+}
+
+.toolbar h2{
+    font-size:19px;
+}
+
+.refresh{
+    border:1px solid #ddd3ca;
+    background:#fff;
+    color:#332e29;
+    border-radius:999px;
+    padding:10px 15px;
+    cursor:pointer;
+    font-weight:700;
+    font-size:12px;
+}
+
+.loading,
+.empty,
+.error{
+    background:#fff;
+    border:1px solid #e5dcd3;
+    border-radius:22px;
+    padding:35px 20px;
+    text-align:center;
+    color:#777;
+}
+
+.events{
+    display:grid;
+    grid-template-columns:repeat(2,minmax(0,1fr));
+    gap:16px;
+}
+
+.event-card{
+    background:#fff;
+    border:1px solid #e5dcd3;
+    border-radius:24px;
+    padding:22px;
+    box-shadow:0 12px 30px rgba(66,49,37,.05);
+}
+
+.card-top{
+    display:flex;
+    justify-content:space-between;
+    align-items:flex-start;
+    gap:14px;
+    margin-bottom:20px;
+}
+
+.event-type{
+    color:#a87854;
+    font-size:10px;
+    letter-spacing:1.4px;
+    text-transform:uppercase;
+    font-weight:800;
+    margin-bottom:6px;
+}
+
+.event-name{
+    font-family:Georgia,serif;
+    font-size:25px;
+    font-weight:normal;
+    line-height:1.15;
+    word-break:break-word;
+}
+
+.status{
+    flex:0 0 auto;
+    padding:7px 10px;
+    border-radius:999px;
+    background:#edf6ee;
+    color:#397146;
+    font-size:10px;
+    font-weight:800;
+    text-transform:uppercase;
+}
+
+.status.inactive{
+    background:#f3eeee;
+    color:#876b6b;
+}
+
+.date{
+    color:#716a63;
+    font-size:13px;
+    line-height:1.5;
+    margin-bottom:19px;
+}
+
+.stats{
+    display:grid;
+    grid-template-columns:repeat(3,minmax(0,1fr));
+    gap:8px;
+    margin-bottom:20px;
+}
+
+.stat{
+    background:#f8f5f2;
+    border-radius:14px;
+    padding:12px 10px;
+}
+
+.stat small{
+    display:block;
+    color:#948b83;
+    font-size:10px;
+    margin-bottom:5px;
+}
+
+.stat strong{
+    font-size:14px;
+}
+
+.slug{
+    overflow:hidden;
+    text-overflow:ellipsis;
+    white-space:nowrap;
+    padding:11px 12px;
+    margin-bottom:16px;
+    border-radius:12px;
+    background:#f8f5f2;
+    color:#7d756e;
+    font-size:11px;
+}
+
+.actions{
+    display:grid;
+    grid-template-columns:1fr 1fr auto;
+    gap:8px;
+}
+
+.action{
+    min-height:42px;
+    display:flex;
+    align-items:center;
+    justify-content:center;
+    border-radius:999px;
+    border:1px solid #ded4cc;
+    background:#fff;
+    cursor:pointer;
+    font-size:12px;
+    font-weight:700;
+}
+
+.action.primary{
+    background:#29251f;
+    color:#fff;
+    border-color:#29251f;
+}
+
+.action.copy{
+    width:44px;
+    padding:0;
+}
+
+.toast{
+    position:fixed;
+    left:50%;
+    bottom:28px;
+    transform:translate(-50%,20px);
+    z-index:100;
+    background:#29251f;
+    color:#fff;
+    padding:12px 17px;
+    border-radius:999px;
+    font-size:12px;
+    opacity:0;
+    pointer-events:none;
+    transition:.2s;
+}
+
+.toast.show{
+    opacity:1;
+    transform:translate(-50%,0);
+}
+
+@media(max-width:760px){
+    .hero{
+        display:block;
+    }
+
+    .summary{
+        grid-template-columns:1fr 1fr 1fr;
+    }
+
+    .events{
+        grid-template-columns:1fr;
+    }
+}
+
+@media(max-width:520px){
+    .page{
+        padding:30px 15px 70px;
+    }
+
+    .topbar-inner{
+        padding:0 15px;
+    }
+
+    .summary-card{
+        padding:14px 10px;
+    }
+
+    .summary-card strong{
+        font-size:21px;
+    }
+
+    .event-card{
+        padding:18px;
+    }
+
+    .actions{
+        grid-template-columns:1fr 1fr;
+    }
+
+    .action.copy{
+        width:auto;
+        grid-column:1 / -1;
+    }
+}
+</style>
+</head>
+
+<body>
+
+<header class="topbar">
+    <div class="topbar-inner">
+        <a href="index.html" class="logo">
+            more<span>moments</span>
+        </a>
+
+        <a href="create-event.html" class="new-event">
+            + Buat Acara
+        </a>
+    </div>
+</header>
+
+<main class="page">
+
+    <section class="hero">
+        <div>
+            <div class="eyebrow">Dashboard</div>
+            <h1>Acara Anda.</h1>
+            <p>
+                Lihat acara, jumlah tamu, foto, dan buka galeri dari satu tempat.
+            </p>
+        </div>
+    </section>
+
+    <section class="summary">
+        <div class="summary-card">
+            <small>Total acara</small>
+            <strong id="totalEvents">0</strong>
+        </div>
+
+        <div class="summary-card">
+            <small>Total tamu</small>
+            <strong id="totalGuests">0</strong>
+        </div>
+
+        <div class="summary-card">
+            <small>Total foto</small>
+            <strong id="totalPhotos">0</strong>
+        </div>
+    </section>
+
+    <div class="toolbar">
+        <h2>Daftar acara</h2>
+        <button class="refresh" id="refreshButton">↻ Muat ulang</button>
+    </div>
+
+    <div class="loading" id="statusBox">
+        Memuat acara...
+    </div>
+
+    <section class="events" id="events"></section>
+
+</main>
+
+<div class="toast" id="toast">
+    Link disalin
+</div>
+
+<script>
+const API_URL =
+    "https://moments-api.alavolaadza.workers.dev";
+
+const eventsEl =
+    document.getElementById("events");
+
+const statusBox =
+    document.getElementById("statusBox");
+
+const toast =
+    document.getElementById("toast");
+
+function formatDate(value){
+    if(!value) return "-";
+
+    const date =
+        new Date(value + "T00:00:00");
+
+    return date.toLocaleDateString(
+        "id-ID",
+        {
+            weekday:"long",
+            day:"numeric",
+            month:"long",
+            year:"numeric"
+        }
+    );
+}
+
+function showToast(message){
+    toast.textContent = message;
+    toast.classList.add("show");
+
+    setTimeout(() => {
+        toast.classList.remove("show");
+    }, 1800);
+}
+
+function eventUrl(slug){
+    return (
+        window.location.origin +
+        window.location.pathname.replace(
+            /dashboard\.html.*$/,
+            ""
+        ) +
+        "event.html?e=" +
+        encodeURIComponent(slug)
+    );
+}
+
+function galleryUrl(slug){
+    return (
+        window.location.origin +
+        window.location.pathname.replace(
+            /dashboard\.html.*$/,
+            ""
+        ) +
+        "gallery.html?e=" +
+        encodeURIComponent(slug)
+    );
+}
+
+async function copyLink(slug){
+    const link = eventUrl(slug);
+
+    try{
+        await navigator.clipboard.writeText(link);
+        showToast("Link acara disalin");
+    }catch(error){
+        window.prompt(
+            "Salin link acara ini:",
+            link
+        );
+    }
+}
+
+function renderEvent(event){
+    const article =
+        document.createElement("article");
+
+    article.className =
+        "event-card";
+
+    const statusClass =
+        event.status === "active"
+        ? ""
+        : " inactive";
+
+    article.innerHTML = `
+        <div class="card-top">
+            <div>
+                <div class="event-type">
+                    ${event.eventType || "Acara"}
+                </div>
+
+                <h3 class="event-name"></h3>
+            </div>
+
+            <div class="status${statusClass}">
+                ${event.status || "active"}
+            </div>
+        </div>
+
+        <div class="date">
+            ${formatDate(event.eventDate)}
+            • ${event.startTime || "-"}–${event.endTime || "-"}
+        </div>
+
+        <div class="stats">
+            <div class="stat">
+                <small>Tamu</small>
+                <strong>${event.guestCount}/${event.maxGuests}</strong>
+            </div>
+
+            <div class="stat">
+                <small>Foto</small>
+                <strong>${event.photoCount}</strong>
+            </div>
+
+            <div class="stat">
+                <small>Jatah</small>
+                <strong>${event.shotsPerGuest} foto</strong>
+            </div>
+        </div>
+
+        <div class="slug"></div>
+
+        <div class="actions">
+            <a class="action primary open-event">
+                Buka acara
+            </a>
+
+            <a class="action open-gallery">
+                Galeri
+            </a>
+
+            <button class="action copy" type="button">
+                🔗 Salin link
+            </button>
+        </div>
+    `;
+
+    article
+        .querySelector(".event-name")
+        .textContent =
+        event.name;
+
+    article
+        .querySelector(".slug")
+        .textContent =
+        event.slug;
+
+    article
+        .querySelector(".open-event")
+        .href =
+        eventUrl(event.slug);
+
+    article
+        .querySelector(".open-gallery")
+        .href =
+        galleryUrl(event.slug);
+
+    article
+        .querySelector(".copy")
+        .addEventListener(
+            "click",
+            () => copyLink(event.slug)
+        );
+
+    return article;
+}
+
+async function loadEvents(){
+    statusBox.style.display = "block";
+    statusBox.className = "loading";
+    statusBox.textContent = "Memuat acara...";
+    eventsEl.innerHTML = "";
+
+    try{
+        const response =
+            await fetch(
+                API_URL + "/api/events"
+            );
+
+        const data =
+            await response.json();
+
+        if(
+            !response.ok ||
+            !data.success
+        ){
+            throw new Error(
+                data.error ||
+                "Daftar acara gagal dimuat."
+            );
+        }
+
+        const events =
+            data.events || [];
+
+        document.getElementById("totalEvents")
+            .textContent =
+            data.stats?.events ?? events.length;
+
+        document.getElementById("totalGuests")
+            .textContent =
+            data.stats?.guests ?? 0;
+
+        document.getElementById("totalPhotos")
+            .textContent =
+            data.stats?.photos ?? 0;
+
+        if(!events.length){
+            statusBox.className = "empty";
+            statusBox.textContent =
+                "Belum ada acara.";
+            return;
+        }
+
+        statusBox.style.display = "none";
+
+        events.forEach(event => {
+            eventsEl.appendChild(
+                renderEvent(event)
+            );
+        });
+
+    }catch(error){
+        console.error(error);
+
+        statusBox.className = "error";
+        statusBox.textContent =
+            error.message ||
+            "Dashboard gagal dimuat.";
+    }
+}
+
+document
+    .getElementById("refreshButton")
+    .addEventListener(
+        "click",
+        loadEvents
+    );
+
+loadEvents();
+</script>
+
+</body>
+</html>
