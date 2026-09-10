@@ -37,8 +37,6 @@ body{
     box-shadow:0 30px 80px rgba(65,48,35,.15);
 }
 
-/* COVER */
-
 .cover{
     height:330px;
     position:relative;
@@ -94,8 +92,6 @@ body{
     opacity:.9;
 }
 
-/* CONTENT */
-
 .content{
     padding:30px;
 }
@@ -115,8 +111,6 @@ body{
     font-size:14px;
     line-height:1.6;
 }
-
-/* INFO */
 
 .info{
     display:grid;
@@ -141,8 +135,6 @@ body{
 .info-box strong{
     font-size:14px;
 }
-
-/* FORM */
 
 label{
     display:block;
@@ -179,8 +171,9 @@ button{
     cursor:pointer;
 }
 
-button:hover{
-    opacity:.92;
+button:disabled{
+    opacity:.6;
+    cursor:not-allowed;
 }
 
 .note{
@@ -190,8 +183,6 @@ button:hover{
     font-size:11px;
     line-height:1.5;
 }
-
-/* ERROR */
 
 .error{
     width:100%;
@@ -222,7 +213,6 @@ button:hover{
 }
 
 @media(max-width:480px){
-
     .page{
         padding:0;
         align-items:stretch;
@@ -245,7 +235,6 @@ button:hover{
 }
 </style>
 </head>
-
 
 <body>
 
@@ -273,61 +262,44 @@ button:hover{
 
         </div>
 
-
         <div class="content">
 
             <div class="welcome">
                 <h2>Selamat datang 👋</h2>
-
                 <p>
                     Abadikan momen dari sudut pandang Anda.
                     Masukkan nama terlebih dahulu untuk mulai memotret.
                 </p>
             </div>
 
-
             <div class="info">
-
                 <div class="info-box">
                     <small>Jatah foto</small>
-
-                    <strong id="shots">
-                        -
-                    </strong>
+                    <strong id="shots">-</strong>
                 </div>
-
 
                 <div class="info-box">
                     <small>Berakhir</small>
-
-                    <strong id="endTime">
-                        -
-                    </strong>
+                    <strong id="endTime">-</strong>
                 </div>
-
             </div>
 
-
             <form id="guestForm">
-
-                <label>
-                    Nama Anda
-                </label>
+                <label>Nama Anda</label>
 
                 <input
                     type="text"
                     id="guestName"
                     placeholder="Contoh: Ahmad"
                     autocomplete="name"
+                    maxlength="80"
                     required
                 >
 
-                <button type="submit">
+                <button type="submit" id="joinButton">
                     📷 Mulai Memotret
                 </button>
-
             </form>
-
 
             <div class="note">
                 Dengan melanjutkan, foto yang Anda ambil
@@ -335,258 +307,99 @@ button:hover{
             </div>
 
         </div>
-
     </div>
-
 </div>
 
-
 <script>
+const API_URL = "https://moments-api.alavolaadza.workers.dev";
 
-/* ========================================
-   KONFIGURASI API
-======================================== */
-
-const API_URL =
-    "https://moments-api.alavolaadza.workers.dev";
-
-
-/* ========================================
-   AMBIL SLUG DARI URL
-======================================== */
-
-const params =
-    new URLSearchParams(
-        window.location.search
-    );
-
-const slug =
-    params.get("e");
-
+const params = new URLSearchParams(window.location.search);
+const slug = params.get("e");
 
 let eventData = null;
 
-
-/* ========================================
-   TAMPILKAN ERROR
-======================================== */
-
 function showError(message){
-
     document.getElementById("app").innerHTML = `
-
         <div class="error">
-
             <h2>Acara tidak ditemukan</h2>
-
-            <p>
-                ${message}
-            </p>
-
-            <a href="index.html">
-                Kembali
-            </a>
-
+            <p>${message}</p>
+            <a href="index.html">Kembali</a>
         </div>
-
     `;
-
 }
 
-
-/* ========================================
-   AMBIL EVENT DARI CLOUDFLARE D1
-======================================== */
-
 async function getEvent(){
-
     if(!slug){
-
-        showError(
-            "Link acara tidak valid."
-        );
-
+        showError("Link acara tidak valid.");
         return;
-
     }
 
-
     try{
+        const response = await fetch(
+            API_URL + "/api/events/" + encodeURIComponent(slug)
+        );
 
-        const response =
-            await fetch(
-                API_URL +
-                "/api/events/" +
-                encodeURIComponent(slug)
-            );
+        const data = await response.json();
 
-
-        const data =
-            await response.json();
-
-
-        if(
-            !response.ok ||
-            !data.success ||
-            !data.event
-        ){
-
-            throw new Error(
-                data.error ||
-                "Acara tidak ditemukan."
-            );
-
+        if(!response.ok || !data.success || !data.event){
+            throw new Error(data.error || "Acara tidak ditemukan.");
         }
 
-
-        const raw =
-            data.event;
-
-
-        /*
-           UBAH DATA D1
-           KE FORMAT YANG DIPAKAI WEBSITE
-        */
+        const raw = data.event;
 
         eventData = {
-
-            id:
-                raw.id,
-
-            slug:
-                raw.slug,
-
-            name:
-                raw.name,
-
-            type:
-                raw.event_type,
-
-            date:
-                raw.event_date,
-
-            startTime:
-                raw.start_time,
-
-            endTime:
-                raw.end_time,
-
-            maxGuests:
-                Number(
-                    raw.max_guests
-                ),
-
-            shots:
-                Number(
-                    raw.shots_per_guest
-                ),
-
-            filter:
-                raw.filter ||
-                "original",
-
-            status:
-                raw.status,
-
-            coverKey:
-                raw.cover_key
-
+            id: raw.id,
+            slug: raw.slug,
+            name: raw.name,
+            type: raw.event_type,
+            date: raw.event_date,
+            startTime: raw.start_time,
+            endTime: raw.end_time,
+            maxGuests: Number(raw.max_guests),
+            shots: Number(raw.shots_per_guest),
+            filter: raw.filter || "original",
+            status: raw.status,
+            coverKey: raw.cover_key
         };
 
-
-        /*
-           SIMPAN SEMENTARA DI HP TAMU.
-           CAMERA.HTML MASIH MEMBUTUHKAN INI.
-        */
-
+        // camera.html masih membaca event dari localStorage.
         localStorage.setItem(
             "momentsEvent",
             JSON.stringify(eventData)
         );
 
-
         loadEvent();
 
-
     }catch(error){
-
         console.error(error);
-
-        showError(
-            error.message ||
-            "Tidak dapat mengambil data acara."
-        );
-
+        showError(error.message || "Tidak dapat mengambil data acara.");
     }
-
 }
-
-
-/* ========================================
-   TAMPILKAN EVENT
-======================================== */
 
 function loadEvent(){
-
-    document
-        .getElementById("eventName")
-        .textContent =
+    document.getElementById("eventName").textContent =
         eventData.name;
 
+    document.getElementById("eventType").textContent =
+        eventData.type || "ACARA";
 
-    document
-        .getElementById("eventType")
-        .textContent =
-        eventData.type ||
-        "ACARA";
+    document.getElementById("shots").textContent =
+        eventData.shots + " foto";
 
+    document.getElementById("endTime").textContent =
+        eventData.endTime || "-";
 
-    document
-        .getElementById("shots")
-        .textContent =
-        eventData.shots +
-        " foto";
-
-
-    document
-        .getElementById("endTime")
-        .textContent =
-        eventData.endTime ||
-        "-";
-
-
-    document
-        .getElementById("eventDate")
-        .textContent =
-        formatDate(
-            eventData.date
-        );
-
+    document.getElementById("eventDate").textContent =
+        formatDate(eventData.date);
 
     document.title =
-        eventData.name +
-        " | MoreMoments";
-
+        eventData.name + " | MoreMoments";
 }
 
-
-/* ========================================
-   FORMAT TANGGAL INDONESIA
-======================================== */
-
 function formatDate(date){
+    if(!date) return "-";
 
-    if(!date){
-        return "-";
-    }
-
-
-    const value =
-        new Date(
-            date +
-            "T00:00:00"
-        );
-
+    const value = new Date(date + "T00:00:00");
 
     return value.toLocaleDateString(
         "id-ID",
@@ -597,120 +410,91 @@ function formatDate(date){
             year:"numeric"
         }
     );
-
 }
 
+const form = document.getElementById("guestForm");
+const joinButton = document.getElementById("joinButton");
 
-/* ========================================
-   TAMU MULAI MEMOTRET
-======================================== */
+form.addEventListener("submit", async function(e){
+    e.preventDefault();
 
-const form =
-    document.getElementById(
-        "guestForm"
-    );
+    if(!eventData){
+        alert("Data acara masih dimuat.");
+        return;
+    }
 
+    const guestName =
+        document.getElementById("guestName").value.trim();
 
-form.addEventListener(
-    "submit",
-    function(e){
+    if(!guestName){
+        return;
+    }
 
-        e.preventDefault();
+    const oldText = joinButton.textContent;
 
+    joinButton.disabled = true;
+    joinButton.textContent = "Menghubungkan...";
 
-        if(!eventData){
-
-            alert(
-                "Data acara masih dimuat."
-            );
-
-            return;
-
-        }
-
-
-        const guestName =
-            document
-            .getElementById(
-                "guestName"
-            )
-            .value
-            .trim();
-
-
-        if(!guestName){
-            return;
-        }
-
-
-        const guest = {
-
-            id:
-                crypto.randomUUID
-                ?
-                crypto.randomUUID()
-                :
-                Date.now()
-                .toString(36) +
-                Math.random()
-                .toString(36)
-                .substring(2,8),
-
-            name:
-                guestName,
-
-            eventId:
-                eventData.id,
-
-            eventSlug:
-                eventData.slug,
-
-            shotsTaken:
-                0,
-
-            joinedAt:
-                new Date()
-                .toISOString()
-
-        };
-
-
-        /*
-           UNTUK SEKARANG DATA TAMU
-           MASIH DISIMPAN DI PERANGKAT.
-
-           TAHAP BERIKUTNYA AKAN KITA
-           SIMPAN JUGA KE D1.
-        */
-
-        localStorage.setItem(
-
-            "momentsGuest_" +
-            eventData.slug,
-
-            JSON.stringify(
-                guest
-            )
-
+    try{
+        const response = await fetch(
+            API_URL + "/api/guests",
+            {
+                method:"POST",
+                headers:{
+                    "Content-Type":"application/json"
+                },
+                body:JSON.stringify({
+                    eventId:eventData.id,
+                    name:guestName
+                })
+            }
         );
 
+        const data = await response.json();
+
+        if(!response.ok || !data.success || !data.guest){
+            throw new Error(
+                data.error || "Gagal bergabung ke acara."
+            );
+        }
+
+        // PENTING:
+        // data ini berasal dari D1/Worker, sehingga guest.id dan
+        // guestToken valid saat camera.html meng-upload foto.
+        const guest = {
+            id: data.guest.id,
+            eventId: data.guest.eventId,
+            eventSlug: data.guest.eventSlug,
+            name: data.guest.name,
+            guestToken: data.guest.guestToken,
+            shotsTaken: Number(data.guest.shotsTaken || 0),
+            shotsLimit: Number(data.guest.shotsLimit || eventData.shots)
+        };
+
+        localStorage.setItem(
+            "momentsGuest_" + eventData.slug,
+            JSON.stringify(guest)
+        );
 
         window.location.href =
             "camera.html?e=" +
-            encodeURIComponent(
-                eventData.slug
-            );
+            encodeURIComponent(eventData.slug);
 
+    }catch(error){
+        console.error(error);
+
+        alert(
+            "Gagal bergabung:\n" +
+            error.message
+        );
+
+    }finally{
+        joinButton.disabled = false;
+        joinButton.textContent = oldText;
     }
-);
-
-
-/* ========================================
-   MULAI
-======================================== */
+});
 
 getEvent();
-
 </script>
 
 </body>
