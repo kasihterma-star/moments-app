@@ -8,246 +8,357 @@
   content="width=device-width, initial-scale=1.0"
 >
 
-<title>Login Admin | MoreMoments</title>
+<title>Masuk | MoreMoments</title>
 
 <style>
 
 *{
-    margin:0;
-    padding:0;
-    box-sizing:border-box;
+  margin:0;
+  padding:0;
+  box-sizing:border-box;
 }
 
 body{
-    min-height:100vh;
+  min-height:100vh;
 
-    display:flex;
-    align-items:center;
-    justify-content:center;
+  display:flex;
+  align-items:center;
+  justify-content:center;
 
-    padding:25px;
+  padding:24px;
 
-    font-family:
-        Arial,
-        Helvetica,
-        sans-serif;
+  background:#eee7df;
 
-    background:
-        #eee7df;
+  font-family:
+    Arial,
+    Helvetica,
+    sans-serif;
 
-    color:
-        #27231f;
+  color:#29251f;
 }
 
 .card{
-    width:100%;
-    max-width:410px;
+  width:100%;
+  max-width:430px;
 
-    background:#fff;
+  padding:
+    34px
+    28px;
 
-    border-radius:30px;
+  background:#fff;
 
-    padding:
-        38px
-        28px;
+  border-radius:30px;
 
-    box-shadow:
-        0
-        30px
-        80px
-        rgba(65,48,35,.15);
+  box-shadow:
+    0
+    30px
+    80px
+    rgba(60,45,34,.14);
 }
 
 .logo{
-    text-align:center;
+  text-align:center;
 
-    font-size:24px;
-    font-weight:800;
+  font-size:24px;
 
-    margin-bottom:34px;
+  font-weight:800;
+
+  margin-bottom:28px;
 }
 
 .logo span{
-    color:#a77852;
+  color:#ad7c58;
 }
 
 .icon{
-    width:72px;
-    height:72px;
+  width:68px;
+  height:68px;
 
-    margin:
-        0
-        auto
-        20px;
+  margin:
+    0
+    auto
+    18px;
 
-    border-radius:22px;
+  display:flex;
+  align-items:center;
+  justify-content:center;
 
-    display:flex;
-    align-items:center;
-    justify-content:center;
+  border-radius:22px;
 
-    background:#eee7df;
+  background:#eee7df;
 
-    font-size:31px;
+  font-size:29px;
 }
 
 h1{
-    text-align:center;
+  text-align:center;
 
-    font-size:28px;
+  font-size:28px;
 
-    margin-bottom:9px;
+  margin-bottom:8px;
 }
 
-.description{
-    text-align:center;
+.subtitle{
+  max-width:330px;
 
-    color:#777;
+  margin:
+    0
+    auto
+    24px;
 
-    font-size:14px;
-    line-height:1.6;
+  text-align:center;
 
-    margin-bottom:28px;
+  color:#7c746d;
+
+  font-size:13px;
+
+  line-height:1.6;
+}
+
+
+/* TAB */
+
+.tabs{
+  display:grid;
+
+  grid-template-columns:
+    1fr
+    1fr;
+
+  gap:5px;
+
+  margin-bottom:24px;
+
+  padding:5px;
+
+  background:#f1ede9;
+
+  border-radius:999px;
+}
+
+.tab{
+  height:42px;
+
+  border:0;
+
+  border-radius:999px;
+
+  background:transparent;
+
+  color:#736c66;
+
+  font-weight:700;
+
+  cursor:pointer;
+}
+
+.tab.active{
+  background:#fff;
+
+  color:#29251f;
+
+  box-shadow:
+    0
+    3px
+    10px
+    rgba(40,30,20,.08);
+}
+
+
+/* FORM */
+
+.form{
+  display:none;
+}
+
+.form.active{
+  display:block;
+}
+
+.field{
+  margin-bottom:15px;
 }
 
 label{
-    display:block;
+  display:block;
 
-    font-size:13px;
-    font-weight:700;
+  margin-bottom:7px;
 
-    margin-bottom:8px;
+  font-size:12px;
+
+  font-weight:700;
 }
 
-.password-box{
-    position:relative;
+.input-wrap{
+  position:relative;
 }
 
 input{
-    width:100%;
-    height:55px;
+  width:100%;
 
-    padding:
-        0
-        52px
-        0
-        16px;
+  height:53px;
 
-    border:
-        1px solid
-        #ddd4cc;
+  padding:
+    0
+    15px;
 
-    border-radius:15px;
+  border:
+    1px solid
+    #ded5ce;
 
-    outline:none;
+  border-radius:15px;
 
-    font-size:16px;
+  outline:none;
 
-    background:#fff;
+  background:#fff;
+
+  color:#29251f;
+
+  font-size:15px;
+}
+
+input.password{
+  padding-right:52px;
 }
 
 input:focus{
-    border-color:#987155;
+  border-color:#9b7255;
 
-    box-shadow:
-        0
-        0
-        0
-        3px
-        rgba(152,113,85,.10);
+  box-shadow:
+    0
+    0
+    0
+    3px
+    rgba(155,114,85,.10);
 }
 
 .show-password{
-    position:absolute;
+  position:absolute;
 
-    right:7px;
-    top:7px;
+  right:7px;
+  top:6px;
 
-    width:41px;
-    height:41px;
+  width:41px;
+  height:41px;
 
-    border:0;
+  border:0;
 
-    border-radius:12px;
+  border-radius:12px;
 
-    background:transparent;
+  background:transparent;
 
-    cursor:pointer;
+  cursor:pointer;
 
-    font-size:18px;
+  font-size:17px;
 }
 
-.login-button{
-    width:100%;
-    height:55px;
+.main-button{
+  width:100%;
 
-    margin-top:17px;
+  height:54px;
 
-    border:0;
+  margin-top:3px;
 
-    border-radius:999px;
+  border:0;
 
-    background:#29251f;
+  border-radius:999px;
 
-    color:white;
+  background:#29251f;
 
-    font-size:15px;
-    font-weight:700;
+  color:#fff;
 
-    cursor:pointer;
+  font-size:14px;
+
+  font-weight:700;
+
+  cursor:pointer;
 }
 
-.login-button:disabled{
-    opacity:.6;
+.main-button:disabled{
+  opacity:.55;
 
-    cursor:not-allowed;
+  cursor:not-allowed;
 }
 
-.error{
-    display:none;
+.info{
+  margin-top:14px;
 
-    margin-top:16px;
+  color:#918981;
 
-    padding:13px;
+  text-align:center;
 
-    border:
-        1px solid
-        #efcccc;
+  font-size:11px;
 
-    border-radius:13px;
+  line-height:1.5;
+}
 
-    background:#fff2f2;
 
-    color:#9a4545;
+/* MESSAGE */
 
-    font-size:12px;
-    line-height:1.5;
+.message{
+  display:none;
+
+  margin-top:16px;
+
+  padding:13px 14px;
+
+  border-radius:13px;
+
+  font-size:12px;
+
+  line-height:1.5;
+}
+
+.message.error{
+  display:block;
+
+  border:
+    1px solid
+    #efcccc;
+
+  background:#fff2f2;
+
+  color:#9b4242;
+}
+
+.message.success{
+  display:block;
+
+  border:
+    1px solid
+    #cce4d0;
+
+  background:#f0faf2;
+
+  color:#357044;
 }
 
 .back{
-    display:block;
+  display:block;
 
-    margin-top:24px;
+  margin-top:23px;
 
-    text-align:center;
+  text-align:center;
 
-    color:#888;
+  color:#89817b;
 
-    text-decoration:none;
+  text-decoration:none;
 
-    font-size:12px;
+  font-size:12px;
 }
 
-.loading{
-    text-align:center;
+@media(max-width:480px){
 
-    color:#888;
+  body{
+    padding:15px;
+  }
 
-    font-size:13px;
+  .card{
+    padding:
+      30px
+      20px;
+  }
 
-    margin-bottom:15px;
-
-    display:none;
 }
 
 </style>
@@ -258,362 +369,947 @@ input:focus{
 
 <div class="card">
 
-    <div class="logo">
-        more<span>moments</span>
-    </div>
+
+  <div class="logo">
+    more<span>moments</span>
+  </div>
 
 
-    <div class="icon">
-        🔐
-    </div>
+  <div class="icon">
+    📸
+  </div>
 
 
-    <h1>
-        Login Admin
-    </h1>
+  <h1 id="title">
+    Selamat datang
+  </h1>
 
 
-    <div class="description">
-        Masukkan password admin
-        untuk membuka dashboard
-        dan mengelola acara.
-    </div>
+  <div
+    class="subtitle"
+    id="subtitle"
+  >
+    Masuk untuk melihat dan
+    mengelola acara Anda.
+  </div>
 
 
-    <div
-        class="loading"
-        id="checking"
+
+  <div class="tabs">
+
+    <button
+      type="button"
+      class="tab active"
+      id="loginTab"
     >
-        Memeriksa sesi...
+      Masuk
+    </button>
+
+
+    <button
+      type="button"
+      class="tab"
+      id="registerTab"
+    >
+      Daftar
+    </button>
+
+  </div>
+
+
+
+  <!-- ==============================
+       LOGIN
+  =============================== -->
+
+  <form
+    class="form active"
+    id="loginForm"
+  >
+
+
+    <div class="field">
+
+      <label>
+        Email
+      </label>
+
+      <input
+        type="email"
+        id="loginEmail"
+        placeholder="nama@email.com"
+        autocomplete="email"
+        required
+      >
+
     </div>
 
 
-    <form id="loginForm">
 
-        <label>
-            Password Admin
-        </label>
+    <div class="field">
 
-
-        <div class="password-box">
-
-            <input
-                type="password"
-                id="password"
-                placeholder="Masukkan password"
-                autocomplete="current-password"
-                required
-            >
+      <label>
+        Password
+      </label>
 
 
-            <button
-                type="button"
-                class="show-password"
-                id="showPassword"
-            >
-                👁
-            </button>
+      <div class="input-wrap">
 
-        </div>
+        <input
+          type="password"
+          class="password"
+          id="loginPassword"
+          placeholder="Masukkan password"
+          autocomplete="current-password"
+          required
+        >
 
 
         <button
-            type="submit"
-            class="login-button"
-            id="loginButton"
+          type="button"
+          class="show-password"
+          data-target="loginPassword"
         >
-            Masuk ke Dashboard
+          👁
         </button>
 
-    </form>
+      </div>
+
+    </div>
 
 
-    <div
-        class="error"
-        id="errorBox"
-    ></div>
 
-
-    <a
-        href="index.html"
-        class="back"
+    <button
+      type="submit"
+      class="main-button"
+      id="loginButton"
     >
-        ← Kembali ke halaman utama
-    </a>
+      Masuk ke Dashboard
+    </button>
+
+
+    <div class="info">
+      Gunakan akun yang sudah
+      Anda daftarkan.
+    </div>
+
+  </form>
+
+
+
+  <!-- ==============================
+       REGISTER
+  =============================== -->
+
+  <form
+    class="form"
+    id="registerForm"
+  >
+
+
+    <div class="field">
+
+      <label>
+        Nama
+      </label>
+
+      <input
+        type="text"
+        id="registerName"
+        placeholder="Nama Anda"
+        autocomplete="name"
+        maxlength="80"
+        required
+      >
+
+    </div>
+
+
+
+    <div class="field">
+
+      <label>
+        Email
+      </label>
+
+      <input
+        type="email"
+        id="registerEmail"
+        placeholder="nama@email.com"
+        autocomplete="email"
+        required
+      >
+
+    </div>
+
+
+
+    <div class="field">
+
+      <label>
+        Password
+      </label>
+
+
+      <div class="input-wrap">
+
+        <input
+          type="password"
+          class="password"
+          id="registerPassword"
+          placeholder="Minimal 8 karakter"
+          autocomplete="new-password"
+          minlength="8"
+          required
+        >
+
+
+        <button
+          type="button"
+          class="show-password"
+          data-target="registerPassword"
+        >
+          👁
+        </button>
+
+      </div>
+
+    </div>
+
+
+
+    <div class="field">
+
+      <label>
+        Ulangi Password
+      </label>
+
+
+      <div class="input-wrap">
+
+        <input
+          type="password"
+          class="password"
+          id="registerPassword2"
+          placeholder="Ketik lagi password"
+          autocomplete="new-password"
+          minlength="8"
+          required
+        >
+
+
+        <button
+          type="button"
+          class="show-password"
+          data-target="registerPassword2"
+        >
+          👁
+        </button>
+
+      </div>
+
+    </div>
+
+
+
+    <button
+      type="submit"
+      class="main-button"
+      id="registerButton"
+    >
+      Buat Akun
+    </button>
+
+
+    <div class="info">
+      Dengan mendaftar, Anda dapat
+      membuat dan mengelola acara sendiri.
+    </div>
+
+  </form>
+
+
+
+  <div
+    id="message"
+    class="message"
+  ></div>
+
+
+  <a
+    href="index.html"
+    class="back"
+  >
+    ← Kembali ke halaman utama
+  </a>
+
 
 </div>
+
 
 
 <script>
 
 const API_URL =
-    "https://moments-api.alavolaadza.workers.dev";
+  "https://moments-api.alavolaadza.workers.dev";
+
+
+const TOKEN_KEY =
+  "momentsAdminToken";
+
+
+const USER_KEY =
+  "momentsUser";
+
+
+const loginTab =
+  document.getElementById(
+    "loginTab"
+  );
+
+
+const registerTab =
+  document.getElementById(
+    "registerTab"
+  );
 
 
 const loginForm =
-    document.getElementById(
-        "loginForm"
-    );
+  document.getElementById(
+    "loginForm"
+  );
 
 
-const passwordInput =
-    document.getElementById(
-        "password"
-    );
+const registerForm =
+  document.getElementById(
+    "registerForm"
+  );
 
 
-const loginButton =
-    document.getElementById(
-        "loginButton"
-    );
+const message =
+  document.getElementById(
+    "message"
+  );
 
 
-const errorBox =
-    document.getElementById(
-        "errorBox"
-    );
+const title =
+  document.getElementById(
+    "title"
+  );
 
 
-const checking =
-    document.getElementById(
-        "checking"
-    );
-
-
-
-/* =====================================================
-   LIHAT / SEMBUNYIKAN PASSWORD
-===================================================== */
-
-document
-.getElementById(
-    "showPassword"
-)
-.addEventListener(
-    "click",
-    function(){
-
-        if(
-            passwordInput.type ===
-            "password"
-        ){
-
-            passwordInput.type =
-                "text";
-
-            this.textContent =
-                "🙈";
-
-        }else{
-
-            passwordInput.type =
-                "password";
-
-            this.textContent =
-                "👁";
-
-        }
-
-    }
-);
+const subtitle =
+  document.getElementById(
+    "subtitle"
+  );
 
 
 
-/* =====================================================
-   CEK TOKEN LAMA
-===================================================== */
+/* =========================================
+   MESSAGE
+========================================= */
 
-async function checkExistingLogin(){
+function showMessage(
+  text,
+  type = "error"
+){
 
-    const token =
-        localStorage.getItem(
-            "momentsAdminToken"
-        );
-
-
-    if(!token){
-        return;
-    }
+  message.className =
+    "message " +
+    type;
 
 
-    checking.style.display =
-        "block";
+  message.textContent =
+    text;
+
+}
 
 
-    loginForm.style.display =
-        "none";
+function clearMessage(){
+
+  message.className =
+    "message";
 
 
-    try{
-
-        const response =
-            await fetch(
-                API_URL +
-                "/api/admin/check",
-                {
-
-                    headers:{
-                        "Authorization":
-                            "Bearer " +
-                            token
-                    }
-
-                }
-            );
-
-
-        const data =
-            await response.json();
-
-
-        if(
-            response.ok &&
-            data.success
-        ){
-
-            window.location.href =
-                "dashboard.html";
-
-            return;
-
-        }
-
-
-        localStorage.removeItem(
-            "momentsAdminToken"
-        );
-
-
-    }catch(error){
-
-        console.error(
-            error
-        );
-
-    }
-
-
-    checking.style.display =
-        "none";
-
-
-    loginForm.style.display =
-        "block";
+  message.textContent =
+    "";
 
 }
 
 
 
-/* =====================================================
-   LOGIN
-===================================================== */
+/* =========================================
+   TAB LOGIN
+========================================= */
 
-loginForm.addEventListener(
-    "submit",
-    async function(e){
+function showLogin(){
 
-        e.preventDefault();
+  clearMessage();
 
 
-        errorBox.style.display =
-            "none";
+  loginTab.classList.add(
+    "active"
+  );
 
 
-        loginButton.disabled =
-            true;
+  registerTab.classList.remove(
+    "active"
+  );
 
 
-        loginButton.textContent =
-            "Memeriksa...";
+  loginForm.classList.add(
+    "active"
+  );
 
 
-        try{
-
-            const response =
-                await fetch(
-                    API_URL +
-                    "/api/admin/login",
-                    {
-
-                        method:
-                            "POST",
-
-                        headers:{
-                            "Content-Type":
-                                "application/json"
-                        },
-
-                        body:
-                            JSON.stringify({
-                                password:
-                                    passwordInput
-                                    .value
-                            })
-
-                    }
-                );
+  registerForm.classList.remove(
+    "active"
+  );
 
 
-            const data =
-                await response.json();
+  title.textContent =
+    "Selamat datang";
 
 
-            if(
-                !response.ok ||
-                !data.success ||
-                !data.token
-            ){
+  subtitle.textContent =
+    "Masuk untuk melihat dan mengelola acara Anda.";
 
-                throw new Error(
-                    data.error ||
-                    "Login gagal."
-                );
-
-            }
+}
 
 
-            localStorage.setItem(
-                "momentsAdminToken",
-                data.token
-            );
+
+/* =========================================
+   TAB REGISTER
+========================================= */
+
+function showRegister(){
+
+  clearMessage();
 
 
-            window.location.href =
-                "dashboard.html";
+  registerTab.classList.add(
+    "active"
+  );
 
 
-        }catch(error){
-
-            console.error(
-                error
-            );
+  loginTab.classList.remove(
+    "active"
+  );
 
 
-            errorBox.textContent =
-                error.message;
+  registerForm.classList.add(
+    "active"
+  );
 
 
-            errorBox.style.display =
-                "block";
+  loginForm.classList.remove(
+    "active"
+  );
 
 
-        }finally{
-
-            loginButton.disabled =
-                false;
+  title.textContent =
+    "Buat akun";
 
 
-            loginButton.textContent =
-                "Masuk ke Dashboard";
+  subtitle.textContent =
+    "Daftar untuk membuat event dan menyimpan momen Anda.";
 
-        }
+}
 
-    }
+
+loginTab.addEventListener(
+  "click",
+  showLogin
+);
+
+
+registerTab.addEventListener(
+  "click",
+  showRegister
 );
 
 
 
-checkExistingLogin();
+/* =========================================
+   SHOW PASSWORD
+========================================= */
+
+document
+.querySelectorAll(
+  ".show-password"
+)
+.forEach(
+  function(button){
+
+    button.addEventListener(
+      "click",
+      function(){
+
+        const target =
+          document.getElementById(
+            button.dataset.target
+          );
+
+
+        if(
+          target.type ===
+          "password"
+        ){
+
+          target.type =
+            "text";
+
+          button.textContent =
+            "🙈";
+
+        }else{
+
+          target.type =
+            "password";
+
+          button.textContent =
+            "👁";
+
+        }
+
+      }
+    );
+
+  }
+);
+
+
+
+/* =========================================
+   SIMPAN SESSION
+========================================= */
+
+function saveSession(
+  token,
+  user
+){
+
+  localStorage.setItem(
+    TOKEN_KEY,
+    token
+  );
+
+
+  localStorage.setItem(
+    USER_KEY,
+    JSON.stringify(
+      user
+    )
+  );
+
+}
+
+
+
+/* =========================================
+   CEK LOGIN YANG SUDAH ADA
+========================================= */
+
+async function checkSession(){
+
+  const token =
+    localStorage.getItem(
+      TOKEN_KEY
+    );
+
+
+  if(!token){
+    return;
+  }
+
+
+  try{
+
+    const response =
+      await fetch(
+        API_URL +
+        "/api/auth/me",
+        {
+
+          headers:{
+            "Authorization":
+              "Bearer " +
+              token
+          }
+
+        }
+      );
+
+
+    const data =
+      await response.json();
+
+
+    if(
+      response.ok &&
+      data.success
+    ){
+
+      localStorage.setItem(
+        USER_KEY,
+        JSON.stringify(
+          data.user
+        )
+      );
+
+
+      window.location.href =
+        "dashboard.html";
+
+
+      return;
+
+    }
+
+
+    localStorage.removeItem(
+      TOKEN_KEY
+    );
+
+
+    localStorage.removeItem(
+      USER_KEY
+    );
+
+
+  }catch(error){
+
+    console.error(
+      error
+    );
+
+  }
+
+}
+
+
+
+/* =========================================
+   LOGIN
+========================================= */
+
+loginForm.addEventListener(
+  "submit",
+  async function(e){
+
+    e.preventDefault();
+
+
+    clearMessage();
+
+
+    const button =
+      document.getElementById(
+        "loginButton"
+      );
+
+
+    button.disabled =
+      true;
+
+
+    button.textContent =
+      "Memeriksa...";
+
+
+    try{
+
+      const response =
+        await fetch(
+          API_URL +
+          "/api/auth/login",
+          {
+
+            method:
+              "POST",
+
+            headers:{
+              "Content-Type":
+                "application/json"
+            },
+
+            body:
+              JSON.stringify({
+
+                email:
+                  document
+                  .getElementById(
+                    "loginEmail"
+                  )
+                  .value
+                  .trim(),
+
+                password:
+                  document
+                  .getElementById(
+                    "loginPassword"
+                  )
+                  .value
+
+              })
+
+          }
+        );
+
+
+      const data =
+        await response.json();
+
+
+      if(
+        !response.ok ||
+        !data.success
+      ){
+
+        throw new Error(
+          data.error ||
+          "Login gagal."
+        );
+
+      }
+
+
+      saveSession(
+        data.token,
+        data.user
+      );
+
+
+      showMessage(
+        "Login berhasil. Membuka dashboard...",
+        "success"
+      );
+
+
+      setTimeout(
+        function(){
+
+          window.location.href =
+            "dashboard.html";
+
+        },
+        500
+      );
+
+
+    }catch(error){
+
+      showMessage(
+        error.message ||
+        "Login gagal."
+      );
+
+
+    }finally{
+
+      button.disabled =
+        false;
+
+
+      button.textContent =
+        "Masuk ke Dashboard";
+
+    }
+
+  }
+);
+
+
+
+/* =========================================
+   REGISTER
+========================================= */
+
+registerForm.addEventListener(
+  "submit",
+  async function(e){
+
+    e.preventDefault();
+
+
+    clearMessage();
+
+
+    const name =
+      document
+      .getElementById(
+        "registerName"
+      )
+      .value
+      .trim();
+
+
+    const email =
+      document
+      .getElementById(
+        "registerEmail"
+      )
+      .value
+      .trim();
+
+
+    const password =
+      document
+      .getElementById(
+        "registerPassword"
+      )
+      .value;
+
+
+    const password2 =
+      document
+      .getElementById(
+        "registerPassword2"
+      )
+      .value;
+
+
+    if(
+      password !==
+      password2
+    ){
+
+      showMessage(
+        "Konfirmasi password tidak sama."
+      );
+
+      return;
+
+    }
+
+
+    if(
+      password.length <
+      8
+    ){
+
+      showMessage(
+        "Password minimal 8 karakter."
+      );
+
+      return;
+
+    }
+
+
+    const button =
+      document.getElementById(
+        "registerButton"
+      );
+
+
+    button.disabled =
+      true;
+
+
+    button.textContent =
+      "Membuat akun...";
+
+
+    try{
+
+      const response =
+        await fetch(
+          API_URL +
+          "/api/auth/register",
+          {
+
+            method:
+              "POST",
+
+            headers:{
+              "Content-Type":
+                "application/json"
+            },
+
+            body:
+              JSON.stringify({
+
+                name:
+                  name,
+
+                email:
+                  email,
+
+                password:
+                  password
+
+              })
+
+          }
+        );
+
+
+      const data =
+        await response.json();
+
+
+      if(
+        !response.ok ||
+        !data.success
+      ){
+
+        throw new Error(
+          data.error ||
+          "Gagal membuat akun."
+        );
+
+      }
+
+
+      saveSession(
+        data.token,
+        data.user
+      );
+
+
+      showMessage(
+        "Akun berhasil dibuat. Membuka dashboard...",
+        "success"
+      );
+
+
+      setTimeout(
+        function(){
+
+          window.location.href =
+            "dashboard.html";
+
+        },
+        600
+      );
+
+
+    }catch(error){
+
+      showMessage(
+        error.message ||
+        "Gagal membuat akun."
+      );
+
+
+    }finally{
+
+      button.disabled =
+        false;
+
+
+      button.textContent =
+        "Buat Akun";
+
+    }
+
+  }
+);
+
+
+
+checkSession();
 
 </script>
 
