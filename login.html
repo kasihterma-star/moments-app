@@ -1,0 +1,621 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+<meta charset="UTF-8">
+
+<meta
+  name="viewport"
+  content="width=device-width, initial-scale=1.0"
+>
+
+<title>Login Admin | MoreMoments</title>
+
+<style>
+
+*{
+    margin:0;
+    padding:0;
+    box-sizing:border-box;
+}
+
+body{
+    min-height:100vh;
+
+    display:flex;
+    align-items:center;
+    justify-content:center;
+
+    padding:25px;
+
+    font-family:
+        Arial,
+        Helvetica,
+        sans-serif;
+
+    background:
+        #eee7df;
+
+    color:
+        #27231f;
+}
+
+.card{
+    width:100%;
+    max-width:410px;
+
+    background:#fff;
+
+    border-radius:30px;
+
+    padding:
+        38px
+        28px;
+
+    box-shadow:
+        0
+        30px
+        80px
+        rgba(65,48,35,.15);
+}
+
+.logo{
+    text-align:center;
+
+    font-size:24px;
+    font-weight:800;
+
+    margin-bottom:34px;
+}
+
+.logo span{
+    color:#a77852;
+}
+
+.icon{
+    width:72px;
+    height:72px;
+
+    margin:
+        0
+        auto
+        20px;
+
+    border-radius:22px;
+
+    display:flex;
+    align-items:center;
+    justify-content:center;
+
+    background:#eee7df;
+
+    font-size:31px;
+}
+
+h1{
+    text-align:center;
+
+    font-size:28px;
+
+    margin-bottom:9px;
+}
+
+.description{
+    text-align:center;
+
+    color:#777;
+
+    font-size:14px;
+    line-height:1.6;
+
+    margin-bottom:28px;
+}
+
+label{
+    display:block;
+
+    font-size:13px;
+    font-weight:700;
+
+    margin-bottom:8px;
+}
+
+.password-box{
+    position:relative;
+}
+
+input{
+    width:100%;
+    height:55px;
+
+    padding:
+        0
+        52px
+        0
+        16px;
+
+    border:
+        1px solid
+        #ddd4cc;
+
+    border-radius:15px;
+
+    outline:none;
+
+    font-size:16px;
+
+    background:#fff;
+}
+
+input:focus{
+    border-color:#987155;
+
+    box-shadow:
+        0
+        0
+        0
+        3px
+        rgba(152,113,85,.10);
+}
+
+.show-password{
+    position:absolute;
+
+    right:7px;
+    top:7px;
+
+    width:41px;
+    height:41px;
+
+    border:0;
+
+    border-radius:12px;
+
+    background:transparent;
+
+    cursor:pointer;
+
+    font-size:18px;
+}
+
+.login-button{
+    width:100%;
+    height:55px;
+
+    margin-top:17px;
+
+    border:0;
+
+    border-radius:999px;
+
+    background:#29251f;
+
+    color:white;
+
+    font-size:15px;
+    font-weight:700;
+
+    cursor:pointer;
+}
+
+.login-button:disabled{
+    opacity:.6;
+
+    cursor:not-allowed;
+}
+
+.error{
+    display:none;
+
+    margin-top:16px;
+
+    padding:13px;
+
+    border:
+        1px solid
+        #efcccc;
+
+    border-radius:13px;
+
+    background:#fff2f2;
+
+    color:#9a4545;
+
+    font-size:12px;
+    line-height:1.5;
+}
+
+.back{
+    display:block;
+
+    margin-top:24px;
+
+    text-align:center;
+
+    color:#888;
+
+    text-decoration:none;
+
+    font-size:12px;
+}
+
+.loading{
+    text-align:center;
+
+    color:#888;
+
+    font-size:13px;
+
+    margin-bottom:15px;
+
+    display:none;
+}
+
+</style>
+</head>
+
+
+<body>
+
+<div class="card">
+
+    <div class="logo">
+        more<span>moments</span>
+    </div>
+
+
+    <div class="icon">
+        🔐
+    </div>
+
+
+    <h1>
+        Login Admin
+    </h1>
+
+
+    <div class="description">
+        Masukkan password admin
+        untuk membuka dashboard
+        dan mengelola acara.
+    </div>
+
+
+    <div
+        class="loading"
+        id="checking"
+    >
+        Memeriksa sesi...
+    </div>
+
+
+    <form id="loginForm">
+
+        <label>
+            Password Admin
+        </label>
+
+
+        <div class="password-box">
+
+            <input
+                type="password"
+                id="password"
+                placeholder="Masukkan password"
+                autocomplete="current-password"
+                required
+            >
+
+
+            <button
+                type="button"
+                class="show-password"
+                id="showPassword"
+            >
+                👁
+            </button>
+
+        </div>
+
+
+        <button
+            type="submit"
+            class="login-button"
+            id="loginButton"
+        >
+            Masuk ke Dashboard
+        </button>
+
+    </form>
+
+
+    <div
+        class="error"
+        id="errorBox"
+    ></div>
+
+
+    <a
+        href="index.html"
+        class="back"
+    >
+        ← Kembali ke halaman utama
+    </a>
+
+</div>
+
+
+<script>
+
+const API_URL =
+    "https://moments-api.alavolaadza.workers.dev";
+
+
+const loginForm =
+    document.getElementById(
+        "loginForm"
+    );
+
+
+const passwordInput =
+    document.getElementById(
+        "password"
+    );
+
+
+const loginButton =
+    document.getElementById(
+        "loginButton"
+    );
+
+
+const errorBox =
+    document.getElementById(
+        "errorBox"
+    );
+
+
+const checking =
+    document.getElementById(
+        "checking"
+    );
+
+
+
+/* =====================================================
+   LIHAT / SEMBUNYIKAN PASSWORD
+===================================================== */
+
+document
+.getElementById(
+    "showPassword"
+)
+.addEventListener(
+    "click",
+    function(){
+
+        if(
+            passwordInput.type ===
+            "password"
+        ){
+
+            passwordInput.type =
+                "text";
+
+            this.textContent =
+                "🙈";
+
+        }else{
+
+            passwordInput.type =
+                "password";
+
+            this.textContent =
+                "👁";
+
+        }
+
+    }
+);
+
+
+
+/* =====================================================
+   CEK TOKEN LAMA
+===================================================== */
+
+async function checkExistingLogin(){
+
+    const token =
+        localStorage.getItem(
+            "momentsAdminToken"
+        );
+
+
+    if(!token){
+        return;
+    }
+
+
+    checking.style.display =
+        "block";
+
+
+    loginForm.style.display =
+        "none";
+
+
+    try{
+
+        const response =
+            await fetch(
+                API_URL +
+                "/api/admin/check",
+                {
+
+                    headers:{
+                        "Authorization":
+                            "Bearer " +
+                            token
+                    }
+
+                }
+            );
+
+
+        const data =
+            await response.json();
+
+
+        if(
+            response.ok &&
+            data.success
+        ){
+
+            window.location.href =
+                "dashboard.html";
+
+            return;
+
+        }
+
+
+        localStorage.removeItem(
+            "momentsAdminToken"
+        );
+
+
+    }catch(error){
+
+        console.error(
+            error
+        );
+
+    }
+
+
+    checking.style.display =
+        "none";
+
+
+    loginForm.style.display =
+        "block";
+
+}
+
+
+
+/* =====================================================
+   LOGIN
+===================================================== */
+
+loginForm.addEventListener(
+    "submit",
+    async function(e){
+
+        e.preventDefault();
+
+
+        errorBox.style.display =
+            "none";
+
+
+        loginButton.disabled =
+            true;
+
+
+        loginButton.textContent =
+            "Memeriksa...";
+
+
+        try{
+
+            const response =
+                await fetch(
+                    API_URL +
+                    "/api/admin/login",
+                    {
+
+                        method:
+                            "POST",
+
+                        headers:{
+                            "Content-Type":
+                                "application/json"
+                        },
+
+                        body:
+                            JSON.stringify({
+                                password:
+                                    passwordInput
+                                    .value
+                            })
+
+                    }
+                );
+
+
+            const data =
+                await response.json();
+
+
+            if(
+                !response.ok ||
+                !data.success ||
+                !data.token
+            ){
+
+                throw new Error(
+                    data.error ||
+                    "Login gagal."
+                );
+
+            }
+
+
+            localStorage.setItem(
+                "momentsAdminToken",
+                data.token
+            );
+
+
+            window.location.href =
+                "dashboard.html";
+
+
+        }catch(error){
+
+            console.error(
+                error
+            );
+
+
+            errorBox.textContent =
+                error.message;
+
+
+            errorBox.style.display =
+                "block";
+
+
+        }finally{
+
+            loginButton.disabled =
+                false;
+
+
+            loginButton.textContent =
+                "Masuk ke Dashboard";
+
+        }
+
+    }
+);
+
+
+
+checkExistingLogin();
+
+</script>
+
+</body>
+</html>
