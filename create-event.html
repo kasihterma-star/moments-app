@@ -2,11 +2,16 @@
 <html lang="id">
 <head>
 <meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<meta
+  name="viewport"
+  content="width=device-width, initial-scale=1.0"
+>
 
 <title>Buat Acara | MoreMoments</title>
 
 <style>
+
 *{
   margin:0;
   padding:0;
@@ -14,14 +19,15 @@
 }
 
 body{
+  min-height:100vh;
+  background:#f3eee8;
+  color:#29241f;
   font-family:Arial,Helvetica,sans-serif;
-  background:#f7f4f0;
-  color:#27231f;
 }
 
 a{
-  text-decoration:none;
   color:inherit;
+  text-decoration:none;
 }
 
 button,
@@ -30,31 +36,33 @@ select{
   font:inherit;
 }
 
+button{
+  cursor:pointer;
+}
 
-/* ================================
-   HEADER
-================================ */
+
+/* HEADER */
 
 .header{
-  height:75px;
-  background:rgba(255,255,255,.9);
-  border-bottom:1px solid #e9e3dc;
+  border-bottom:1px solid #e4d9d0;
+  background:#faf8f5;
+}
+
+.header-inner{
+  width:100%;
+  max-width:1050px;
+  min-height:72px;
+  margin:auto;
+  padding:0 20px;
 
   display:flex;
   align-items:center;
   justify-content:space-between;
-
-  padding:0 30px;
-
-  position:sticky;
-  top:0;
-  z-index:100;
-
-  backdrop-filter:blur(12px);
+  gap:15px;
 }
 
 .logo{
-  font-size:23px;
+  font-size:22px;
   font-weight:800;
 }
 
@@ -62,489 +70,417 @@ select{
   color:#a77852;
 }
 
-.header-right{
+.back{
+  min-height:42px;
+  padding:0 16px;
+
   display:flex;
   align-items:center;
-  gap:9px;
-}
+  justify-content:center;
 
-.account{
-  display:none;
-
-  max-width:220px;
-
-  padding:9px 13px;
-
-  border:1px solid #e1d8d0;
+  border:1px solid #ddd2ca;
   border-radius:999px;
 
   background:#fff;
 
   font-size:11px;
-}
-
-.account strong{
-  display:block;
-
-  overflow:hidden;
-  text-overflow:ellipsis;
-  white-space:nowrap;
-}
-
-.account span{
-  color:#8b8179;
-}
-
-.back{
-  border:1px solid #ddd3ca;
-  border-radius:999px;
-
-  padding:10px 17px;
-
-  font-size:13px;
-
-  background:white;
+  font-weight:700;
 }
 
 
-/* ================================
-   PAGE
-================================ */
+/* PAGE */
 
 .page{
-  max-width:850px;
+  width:100%;
+  max-width:900px;
+
   margin:auto;
-  padding:55px 20px 100px;
+
+  padding:50px 20px 90px;
 }
 
-.title{
-  margin-bottom:35px;
-}
+.eyebrow{
+  margin-bottom:10px;
 
-.title small{
-  color:#9a7255;
-  font-weight:700;
+  color:#a77852;
+
+  font-size:10px;
+  font-weight:800;
+
+  letter-spacing:1.7px;
 
   text-transform:uppercase;
-  letter-spacing:1.5px;
 }
 
-.title h1{
-  font-size:42px;
-  margin-top:9px;
-  letter-spacing:-2px;
+h1{
+  margin-bottom:12px;
+
+  font-family:Georgia,serif;
+
+  font-size:clamp(
+    38px,
+    6vw,
+    58px
+  );
+
+  font-weight:normal;
+
+  line-height:1;
 }
 
-.title p{
-  margin-top:12px;
+.subtitle{
+  max-width:650px;
 
-  color:#777;
+  margin-bottom:30px;
 
-  line-height:1.6;
-}
+  color:#756d66;
 
-
-/* ================================
-   LOGIN STATUS
-================================ */
-
-.login-status{
-  display:flex;
-  align-items:center;
-  gap:10px;
-
-  margin-bottom:20px;
-
-  padding:13px 16px;
-
-  border:1px solid #e4ddd6;
-  border-radius:16px;
-
-  background:#fff;
-
-  color:#777;
-
-  font-size:12px;
-}
-
-.login-dot{
-  width:9px;
-  height:9px;
-
-  flex:0 0 auto;
-
-  border-radius:50%;
-
-  background:#d2c8c0;
-}
-
-.login-status.success .login-dot{
-  background:#54a766;
-}
-
-.login-status.error .login-dot{
-  background:#bc5a52;
+  font-size:14px;
+  line-height:1.65;
 }
 
 
-/* ================================
-   CARD
-================================ */
+/* CARD */
 
 .card{
-  background:white;
+  padding:28px;
 
-  border:1px solid #ebe4dc;
-  border-radius:25px;
+  border:1px solid #dfd5cd;
+  border-radius:26px;
 
-  padding:30px;
-
-  box-shadow:
-    0 15px 45px
-    rgba(67,52,39,.06);
-
-  margin-bottom:20px;
+  background:#fff;
 }
 
-.section-title{
-  font-size:20px;
-  margin-bottom:22px;
-}
 
-.grid{
+/* FORM */
+
+.form-grid{
   display:grid;
-
-  grid-template-columns:
-    1fr 1fr;
-
+  grid-template-columns:1fr 1fr;
   gap:18px;
 }
 
-.full{
+.field{
+  display:flex;
+  flex-direction:column;
+  gap:8px;
+}
+
+.field.full{
   grid-column:1/-1;
 }
 
 label{
-  display:block;
+  font-size:12px;
+  font-weight:800;
+}
 
-  font-size:13px;
-  font-weight:700;
+.helper{
+  color:#928981;
 
-  margin-bottom:8px;
+  font-size:10px;
+  line-height:1.5;
 }
 
 input,
 select{
   width:100%;
-  height:50px;
-
-  border:1px solid #ddd6cf;
-  border-radius:13px;
+  min-height:52px;
 
   padding:0 14px;
 
-  font-size:15px;
+  border:1px solid #ddd2ca;
+  border-radius:14px;
+
+  background:#fff;
+  color:#29241f;
 
   outline:none;
 
-  background:#fff;
+  font-size:14px;
 }
 
 input:focus,
 select:focus{
-  border-color:#9b755a;
+  border-color:#9c7457;
 
   box-shadow:
     0 0 0 3px
-    rgba(155,117,90,.10);
-}
-
-input:disabled,
-select:disabled{
-  opacity:.65;
-  cursor:not-allowed;
-}
-
-.help{
-  font-size:12px;
-
-  color:#999;
-
-  margin-top:7px;
-
-  line-height:1.4;
+    rgba(156,116,87,.1);
 }
 
 
-/* ================================
-   SLUG
-================================ */
+/* TIMEZONE */
 
-.slug-box{
-  background:#f8f6f3;
+.timezone-box{
+  grid-column:1/-1;
+
+  padding:18px;
+
+  border-radius:18px;
+
+  background:#f7f3ef;
+}
+
+.timezone-head{
+  margin-bottom:12px;
+}
+
+.timezone-title{
+  margin-bottom:4px;
+
+  font-size:13px;
+  font-weight:800;
+}
+
+.timezone-description{
+  color:#837a72;
+
+  font-size:10px;
+  line-height:1.5;
+}
+
+.timezone-info{
+  margin-top:10px;
+
+  padding:11px 12px;
 
   border-radius:12px;
 
-  padding:13px 15px;
+  background:#fff;
 
-  margin-top:8px;
+  color:#746b64;
 
-  color:#777;
+  font-size:10px;
+  line-height:1.5;
+}
 
-  font-size:13px;
+
+/* LINK PREVIEW */
+
+.link-preview{
+  margin-top:4px;
+
+  padding:13px 14px;
+
+  border-radius:13px;
+
+  background:#f7f3ef;
+
+  color:#716961;
+
+  font-size:11px;
 
   word-break:break-all;
 }
 
 
-/* ================================
-   COVER
-================================ */
+/* BUTTON */
 
-.cover-upload{
-  border:2px dashed #d8cec5;
-  border-radius:17px;
+.submit-area{
+  margin-top:26px;
 
-  text-align:center;
+  padding-top:24px;
 
-  padding:30px 20px;
-
-  cursor:pointer;
-
-  background:#fbfaf8;
+  border-top:1px solid #eee5de;
 }
 
-.cover-upload input{
-  display:none;
-}
-
-.cover-upload strong{
-  display:block;
-  margin-bottom:6px;
-}
-
-.cover-upload span{
-  font-size:13px;
-  color:#888;
-}
-
-.preview{
-  display:none;
-  margin-top:18px;
-}
-
-.preview img{
+.submit-button{
   width:100%;
-  max-height:350px;
+  min-height:55px;
 
-  object-fit:cover;
-
-  border-radius:16px;
-}
-
-
-/* ================================
-   BUTTON
-================================ */
-
-.action{
-  display:flex;
-  justify-content:flex-end;
-
-  margin-top:25px;
-}
-
-.create-btn{
-  border:none;
-
-  min-width:190px;
-  height:54px;
-
+  border:0;
   border-radius:999px;
 
-  background:#29251f;
+  background:#29241f;
+  color:#fff;
 
-  color:white;
-
-  font-size:15px;
-  font-weight:700;
-
-  cursor:pointer;
+  font-size:14px;
+  font-weight:800;
 }
 
-.create-btn:hover{
-  opacity:.9;
-}
-
-.create-btn:disabled{
-  opacity:.5;
+.submit-button:disabled{
+  opacity:.55;
   cursor:not-allowed;
 }
 
 
-/* ================================
-   RESULT
-================================ */
+/* ERROR */
+
+.message{
+  display:none;
+
+  margin-top:16px;
+
+  padding:14px;
+
+  border-radius:14px;
+
+  font-size:12px;
+  line-height:1.55;
+}
+
+.message.error{
+  display:block;
+
+  background:#fff0ef;
+  color:#a44a44;
+}
+
+.message.success{
+  display:block;
+
+  background:#eff7f0;
+  color:#417249;
+}
+
+
+/* RESULT */
 
 .result{
   display:none;
 
-  background:#ecf6ed;
+  margin-top:22px;
 
-  border:1px solid #cbe3ce;
-  border-radius:20px;
+  padding:24px;
 
-  padding:25px;
+  border:1px solid #ddd3ca;
+  border-radius:22px;
 
-  margin-top:20px;
+  background:#fff;
+}
+
+.result.visible{
+  display:block;
+}
+
+.result-label{
+  margin-bottom:8px;
+
+  color:#a77852;
+
+  font-size:10px;
+  font-weight:800;
+
+  letter-spacing:1.4px;
+
+  text-transform:uppercase;
 }
 
 .result h2{
-  font-size:21px;
   margin-bottom:10px;
+
+  font-family:Georgia,serif;
+
+  font-size:29px;
+  font-weight:normal;
 }
 
-.result p{
-  color:#617063;
+.result-text{
+  margin-bottom:18px;
 
-  font-size:14px;
+  color:#756d66;
 
-  line-height:1.5;
+  font-size:12px;
+  line-height:1.6;
 }
 
-.event-link{
-  margin-top:15px;
+.result-link{
+  padding:13px;
 
-  background:white;
+  border-radius:13px;
 
-  padding:13px 15px;
+  background:#f7f3ef;
 
-  border-radius:12px;
+  color:#736a63;
 
-  font-size:13px;
+  font-size:10px;
 
   word-break:break-all;
 }
 
 .result-actions{
-  display:flex;
-  flex-wrap:wrap;
-
+  display:grid;
+  grid-template-columns:1fr 1fr;
   gap:8px;
 
-  margin-top:16px;
+  margin-top:14px;
 }
 
 .result-button{
-  min-height:42px;
+  min-height:45px;
 
-  padding:0 15px;
-
-  display:inline-flex;
+  display:flex;
   align-items:center;
   justify-content:center;
 
-  border:1px solid #cbdccb;
+  border:1px solid #ddd2ca;
   border-radius:999px;
 
   background:#fff;
 
-  color:#3e5741;
-
-  font-size:12px;
+  font-size:11px;
   font-weight:700;
-
-  cursor:pointer;
 }
 
 .result-button.dark{
-  border-color:#294430;
-  background:#294430;
+  border-color:#29241f;
+
+  background:#29241f;
   color:#fff;
 }
 
 
-/* ================================
-   MOBILE
-================================ */
+/* MOBILE */
 
 @media(max-width:650px){
 
-  .header{
-    padding:0 17px;
-  }
-
-  .account{
-    display:none !important;
-  }
-
   .page{
-    padding-top:35px;
-  }
-
-  .title h1{
-    font-size:34px;
-  }
-
-  .grid{
-    grid-template-columns:1fr;
-  }
-
-  .full{
-    grid-column:auto;
+    padding:
+      35px
+      14px
+      70px;
   }
 
   .card{
-    padding:22px;
+    padding:20px 16px;
   }
 
-  .action{
-    display:block;
-  }
-
-  .create-btn{
-    width:100%;
-  }
-
-  .result-actions{
-    display:grid;
+  .form-grid{
     grid-template-columns:1fr;
   }
 
-  .result-button{
-    width:100%;
+  .field.full,
+  .timezone-box{
+    grid-column:auto;
+  }
+
+  .result-actions{
+    grid-template-columns:1fr;
   }
 }
+
 </style>
 </head>
-
 
 <body>
 
 
 <header class="header">
 
-  <a href="index.html" class="logo">
-    more<span>moments</span>
-  </a>
+  <div class="header-inner">
 
+    <a
+      class="logo"
+      href="index.html"
+    >
+      more<span>moments</span>
+    </a>
 
-  <div class="header-right">
-
-    <div class="account" id="accountBox">
-
-      <strong id="accountName">
-        Pengguna
-      </strong>
-
-      <span id="accountRole">
-        User
-      </span>
-
-    </div>
-
-
-    <a href="dashboard.html" class="back">
+    <a
+      class="back"
+      href="dashboard.html"
+    >
       ← Dashboard
     </a>
 
@@ -553,391 +489,340 @@ select:disabled{
 </header>
 
 
-
 <main class="page">
 
-
-  <div class="title">
-
-    <small>
-      Acara baru
-    </small>
-
-    <h1>
-      Buat momen Anda.
-    </h1>
-
-    <p>
-      Isi informasi acara. Setiap acara akan mempunyai
-      link sendiri untuk dibagikan kepada tamu.
-    </p>
-
+  <div class="eyebrow">
+    MoreMoments
   </div>
 
+  <h1>
+    Buat acara.
+  </h1>
+
+  <p class="subtitle">
+    Atur tanggal, waktu, zona waktu,
+    jumlah tamu, dan jatah foto.
+    Link acara dapat dibagikan melalui
+    QR Code setelah acara dibuat.
+  </p>
 
 
-  <div
-    class="login-status"
-    id="loginStatus"
+  <form
+    class="card"
+    id="eventForm"
   >
 
-    <div class="login-dot"></div>
+    <div class="form-grid">
 
-    <div id="loginStatusText">
-      Memeriksa akun...
-    </div>
 
-  </div>
+      <!-- NAMA -->
 
+      <div class="field full">
 
-
-  <form id="eventForm">
-
-
-    <!-- INFORMASI ACARA -->
-
-    <div class="card">
-
-      <h2 class="section-title">
-        Informasi acara
-      </h2>
-
-
-      <div class="grid">
-
-
-        <div class="full">
-
-          <label>
-            Nama acara
-          </label>
-
-          <input
-            id="eventName"
-            type="text"
-            placeholder="Contoh: Pernikahan May & Habi"
-            required
-          >
-
-        </div>
-
-
-        <div>
-
-          <label>
-            Jenis acara
-          </label>
-
-          <select id="eventType">
-
-            <option value="Pernikahan">
-              Pernikahan
-            </option>
-
-            <option value="Ulang Tahun">
-              Ulang Tahun
-            </option>
-
-            <option value="Wisuda">
-              Wisuda
-            </option>
-
-            <option value="Reuni">
-              Reuni
-            </option>
-
-            <option value="Gathering">
-              Gathering
-            </option>
-
-            <option value="Keagamaan">
-              Keagamaan
-            </option>
-
-            <option value="Sekolah">
-              Sekolah
-            </option>
-
-            <option value="Lainnya">
-              Lainnya
-            </option>
-
-          </select>
-
-        </div>
-
-
-        <div>
-
-          <label>
-            Tanggal acara
-          </label>
-
-          <input
-            id="eventDate"
-            type="date"
-            required
-          >
-
-        </div>
-
-
-        <div>
-
-          <label>
-            Mulai
-          </label>
-
-          <input
-            id="startTime"
-            type="time"
-            required
-          >
-
-        </div>
-
-
-        <div>
-
-          <label>
-            Berakhir
-          </label>
-
-          <input
-            id="endTime"
-            type="time"
-            required
-          >
-
-        </div>
-
-
-      </div>
-
-    </div>
-
-
-
-    <!-- PENGATURAN -->
-
-    <div class="card">
-
-      <h2 class="section-title">
-        Pengaturan tamu & kamera
-      </h2>
-
-
-      <div class="grid">
-
-
-        <div>
-
-          <label>
-            Maksimal tamu
-          </label>
-
-          <input
-            id="maxGuests"
-            type="number"
-            value="100"
-            min="1"
-            max="10000"
-            required
-          >
-
-          <div class="help">
-            Maksimal orang yang dapat bergabung.
-          </div>
-
-        </div>
-
-
-        <div>
-
-          <label>
-            Jatah foto per tamu
-          </label>
-
-          <select id="shots">
-
-            <option value="5">
-              5 foto
-            </option>
-
-            <option value="10">
-              10 foto
-            </option>
-
-            <option
-              value="15"
-              selected
-            >
-              15 foto
-            </option>
-
-            <option value="20">
-              20 foto
-            </option>
-
-            <option value="25">
-              25 foto
-            </option>
-
-            <option value="30">
-              30 foto
-            </option>
-
-          </select>
-
-          <div class="help">
-            Setiap tamu mempunyai jumlah jepretan sendiri.
-          </div>
-
-        </div>
-
-
-        <div class="full">
-
-          <label>
-            Link acara
-          </label>
-
-          <input
-            id="slug"
-            type="text"
-            placeholder="may-habi"
-            required
-          >
-
-          <div
-            class="slug-box"
-            id="slugPreview"
-          >
-            .../event.html?e=nama-acara
-          </div>
-
-          <div class="help">
-            Link otomatis dibuat dari nama acara,
-            tetapi masih bisa Anda ubah.
-          </div>
-
-        </div>
-
-
-      </div>
-
-    </div>
-
-
-
-    <!-- COVER -->
-
-    <div class="card">
-
-      <h2 class="section-title">
-        Cover acara
-      </h2>
-
-
-      <label class="cover-upload">
+        <label for="eventName">
+          Nama acara
+        </label>
 
         <input
-          type="file"
-          id="cover"
-          accept="image/*"
-        >
-
-        <strong>
-          📷 Pilih foto cover
-        </strong>
-
-        <span>
-          JPG, PNG atau WebP
-        </span>
-
-      </label>
-
-
-      <div
-        class="preview"
-        id="preview"
-      >
-
-        <img
-          id="previewImage"
-          alt="Preview cover"
+          type="text"
+          id="eventName"
+          placeholder="Contoh: Pernikahan Habib & Maisa"
+          maxlength="100"
+          required
         >
 
       </div>
 
 
-      <div class="help">
-        Untuk saat ini cover ditampilkan sebagai pratinjau.
-        Foto acara dari kamera tetap mengikuti penyimpanan
-        yang Anda pilih di dashboard.
+      <!-- JENIS -->
+
+      <div class="field">
+
+        <label for="eventType">
+          Jenis acara
+        </label>
+
+        <select
+          id="eventType"
+          required
+        >
+
+          <option value="Pernikahan">
+            Pernikahan
+          </option>
+
+          <option value="Ulang Tahun">
+            Ulang Tahun
+          </option>
+
+          <option value="Wisuda">
+            Wisuda
+          </option>
+
+          <option value="Reuni">
+            Reuni
+          </option>
+
+          <option value="Sekolah">
+            Sekolah
+          </option>
+
+          <option value="Keluarga">
+            Keluarga
+          </option>
+
+          <option value="Komunitas">
+            Komunitas
+          </option>
+
+          <option value="Lainnya">
+            Lainnya
+          </option>
+
+        </select>
+
+      </div>
+
+
+      <!-- SLUG -->
+
+      <div class="field">
+
+        <label for="slug">
+          Link acara
+        </label>
+
+        <input
+          type="text"
+          id="slug"
+          placeholder="pernikahan-habib-maisa"
+          maxlength="80"
+          required
+        >
+
+        <div class="helper">
+          Huruf kecil, angka, dan tanda - saja.
+        </div>
+
+      </div>
+
+
+      <!-- LINK -->
+
+      <div class="field full">
+
+        <div
+          class="link-preview"
+          id="linkPreview"
+        >
+          https://moments-app.ege.my.id/event.html?e=nama-acara
+        </div>
+
+      </div>
+
+
+      <!-- TANGGAL -->
+
+      <div class="field">
+
+        <label for="eventDate">
+          Tanggal acara
+        </label>
+
+        <input
+          type="date"
+          id="eventDate"
+          required
+        >
+
+      </div>
+
+
+      <!-- TIMEZONE -->
+
+      <div class="timezone-box">
+
+        <div class="timezone-head">
+
+          <div class="timezone-title">
+            Zona waktu acara
+          </div>
+
+          <div class="timezone-description">
+            Pilih berdasarkan lokasi
+            tempat acara berlangsung,
+            bukan lokasi tamu.
+          </div>
+
+        </div>
+
+
+        <select
+          id="timezone"
+          required
+        >
+
+          <option value="Asia/Jakarta">
+            WIB — UTC+7
+          </option>
+
+          <option value="Asia/Makassar">
+            WITA — UTC+8
+          </option>
+
+          <option value="Asia/Jayapura">
+            WIT — UTC+9
+          </option>
+
+        </select>
+
+
+        <div
+          class="timezone-info"
+          id="timezoneInfo"
+        >
+          WITA — Bali, Nusa Tenggara,
+          sebagian besar Kalimantan,
+          dan Sulawesi.
+        </div>
+
+      </div>
+
+
+      <!-- MULAI -->
+
+      <div class="field">
+
+        <label for="startTime">
+          Jam mulai
+        </label>
+
+        <input
+          type="time"
+          id="startTime"
+          required
+        >
+
+      </div>
+
+
+      <!-- SELESAI -->
+
+      <div class="field">
+
+        <label for="endTime">
+          Jam selesai
+        </label>
+
+        <input
+          type="time"
+          id="endTime"
+          required
+        >
+
+        <div class="helper">
+          Acara boleh melewati tengah malam,
+          misalnya 20.00–01.00.
+        </div>
+
+      </div>
+
+
+      <!-- TAMU -->
+
+      <div class="field">
+
+        <label for="maxGuests">
+          Maksimal tamu
+        </label>
+
+        <input
+          type="number"
+          id="maxGuests"
+          min="1"
+          max="10000"
+          value="100"
+          required
+        >
+
+      </div>
+
+
+      <!-- FOTO -->
+
+      <div class="field">
+
+        <label for="shotsPerGuest">
+          Jatah foto per tamu
+        </label>
+
+        <input
+          type="number"
+          id="shotsPerGuest"
+          min="1"
+          max="100"
+          value="15"
+          required
+        >
+
       </div>
 
     </div>
 
 
-
-    <div class="action">
+    <div class="submit-area">
 
       <button
-        class="create-btn"
-        id="createButton"
         type="submit"
-        disabled
+        class="submit-button"
+        id="submitButton"
       >
-        Memeriksa akun...
+        Buat Acara
       </button>
 
-    </div>
+      <div
+        class="message"
+        id="message"
+      ></div>
 
+    </div>
 
   </form>
 
 
-
-  <!-- RESULT -->
-
-  <div
+  <section
     class="result"
     id="result"
   >
 
-    <h2>
-      ✓ Acara berhasil dibuat
+    <div class="result-label">
+      Acara berhasil dibuat
+    </div>
+
+    <h2 id="resultName">
+      Acara
     </h2>
 
-    <p>
-      Acara sudah tersimpan ke database MoreMoments.
-      Bagikan link berikut kepada tamu.
-    </p>
-
+    <div
+      class="result-text"
+      id="resultInfo"
+    >
+    </div>
 
     <div
-      class="event-link"
-      id="eventLink"
-    ></div>
-
+      class="result-link"
+      id="resultLink"
+    >
+    </div>
 
     <div class="result-actions">
 
       <a
-        href="#"
         class="result-button dark"
+        href="#"
         id="openEventButton"
       >
         Buka Acara
-      </a>
-
-      <a
-        href="#"
-        class="result-button"
-        id="openGalleryButton"
-      >
-        Buka Galeri
       </a>
 
       <button
@@ -949,39 +834,53 @@ select:disabled{
       </button>
 
       <a
-        href="dashboard.html"
         class="result-button"
+        href="dashboard.html"
       >
-        Dashboard
+        Kembali ke Dashboard
       </a>
 
     </div>
 
-  </div>
-
+  </section>
 
 </main>
 
 
-
 <script>
 
-/* ========================================
+/* =====================================================
    CONFIG
-======================================== */
+===================================================== */
 
 const API_URL =
-  "https://moments-api.alavolaadza.workers.dev";
+  "https://api.ege.my.id";
+
 
 const TOKEN_KEY =
   "momentsAdminToken";
 
-const USER_KEY =
-  "momentsUser";
 
 const token =
   localStorage.getItem(
     TOKEN_KEY
+  );
+
+
+if(!token){
+
+  window.location.href =
+    "login.html";
+}
+
+
+/* =====================================================
+   ELEMENT
+===================================================== */
+
+const form =
+  document.getElementById(
+    "eventForm"
   );
 
 
@@ -990,65 +889,56 @@ const eventName =
     "eventName"
   );
 
-const slug =
+
+const slugInput =
   document.getElementById(
     "slug"
   );
 
-const slugPreview =
+
+const timezoneSelect =
   document.getElementById(
-    "slugPreview"
+    "timezone"
   );
 
-const createButton =
+
+const timezoneInfo =
   document.getElementById(
-    "createButton"
+    "timezoneInfo"
   );
 
-const loginStatus =
+
+const linkPreview =
   document.getElementById(
-    "loginStatus"
+    "linkPreview"
   );
 
-const loginStatusText =
+
+const submitButton =
   document.getElementById(
-    "loginStatusText"
+    "submitButton"
   );
 
 
-let slugManual = false;
-
-let currentEventLink = "";
-
-
-/* ========================================
-   LOGIN
-======================================== */
-
-function goToLogin(){
-
-  localStorage.removeItem(
-    TOKEN_KEY
+const message =
+  document.getElementById(
+    "message"
   );
 
-  localStorage.removeItem(
-    USER_KEY
-  );
 
-  window.location.href =
-    "login.html";
-}
+let lastGeneratedSlug =
+  "";
 
 
-async function checkLogin(){
+let createdEventUrl =
+  "";
 
-  if(!token){
 
-    goToLogin();
+/* =====================================================
+   AUTH CHECK
+===================================================== */
 
-    return false;
-  }
-
+async function checkAuth(){
 
   try{
 
@@ -1056,10 +946,7 @@ async function checkLogin(){
       await fetch(
         API_URL +
         "/api/auth/me",
-
         {
-          method:"GET",
-
           headers:{
             "Authorization":
               "Bearer " +
@@ -1069,675 +956,784 @@ async function checkLogin(){
       );
 
 
+    if(!response.ok){
+
+      throw new Error();
+    }
+
+
     const data =
       await response.json();
 
 
-    if(
-      !response.ok ||
-      !data.success ||
-      !data.user
-    ){
+    if(!data.success){
 
-      goToLogin();
-
-      return false;
+      throw new Error();
     }
-
-
-    localStorage.setItem(
-      USER_KEY,
-      JSON.stringify(
-        data.user
-      )
-    );
-
-
-    document
-      .getElementById(
-        "accountName"
-      )
-      .textContent =
-      data.user.name ||
-      "Pengguna";
-
-
-    document
-      .getElementById(
-        "accountRole"
-      )
-      .textContent =
-      data.user.role ===
-      "superadmin"
-        ?
-        "Superadmin"
-        :
-        "User";
-
-
-    document
-      .getElementById(
-        "accountBox"
-      )
-      .style.display =
-      "block";
-
-
-    loginStatus
-      .classList
-      .add(
-        "success"
-      );
-
-
-    loginStatusText
-      .textContent =
-      "Masuk sebagai "
-      +
-      (
-        data.user.name ||
-        data.user.email
-      )
-      +
-      ". Acara baru akan tersimpan ke akun ini.";
-
-
-    createButton.disabled =
-      false;
-
-
-    createButton.textContent =
-      "Buat Acara →";
-
-
-    return true;
 
 
   }catch(error){
 
-    console.error(
-      "Gagal memeriksa login:",
-      error
+    localStorage.removeItem(
+      TOKEN_KEY
     );
 
 
-    loginStatus
-      .classList
-      .add(
-        "error"
-      );
-
-
-    loginStatusText
-      .textContent =
-      "Tidak dapat memeriksa sesi login. Coba muat ulang halaman.";
-
-
-    createButton.disabled =
-      true;
-
-
-    createButton.textContent =
-      "Tidak dapat membuat acara";
-
-
-    return false;
+    window.location.href =
+      "login.html";
   }
 }
 
 
-/* ========================================
+/* =====================================================
    SLUG
-======================================== */
+===================================================== */
 
-function makeSlug(text){
+function createSlug(
+  value
+){
 
   return String(
-    text || ""
+    value || ""
   )
+    .normalize(
+      "NFD"
+    )
+    .replace(
+      /[\u0300-\u036f]/g,
+      ""
+    )
     .toLowerCase()
-    .trim()
-    .replace(/&/g,"dan")
-    .replace(/[^a-z0-9]+/g,"-")
-    .replace(/^-+|-+$/g,"");
-}
-
-
-eventName
-  .addEventListener(
-    "input",
-    function(){
-
-      if(!slugManual){
-
-        slug.value =
-          makeSlug(
-            eventName.value
-          );
-
-        updateSlugPreview();
-      }
-    }
-  );
-
-
-slug
-  .addEventListener(
-    "input",
-    function(){
-
-      slugManual =
-        true;
-
-      slug.value =
-        makeSlug(
-          slug.value
-        );
-
-      updateSlugPreview();
-    }
-  );
-
-
-function updateSlugPreview(){
-
-  const value =
-    slug.value ||
-    "nama-acara";
-
-
-  const base =
-    window.location.origin +
-    window.location.pathname
-      .replace(
-        "create-event.html",
-        ""
-      );
-
-
-  slugPreview.textContent =
-    base +
-    "event.html?e=" +
-    encodeURIComponent(
-      value
+    .replace(
+      /[^a-z0-9]+/g,
+      "-"
+    )
+    .replace(
+      /^-+|-+$/g,
+      ""
+    )
+    .slice(
+      0,
+      80
     );
 }
 
 
-/* ========================================
-   COVER PREVIEW
-======================================== */
+function cleanSlug(
+  value
+){
 
-document
-  .getElementById(
-    "cover"
+  return String(
+    value || ""
   )
-  .addEventListener(
-    "change",
-    function(e){
+    .toLowerCase()
+    .replace(
+      /[^a-z0-9-]/g,
+      "-"
+    )
+    .replace(
+      /-+/g,
+      "-"
+    )
+    .replace(
+      /^-+|-+$/g,
+      ""
+    )
+    .slice(
+      0,
+      80
+    );
+}
 
-      const file =
-        e.target.files[0];
+
+function updatePreview(){
+
+  const slug =
+    cleanSlug(
+      slugInput.value
+    );
 
 
-      if(!file){
+  linkPreview.textContent =
+    "https://moments-app.ege.my.id/event.html?e="
+    +
+    (
+      slug ||
+      "nama-acara"
+    );
+}
+
+
+eventName.addEventListener(
+  "input",
+  function(){
+
+    const generated =
+      createSlug(
+        this.value
+      );
+
+
+    /*
+    Kalau user belum mengedit slug manual,
+    slug mengikuti nama acara.
+    */
+
+    if(
+      !slugInput.value ||
+      slugInput.value ===
+      lastGeneratedSlug
+    ){
+
+      slugInput.value =
+        generated;
+
+
+      lastGeneratedSlug =
+        generated;
+
+
+      updatePreview();
+    }
+  }
+);
+
+
+slugInput.addEventListener(
+  "input",
+  function(){
+
+    const cursor =
+      this.selectionStart;
+
+
+    this.value =
+      cleanSlug(
+        this.value
+      );
+
+
+    try{
+
+      this.setSelectionRange(
+        cursor,
+        cursor
+      );
+
+    }catch(error){}
+
+
+    updatePreview();
+  }
+);
+
+
+/* =====================================================
+   TIMEZONE
+===================================================== */
+
+const timezoneDescriptions = {
+
+  "Asia/Jakarta":
+    "WIB — Sumatra, Jawa, Kalimantan Barat, dan Kalimantan Tengah.",
+
+  "Asia/Makassar":
+    "WITA — Bali, Nusa Tenggara, Kalimantan Selatan, Kalimantan Timur, Kalimantan Utara, dan Sulawesi.",
+
+  "Asia/Jayapura":
+    "WIT — Maluku dan Papua."
+};
+
+
+function updateTimezoneInfo(){
+
+  timezoneInfo.textContent =
+    timezoneDescriptions[
+      timezoneSelect.value
+    ]
+    ||
+    "";
+}
+
+
+function detectTimezone(){
+
+  let browserTimezone = "";
+
+
+  try{
+
+    browserTimezone =
+      Intl
+        .DateTimeFormat()
+        .resolvedOptions()
+        .timeZone ||
+      "";
+
+  }catch(error){}
+
+
+  /*
+  Prioritas pertama:
+  timezone browser tepat.
+  */
+
+  if(
+    browserTimezone ===
+    "Asia/Jakarta"
+  ){
+
+    timezoneSelect.value =
+      "Asia/Jakarta";
+
+    updateTimezoneInfo();
+
+    return;
+  }
+
+
+  if(
+    browserTimezone ===
+    "Asia/Makassar"
+  ){
+
+    timezoneSelect.value =
+      "Asia/Makassar";
+
+    updateTimezoneInfo();
+
+    return;
+  }
+
+
+  if(
+    browserTimezone ===
+    "Asia/Jayapura"
+  ){
+
+    timezoneSelect.value =
+      "Asia/Jayapura";
+
+    updateTimezoneInfo();
+
+    return;
+  }
+
+
+  /*
+  Jika browser memberi nama timezone lain,
+  gunakan offset sebagai bantuan.
+
+  getTimezoneOffset:
+  WIB  = -420
+  WITA = -480
+  WIT  = -540
+  */
+
+  const offset =
+    new Date()
+      .getTimezoneOffset();
+
+
+  if(offset === -420){
+
+    timezoneSelect.value =
+      "Asia/Jakarta";
+
+  }else if(
+    offset === -540
+  ){
+
+    timezoneSelect.value =
+      "Asia/Jayapura";
+
+  }else{
+
+    /*
+    Default sementara:
+    WITA.
+    */
+
+    timezoneSelect.value =
+      "Asia/Makassar";
+  }
+
+
+  updateTimezoneInfo();
+}
+
+
+timezoneSelect.addEventListener(
+  "change",
+  updateTimezoneInfo
+);
+
+
+/* =====================================================
+   DEFAULT DATE
+===================================================== */
+
+function setDefaultDate(){
+
+  const now =
+    new Date();
+
+
+  const year =
+    now.getFullYear();
+
+
+  const month =
+    String(
+      now.getMonth() + 1
+    ).padStart(
+      2,
+      "0"
+    );
+
+
+  const day =
+    String(
+      now.getDate()
+    ).padStart(
+      2,
+      "0"
+    );
+
+
+  document.getElementById(
+    "eventDate"
+  ).min =
+    `${year}-${month}-${day}`;
+}
+
+
+/* =====================================================
+   TIMEZONE LABEL
+===================================================== */
+
+function timezoneLabel(
+  timezone
+){
+
+  if(
+    timezone ===
+    "Asia/Jakarta"
+  ){
+    return "WIB";
+  }
+
+
+  if(
+    timezone ===
+    "Asia/Jayapura"
+  ){
+    return "WIT";
+  }
+
+
+  return "WITA";
+}
+
+
+/* =====================================================
+   MESSAGE
+===================================================== */
+
+function showMessage(
+  text,
+  type
+){
+
+  message.textContent =
+    text;
+
+
+  message.className =
+    "message " +
+    type;
+}
+
+
+/* =====================================================
+   SUBMIT
+===================================================== */
+
+form.addEventListener(
+  "submit",
+  async function(
+    event
+  ){
+
+    event.preventDefault();
+
+
+    message.className =
+      "message";
+
+
+    const name =
+      eventName
+        .value
+        .trim();
+
+
+    const slug =
+      cleanSlug(
+        slugInput.value
+      );
+
+
+    const eventType =
+      document.getElementById(
+        "eventType"
+      ).value;
+
+
+    const eventDate =
+      document.getElementById(
+        "eventDate"
+      ).value;
+
+
+    const startTime =
+      document.getElementById(
+        "startTime"
+      ).value;
+
+
+    const endTime =
+      document.getElementById(
+        "endTime"
+      ).value;
+
+
+    const timezone =
+      timezoneSelect.value;
+
+
+    const maxGuests =
+      Number(
+        document.getElementById(
+          "maxGuests"
+        ).value
+      );
+
+
+    const shotsPerGuest =
+      Number(
+        document.getElementById(
+          "shotsPerGuest"
+        ).value
+      );
+
+
+    if(
+      !name ||
+      !slug ||
+      !eventDate ||
+      !startTime ||
+      !endTime
+    ){
+
+      showMessage(
+        "Lengkapi semua data acara.",
+        "error"
+      );
+
+      return;
+    }
+
+
+    if(
+      startTime ===
+      endTime
+    ){
+
+      showMessage(
+        "Jam mulai dan jam selesai tidak boleh sama.",
+        "error"
+      );
+
+      return;
+    }
+
+
+    submitButton.disabled =
+      true;
+
+
+    submitButton.textContent =
+      "Membuat acara...";
+
+
+    try{
+
+      const response =
+        await fetch(
+          API_URL +
+          "/api/events",
+          {
+
+            method:"POST",
+
+            headers:{
+
+              "Content-Type":
+                "application/json",
+
+              "Authorization":
+                "Bearer " +
+                token
+            },
+
+            body:
+              JSON.stringify({
+
+                name,
+
+                slug,
+
+                eventType,
+
+                eventDate,
+
+                startTime,
+
+                endTime,
+
+                timezone,
+
+                maxGuests,
+
+                shotsPerGuest
+              })
+          }
+        );
+
+
+      const data =
+        await response.json();
+
+
+      if(
+        response.status === 401
+      ){
+
+        localStorage.removeItem(
+          TOKEN_KEY
+        );
+
+
+        window.location.href =
+          "login.html";
+
         return;
       }
 
 
       if(
-        !file.type.startsWith(
-          "image/"
-        )
+        !response.ok ||
+        !data.success
       ){
 
-        alert(
-          "File cover harus berupa gambar."
+        throw new Error(
+          data.error ||
+          "Acara gagal dibuat."
         );
-
-        this.value =
-          "";
-
-        return;
       }
 
 
-      const imageUrl =
-        URL.createObjectURL(
-          file
+      createdEventUrl =
+        "https://moments-app.ege.my.id/event.html?e="
+        +
+        encodeURIComponent(
+          data.event.slug
         );
 
 
-      document
-        .getElementById(
-          "previewImage"
-        )
-        .src =
-        imageUrl;
+      showMessage(
+        "Acara berhasil dibuat.",
+        "success"
+      );
 
 
-      document
-        .getElementById(
-          "preview"
+      document.getElementById(
+        "resultName"
+      ).textContent =
+        name;
+
+
+      document.getElementById(
+        "resultInfo"
+      ).textContent =
+        formatEventDate(
+          eventDate
         )
-        .style.display =
-        "block";
+        +
+        " • "
+        +
+        startTime
+        +
+        "–"
+        +
+        endTime
+        +
+        " "
+        +
+        timezoneLabel(
+          timezone
+        );
+
+
+      document.getElementById(
+        "resultLink"
+      ).textContent =
+        createdEventUrl;
+
+
+      document.getElementById(
+        "openEventButton"
+      ).href =
+        createdEventUrl;
+
+
+      document.getElementById(
+        "result"
+      ).classList.add(
+        "visible"
+      );
+
+
+      document.getElementById(
+        "result"
+      ).scrollIntoView({
+        behavior:"smooth",
+        block:"start"
+      });
+
+
+    }catch(error){
+
+      console.error(
+        error
+      );
+
+
+      showMessage(
+        error.message ||
+        "Acara gagal dibuat.",
+        "error"
+      );
+
+
+    }finally{
+
+      submitButton.disabled =
+        false;
+
+
+      submitButton.textContent =
+        "Buat Acara";
     }
-  );
+  }
+);
 
 
-/* ========================================
-   CREATE EVENT
-======================================== */
+/* =====================================================
+   FORMAT DATE
+===================================================== */
 
-document
-  .getElementById(
-    "eventForm"
+function formatEventDate(
+  value
+){
+
+  if(!value){
+    return "-";
+  }
+
+
+  return new Date(
+    value +
+    "T00:00:00"
   )
-  .addEventListener(
-    "submit",
-    async function(e){
-
-      e.preventDefault();
-
-
-      if(!token){
-
-        goToLogin();
-
-        return;
-      }
-
-
-      const originalText =
-        createButton.textContent;
-
-
-      createButton.disabled =
-        true;
-
-      createButton.textContent =
-        "Membuat acara...";
-
-
-      const eventData = {
-
-        name:
-          document
-            .getElementById(
-              "eventName"
-            )
-            .value
-            .trim(),
-
-        eventType:
-          document
-            .getElementById(
-              "eventType"
-            )
-            .value,
-
-        eventDate:
-          document
-            .getElementById(
-              "eventDate"
-            )
-            .value,
-
-        startTime:
-          document
-            .getElementById(
-              "startTime"
-            )
-            .value,
-
-        endTime:
-          document
-            .getElementById(
-              "endTime"
-            )
-            .value,
-
-        maxGuests:
-          Number(
-            document
-              .getElementById(
-                "maxGuests"
-              )
-              .value
-          ),
-
-        shotsPerGuest:
-          Number(
-            document
-              .getElementById(
-                "shots"
-              )
-              .value
-          ),
-
-        slug:
-          document
-            .getElementById(
-              "slug"
-            )
-            .value
-            .trim()
-      };
-
-
-      if(
-        !eventData.name ||
-        !eventData.slug ||
-        !eventData.eventDate ||
-        !eventData.startTime ||
-        !eventData.endTime
-      ){
-
-        alert(
-          "Mohon lengkapi data acara."
-        );
-
-        createButton.disabled =
-          false;
-
-        createButton.textContent =
-          originalText;
-
-        return;
-      }
-
-
-      try{
-
-
-        const response =
-          await fetch(
-            API_URL +
-            "/api/events",
-
-            {
-              method:"POST",
-
-              headers:{
-
-                "Content-Type":
-                  "application/json",
-
-                "Authorization":
-                  "Bearer " +
-                  token
-              },
-
-              body:
-                JSON.stringify(
-                  eventData
-                )
-            }
-          );
-
-
-        let data;
-
-
-        try{
-
-          data =
-            await response.json();
-
-        }catch(error){
-
-          throw new Error(
-            "Respons server tidak valid."
-          );
-        }
-
-
-        if(
-          response.status === 401
-        ){
-
-          localStorage.removeItem(
-            TOKEN_KEY
-          );
-
-          localStorage.removeItem(
-            USER_KEY
-          );
-
-
-          alert(
-            "Sesi login sudah berakhir. Silakan login kembali."
-          );
-
-
-          window.location.href =
-            "login.html";
-
-          return;
-        }
-
-
-        if(
-          !response.ok ||
-          !data.success
-        ){
-
-          throw new Error(
-            data.error ||
-            "Acara gagal dibuat."
-          );
-        }
-
-
-        /* =================================
-           LOCAL EVENT COMPATIBILITY
-        ================================= */
-
-        const localEvent = {
-
-          id:
-            data.event.id,
-
-          slug:
-            data.event.slug,
-
-          name:
-            data.event.name,
-
-          type:
-            eventData.eventType,
-
-          date:
-            eventData.eventDate,
-
-          startTime:
-            eventData.startTime,
-
-          endTime:
-            eventData.endTime,
-
-          maxGuests:
-            eventData.maxGuests,
-
-          shots:
-            eventData.shotsPerGuest
-        };
-
-
-        localStorage.setItem(
-          "momentsEvent",
-
-          JSON.stringify(
-            localEvent
-          )
-        );
-
-
-        /* =================================
-           EVENT LINK
-        ================================= */
-
-        const base =
-          window.location.origin +
-          window.location.pathname
-            .replace(
-              "create-event.html",
-              ""
-            );
-
-
-        currentEventLink =
-          base +
-          "event.html?e=" +
-          encodeURIComponent(
-            data.event.slug
-          );
-
-
-        document
-          .getElementById(
-            "eventLink"
-          )
-          .textContent =
-          currentEventLink;
-
-
-        document
-          .getElementById(
-            "openEventButton"
-          )
-          .href =
-          currentEventLink;
-
-
-        document
-          .getElementById(
-            "openGalleryButton"
-          )
-          .href =
-          base +
-          "gallery.html?e=" +
-          encodeURIComponent(
-            data.event.slug
-          );
-
-
-        document
-          .getElementById(
-            "result"
-          )
-          .style.display =
-          "block";
-
-
-        document
-          .getElementById(
-            "result"
-          )
-          .scrollIntoView({
-            behavior:"smooth",
-            block:"start"
-          });
-
-
-        console.log(
-          "Event tersimpan ke D1:",
-          data.event
-        );
-
-
-      }catch(error){
-
-        console.error(
-          error
-        );
-
-
-        alert(
-          "Gagal membuat acara:\n" +
-          (
-            error.message ||
-            "Terjadi kesalahan."
-          )
-        );
-
-
-      }finally{
-
-        createButton.disabled =
-          false;
-
-        createButton.textContent =
-          "Buat Acara →";
-      }
+  .toLocaleDateString(
+    "id-ID",
+    {
+      weekday:"long",
+      day:"numeric",
+      month:"long",
+      year:"numeric"
     }
   );
+}
 
 
-/* ========================================
+/* =====================================================
    COPY LINK
-======================================== */
+===================================================== */
 
-document
-  .getElementById(
-    "copyLinkButton"
-  )
-  .addEventListener(
-    "click",
-    async function(){
+document.getElementById(
+  "copyLinkButton"
+).addEventListener(
+  "click",
+  async function(){
 
-      if(!currentEventLink){
-        return;
-      }
-
-
-      try{
-
-        await navigator
-          .clipboard
-          .writeText(
-            currentEventLink
-          );
-
-
-        const original =
-          this.textContent;
-
-
-        this.textContent =
-          "✓ Link disalin";
-
-
-        setTimeout(
-          () => {
-
-            this.textContent =
-              original;
-
-          },
-          1800
-        );
-
-
-      }catch(error){
-
-        window.prompt(
-          "Salin link acara:",
-          currentEventLink
-        );
-      }
+    if(!createdEventUrl){
+      return;
     }
-  );
 
 
-/* ========================================
+    try{
+
+      await navigator.clipboard.writeText(
+        createdEventUrl
+      );
+
+
+      this.textContent =
+        "✓ Link Disalin";
+
+
+      setTimeout(
+        () => {
+
+          this.textContent =
+            "Salin Link";
+
+        },
+        1800
+      );
+
+
+    }catch(error){
+
+      window.prompt(
+        "Salin link acara:",
+        createdEventUrl
+      );
+    }
+  }
+);
+
+
+/* =====================================================
    START
-======================================== */
+===================================================== */
 
-updateSlugPreview();
+async function start(){
 
-checkLogin();
+  detectTimezone();
+
+  setDefaultDate();
+
+  updatePreview();
+
+  await checkAuth();
+}
+
+
+start();
 
 </script>
 
