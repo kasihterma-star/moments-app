@@ -2,815 +2,865 @@
 <html lang="id">
 <head>
 <meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
+
+<meta
+  name="viewport"
+  content="width=device-width, initial-scale=1.0, viewport-fit=cover"
+>
 
 <title>Kamera | MoreMoments</title>
 
 <style>
+
 *{
-    margin:0;
-    padding:0;
-    box-sizing:border-box;
+  margin:0;
+  padding:0;
+  box-sizing:border-box;
 }
 
-html,body{
-    width:100%;
-    height:100%;
-    background:#000;
-    font-family:Arial,Helvetica,sans-serif;
+html,
+body{
+  width:100%;
+  height:100%;
+  background:#000;
+  font-family:Arial,Helvetica,sans-serif;
 }
 
 body{
-    overflow:hidden;
+  overflow:hidden;
 }
 
 .camera-app{
-    width:100%;
-    height:100%;
-    position:relative;
-    background:#000;
+  width:100%;
+  height:100%;
+  position:relative;
+  background:#000;
 }
+
 
 /* VIDEO */
 
 .video-box{
-    position:absolute;
-    inset:0;
-    overflow:hidden;
-    background:#111;
+  position:absolute;
+  inset:0;
+  overflow:hidden;
+  background:#111;
 }
 
 video{
-    width:100%;
-    height:100%;
-    object-fit:cover;
+  width:100%;
+  height:100%;
+  object-fit:cover;
 }
+
 
 /* TOP */
 
 .topbar{
-    position:absolute;
-    top:0;
-    left:0;
-    right:0;
-    z-index:10;
+  position:absolute;
+  top:0;
+  left:0;
+  right:0;
+  z-index:10;
 
-    padding:
-        max(18px, env(safe-area-inset-top))
-        20px
-        20px;
+  padding:
+    max(18px, env(safe-area-inset-top))
+    20px
+    20px;
 
-    display:flex;
-    justify-content:space-between;
-    align-items:center;
+  display:flex;
+  justify-content:space-between;
+  align-items:center;
 
-    background:linear-gradient(
-        rgba(0,0,0,.55),
-        transparent
-    );
+  background:linear-gradient(
+    rgba(0,0,0,.58),
+    transparent
+  );
 
-    color:white;
+  color:white;
 }
 
 .event-info small{
-    display:block;
-    font-size:11px;
-    opacity:.75;
-    margin-bottom:3px;
+  display:block;
+  margin-bottom:3px;
+  font-size:11px;
+  opacity:.75;
 }
 
 .event-info strong{
-    font-size:16px;
+  display:block;
+  max-width:260px;
+  overflow:hidden;
+  text-overflow:ellipsis;
+  white-space:nowrap;
+  font-size:16px;
+}
+
+.event-time{
+  margin-top:3px;
+  font-size:9px;
+  opacity:.7;
 }
 
 .exit{
-    width:42px;
-    height:42px;
+  width:42px;
+  height:42px;
 
-    display:flex;
-    justify-content:center;
-    align-items:center;
+  display:flex;
+  align-items:center;
+  justify-content:center;
 
-    border-radius:50%;
+  border-radius:50%;
 
-    background:rgba(0,0,0,.35);
+  background:rgba(0,0,0,.35);
 
-    backdrop-filter:blur(10px);
+  backdrop-filter:blur(10px);
 
-    color:white;
-    text-decoration:none;
-    font-size:21px;
+  color:#fff;
+  text-decoration:none;
+
+  font-size:21px;
 }
 
-/* COUNT */
+
+/* COUNTER */
 
 .counter{
-    position:absolute;
-    top:90px;
-    left:50%;
+  position:absolute;
+  top:105px;
+  left:50%;
+  z-index:10;
 
-    transform:translateX(-50%);
+  transform:translateX(-50%);
 
-    z-index:10;
+  padding:9px 15px;
 
-    padding:9px 15px;
+  border-radius:999px;
 
-    border-radius:999px;
+  background:rgba(0,0,0,.46);
 
-    background:rgba(0,0,0,.45);
+  backdrop-filter:blur(10px);
 
-    backdrop-filter:blur(10px);
+  color:#fff;
 
-    color:white;
+  font-size:12px;
 
-    font-size:12px;
-
-    white-space:nowrap;
+  white-space:nowrap;
 }
 
-/* BOTTOM */
+
+/* BOTTOM CONTROLS */
 
 .controls{
-    position:absolute;
-    bottom:0;
-    left:0;
-    right:0;
+  position:absolute;
+  bottom:0;
+  left:0;
+  right:0;
+  z-index:20;
 
-    z-index:20;
+  padding:
+    25px
+    24px
+    max(28px, env(safe-area-inset-bottom));
 
-    padding:
-        25px
-        24px
-        max(28px, env(safe-area-inset-bottom));
-
-    background:linear-gradient(
-        transparent,
-        rgba(0,0,0,.75)
-    );
+  background:linear-gradient(
+    transparent,
+    rgba(0,0,0,.78)
+  );
 }
 
 .control-row{
-    display:grid;
-    grid-template-columns:1fr auto 1fr;
-    align-items:center;
+  display:grid;
+  grid-template-columns:1fr auto 1fr;
+  align-items:center;
 }
 
-/* PREVIEW */
+
+/* LAST PHOTO */
 
 .last-photo{
-    width:52px;
-    height:52px;
+  width:52px;
+  height:52px;
 
-    border-radius:12px;
+  overflow:hidden;
 
-    border:2px solid rgba(255,255,255,.65);
+  border:2px solid rgba(255,255,255,.65);
+  border-radius:12px;
 
-    overflow:hidden;
-
-    background:rgba(255,255,255,.15);
+  background:rgba(255,255,255,.15);
 }
 
 .last-photo img{
-    width:100%;
-    height:100%;
-
-    object-fit:cover;
-
-    display:none;
+  width:100%;
+  height:100%;
+  object-fit:cover;
+  display:none;
 }
+
 
 /* SHUTTER */
 
 .shutter-wrap{
-    display:flex;
-    justify-content:center;
+  display:flex;
+  justify-content:center;
 }
 
 .shutter{
-    width:78px;
-    height:78px;
+  width:78px;
+  height:78px;
 
-    padding:5px;
+  padding:5px;
 
-    border-radius:50%;
+  border:5px solid #fff;
+  border-radius:50%;
 
-    border:5px solid white;
+  background:transparent;
 
-    background:transparent;
-
-    cursor:pointer;
+  cursor:pointer;
 }
 
 .shutter-inner{
-    width:100%;
-    height:100%;
+  width:100%;
+  height:100%;
 
-    border-radius:50%;
+  border-radius:50%;
 
-    background:white;
+  background:#fff;
 
-    transition:.12s;
+  transition:.12s;
 }
 
 .shutter:active .shutter-inner{
-    transform:scale(.88);
+  transform:scale(.88);
 }
 
 .shutter:disabled{
-    opacity:.55;
+  opacity:.5;
+  cursor:not-allowed;
 }
+
 
 /* SWITCH */
 
 .switch-wrap{
-    display:flex;
-    justify-content:flex-end;
+  display:flex;
+  justify-content:flex-end;
 }
 
 .switch{
-    width:52px;
-    height:52px;
+  width:52px;
+  height:52px;
 
-    border:none;
-    border-radius:50%;
+  border:0;
+  border-radius:50%;
 
-    background:rgba(255,255,255,.18);
+  background:rgba(255,255,255,.18);
 
-    backdrop-filter:blur(10px);
+  backdrop-filter:blur(10px);
 
-    color:white;
+  color:#fff;
 
-    font-size:23px;
+  font-size:23px;
 
-    cursor:pointer;
+  cursor:pointer;
 }
+
 
 /* FLASH */
 
 .flash{
-    position:absolute;
-    inset:0;
+  position:absolute;
+  inset:0;
+  z-index:100;
 
-    z-index:100;
+  background:#fff;
 
-    background:white;
+  pointer-events:none;
 
-    pointer-events:none;
-
-    opacity:0;
+  opacity:0;
 }
 
 .flash.active{
-    animation:flash .25s ease;
+  animation:flash .25s ease;
 }
 
 @keyframes flash{
-    0%{opacity:0;}
-    40%{opacity:.9;}
-    100%{opacity:0;}
+  0%{opacity:0;}
+  40%{opacity:.9;}
+  100%{opacity:0;}
 }
+
 
 /* PERMISSION */
 
 .permission{
-    position:absolute;
-    inset:0;
+  position:absolute;
+  inset:0;
+  z-index:200;
 
-    z-index:200;
+  padding:25px;
 
-    padding:25px;
+  display:flex;
+  align-items:center;
+  justify-content:center;
 
-    display:flex;
-    justify-content:center;
-    align-items:center;
-
-    background:#f7f4f0;
+  background:#f7f4f0;
 }
 
 .permission-card{
-    width:100%;
-    max-width:390px;
+  width:100%;
+  max-width:390px;
 
-    padding:38px 28px;
+  padding:38px 28px;
 
-    border-radius:28px;
+  border-radius:28px;
 
-    background:white;
+  background:#fff;
 
-    text-align:center;
+  text-align:center;
 
-    box-shadow:0 30px 80px rgba(0,0,0,.15);
+  box-shadow:
+    0 30px 80px
+    rgba(0,0,0,.15);
 }
 
 .camera-icon{
-    width:75px;
-    height:75px;
+  width:75px;
+  height:75px;
 
-    margin:0 auto 22px;
+  margin:0 auto 22px;
 
-    display:flex;
-    align-items:center;
-    justify-content:center;
+  display:flex;
+  align-items:center;
+  justify-content:center;
 
-    border-radius:22px;
+  border-radius:22px;
 
-    background:#eee7df;
+  background:#eee7df;
 
-    font-size:34px;
+  font-size:34px;
 }
 
 .permission h1{
-    margin-bottom:10px;
-
-    font-size:25px;
+  margin-bottom:10px;
+  font-size:25px;
 }
 
 .permission p{
-    margin-bottom:25px;
+  margin-bottom:25px;
 
-    color:#777;
+  color:#777;
 
-    font-size:14px;
-    line-height:1.6;
+  font-size:14px;
+  line-height:1.6;
 }
 
 .permission button{
-    width:100%;
-    height:53px;
+  width:100%;
+  height:53px;
 
-    border:0;
-    border-radius:999px;
+  border:0;
+  border-radius:999px;
 
-    background:#29251f;
-    color:white;
+  background:#29251f;
+  color:#fff;
 
-    font-size:15px;
-    font-weight:700;
+  font-size:15px;
+  font-weight:700;
 
-    cursor:pointer;
+  cursor:pointer;
 }
 
 .permission-error{
-    margin-top:16px;
+  margin-top:16px;
 
-    color:#b34f4f;
+  color:#b34f4f;
 
-    font-size:12px;
-    line-height:1.5;
+  font-size:12px;
+  line-height:1.5;
 }
+
 
 /* LIMIT */
 
 .limit-screen{
-    display:none;
+  display:none;
 
-    position:absolute;
-    inset:0;
+  position:absolute;
+  inset:0;
+  z-index:300;
 
-    z-index:300;
+  padding:25px;
 
-    padding:25px;
+  align-items:center;
+  justify-content:center;
 
-    justify-content:center;
-    align-items:center;
-
-    background:#f7f4f0;
+  background:#f7f4f0;
 }
 
 .limit-card{
-    width:100%;
-    max-width:380px;
+  width:100%;
+  max-width:380px;
 
-    padding:35px;
+  padding:35px;
 
-    border-radius:28px;
+  border-radius:28px;
 
-    background:white;
+  background:#fff;
 
-    text-align:center;
+  text-align:center;
 }
 
 .limit-card h2{
-    margin-bottom:10px;
+  margin-bottom:10px;
 }
 
 .limit-card p{
-    margin-bottom:22px;
+  margin-bottom:22px;
 
-    color:#777;
+  color:#777;
 
-    font-size:14px;
-    line-height:1.6;
+  font-size:14px;
+  line-height:1.6;
 }
 
 .limit-card a{
-    display:inline-block;
+  display:inline-flex;
+  align-items:center;
+  justify-content:center;
 
-    padding:14px 23px;
+  min-height:48px;
 
-    border-radius:999px;
+  padding:0 23px;
 
-    background:#29251f;
-    color:white;
+  border-radius:999px;
 
-    text-decoration:none;
+  background:#29251f;
+  color:#fff;
 
-    font-size:14px;
-    font-weight:700;
+  text-decoration:none;
+
+  font-size:13px;
+  font-weight:700;
 }
+
 
 /* EVENT LOCK */
 
 .lock-screen{
-    display:none;
+  display:none;
 
-    position:absolute;
-    inset:0;
+  position:absolute;
+  inset:0;
+  z-index:500;
 
-    z-index:500;
+  padding:25px;
 
-    padding:25px;
+  align-items:center;
+  justify-content:center;
 
-    justify-content:center;
-    align-items:center;
-
-    background:#f7f4f0;
+  background:#f7f4f0;
 }
 
 .lock-screen.visible{
-    display:flex;
+  display:flex;
 }
 
 .lock-card{
-    width:100%;
-    max-width:390px;
+  width:100%;
+  max-width:390px;
 
-    padding:36px 28px;
+  padding:36px 28px;
 
-    border-radius:30px;
+  border-radius:30px;
 
-    background:#fff;
+  background:#fff;
 
-    text-align:center;
+  text-align:center;
 
-    box-shadow:0 30px 80px rgba(0,0,0,.12);
+  box-shadow:
+    0 30px 80px
+    rgba(0,0,0,.12);
 }
 
 .lock-icon{
-    width:72px;
-    height:72px;
+  width:72px;
+  height:72px;
 
-    margin:0 auto 20px;
+  margin:0 auto 20px;
 
-    display:flex;
-    align-items:center;
-    justify-content:center;
+  display:flex;
+  align-items:center;
+  justify-content:center;
 
-    border-radius:22px;
+  border-radius:22px;
 
-    background:#eee7df;
+  background:#eee7df;
 
-    font-size:32px;
+  font-size:32px;
 }
 
 .lock-label{
-    margin-bottom:8px;
+  margin-bottom:8px;
 
-    color:#9c7457;
+  color:#9c7457;
 
-    font-size:10px;
-    font-weight:800;
+  font-size:10px;
+  font-weight:800;
 
-    letter-spacing:1.4px;
-
-    text-transform:uppercase;
+  letter-spacing:1.4px;
+  text-transform:uppercase;
 }
 
 .lock-card h2{
-    margin-bottom:10px;
-
-    font-size:25px;
+  margin-bottom:10px;
+  font-size:25px;
 }
 
 .lock-card p{
-    color:#777;
+  color:#777;
 
-    font-size:13px;
-    line-height:1.65;
+  font-size:13px;
+  line-height:1.65;
 }
 
 .lock-time{
-    margin-top:18px;
-    padding:14px;
+  margin-top:18px;
 
-    border-radius:15px;
+  padding:14px;
 
-    background:#f7f3ef;
+  border-radius:15px;
 
-    font-size:12px;
-    line-height:1.6;
+  background:#f7f3ef;
+
+  font-size:12px;
+  line-height:1.65;
 }
 
 .lock-button{
-    width:100%;
-    min-height:50px;
+  width:100%;
+  min-height:50px;
 
-    margin-top:18px;
+  margin-top:18px;
 
-    display:flex;
-    align-items:center;
-    justify-content:center;
+  display:flex;
+  align-items:center;
+  justify-content:center;
 
-    border-radius:999px;
+  border-radius:999px;
 
-    background:#29251f;
-    color:#fff;
+  background:#29251f;
+  color:#fff;
 
-    text-decoration:none;
+  text-decoration:none;
 
-    font-size:13px;
-    font-weight:700;
+  font-size:13px;
+  font-weight:700;
 }
 
 .lock-button.light{
-    margin-top:8px;
+  margin-top:8px;
 
-    border:1px solid #ddd5cd;
+  border:1px solid #ddd5cd;
 
-    background:#fff;
-    color:#29251f;
+  background:#fff;
+  color:#29251f;
 }
+
 
 /* LOADING */
 
 .loading-screen{
-    position:absolute;
-    inset:0;
+  position:absolute;
+  inset:0;
+  z-index:600;
 
-    z-index:600;
+  display:flex;
+  align-items:center;
+  justify-content:center;
 
-    display:flex;
-    align-items:center;
-    justify-content:center;
+  padding:25px;
 
-    padding:25px;
-
-    background:#f7f4f0;
+  background:#f7f4f0;
 }
 
 .loading-card{
-    color:#756d66;
-
-    text-align:center;
-
-    font-size:13px;
+  color:#756d66;
+  text-align:center;
+  font-size:13px;
 }
+
 
 /* DESKTOP */
 
 @media(min-width:700px){
 
-    .camera-app{
-        max-width:500px;
-        margin:auto;
-    }
+  .camera-app{
+    max-width:500px;
+    margin:auto;
+  }
 
-    body{
-        background:#111;
-    }
+  body{
+    background:#111;
+  }
 }
+
 </style>
 </head>
 
 <body>
 
+
 <div class="camera-app">
 
-    <div class="video-box">
 
-        <video
-            id="video"
-            autoplay
-            playsinline
-            muted>
-        </video>
+  <div class="video-box">
 
-    </div>
+    <video
+      id="video"
+      autoplay
+      playsinline
+      muted
+    ></video>
+
+  </div>
 
 
-    <div class="topbar">
+  <div class="topbar">
 
-        <div class="event-info">
+    <div class="event-info">
 
-            <small id="guestName">
-                Tamu
-            </small>
+      <small id="guestName">
+        Tamu
+      </small>
 
-            <strong id="eventName">
-                MoreMoments
-            </strong>
+      <strong id="eventName">
+        MoreMoments
+      </strong>
 
-        </div>
-
-        <a
-            href="#"
-            class="exit"
-            id="exitButton">
-            ×
-        </a>
+      <div
+        class="event-time"
+        id="eventTime"
+      ></div>
 
     </div>
 
 
-    <div
-        class="counter"
-        id="counter">
-        0 dari 15 foto
-    </div>
+    <a
+      href="#"
+      class="exit"
+      id="exitButton"
+    >
+      ×
+    </a>
+
+  </div>
 
 
-    <div class="controls">
-
-        <div class="control-row">
-
-            <div class="last-photo">
-
-                <img
-                    id="lastPhoto"
-                    alt="Foto terakhir">
-
-            </div>
+  <div
+    class="counter"
+    id="counter"
+  >
+    0 dari 15 foto
+  </div>
 
 
-            <div class="shutter-wrap">
+  <div class="controls">
 
-                <button
-                    class="shutter"
-                    id="captureButton"
-                    aria-label="Ambil foto">
-
-                    <div class="shutter-inner"></div>
-
-                </button>
-
-            </div>
+    <div class="control-row">
 
 
-            <div class="switch-wrap">
+      <div class="last-photo">
 
-                <button
-                    class="switch"
-                    id="switchCamera"
-                    aria-label="Ganti kamera">
-                    ↻
-                </button>
+        <img
+          id="lastPhoto"
+          alt="Foto terakhir"
+        >
 
-            </div>
-
-        </div>
-
-    </div>
+      </div>
 
 
-    <div
-        class="flash"
-        id="flash">
-    </div>
+      <div class="shutter-wrap">
+
+        <button
+          class="shutter"
+          id="captureButton"
+          aria-label="Ambil foto"
+        >
+
+          <div class="shutter-inner"></div>
+
+        </button>
+
+      </div>
 
 
-    <!-- IZIN KAMERA -->
+      <div class="switch-wrap">
 
-    <div
-        class="permission"
-        id="permissionScreen">
+        <button
+          class="switch"
+          id="switchCamera"
+          aria-label="Ganti kamera"
+        >
+          ↻
+        </button>
 
-        <div class="permission-card">
+      </div>
 
-            <div class="camera-icon">
-                📷
-            </div>
-
-            <h1>
-                Izinkan kamera
-            </h1>
-
-            <p>
-                MoreMoments memerlukan akses kamera
-                agar Anda dapat mengabadikan momen acara.
-            </p>
-
-            <button id="startCamera">
-                Buka Kamera
-            </button>
-
-            <div
-                class="permission-error"
-                id="permissionError">
-            </div>
-
-        </div>
 
     </div>
 
-
-    <!-- JATAH HABIS -->
-
-    <div
-        class="limit-screen"
-        id="limitScreen">
-
-        <div class="limit-card">
-
-            <h2>
-                Semua foto sudah diambil 🎉
-            </h2>
-
-            <p>
-                Anda sudah menggunakan seluruh jatah foto
-                untuk acara ini.
-            </p>
-
-            <a
-                href="#"
-                id="backEvent">
-                Kembali ke Acara
-            </a>
-
-        </div>
-
-    </div>
+  </div>
 
 
-    <!-- ACARA TERKUNCI -->
+  <div
+    class="flash"
+    id="flash"
+  ></div>
 
-    <div
-        class="lock-screen"
-        id="lockScreen">
 
-        <div class="lock-card">
+  <!-- IZIN KAMERA -->
 
-            <div
-                class="lock-icon"
-                id="lockIcon">
-                ⏳
-            </div>
+  <div
+    class="permission"
+    id="permissionScreen"
+  >
 
-            <div
-                class="lock-label"
-                id="lockLabel">
-                MoreMoments
-            </div>
+    <div class="permission-card">
 
-            <h2 id="lockTitle">
-                Acara belum dimulai
-            </h2>
+      <div class="camera-icon">
+        📷
+      </div>
 
-            <p id="lockText">
-                Kamera belum tersedia.
-            </p>
+      <h1>
+        Izinkan kamera
+      </h1>
 
-            <div
-                class="lock-time"
-                id="lockTime">
-            </div>
+      <p>
+        MoreMoments memerlukan akses kamera
+        agar Anda dapat mengabadikan momen acara.
+      </p>
 
-            <a
-                href="#"
-                class="lock-button"
-                id="lockMainButton">
-                Kembali ke Acara
-            </a>
+      <button id="startCamera">
+        Buka Kamera
+      </button>
 
-            <a
-                href="#"
-                class="lock-button light"
-                id="lockGalleryButton"
-                style="display:none">
-                Lihat Galeri
-            </a>
-
-        </div>
+      <div
+        class="permission-error"
+        id="permissionError"
+      ></div>
 
     </div>
 
+  </div>
 
-    <!-- LOADING -->
 
-    <div
-        class="loading-screen"
-        id="loadingScreen">
+  <!-- JATAH HABIS -->
 
-        <div class="loading-card">
-            Memeriksa waktu acara...
-        </div>
+  <div
+    class="limit-screen"
+    id="limitScreen"
+  >
+
+    <div class="limit-card">
+
+      <h2>
+        Semua foto sudah diambil 🎉
+      </h2>
+
+      <p>
+        Anda sudah menggunakan seluruh
+        jatah foto untuk acara ini.
+      </p>
+
+      <a
+        href="#"
+        id="backEvent"
+      >
+        Kembali ke Acara
+      </a>
 
     </div>
 
+  </div>
 
-    <canvas
-        id="canvas"
-        hidden>
-    </canvas>
+
+  <!-- EVENT LOCK -->
+
+  <div
+    class="lock-screen"
+    id="lockScreen"
+  >
+
+    <div class="lock-card">
+
+      <div
+        class="lock-icon"
+        id="lockIcon"
+      >
+        ⏳
+      </div>
+
+      <div
+        class="lock-label"
+        id="lockLabel"
+      >
+        MOREMOMENTS
+      </div>
+
+      <h2 id="lockTitle">
+        Acara belum dimulai
+      </h2>
+
+      <p id="lockText">
+        Kamera belum tersedia.
+      </p>
+
+      <div
+        class="lock-time"
+        id="lockTime"
+      ></div>
+
+      <a
+        href="#"
+        class="lock-button"
+        id="lockMainButton"
+      >
+        Kembali ke Acara
+      </a>
+
+      <a
+        href="#"
+        class="lock-button light"
+        id="lockGalleryButton"
+        style="display:none"
+      >
+        Lihat Galeri
+      </a>
+
+    </div>
+
+  </div>
+
+
+  <!-- LOADING -->
+
+  <div
+    class="loading-screen"
+    id="loadingScreen"
+  >
+
+    <div class="loading-card">
+      Memeriksa waktu acara...
+    </div>
+
+  </div>
+
+
+  <canvas
+    id="canvas"
+    hidden
+  ></canvas>
 
 </div>
 
@@ -822,33 +872,61 @@ video{
 ===================================================== */
 
 const API_URL =
-    "https://api.ege.my.id";
+  "https://api.ege.my.id";
 
 
 const params =
-    new URLSearchParams(
-        window.location.search
-    );
+  new URLSearchParams(
+    window.location.search
+  );
 
 
 const slug =
-    params.get("e");
+  params.get("e");
 
 
 /* =====================================================
    DATA
 ===================================================== */
 
-let eventData = null;
+let eventData =
+  null;
 
-let guest = null;
 
-let stream = null;
+let guest =
+  null;
+
+
+let stream =
+  null;
+
 
 let facingMode =
-    "environment";
+  "environment";
 
-let eventTimer = null;
+
+let eventTimer =
+  null;
+
+
+let refreshTimer =
+  null;
+
+
+let currentMode =
+  null;
+
+
+/*
+Jam server.
+*/
+
+let serverEpochMs =
+  null;
+
+
+let performanceBaseline =
+  null;
 
 
 /* =====================================================
@@ -856,40 +934,190 @@ let eventTimer = null;
 ===================================================== */
 
 const video =
-    document.getElementById("video");
+  document.getElementById(
+    "video"
+  );
+
 
 const canvas =
-    document.getElementById("canvas");
+  document.getElementById(
+    "canvas"
+  );
+
 
 const captureButton =
-    document.getElementById("captureButton");
+  document.getElementById(
+    "captureButton"
+  );
+
 
 const switchButton =
-    document.getElementById("switchCamera");
+  document.getElementById(
+    "switchCamera"
+  );
+
 
 const permissionScreen =
-    document.getElementById("permissionScreen");
+  document.getElementById(
+    "permissionScreen"
+  );
+
 
 const permissionError =
-    document.getElementById("permissionError");
+  document.getElementById(
+    "permissionError"
+  );
+
 
 const lastPhoto =
-    document.getElementById("lastPhoto");
+  document.getElementById(
+    "lastPhoto"
+  );
+
 
 const counter =
-    document.getElementById("counter");
+  document.getElementById(
+    "counter"
+  );
+
 
 const flash =
-    document.getElementById("flash");
+  document.getElementById(
+    "flash"
+  );
+
 
 const limitScreen =
-    document.getElementById("limitScreen");
+  document.getElementById(
+    "limitScreen"
+  );
+
 
 const lockScreen =
-    document.getElementById("lockScreen");
+  document.getElementById(
+    "lockScreen"
+  );
+
 
 const loadingScreen =
-    document.getElementById("loadingScreen");
+  document.getElementById(
+    "loadingScreen"
+  );
+
+
+/* =====================================================
+   TIMEZONE
+===================================================== */
+
+function timezoneLabel(
+  timezone
+){
+
+  if(
+    timezone ===
+    "Asia/Jakarta"
+  ){
+    return "WIB";
+  }
+
+
+  if(
+    timezone ===
+    "Asia/Jayapura"
+  ){
+    return "WIT";
+  }
+
+
+  return "WITA";
+}
+
+
+/* =====================================================
+   SERVER CLOCK
+===================================================== */
+
+function syncServerClock(
+  serverTime
+){
+
+  const parsed =
+    Date.parse(
+      serverTime
+    );
+
+
+  if(
+    Number.isNaN(
+      parsed
+    )
+  ){
+    return false;
+  }
+
+
+  serverEpochMs =
+    parsed;
+
+
+  performanceBaseline =
+    performance.now();
+
+
+  return true;
+}
+
+
+function getServerNow(){
+
+  if(
+    serverEpochMs === null ||
+    performanceBaseline === null
+  ){
+
+    return null;
+  }
+
+
+  return (
+    serverEpochMs
+    +
+    (
+      performance.now()
+      -
+      performanceBaseline
+    )
+  );
+}
+
+
+/* =====================================================
+   FORMAT DATE
+===================================================== */
+
+function formatDate(
+  value
+){
+
+  if(!value){
+    return "-";
+  }
+
+
+  return new Date(
+    value +
+    "T00:00:00"
+  )
+  .toLocaleDateString(
+    "id-ID",
+    {
+      weekday:"long",
+      day:"numeric",
+      month:"long",
+      year:"numeric"
+    }
+  );
+}
 
 
 /* =====================================================
@@ -898,366 +1126,274 @@ const loadingScreen =
 
 function loadGuest(){
 
-    if(!slug){
-        return false;
-    }
-
-    const savedGuest =
-        localStorage.getItem(
-            "momentsGuest_" + slug
-        );
-
-    if(!savedGuest){
-        return false;
-    }
-
-    try{
-
-        guest =
-            JSON.parse(savedGuest);
-
-        if(
-            !guest ||
-            !guest.id ||
-            !guest.guestToken
-        ){
-            return false;
-        }
-
-        return true;
-
-    }catch(error){
-
-        console.error(error);
-
-        return false;
-    }
-}
+  if(!slug){
+    return false;
+  }
 
 
-/* =====================================================
-   TIMEZONE
-===================================================== */
-
-function timezoneOffset(
-    timezone
-){
-
-    if(
-        timezone ===
-        "Asia/Jakarta"
-    ){
-        return "+07:00";
-    }
-
-    if(
-        timezone ===
-        "Asia/Jayapura"
-    ){
-        return "+09:00";
-    }
-
-    return "+08:00";
-}
-
-
-function createEventDate(
-    date,
-    time,
-    timezone
-){
-
-    return new Date(
-        date
-        +
-        "T"
-        +
-        time
-        +
-        ":00"
-        +
-        timezoneOffset(timezone)
+  const saved =
+    localStorage.getItem(
+      "momentsGuest_" +
+      slug
     );
-}
 
 
-function getEventTimes(){
-
-    const start =
-        createEventDate(
-            eventData.date,
-            eventData.startTime,
-            eventData.timezone
-        );
-
-    let end =
-        createEventDate(
-            eventData.date,
-            eventData.endTime,
-            eventData.timezone
-        );
-
-    /*
-    Kalau acara selesai setelah tengah malam.
-    Contoh 20.00 - 01.00
-    */
-
-    if(end <= start){
-
-        end =
-            new Date(
-                end.getTime()
-                +
-                24 * 60 * 60 * 1000
-            );
-    }
-
-    return {
-        start,
-        end
-    };
-}
+  if(!saved){
+    return false;
+  }
 
 
-/* =====================================================
-   MODE ACARA
-===================================================== */
+  try{
 
-function getEventMode(){
+    guest =
+      JSON.parse(
+        saved
+      );
 
-    if(!eventData){
-        return "loading";
-    }
-
-    /*
-    Nanti status manual Aktif / Nonaktif
-    memakai bagian ini juga.
-    */
 
     if(
-        eventData.status !==
-        "active"
+      !guest ||
+      !guest.id ||
+      !guest.guestToken
     ){
-        return "inactive";
-    }
-
-    const now =
-        new Date();
-
-    const {
-        start,
-        end
-    } =
-        getEventTimes();
-
-
-    if(now < start){
-        return "waiting";
+      return false;
     }
 
 
-    if(now >= end){
-        return "finished";
-    }
+    return true;
 
 
-    return "active";
+  }catch(error){
+
+    console.error(
+      error
+    );
+
+
+    return false;
+  }
 }
 
 
 /* =====================================================
-   FORMAT TANGGAL
+   LOAD EVENT FROM SERVER
 ===================================================== */
 
-function formatDate(
-    value
+async function loadEvent(
+  quiet = false
 ){
 
-    if(!value){
-        return "-";
-    }
+  if(!slug){
 
-    const date =
-        new Date(
-            value + "T00:00:00"
-        );
+    window.location.href =
+      "index.html";
 
-    return date.toLocaleDateString(
-        "id-ID",
+    return false;
+  }
+
+
+  try{
+
+    const response =
+      await fetch(
+        API_URL +
+        "/api/events/" +
+        encodeURIComponent(
+          slug
+        ),
         {
-            weekday:"long",
-            day:"numeric",
-            month:"long",
-            year:"numeric"
+          cache:"no-store"
         }
+      );
+
+
+    const data =
+      await response.json();
+
+
+    if(
+      !response.ok ||
+      !data.success ||
+      !data.event
+    ){
+
+      throw new Error(
+        data.error ||
+        "Acara tidak ditemukan."
+      );
+    }
+
+
+    if(
+      data.serverTime
+    ){
+
+      syncServerClock(
+        data.serverTime
+      );
+    }
+
+
+    const raw =
+      data.event;
+
+
+    eventData = {
+
+      id:
+        raw.id,
+
+      slug:
+        raw.slug,
+
+      name:
+        raw.name,
+
+      type:
+        raw.event_type,
+
+      date:
+        raw.event_date,
+
+      startTime:
+        raw.start_time,
+
+      endTime:
+        raw.end_time,
+
+      timezone:
+        raw.timezone ||
+        "Asia/Makassar",
+
+      maxGuests:
+        Number(
+          raw.max_guests ||
+          0
+        ),
+
+      shots:
+        Number(
+          raw.shots_per_guest ||
+          15
+        ),
+
+      filter:
+        raw.filter ||
+        "original",
+
+      status:
+        raw.status,
+
+      phase:
+        data.eventPhase ||
+        raw.event_phase ||
+        "invalid",
+
+      startAt:
+        raw.start_at
+          ?
+          Date.parse(
+            raw.start_at
+          )
+          :
+          null,
+
+      endAt:
+        raw.end_at
+          ?
+          Date.parse(
+            raw.end_at
+          )
+          :
+          null
+    };
+
+
+    /*
+    Kalau jatah foto diedit pemilik,
+    guest yang sudah masuk juga mengikuti
+    batas terbaru.
+    */
+
+    if(guest){
+
+      guest.shotsLimit =
+        eventData.shots;
+
+
+      localStorage.setItem(
+        "momentsGuest_" +
+        slug,
+
+        JSON.stringify(
+          guest
+        )
+      );
+    }
+
+
+    localStorage.setItem(
+      "momentsEvent",
+      JSON.stringify(
+        eventData
+      )
     );
-}
 
 
-/* =====================================================
-   LOAD EVENT DARI SERVER
-===================================================== */
+    setupPage();
 
-async function loadEvent(){
 
-    if(!slug){
+    loadingScreen.style.display =
+      "none";
 
-        window.location.href =
-            "index.html";
 
-        return;
+    checkEventAccess();
+
+
+    return true;
+
+
+  }catch(error){
+
+    console.error(
+      error
+    );
+
+
+    if(!quiet){
+
+      loadingScreen.innerHTML = `
+
+        <div class="lock-card">
+
+          <div class="lock-icon">
+            ⚠️
+          </div>
+
+          <h2>
+            Acara tidak tersedia
+          </h2>
+
+          <p>
+            ${escapeHtml(
+              error.message
+            )}
+          </p>
+
+          <a
+            class="lock-button"
+            href="index.html"
+          >
+            Kembali
+          </a>
+
+        </div>
+      `;
     }
 
 
-    try{
-
-        const response =
-            await fetch(
-                API_URL
-                +
-                "/api/events/"
-                +
-                encodeURIComponent(slug)
-            );
-
-
-        const data =
-            await response.json();
-
-
-        if(
-            !response.ok ||
-            !data.success ||
-            !data.event
-        ){
-
-            throw new Error(
-                data.error ||
-                "Acara tidak ditemukan."
-            );
-        }
-
-
-        const raw =
-            data.event;
-
-
-        eventData = {
-
-            id:
-                raw.id,
-
-            slug:
-                raw.slug,
-
-            name:
-                raw.name,
-
-            type:
-                raw.event_type,
-
-            date:
-                raw.event_date,
-
-            startTime:
-                raw.start_time,
-
-            endTime:
-                raw.end_time,
-
-            timezone:
-                raw.timezone ||
-                "Asia/Makassar",
-
-            maxGuests:
-                Number(
-                    raw.max_guests ||
-                    0
-                ),
-
-            shots:
-                Number(
-                    raw.shots_per_guest ||
-                    15
-                ),
-
-            filter:
-                raw.filter ||
-                "original",
-
-            status:
-                raw.status ||
-                "active",
-
-            coverKey:
-                raw.cover_key
-        };
-
-
-        /*
-        Simpan versi terbaru untuk halaman lain.
-        */
-
-        localStorage.setItem(
-            "momentsEvent",
-            JSON.stringify(eventData)
-        );
-
-
-        setupPage();
-
-        loadingScreen.style.display =
-            "none";
-
-
-        checkEventAccess();
-
-
-        /*
-        Cek waktu setiap detik.
-        Jadi saat jam selesai,
-        kamera otomatis ditutup.
-        */
-
-        eventTimer =
-            setInterval(
-                checkEventAccess,
-                1000
-            );
-
-
-    }catch(error){
-
-        console.error(error);
-
-
-        loadingScreen.innerHTML = `
-
-            <div class="lock-card">
-
-                <div class="lock-icon">
-                    ⚠️
-                </div>
-
-                <h2>
-                    Acara tidak tersedia
-                </h2>
-
-                <p>
-                    ${escapeHtml(
-                        error.message
-                    )}
-                </p>
-
-                <a
-                    class="lock-button"
-                    href="index.html">
-                    Kembali
-                </a>
-
-            </div>
-        `;
-    }
+    return false;
+  }
 }
 
 
@@ -1266,325 +1402,614 @@ async function loadEvent(){
 ===================================================== */
 
 function escapeHtml(
-    value
+  value
 ){
 
-    return String(
-        value || ""
-    )
-    .replace(/&/g,"&amp;")
-    .replace(/</g,"&lt;")
-    .replace(/>/g,"&gt;")
-    .replace(/"/g,"&quot;")
-    .replace(/'/g,"&#039;");
+  return String(
+    value || ""
+  )
+  .replace(/&/g,"&amp;")
+  .replace(/</g,"&lt;")
+  .replace(/>/g,"&gt;")
+  .replace(/"/g,"&quot;")
+  .replace(/'/g,"&#039;");
 }
 
 
 /* =====================================================
-   SETUP HALAMAN
+   SETUP PAGE
 ===================================================== */
 
 function setupPage(){
 
-    document.getElementById(
-        "eventName"
-    ).textContent =
-        eventData.name ||
-        "MoreMoments";
+  if(!eventData){
+    return;
+  }
 
 
-    document.getElementById(
-        "guestName"
-    ).textContent =
-        guest?.name ||
-        "Tamu";
-
-
-    document.getElementById(
-        "exitButton"
-    ).href =
-        "event.html?e="
-        +
-        encodeURIComponent(slug);
-
-
-    document.getElementById(
-        "backEvent"
-    ).href =
-        "event.html?e="
-        +
-        encodeURIComponent(slug);
-
-
-    document.getElementById(
-        "lockMainButton"
-    ).href =
-        "event.html?e="
-        +
-        encodeURIComponent(slug);
-
-
-    document.getElementById(
-        "lockGalleryButton"
-    ).href =
-        "gallery.html?e="
-        +
-        encodeURIComponent(slug);
-
-
-    document.title =
-        "Kamera "
-        +
-        eventData.name
-        +
-        " | MoreMoments";
-
-
-    updateCounter();
-}
-
-
-/* =====================================================
-   LOCK SCREEN
-===================================================== */
-
-function showLock(
-    mode
-){
-
-    stopCamera();
-
-    permissionScreen.style.display =
-        "none";
-
-    lockScreen.classList.add(
-        "visible"
+  const tz =
+    timezoneLabel(
+      eventData.timezone
     );
 
 
-    const icon =
-        document.getElementById(
-            "lockIcon"
-        );
-
-    const label =
-        document.getElementById(
-            "lockLabel"
-        );
-
-    const title =
-        document.getElementById(
-            "lockTitle"
-        );
-
-    const text =
-        document.getElementById(
-            "lockText"
-        );
-
-    const time =
-        document.getElementById(
-            "lockTime"
-        );
-
-    const gallery =
-        document.getElementById(
-            "lockGalleryButton"
-        );
+  document.getElementById(
+    "eventName"
+  ).textContent =
+    eventData.name ||
+    "MoreMoments";
 
 
-    gallery.style.display =
-        "none";
+  document.getElementById(
+    "guestName"
+  ).textContent =
+    guest?.name ||
+    "Tamu";
 
 
-    if(mode === "waiting"){
-
-        const {
-            start
-        } =
-            getEventTimes();
-
-
-        const remaining =
-            Math.max(
-                0,
-                start.getTime()
-                -
-                Date.now()
-            );
+  document.getElementById(
+    "eventTime"
+  ).textContent =
+    eventData.startTime
+    +
+    "–"
+    +
+    eventData.endTime
+    +
+    " "
+    +
+    tz;
 
 
-        const totalSeconds =
-            Math.floor(
-                remaining / 1000
-            );
+  document.getElementById(
+    "exitButton"
+  ).href =
+    "event.html?e="
+    +
+    encodeURIComponent(
+      slug
+    );
 
 
-        const days =
-            Math.floor(
-                totalSeconds / 86400
-            );
+  document.getElementById(
+    "backEvent"
+  ).href =
+    "event.html?e="
+    +
+    encodeURIComponent(
+      slug
+    );
 
 
-        const hours =
-            Math.floor(
-                (totalSeconds % 86400)
-                /
-                3600
-            );
+  document.getElementById(
+    "lockMainButton"
+  ).href =
+    "event.html?e="
+    +
+    encodeURIComponent(
+      slug
+    );
 
 
-        const minutes =
-            Math.floor(
-                (totalSeconds % 3600)
-                /
-                60
-            );
+  document.getElementById(
+    "lockGalleryButton"
+  ).href =
+    "gallery.html?e="
+    +
+    encodeURIComponent(
+      slug
+    );
 
 
-        const seconds =
-            totalSeconds % 60;
+  document.title =
+    "Kamera "
+    +
+    eventData.name
+    +
+    " | MoreMoments";
 
 
-        icon.textContent =
-            "⏳";
-
-        label.textContent =
-            "BELUM DIMULAI";
-
-        title.textContent =
-            "Acara belum dimulai";
-
-        text.textContent =
-            "QR Code Anda sudah benar. Kamera akan otomatis tersedia saat waktu acara dimulai.";
-
-        time.innerHTML =
-            "<strong>"
-            +
-            days
-            +
-            " hari "
-            +
-            String(hours).padStart(2,"0")
-            +
-            " jam "
-            +
-            String(minutes).padStart(2,"0")
-            +
-            " menit "
-            +
-            String(seconds).padStart(2,"0")
-            +
-            " detik"
-            +
-            "</strong><br>"
-            +
-            "Kamera aktif "
-            +
-            formatDate(eventData.date)
-            +
-            " pukul "
-            +
-            eventData.startTime;
-
-
-    }else if(
-        mode ===
-        "finished"
-    ){
-
-        icon.textContent =
-            "🎉";
-
-        label.textContent =
-            "SELESAI";
-
-        title.textContent =
-            "Acara telah selesai";
-
-        text.textContent =
-            "Waktu mengambil foto sudah berakhir. Terima kasih sudah ikut mengabadikan momen acara ini.";
-
-        time.textContent =
-            formatDate(eventData.date)
-            +
-            " • "
-            +
-            eventData.startTime
-            +
-            " – "
-            +
-            eventData.endTime;
-
-        gallery.style.display =
-            "flex";
-
-
-    }else if(
-        mode ===
-        "inactive"
-    ){
-
-        icon.textContent =
-            "🔒";
-
-        label.textContent =
-            "NONAKTIF";
-
-        title.textContent =
-            "Acara tidak aktif";
-
-        text.textContent =
-            "Acara ini sedang dinonaktifkan oleh penyelenggara.";
-
-        time.textContent =
-            "Silakan hubungi penyelenggara acara jika diperlukan.";
-    }
+  updateCounter();
 }
 
 
 /* =====================================================
-   CEK AKSES ACARA
+   EVENT MODE - SERVER TIME
+===================================================== */
+
+function getEventMode(){
+
+  if(!eventData){
+    return "loading";
+  }
+
+
+  if(
+    eventData.status !==
+    "active"
+  ){
+    return "inactive";
+  }
+
+
+  const now =
+    getServerNow();
+
+
+  /*
+  Kalau belum ada clock server,
+  percaya phase dari Worker.
+  */
+
+  if(
+    now === null
+  ){
+
+    return (
+      eventData.phase ||
+      "invalid"
+    );
+  }
+
+
+  if(
+    !Number.isFinite(
+      eventData.startAt
+    ) ||
+    !Number.isFinite(
+      eventData.endAt
+    )
+  ){
+
+    return (
+      eventData.phase ||
+      "invalid"
+    );
+  }
+
+
+  if(
+    now <
+    eventData.startAt
+  ){
+
+    return "waiting";
+  }
+
+
+  if(
+    now >=
+    eventData.endAt
+  ){
+
+    return "finished";
+  }
+
+
+  return "active";
+}
+
+
+/* =====================================================
+   COUNTDOWN TEXT
+===================================================== */
+
+function getCountdownText(){
+
+  if(
+    !eventData ||
+    !Number.isFinite(
+      eventData.startAt
+    )
+  ){
+
+    return "";
+  }
+
+
+  const now =
+    getServerNow();
+
+
+  if(
+    now === null
+  ){
+    return "";
+  }
+
+
+  let diff =
+    Math.max(
+      0,
+      eventData.startAt -
+      now
+    );
+
+
+  const day =
+    86400000;
+
+
+  const hour =
+    3600000;
+
+
+  const minute =
+    60000;
+
+
+  const days =
+    Math.floor(
+      diff /
+      day
+    );
+
+
+  diff %=
+    day;
+
+
+  const hours =
+    Math.floor(
+      diff /
+      hour
+    );
+
+
+  diff %=
+    hour;
+
+
+  const minutes =
+    Math.floor(
+      diff /
+      minute
+    );
+
+
+  diff %=
+    minute;
+
+
+  const seconds =
+    Math.floor(
+      diff /
+      1000
+    );
+
+
+  return (
+    days
+    +
+    " hari "
+    +
+    String(
+      hours
+    ).padStart(
+      2,
+      "0"
+    )
+    +
+    " jam "
+    +
+    String(
+      minutes
+    ).padStart(
+      2,
+      "0"
+    )
+    +
+    " menit "
+    +
+    String(
+      seconds
+    ).padStart(
+      2,
+      "0"
+    )
+    +
+    " detik"
+  );
+}
+
+
+/* =====================================================
+   LOCK
+===================================================== */
+
+function showLock(
+  mode
+){
+
+  stopCamera();
+
+
+  permissionScreen.style.display =
+    "none";
+
+
+  lockScreen.classList.add(
+    "visible"
+  );
+
+
+  const icon =
+    document.getElementById(
+      "lockIcon"
+    );
+
+
+  const label =
+    document.getElementById(
+      "lockLabel"
+    );
+
+
+  const title =
+    document.getElementById(
+      "lockTitle"
+    );
+
+
+  const text =
+    document.getElementById(
+      "lockText"
+    );
+
+
+  const time =
+    document.getElementById(
+      "lockTime"
+    );
+
+
+  const gallery =
+    document.getElementById(
+      "lockGalleryButton"
+    );
+
+
+  gallery.style.display =
+    "none";
+
+
+  const tz =
+    timezoneLabel(
+      eventData.timezone
+    );
+
+
+  if(
+    mode ===
+    "waiting"
+  ){
+
+    icon.textContent =
+      "⏳";
+
+
+    label.textContent =
+      "BELUM DIMULAI";
+
+
+    title.textContent =
+      "Acara belum dimulai";
+
+
+    text.textContent =
+      "QR Code Anda sudah benar. Kamera akan otomatis tersedia saat waktu acara dimulai.";
+
+
+    time.innerHTML =
+      "<strong>"
+      +
+      getCountdownText()
+      +
+      "</strong><br>"
+      +
+      "Kamera aktif "
+      +
+      formatDate(
+        eventData.date
+      )
+      +
+      " pukul "
+      +
+      eventData.startTime
+      +
+      " "
+      +
+      tz
+      +
+      ".";
+
+
+  }else if(
+    mode ===
+    "finished"
+  ){
+
+    icon.textContent =
+      "🎉";
+
+
+    label.textContent =
+      "SELESAI";
+
+
+    title.textContent =
+      "Acara telah selesai";
+
+
+    text.textContent =
+      "Waktu mengambil foto sudah berakhir. Terima kasih sudah ikut mengabadikan momen acara ini.";
+
+
+    time.textContent =
+      formatDate(
+        eventData.date
+      )
+      +
+      " • "
+      +
+      eventData.startTime
+      +
+      " – "
+      +
+      eventData.endTime
+      +
+      " "
+      +
+      tz;
+
+
+    gallery.style.display =
+      "flex";
+
+
+  }else if(
+    mode ===
+    "inactive"
+  ){
+
+    icon.textContent =
+      "🔒";
+
+
+    label.textContent =
+      "NONAKTIF";
+
+
+    title.textContent =
+      "Acara tidak aktif";
+
+
+    text.textContent =
+      "Acara ini sedang dinonaktifkan oleh penyelenggara.";
+
+
+    time.textContent =
+      "Kamera untuk tamu sedang ditutup.";
+
+
+  }else{
+
+    icon.textContent =
+      "⚠️";
+
+
+    label.textContent =
+      "TIDAK TERSEDIA";
+
+
+    title.textContent =
+      "Kamera tidak tersedia";
+
+
+    text.textContent =
+      "Status acara tidak dapat ditentukan.";
+
+
+    time.textContent =
+      "";
+  }
+}
+
+
+/* =====================================================
+   CHECK ACCESS
 ===================================================== */
 
 function checkEventAccess(){
 
-    if(!eventData){
-        return;
+  if(!eventData){
+    return;
+  }
+
+
+  const mode =
+    getEventMode();
+
+
+  if(
+    mode !==
+    currentMode
+  ){
+
+    currentMode =
+      mode;
+  }
+
+
+  if(
+    mode ===
+    "active"
+  ){
+
+    lockScreen.classList.remove(
+      "visible"
+    );
+
+
+    const taken =
+      Number(
+        guest?.shotsTaken ||
+        0
+      );
+
+
+    const limit =
+      Number(
+        eventData.shots ||
+        15
+      );
+
+
+    if(
+      taken >= limit
+    ){
+
+      limitScreen.style.display =
+        "flex";
+
+
+      permissionScreen.style.display =
+        "none";
+
+
+      stopCamera();
+
+
+      return;
     }
 
 
-    const mode =
-        getEventMode();
+    limitScreen.style.display =
+      "none";
 
 
-    if(mode === "active"){
+    /*
+    Jangan tampilkan izin ulang
+    kalau kamera sudah hidup.
+    */
 
-        lockScreen.classList.remove(
-            "visible"
-        );
+    if(!stream){
 
-
-        /*
-        Kalau kamera belum pernah dibuka,
-        tampilkan layar izin kamera.
-        */
-
-        if(
-            !stream &&
-            limitScreen.style.display !==
-            "flex"
-        ){
-
-            permissionScreen.style.display =
-                "flex";
-        }
-
-
-    }else{
-
-        showLock(mode);
+      permissionScreen.style.display =
+        "flex";
     }
+
+
+  }else{
+
+    limitScreen.style.display =
+      "none";
+
+
+    showLock(
+      mode
+    );
+  }
 }
 
 
@@ -1594,49 +2019,52 @@ function checkEventAccess(){
 
 function updateCounter(){
 
-    if(
-        !guest ||
-        !eventData
-    ){
-        return;
-    }
+  if(
+    !guest ||
+    !eventData
+  ){
+    return;
+  }
 
 
-    const taken =
-        Number(
-            guest.shotsTaken ||
-            0
-        );
+  const taken =
+    Number(
+      guest.shotsTaken ||
+      0
+    );
 
 
-    const max =
-        Number(
-            guest.shotsLimit ||
-            eventData.shots ||
-            15
-        );
+  const max =
+    Number(
+      eventData.shots ||
+      15
+    );
 
 
-    counter.textContent =
-        taken
-        +
-        " dari "
-        +
-        max
-        +
-        " foto";
+  counter.textContent =
+    taken
+    +
+    " dari "
+    +
+    max
+    +
+    " foto";
 
 
-    if(taken >= max){
+  if(
+    taken >= max
+  ){
 
-        limitScreen.style.display =
-            "flex";
+    limitScreen.style.display =
+      "flex";
 
-        permissionScreen.style.display =
-            "none";
 
-        stopCamera();
-    }
+    permissionScreen.style.display =
+      "none";
+
+
+    stopCamera();
+  }
 }
 
 
@@ -1646,111 +2074,115 @@ function updateCounter(){
 
 async function startCamera(){
 
+  /*
+  Selalu cek server state lokal
+  sebelum meminta izin kamera.
+  */
+
+  if(
+    getEventMode() !==
+    "active"
+  ){
+
+    checkEventAccess();
+
+    return;
+  }
+
+
+  permissionError.textContent =
+    "";
+
+
+  if(
+    !navigator.mediaDevices ||
+    !navigator.mediaDevices.getUserMedia
+  ){
+
+    permissionError.textContent =
+      "Browser ini tidak mendukung akses kamera.";
+
+    return;
+  }
+
+
+  try{
+
+    stopCamera();
+
+
+    const constraints = {
+
+      audio:false,
+
+      video:{
+
+        facingMode:{
+          ideal:
+            facingMode
+        },
+
+        width:{
+          ideal:
+            1920
+        },
+
+        height:{
+          ideal:
+            1080
+        }
+      }
+    };
+
+
+    stream =
+      await navigator
+        .mediaDevices
+        .getUserMedia(
+          constraints
+        );
+
+
     /*
-    Tidak boleh membuka kamera
-    di luar waktu acara.
+    Cek lagi setelah permission selesai.
     */
 
     if(
-        getEventMode() !==
-        "active"
+      getEventMode() !==
+      "active"
     ){
 
-        checkEventAccess();
+      stopCamera();
 
-        return;
+      checkEventAccess();
+
+      return;
     }
 
 
-    permissionError.textContent =
-        "";
+    video.srcObject =
+      stream;
 
 
-    if(
-        !navigator.mediaDevices ||
-        !navigator.mediaDevices.getUserMedia
-    ){
-
-        permissionError.textContent =
-            "Browser ini tidak mendukung akses kamera.";
-
-        return;
-    }
+    await video.play();
 
 
-    try{
-
-        stopCamera();
-
-
-        const constraints = {
-
-            audio:false,
-
-            video:{
-
-                facingMode:{
-                    ideal:facingMode
-                },
-
-                width:{
-                    ideal:1920
-                },
-
-                height:{
-                    ideal:1080
-                }
-            }
-        };
+    permissionScreen.style.display =
+      "none";
 
 
-        stream =
-            await navigator
-            .mediaDevices
-            .getUserMedia(
-                constraints
-            );
+  }catch(error){
+
+    console.error(
+      error
+    );
 
 
-        /*
-        Cek lagi karena user mungkin
-        membuka izin tepat saat acara berakhir.
-        */
-
-        if(
-            getEventMode() !==
-            "active"
-        ){
-
-            stopCamera();
-
-            checkEventAccess();
-
-            return;
-        }
-
-
-        video.srcObject =
-            stream;
-
-
-        await video.play();
-
-
-        permissionScreen.style.display =
-            "none";
-
-
-    }catch(error){
-
-        console.error(error);
-
-
-        permissionError.innerHTML =
-            "Kamera tidak dapat dibuka.<br>"
-            +
-            "Pastikan izin kamera sudah diberikan pada browser.";
-    }
+    permissionError.innerHTML =
+      "Kamera tidak dapat dibuka.<br>"
+      +
+      "Pastikan izin kamera sudah diberikan pada browser.";
+  }
 }
 
 
@@ -1760,36 +2192,35 @@ async function startCamera(){
 
 function stopCamera(){
 
-    if(stream){
+  if(stream){
 
-        stream
-        .getTracks()
-        .forEach(
-            track =>
-                track.stop()
-        );
-
-        stream =
-            null;
-    }
+    stream
+      .getTracks()
+      .forEach(
+        track =>
+          track.stop()
+      );
 
 
-    video.srcObject =
-        null;
+    stream =
+      null;
+  }
+
+
+  video.srcObject =
+    null;
 }
 
 
 /* =====================================================
-   START BUTTON
+   CAMERA BUTTON
 ===================================================== */
 
-document
-.getElementById(
-    "startCamera"
-)
-.addEventListener(
-    "click",
-    startCamera
+document.getElementById(
+  "startCamera"
+).addEventListener(
+  "click",
+  startCamera
 );
 
 
@@ -1798,31 +2229,31 @@ document
 ===================================================== */
 
 switchButton.addEventListener(
-    "click",
-    async function(){
+  "click",
+  async function(){
 
-        if(
-            getEventMode() !==
-            "active"
-        ){
+    if(
+      getEventMode() !==
+      "active"
+    ){
 
-            checkEventAccess();
+      checkEventAccess();
 
-            return;
-        }
-
-
-        facingMode =
-            facingMode ===
-            "environment"
-            ?
-            "user"
-            :
-            "environment";
-
-
-        await startCamera();
+      return;
     }
+
+
+    facingMode =
+      facingMode ===
+      "environment"
+      ?
+      "user"
+      :
+      "environment";
+
+
+    await startCamera();
+  }
 );
 
 
@@ -1831,341 +2262,392 @@ switchButton.addEventListener(
 ===================================================== */
 
 captureButton.addEventListener(
-    "click",
-    capturePhoto
+  "click",
+  capturePhoto
 );
 
 
 async function capturePhoto(){
 
+  if(
+    getEventMode() !==
+    "active"
+  ){
+
+    await loadEvent(
+      true
+    );
+
+
+    checkEventAccess();
+
+    return;
+  }
+
+
+  const max =
+    Number(
+      eventData.shots ||
+      15
+    );
+
+
+  if(
+    Number(
+      guest.shotsTaken ||
+      0
+    ) >= max
+  ){
+
+    updateCounter();
+
+    return;
+  }
+
+
+  if(
+    !video.videoWidth ||
+    !video.videoHeight
+  ){
+
+    return;
+  }
+
+
+  captureButton.disabled =
+    true;
+
+
+  try{
+
+
+    /* FLASH */
+
+    flash.classList.remove(
+      "active"
+    );
+
+
+    void flash.offsetWidth;
+
+
+    flash.classList.add(
+      "active"
+    );
+
+
+    /* FOTO SIZE */
+
+    const maxWidth =
+      1600;
+
+
+    let width =
+      video.videoWidth;
+
+
+    let height =
+      video.videoHeight;
+
+
+    if(
+      width >
+      maxWidth
+    ){
+
+      const ratio =
+        maxWidth /
+        width;
+
+
+      width =
+        maxWidth;
+
+
+      height =
+        Math.round(
+          height *
+          ratio
+        );
+    }
+
+
+    canvas.width =
+      width;
+
+
+    canvas.height =
+      height;
+
+
+    const ctx =
+      canvas.getContext(
+        "2d"
+      );
+
+
+    /* MIRROR KAMERA DEPAN */
+
+    if(
+      facingMode ===
+      "user"
+    ){
+
+      ctx.save();
+
+
+      ctx.translate(
+        width,
+        0
+      );
+
+
+      ctx.scale(
+        -1,
+        1
+      );
+
+
+      ctx.drawImage(
+        video,
+        0,
+        0,
+        width,
+        height
+      );
+
+
+      ctx.restore();
+
+
+    }else{
+
+
+      ctx.drawImage(
+        video,
+        0,
+        0,
+        width,
+        height
+      );
+    }
+
+
+    /* WEBP */
+
+    const photoBlob =
+      await new Promise(
+        (
+          resolve,
+          reject
+        ) => {
+
+          canvas.toBlob(
+            blob => {
+
+              if(blob){
+
+                resolve(
+                  blob
+                );
+
+              }else{
+
+                reject(
+                  new Error(
+                    "Foto gagal diproses."
+                  )
+                );
+              }
+            },
+
+            "image/webp",
+
+            0.82
+          );
+        }
+      );
+
+
     /*
-    CEK WAKTU LAGI
-    sebelum mengambil foto.
+    Cek ulang waktu sebelum upload.
     */
 
     if(
-        getEventMode() !==
-        "active"
+      getEventMode() !==
+      "active"
     ){
+
+      await loadEvent(
+        true
+      );
+
+
+      checkEventAccess();
+
+      return;
+    }
+
+
+    /* PREVIEW */
+
+    const previewUrl =
+      URL.createObjectURL(
+        photoBlob
+      );
+
+
+    lastPhoto.src =
+      previewUrl;
+
+
+    lastPhoto.style.display =
+      "block";
+
+
+    /* FORM */
+
+    const formData =
+      new FormData();
+
+
+    formData.append(
+      "photo",
+      photoBlob,
+      "photo.webp"
+    );
+
+
+    formData.append(
+      "eventId",
+      eventData.id
+    );
+
+
+    formData.append(
+      "guestId",
+      guest.id
+    );
+
+
+    formData.append(
+      "guestToken",
+      guest.guestToken
+    );
+
+
+    formData.append(
+      "width",
+      String(
+        width
+      )
+    );
+
+
+    formData.append(
+      "height",
+      String(
+        height
+      )
+    );
+
+
+    /* UPLOAD */
+
+    const response =
+      await fetch(
+        API_URL +
+        "/api/photos",
+        {
+          method:
+            "POST",
+
+          body:
+            formData
+        }
+      );
+
+
+    const data =
+      await response.json();
+
+
+    if(
+      !response.ok ||
+      !data.success
+    ){
+
+      /*
+      Kalau Worker menolak karena waktu/status,
+      refresh event agar layar kamera
+      langsung menyesuaikan.
+      */
+
+      if(
+        data.eventPhase
+      ){
+
+        await loadEvent(
+          true
+        );
+
 
         checkEventAccess();
+      }
 
-        return;
+
+      throw new Error(
+        data.error ||
+        "Foto gagal disimpan."
+      );
     }
 
 
-    const max =
-        Number(
-            guest.shotsLimit ||
-            eventData.shots ||
-            15
-        );
+    guest.shotsTaken =
+      Number(
+        data.shotsTaken ||
+        0
+      );
 
 
-    if(
-        Number(
-            guest.shotsTaken ||
-            0
-        ) >= max
-    ){
-
-        updateCounter();
-
-        return;
-    }
+    guest.shotsLimit =
+      Number(
+        data.shotsLimit ||
+        eventData.shots
+      );
 
 
-    if(
-        !video.videoWidth ||
-        !video.videoHeight
-    ){
-        return;
-    }
+    localStorage.setItem(
+      "momentsGuest_" +
+      slug,
 
+      JSON.stringify(
+        guest
+      )
+    );
+
+
+    updateCounter();
+
+
+  }catch(error){
+
+    console.error(
+      error
+    );
+
+
+    alert(
+      error.message ||
+      "Foto gagal di-upload."
+    );
+
+
+  }finally{
 
     captureButton.disabled =
-        true;
-
-
-    try{
-
-        /* FLASH */
-
-        flash.classList.remove(
-            "active"
-        );
-
-        void flash.offsetWidth;
-
-        flash.classList.add(
-            "active"
-        );
-
-
-        /* FOTO SIZE */
-
-        const maxWidth =
-            1600;
-
-
-        let width =
-            video.videoWidth;
-
-
-        let height =
-            video.videoHeight;
-
-
-        if(width > maxWidth){
-
-            const ratio =
-                maxWidth / width;
-
-
-            width =
-                maxWidth;
-
-
-            height =
-                Math.round(
-                    height * ratio
-                );
-        }
-
-
-        canvas.width =
-            width;
-
-        canvas.height =
-            height;
-
-
-        const ctx =
-            canvas.getContext(
-                "2d"
-            );
-
-
-        /* MIRROR KAMERA DEPAN */
-
-        if(
-            facingMode ===
-            "user"
-        ){
-
-            ctx.save();
-
-
-            ctx.translate(
-                width,
-                0
-            );
-
-
-            ctx.scale(
-                -1,
-                1
-            );
-
-
-            ctx.drawImage(
-                video,
-                0,
-                0,
-                width,
-                height
-            );
-
-
-            ctx.restore();
-
-        }else{
-
-            ctx.drawImage(
-                video,
-                0,
-                0,
-                width,
-                height
-            );
-        }
-
-
-        /* WEBP */
-
-        const photoBlob =
-            await new Promise(
-                (
-                    resolve,
-                    reject
-                ) => {
-
-                    canvas.toBlob(
-                        blob => {
-
-                            if(blob){
-
-                                resolve(blob);
-
-                            }else{
-
-                                reject(
-                                    new Error(
-                                        "Foto gagal diproses."
-                                    )
-                                );
-                            }
-                        },
-
-                        "image/webp",
-
-                        0.82
-                    );
-                }
-            );
-
-
-        /*
-        Cek waktu sekali lagi
-        sebelum upload.
-        */
-
-        if(
-            getEventMode() !==
-            "active"
-        ){
-
-            checkEventAccess();
-
-            return;
-        }
-
-
-        /* PREVIEW */
-
-        const previewUrl =
-            URL.createObjectURL(
-                photoBlob
-            );
-
-
-        lastPhoto.src =
-            previewUrl;
-
-
-        lastPhoto.style.display =
-            "block";
-
-
-        /* FORM UPLOAD */
-
-        const formData =
-            new FormData();
-
-
-        formData.append(
-            "photo",
-            photoBlob,
-            "photo.webp"
-        );
-
-
-        formData.append(
-            "eventId",
-            eventData.id
-        );
-
-
-        formData.append(
-            "guestId",
-            guest.id
-        );
-
-
-        formData.append(
-            "guestToken",
-            guest.guestToken
-        );
-
-
-        formData.append(
-            "width",
-            String(width)
-        );
-
-
-        formData.append(
-            "height",
-            String(height)
-        );
-
-
-        /* UPLOAD */
-
-        const response =
-            await fetch(
-                API_URL +
-                "/api/photos",
-                {
-                    method:"POST",
-                    body:formData
-                }
-            );
-
-
-        const data =
-            await response.json();
-
-
-        if(
-            !response.ok ||
-            !data.success
-        ){
-
-            throw new Error(
-                data.error ||
-                "Foto gagal disimpan."
-            );
-        }
-
-
-        /*
-        COUNTER DARI SERVER
-        */
-
-        guest.shotsTaken =
-            Number(
-                data.shotsTaken ||
-                0
-            );
-
-
-        localStorage.setItem(
-            "momentsGuest_" + slug,
-            JSON.stringify(guest)
-        );
-
-
-        updateCounter();
-
-
-    }catch(error){
-
-        console.error(error);
-
-
-        alert(
-            "Foto gagal di-upload:\n"
-            +
-            error.message
-        );
-
-
-    }finally{
-
-        captureButton.disabled =
-            false;
-    }
+      false;
+  }
 }
 
 
@@ -2173,19 +2655,31 @@ async function capturePhoto(){
    CLEANUP
 ===================================================== */
 
+function cleanup(){
+
+  stopCamera();
+
+
+  if(eventTimer){
+
+    clearInterval(
+      eventTimer
+    );
+  }
+
+
+  if(refreshTimer){
+
+    clearInterval(
+      refreshTimer
+    );
+  }
+}
+
+
 window.addEventListener(
-    "beforeunload",
-    function(){
-
-        stopCamera();
-
-        if(eventTimer){
-
-            clearInterval(
-                eventTimer
-            );
-        }
-    }
+  "beforeunload",
+  cleanup
 );
 
 
@@ -2195,28 +2689,71 @@ window.addEventListener(
 
 async function start(){
 
-    /*
-    Kalau belum pernah masuk sebagai tamu,
-    kembali ke halaman event.
-    */
+  /*
+  Kamera hanya untuk tamu
+  yang sudah bergabung.
+  */
 
-    if(
-        !slug ||
-        !loadGuest()
-    ){
+  if(
+    !slug ||
+    !loadGuest()
+  ){
 
-        window.location.href =
-            "event.html?e="
-            +
-            encodeURIComponent(
-                slug || ""
-            );
+    window.location.href =
+      "event.html?e="
+      +
+      encodeURIComponent(
+        slug || ""
+      );
 
-        return;
-    }
+    return;
+  }
 
 
+  const loaded =
     await loadEvent();
+
+
+  if(!loaded){
+    return;
+  }
+
+
+  /*
+  Cek perubahan waktu setiap detik
+  berdasarkan clock server.
+  */
+
+  eventTimer =
+    setInterval(
+      checkEventAccess,
+      1000
+    );
+
+
+  /*
+  Sinkron ke Cloudflare setiap 30 detik.
+
+  Jika pemilik:
+  - memperpanjang waktu
+  - menambah jatah foto
+  - menonaktifkan acara
+  - mengaktifkan kembali acara
+
+  perubahan otomatis masuk ke HP tamu.
+  */
+
+  refreshTimer =
+    setInterval(
+      async function(){
+
+        await loadEvent(
+          true
+        );
+
+      },
+      30000
+    );
 }
 
 
