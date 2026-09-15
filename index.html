@@ -2,1280 +2,1480 @@
 <html lang="id">
 <head>
 <meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-
-<title>MoreMoments — Abadikan Momen Bersama</title>
 
 <meta
-  name="description"
-  content="Bagikan dan abadikan momen acara bersama teman dan keluarga."
+  name="viewport"
+  content="width=device-width, initial-scale=1.0"
 >
 
-<style>
+<title>Masuk | MoreMoments</title>
 
+<style>
 *{
   margin:0;
   padding:0;
   box-sizing:border-box;
 }
 
-html{
-  scroll-behavior:smooth;
-}
-
 body{
-  font-family:Arial,Helvetica,sans-serif;
-  background:#faf9f7;
-  color:#222;
-}
-
-a{
-  text-decoration:none;
-  color:inherit;
-}
-
-
-/* ===============================
-   NAVBAR
-================================ */
-
-.navbar{
-  width:100%;
-
-  padding:18px 24px;
-
+  min-height:100vh;
   display:flex;
-  justify-content:space-between;
   align-items:center;
+  justify-content:center;
+  padding:24px;
+  background:#eee7df;
+  font-family:Arial,Helvetica,sans-serif;
+  color:#29251f;
+}
 
-  background:
-    rgba(250,249,247,.94);
-
-  backdrop-filter:
-    blur(12px);
-
-  position:fixed;
-  top:0;
-  left:0;
-
-  z-index:1000;
-
-  border-bottom:
-    1px solid rgba(0,0,0,.06);
+.card{
+  width:100%;
+  max-width:430px;
+  padding:34px 28px;
+  background:#fff;
+  border-radius:30px;
+  box-shadow:0 30px 80px rgba(60,45,34,.14);
 }
 
 .logo{
+  text-align:center;
   font-size:24px;
   font-weight:800;
-  letter-spacing:-1px;
-}
-
-.logo span{
-  color:#a77852;
-}
-
-.nav-actions{
-  display:flex;
-  gap:9px;
-  align-items:center;
-}
-
-.btn-login{
-  display:inline-flex;
-  align-items:center;
-  justify-content:center;
-
-  min-height:42px;
-
-  padding:0 16px;
-
-  border-radius:999px;
-
-  font-size:14px;
-  font-weight:700;
-
-  cursor:pointer;
-}
-
-.btn-login:hover{
-  background:#eee9e4;
-}
-
-.btn-create-small{
-  display:inline-flex;
-  align-items:center;
-  justify-content:center;
-
-  min-height:42px;
-
-  background:#222;
-  color:white;
-
-  padding:0 18px;
-
-  border-radius:999px;
-
-  font-size:14px;
-  font-weight:700;
-
-  cursor:pointer;
-}
-
-
-/* ===============================
-   HERO
-================================ */
-
-.hero{
-  min-height:100vh;
-
-  display:flex;
-  align-items:center;
-  justify-content:center;
-
-  padding:
-    120px 24px 60px;
-}
-
-.hero-inner{
-  max-width:1100px;
-  width:100%;
-
-  display:grid;
-
-  grid-template-columns:
-    1fr 1fr;
-
-  gap:60px;
-
-  align-items:center;
-}
-
-.hero-text .tag{
-  display:inline-block;
-
-  background:#eee7df;
-  color:#7a5539;
-
-  padding:8px 14px;
-
-  border-radius:999px;
-
-  font-size:13px;
-  font-weight:700;
-
-  margin-bottom:24px;
-}
-
-.hero-text h1{
-  font-size:
-    clamp(
-      42px,
-      6vw,
-      78px
-    );
-
-  line-height:.98;
-
-  letter-spacing:-4px;
-
-  margin-bottom:24px;
-}
-
-.hero-text h1 span{
-  color:#a77852;
-}
-
-.hero-text p{
-  max-width:520px;
-
-  font-size:18px;
-
-  line-height:1.7;
-
-  color:#666;
-
-  margin-bottom:32px;
-}
-
-.hero-buttons{
-  display:flex;
-
-  gap:12px;
-
-  flex-wrap:wrap;
-}
-
-.btn-primary{
-  display:inline-flex;
-
-  align-items:center;
-  justify-content:center;
-
-  min-height:54px;
-
-  padding:0 26px;
-
-  background:#222;
-  color:#fff;
-
-  border-radius:999px;
-
-  font-size:16px;
-  font-weight:700;
-
-  border:none;
-
-  cursor:pointer;
-}
-
-.btn-primary:hover{
-  opacity:.9;
-}
-
-.btn-secondary{
-  display:inline-flex;
-
-  align-items:center;
-  justify-content:center;
-
-  min-height:54px;
-
-  padding:0 26px;
-
-  background:white;
-
-  border:1px solid #ddd;
-
-  border-radius:999px;
-
-  font-size:16px;
-  font-weight:700;
-}
-
-
-/* ===============================
-   PHONE MOCKUP
-================================ */
-
-.phone-wrapper{
-  display:flex;
-  justify-content:center;
-}
-
-.phone{
-  width:300px;
-  height:610px;
-
-  background:#111;
-
-  border-radius:42px;
-
-  padding:10px;
-
-  box-shadow:
-    0 30px 70px
-    rgba(0,0,0,.18);
-
-  transform:
-    rotate(3deg);
-}
-
-.phone-screen{
-  width:100%;
-  height:100%;
-
-  border-radius:34px;
-
-  overflow:hidden;
-
-  background:
-    linear-gradient(
-      rgba(0,0,0,.15),
-      rgba(0,0,0,.15)
-    ),
-    linear-gradient(
-      145deg,
-      #ceb69f,
-      #8d6f59
-    );
-
-  position:relative;
-
-  display:flex;
-
-  flex-direction:column;
-
-  justify-content:
-    space-between;
-
-  padding:
-    25px 20px;
-
-  color:white;
-}
-
-.camera-top{
-  display:flex;
-
-  justify-content:
-    space-between;
-
-  font-size:13px;
-
-  font-weight:600;
-}
-
-.event-info{
-  text-align:center;
-
-  margin-top:auto;
-
-  margin-bottom:32px;
-}
-
-.event-info small{
-  font-size:12px;
-
-  opacity:.85;
-}
-
-.event-info h2{
-  margin-top:7px;
-
-  font-family:
-    Georgia,serif;
-
-  font-size:32px;
-
-  font-weight:normal;
-}
-
-.shot-count{
-  font-size:13px;
-
-  opacity:.9;
-
-  margin-top:9px;
-}
-
-.camera-controls{
-  display:flex;
-
-  justify-content:center;
-
-  align-items:center;
-
-  position:relative;
-}
-
-.shutter{
-  width:72px;
-  height:72px;
-
-  border-radius:50%;
-
-  border:
-    5px solid white;
-
-  position:relative;
-}
-
-.shutter::after{
-  content:"";
-
-  position:absolute;
-
-  inset:5px;
-
-  background:white;
-
-  border-radius:50%;
-}
-
-.switch-camera{
-  position:absolute;
-
-  right:12px;
-
-  width:46px;
-  height:46px;
-
-  border-radius:50%;
-
-  background:
-    rgba(255,255,255,.18);
-
-  display:flex;
-
-  align-items:center;
-
-  justify-content:center;
-
-  font-size:20px;
-}
-
-
-/* ===============================
-   FEATURES
-================================ */
-
-.features{
-  padding:
-    90px 24px;
-
-  background:#fff;
-}
-
-.section-inner{
-  max-width:1100px;
-
-  margin:auto;
-}
-
-.section-title{
-  text-align:center;
-
-  margin-bottom:50px;
-}
-
-.section-title small{
-  color:#a77852;
-
-  text-transform:
-    uppercase;
-
-  letter-spacing:2px;
-
-  font-weight:700;
-}
-
-.section-title h2{
-  font-size:
-    clamp(
-      32px,
-      5vw,
-      50px
-    );
-
-  margin-top:12px;
-
-  letter-spacing:-2px;
-}
-
-.feature-grid{
-  display:grid;
-
-  grid-template-columns:
-    repeat(
-      3,
-      1fr
-    );
-
-  gap:18px;
-}
-
-.feature-card{
-  background:#faf9f7;
-
-  border:
-    1px solid #eee;
-
-  padding:30px;
-
-  border-radius:24px;
-}
-
-.feature-icon{
-  width:48px;
-  height:48px;
-
-  display:flex;
-
-  align-items:center;
-
-  justify-content:center;
-
-  background:#eee7df;
-
-  border-radius:14px;
-
-  font-size:23px;
-
-  margin-bottom:20px;
-}
-
-.feature-card h3{
-  font-size:20px;
-
-  margin-bottom:10px;
-}
-
-.feature-card p{
-  color:#777;
-
-  line-height:1.6;
-
-  font-size:14px;
-}
-
-
-/* ===============================
-   HOW
-================================ */
-
-.how{
-  padding:
-    100px 24px;
-}
-
-.steps{
-  max-width:850px;
-
-  margin:auto;
-
-  display:grid;
-
-  gap:18px;
-}
-
-.step{
-  display:flex;
-
-  gap:20px;
-
-  align-items:center;
-
-  background:white;
-
-  padding:22px;
-
-  border-radius:20px;
-
-  border:
-    1px solid #eee;
-}
-
-.number{
-  min-width:50px;
-
-  height:50px;
-
-  border-radius:50%;
-
-  background:#222;
-
-  color:white;
-
-  display:flex;
-
-  align-items:center;
-
-  justify-content:center;
-
-  font-weight:700;
-}
-
-.step h3{
-  margin-bottom:5px;
-}
-
-.step p{
-  color:#777;
-
-  font-size:14px;
-
-  line-height:1.5;
-}
-
-
-/* ===============================
-   CTA
-================================ */
-
-.cta{
-  max-width:1050px;
-
-  margin:
-    30px auto 90px;
-
-  background:#222;
-
-  color:white;
-
-  padding:
-    70px 30px;
-
-  border-radius:35px;
-
-  text-align:center;
-}
-
-.cta h2{
-  font-size:
-    clamp(
-      32px,
-      5vw,
-      54px
-    );
-
-  margin-bottom:15px;
-
-  letter-spacing:-2px;
-}
-
-.cta p{
-  color:#bbb;
-
   margin-bottom:28px;
 }
 
-.cta .btn-primary{
-  background:white;
-
-  color:#222;
+.logo span{
+  color:#ad7c58;
 }
 
-
-/* ===============================
-   FOOTER
-================================ */
-
-footer{
-  text-align:center;
-
-  padding:
-    30px 20px 45px;
-
-  color:#999;
-
-  font-size:13px;
-}
-
-.footer-links{
+.icon{
+  width:68px;
+  height:68px;
+  margin:0 auto 18px;
   display:flex;
-
+  align-items:center;
   justify-content:center;
-
-  gap:18px;
-
-  flex-wrap:wrap;
-
-  margin-bottom:12px;
+  border-radius:22px;
+  background:#eee7df;
+  font-size:29px;
 }
 
-.footer-links a{
-  color:#665d56;
-
-  font-weight:600;
+h1{
+  text-align:center;
+  font-size:28px;
+  margin-bottom:8px;
 }
 
+.subtitle{
+  max-width:330px;
+  margin:0 auto 24px;
+  text-align:center;
+  color:#7c746d;
+  font-size:13px;
+  line-height:1.6;
+}
 
-/* ===============================
-   MOBILE
-================================ */
+/* TAB */
 
-@media(max-width:800px){
+.tabs{
+  display:grid;
+  grid-template-columns:1fr 1fr;
+  gap:5px;
+  margin-bottom:24px;
+  padding:5px;
+  background:#f1ede9;
+  border-radius:999px;
+}
 
-  .navbar{
-    padding:
-      14px 16px;
+.tab{
+  height:42px;
+  border:0;
+  border-radius:999px;
+  background:transparent;
+  color:#736c66;
+  font-weight:700;
+  cursor:pointer;
+}
+
+.tab.active{
+  background:#fff;
+  color:#29251f;
+  box-shadow:0 3px 10px rgba(40,30,20,.08);
+}
+
+/* FORM */
+
+.form{
+  display:none;
+}
+
+.form.active{
+  display:block;
+}
+
+.field{
+  margin-bottom:15px;
+}
+
+label{
+  display:block;
+  margin-bottom:7px;
+  font-size:12px;
+  font-weight:700;
+}
+
+.input-wrap{
+  position:relative;
+}
+
+input{
+  width:100%;
+  height:53px;
+  padding:0 15px;
+  border:1px solid #ded5ce;
+  border-radius:15px;
+  outline:none;
+  background:#fff;
+  color:#29251f;
+  font-size:15px;
+}
+
+input.password{
+  padding-right:52px;
+}
+
+input:focus{
+  border-color:#9b7255;
+  box-shadow:0 0 0 3px rgba(155,114,85,.10);
+}
+
+.show-password{
+  position:absolute;
+  right:7px;
+  top:6px;
+  width:41px;
+  height:41px;
+  border:0;
+  border-radius:12px;
+  background:transparent;
+  cursor:pointer;
+  font-size:17px;
+}
+
+.main-button{
+  width:100%;
+  min-height:54px;
+  margin-top:3px;
+  border:0;
+  border-radius:999px;
+  background:#29251f;
+  color:#fff;
+  font-size:14px;
+  font-weight:700;
+  cursor:pointer;
+}
+
+.main-button:disabled{
+  opacity:.55;
+  cursor:not-allowed;
+}
+
+.info{
+  margin-top:14px;
+  color:#918981;
+  text-align:center;
+  font-size:11px;
+  line-height:1.5;
+}
+
+.email-note{
+  margin-top:7px;
+  color:#918981;
+  font-size:11px;
+  line-height:1.5;
+}
+
+/* FORGOT PASSWORD */
+
+.forgot-small{
+  display:block;
+  width:max-content;
+  margin:14px auto 0;
+  color:#72533e;
+  text-decoration:none;
+  font-size:12px;
+  font-weight:700;
+}
+
+.forgot-small:hover{
+  text-decoration:underline;
+}
+
+.recovery-help{
+  display:none;
+  margin-top:17px;
+  padding:15px;
+  border:1px solid #e4d6c9;
+  background:#faf5f0;
+  border-radius:16px;
+}
+
+.recovery-help.show{
+  display:block;
+}
+
+.recovery-title{
+  font-size:13px;
+  font-weight:800;
+  margin-bottom:5px;
+}
+
+.recovery-text{
+  font-size:11px;
+  line-height:1.5;
+  color:#756d66;
+}
+
+.recovery-button{
+  display:flex;
+  align-items:center;
+  justify-content:center;
+  min-height:43px;
+  margin-top:12px;
+  border-radius:999px;
+  background:#29251f;
+  color:white;
+  text-decoration:none;
+  font-size:12px;
+  font-weight:700;
+}
+
+/* MESSAGE */
+
+.message{
+  display:none;
+  margin-top:16px;
+  padding:13px 14px;
+  border-radius:13px;
+  font-size:12px;
+  line-height:1.5;
+}
+
+.message.error{
+  display:block;
+  border:1px solid #efcccc;
+  background:#fff2f2;
+  color:#9b4242;
+}
+
+.message.success{
+  display:block;
+  border:1px solid #cce4d0;
+  background:#f0faf2;
+  color:#357044;
+}
+
+.back{
+  display:block;
+  margin-top:23px;
+  text-align:center;
+  color:#89817b;
+  text-decoration:none;
+  font-size:12px;
+}
+
+/* EMAIL CONFIRM MODAL */
+
+.modal-backdrop{
+  position:fixed;
+  inset:0;
+  z-index:1000;
+  display:none;
+  align-items:center;
+  justify-content:center;
+  padding:20px;
+  background:rgba(30,25,21,.55);
+  backdrop-filter:blur(5px);
+}
+
+.modal-backdrop.show{
+  display:flex;
+}
+
+.modal{
+  width:100%;
+  max-width:420px;
+  background:#fff;
+  border-radius:24px;
+  padding:27px;
+  box-shadow:0 30px 90px rgba(0,0,0,.25);
+}
+
+.modal-icon{
+  width:56px;
+  height:56px;
+  margin:0 auto 16px;
+  display:flex;
+  align-items:center;
+  justify-content:center;
+  border-radius:18px;
+  background:#f2ebe5;
+  font-size:25px;
+}
+
+.modal h2{
+  text-align:center;
+  font-size:22px;
+  margin-bottom:8px;
+}
+
+.modal-text{
+  text-align:center;
+  color:#746b64;
+  font-size:12px;
+  line-height:1.6;
+}
+
+.email-preview{
+  margin:18px 0;
+  padding:14px;
+  border-radius:14px;
+  background:#f5f1ed;
+  text-align:center;
+  font-size:14px;
+  font-weight:800;
+  word-break:break-word;
+}
+
+.modal-warning{
+  padding:12px 13px;
+  border-radius:13px;
+  background:#fff7e7;
+  border:1px solid #eeddb6;
+  color:#77591b;
+  font-size:11px;
+  line-height:1.5;
+}
+
+.modal-actions{
+  display:grid;
+  grid-template-columns:1fr 1fr;
+  gap:9px;
+  margin-top:18px;
+}
+
+.modal-button{
+  min-height:48px;
+  border-radius:999px;
+  border:0;
+  cursor:pointer;
+  font-size:12px;
+  font-weight:800;
+}
+
+.modal-button.secondary{
+  background:#f1ece7;
+  color:#332d28;
+}
+
+.modal-button.primary{
+  background:#29251f;
+  color:#fff;
+}
+
+.modal-button:disabled{
+  opacity:.55;
+  cursor:not-allowed;
+}
+
+@media(max-width:480px){
+  body{
+    padding:15px;
   }
 
-  /*
-    LOGIN TIDAK LAGI DISEMBUNYIKAN
-  */
-
-  .logo{
-    font-size:21px;
+  .card{
+    padding:30px 20px;
   }
 
-  .nav-actions{
-    gap:5px;
+  .modal{
+    padding:23px 18px;
   }
 
-  .btn-login{
-    display:inline-flex;
-
-    min-height:40px;
-
-    padding:
-      0 10px;
-
-    font-size:12px;
-  }
-
-  .btn-create-small{
-    min-height:40px;
-
-    padding:
-      0 14px;
-
-    font-size:12px;
-  }
-
-  .hero{
-    padding-top:110px;
-  }
-
-  .hero-inner{
-    grid-template-columns:
-      1fr;
-
-    text-align:center;
-
-    gap:55px;
-  }
-
-  .hero-text p{
-    margin-left:auto;
-
-    margin-right:auto;
-  }
-
-  .hero-buttons{
-    justify-content:center;
-  }
-
-  .hero-text h1{
-    letter-spacing:-2px;
-  }
-
-  .phone{
-    width:260px;
-
-    height:530px;
-  }
-
-  .feature-grid{
+  .modal-actions{
     grid-template-columns:1fr;
   }
-
-  .cta{
-    margin-left:16px;
-
-    margin-right:16px;
-  }
 }
-
-
-@media(max-width:430px){
-
-  .navbar{
-    padding:
-      12px 13px;
-  }
-
-  .logo{
-    font-size:19px;
-  }
-
-  .btn-login{
-    padding:
-      0 8px;
-
-    font-size:11px;
-  }
-
-  .btn-create-small{
-    padding:
-      0 11px;
-
-    font-size:11px;
-  }
-
-  .hero{
-    padding-left:17px;
-
-    padding-right:17px;
-  }
-
-  .hero-text .tag{
-    font-size:12px;
-  }
-
-  .hero-text p{
-    font-size:17px;
-  }
-
-  .hero-buttons{
-    display:grid;
-
-    grid-template-columns:
-      1fr 1fr;
-  }
-
-  .btn-primary,
-  .btn-secondary{
-    padding:
-      0 14px;
-
-    font-size:14px;
-  }
-}
-
 </style>
 </head>
 
-
 <body>
 
+<div class="card">
 
-<header class="navbar">
+  <div class="logo">
+    more<span>moments</span>
+  </div>
+
+  <div class="icon">
+    📸
+  </div>
+
+  <h1 id="title">
+    Selamat datang
+  </h1>
+
+  <div
+    class="subtitle"
+    id="subtitle"
+  >
+    Masuk untuk melihat dan
+    mengelola acara Anda.
+  </div>
+
+  <div class="tabs">
+
+    <button
+      type="button"
+      class="tab active"
+      id="loginTab"
+    >
+      Masuk
+    </button>
+
+    <button
+      type="button"
+      class="tab"
+      id="registerTab"
+    >
+      Daftar
+    </button>
+
+  </div>
+
+
+  <!-- LOGIN -->
+
+  <form
+    class="form active"
+    id="loginForm"
+  >
+
+    <div class="field">
+
+      <label>
+        Email
+      </label>
+
+      <input
+        type="email"
+        id="loginEmail"
+        placeholder="nama@email.com"
+        autocomplete="email"
+        required
+      >
+
+    </div>
+
+
+    <div class="field">
+
+      <label>
+        Password
+      </label>
+
+      <div class="input-wrap">
+
+        <input
+          type="password"
+          class="password"
+          id="loginPassword"
+          placeholder="Masukkan password"
+          autocomplete="current-password"
+          required
+        >
+
+        <button
+          type="button"
+          class="show-password"
+          data-target="loginPassword"
+        >
+          👁
+        </button>
+
+      </div>
+
+    </div>
+
+
+    <button
+      type="submit"
+      class="main-button"
+      id="loginButton"
+    >
+      Masuk ke Dashboard
+    </button>
+
+
+    <a
+      href="forgot-password.html"
+      class="forgot-small"
+    >
+      Lupa password?
+    </a>
+
+
+    <div
+      id="recoveryHelp"
+      class="recovery-help"
+    >
+
+      <div class="recovery-title">
+        Kesulitan masuk?
+      </div>
+
+      <div class="recovery-text">
+        Password sudah beberapa kali salah.
+        Anda dapat reset lewat email atau
+        mengajukan reset ke superadmin.
+      </div>
+
+      <a
+        href="forgot-password.html"
+        class="recovery-button"
+      >
+        Pulihkan Akun
+      </a>
+
+    </div>
+
+
+    <div class="info">
+      Gunakan akun yang sudah
+      Anda daftarkan.
+    </div>
+
+  </form>
+
+
+  <!-- REGISTER -->
+
+  <form
+    class="form"
+    id="registerForm"
+  >
+
+    <div class="field">
+
+      <label>
+        Nama
+      </label>
+
+      <input
+        type="text"
+        id="registerName"
+        placeholder="Nama Anda"
+        autocomplete="name"
+        maxlength="80"
+        required
+      >
+
+    </div>
+
+
+    <div class="field">
+
+      <label>
+        Email
+      </label>
+
+      <input
+        type="email"
+        id="registerEmail"
+        placeholder="nama@email.com"
+        autocomplete="email"
+        required
+      >
+
+      <div class="email-note">
+        Gunakan email yang benar dan masih
+        bisa Anda akses untuk pemulihan akun.
+      </div>
+
+    </div>
+
+
+    <div class="field">
+
+      <label>
+        Password
+      </label>
+
+      <div class="input-wrap">
+
+        <input
+          type="password"
+          class="password"
+          id="registerPassword"
+          placeholder="Minimal 8 karakter"
+          autocomplete="new-password"
+          minlength="8"
+          required
+        >
+
+        <button
+          type="button"
+          class="show-password"
+          data-target="registerPassword"
+        >
+          👁
+        </button>
+
+      </div>
+
+    </div>
+
+
+    <div class="field">
+
+      <label>
+        Ulangi Password
+      </label>
+
+      <div class="input-wrap">
+
+        <input
+          type="password"
+          class="password"
+          id="registerPassword2"
+          placeholder="Ketik lagi password"
+          autocomplete="new-password"
+          minlength="8"
+          required
+        >
+
+        <button
+          type="button"
+          class="show-password"
+          data-target="registerPassword2"
+        >
+          👁
+        </button>
+
+      </div>
+
+    </div>
+
+
+    <button
+      type="submit"
+      class="main-button"
+      id="registerButton"
+    >
+      Buat Akun
+    </button>
+
+
+    <div class="info">
+      Sebelum akun dibuat, kami akan meminta
+      Anda memastikan email sudah benar.
+    </div>
+
+  </form>
+
+
+  <div
+    id="message"
+    class="message"
+  ></div>
+
 
   <a
     href="index.html"
-    class="logo"
+    class="back"
   >
-    more<span>moments</span>
+    ← Kembali ke halaman utama
   </a>
 
+</div>
 
-  <div class="nav-actions">
 
-    <a
-      href="login.html"
-      class="btn-login"
-      id="loginButton"
-    >
-      Masuk
-    </a>
+<!-- EMAIL CONFIRMATION -->
 
-
-    <a
-      href="login.html"
-      class="btn-create-small create-link"
-    >
-      Buat Acara
-    </a>
-
-  </div>
-
-</header>
-
-
-
-<main class="hero">
-
-  <div class="hero-inner">
-
-
-    <div class="hero-text">
-
-      <div class="tag">
-        📸 Disposable Camera untuk Acara
-      </div>
-
-
-      <h1>
-        Semua tamu.<br>
-        Semua <span>momen.</span>
-      </h1>
-
-
-      <p>
-        Biarkan teman dan keluarga
-        mengabadikan momen acara langsung
-        dari kamera HP mereka.
-        Tanpa install aplikasi.
-        Cukup scan QR, jepret,
-        dan simpan kenangan bersama.
-      </p>
-
-
-      <div class="hero-buttons">
-
-        <a
-          href="login.html"
-          class="btn-primary create-link"
-        >
-          Buat Acara
-        </a>
-
-
-        <a
-          href="#cara-kerja"
-          class="btn-secondary"
-        >
-          Cara Kerja
-        </a>
-
-      </div>
-
-    </div>
-
-
-
-    <div class="phone-wrapper">
-
-      <div class="phone">
-
-        <div class="phone-screen">
-
-
-          <div class="camera-top">
-
-            <span>
-              May & Habi
-            </span>
-
-            <span>
-              ⋯
-            </span>
-
-          </div>
-
-
-          <div class="event-info">
-
-            <small>
-              THE WEDDING OF
-            </small>
-
-            <h2>
-              May & Habi
-            </h2>
-
-            <div class="shot-count">
-              8 dari 15 foto
-            </div>
-
-          </div>
-
-
-          <div class="camera-controls">
-
-            <div class="shutter"></div>
-
-            <div class="switch-camera">
-              ↻
-            </div>
-
-          </div>
-
-
-        </div>
-
-      </div>
-
-    </div>
-
-
-  </div>
-
-</main>
-
-
-
-<section class="features">
-
-  <div class="section-inner">
-
-
-    <div class="section-title">
-
-      <small>
-        Semua jadi mudah
-      </small>
-
-      <h2>
-        Satu QR untuk semua momen.
-      </h2>
-
-    </div>
-
-
-    <div class="feature-grid">
-
-
-      <div class="feature-card">
-
-        <div class="feature-icon">
-          ▦
-        </div>
-
-        <h3>
-          Scan QR
-        </h3>
-
-        <p>
-          Tamu cukup scan QR acara
-          tanpa perlu download atau
-          install aplikasi.
-        </p>
-
-      </div>
-
-
-      <div class="feature-card">
-
-        <div class="feature-icon">
-          📷
-        </div>
-
-        <h3>
-          Jepret Foto
-        </h3>
-
-        <p>
-          Kamera langsung terbuka
-          di browser dan tamu bisa
-          mulai mengambil foto.
-        </p>
-
-      </div>
-
-
-      <div class="feature-card">
-
-        <div class="feature-icon">
-          🖼️
-        </div>
-
-        <h3>
-          Galeri Bersama
-        </h3>
-
-        <p>
-          Semua foto terkumpul
-          menjadi satu galeri
-          kenangan setelah acara selesai.
-        </p>
-
-      </div>
-
-
-    </div>
-
-  </div>
-
-</section>
-
-
-
-<section
-  class="how"
-  id="cara-kerja"
+<div
+  id="emailModal"
+  class="modal-backdrop"
 >
 
-  <div class="section-title">
+  <div class="modal">
 
-    <small>
-      Cara kerja
-    </small>
+    <div class="modal-icon">
+      ✉️
+    </div>
 
     <h2>
-      Hanya tiga langkah.
+      Email Anda sudah benar?
     </h2>
 
-  </div>
+    <div class="modal-text">
+      Pastikan alamat email di bawah benar.
+      Email ini digunakan untuk login dan
+      pemulihan password.
+    </div>
 
+    <div
+      id="emailPreview"
+      class="email-preview"
+    ></div>
 
-  <div class="steps">
+    <div class="modal-warning">
+      Jika email salah atau tidak dapat Anda
+      akses, reset password melalui email
+      nantinya tidak akan sampai.
+    </div>
 
+    <div class="modal-actions">
 
-    <div class="step">
+      <button
+        type="button"
+        class="modal-button secondary"
+        id="changeEmailButton"
+      >
+        Ubah Email
+      </button>
 
-      <div class="number">
-        1
-      </div>
-
-      <div>
-
-        <h3>
-          Buat acara
-        </h3>
-
-        <p>
-          Tentukan nama acara,
-          tanggal, jumlah tamu,
-          dan jumlah jepretan.
-        </p>
-
-      </div>
+      <button
+        type="button"
+        class="modal-button primary"
+        id="confirmEmailButton"
+      >
+        Ya, Email Sudah Benar
+      </button>
 
     </div>
 
-
-    <div class="step">
-
-      <div class="number">
-        2
-      </div>
-
-      <div>
-
-        <h3>
-          Bagikan QR
-        </h3>
-
-        <p>
-          Letakkan QR di meja,
-          undangan atau layar agar
-          tamu dapat mengakses kamera.
-        </p>
-
-      </div>
-
-    </div>
-
-
-    <div class="step">
-
-      <div class="number">
-        3
-      </div>
-
-      <div>
-
-        <h3>
-          Nikmati galerinya
-        </h3>
-
-        <p>
-          Setelah acara selesai,
-          semua momen dapat dinikmati
-          bersama dalam satu galeri.
-        </p>
-
-      </div>
-
-    </div>
-
-
   </div>
 
-</section>
-
-
-
-<section class="cta">
-
-  <h2>
-    Siap mengabadikan momen?
-  </h2>
-
-  <p>
-    Buat acara pertama Anda
-    dan biarkan para tamu
-    mengisi album dengan sudut
-    pandang mereka.
-  </p>
-
-
-  <a
-    href="login.html"
-    class="btn-primary create-link"
-  >
-    Buat Acara
-  </a>
-
-</section>
-
-
-
-<footer>
-
-  <div class="footer-links">
-
-    <!-- nanti kita buat halaman ini
-         untuk verifikasi Google -->
-
-    <a href="privacy.html">
-      Kebijakan Privasi
-    </a>
-
-  </div>
-
-  © 2026 MoreMoments.
-  Dibuat untuk mengabadikan setiap cerita.
-
-</footer>
-
+</div>
 
 
 <script>
 
+const API_URL =
+  "https://api.ege.my.id";
+
 const TOKEN_KEY =
   "momentsAdminToken";
 
-const token =
-  localStorage.getItem(
-    TOKEN_KEY
-  );
+const USER_KEY =
+  "momentsUser";
+
+const FAIL_KEY =
+  "momentsLoginFailCount";
 
 
-const loginButton =
+const loginTab =
   document.getElementById(
-    "loginButton"
+    "loginTab"
+  );
+
+const registerTab =
+  document.getElementById(
+    "registerTab"
+  );
+
+const loginForm =
+  document.getElementById(
+    "loginForm"
+  );
+
+const registerForm =
+  document.getElementById(
+    "registerForm"
+  );
+
+const message =
+  document.getElementById(
+    "message"
+  );
+
+const title =
+  document.getElementById(
+    "title"
+  );
+
+const subtitle =
+  document.getElementById(
+    "subtitle"
+  );
+
+const recoveryHelp =
+  document.getElementById(
+    "recoveryHelp"
+  );
+
+const emailModal =
+  document.getElementById(
+    "emailModal"
+  );
+
+const emailPreview =
+  document.getElementById(
+    "emailPreview"
+  );
+
+const confirmEmailButton =
+  document.getElementById(
+    "confirmEmailButton"
+  );
+
+const changeEmailButton =
+  document.getElementById(
+    "changeEmailButton"
   );
 
 
-const createLinks =
-  document.querySelectorAll(
-    ".create-link"
-  );
+let pendingRegistration = null;
 
 
-/*
-========================================
-BELUM LOGIN
-========================================
-Masuk       -> login.html
-Buat Acara  -> login.html
-*/
+/* MESSAGE */
 
-if(!token){
+function showMessage(
+  text,
+  type = "error"
+){
+  message.className =
+    "message " + type;
 
-  loginButton.textContent =
-    "Masuk";
-
-  loginButton.href =
-    "login.html";
-
-
-  createLinks.forEach(
-    function(link){
-
-      link.href =
-        "login.html";
-
-    }
-  );
-
+  message.textContent =
+    text;
 }
 
 
-/*
-========================================
-SUDAH LOGIN
-========================================
-Masuk berubah menjadi Dashboard
-Buat Acara langsung ke create-event
-*/
+function clearMessage(){
+  message.className =
+    "message";
 
-else{
-
-  loginButton.textContent =
-    "Dashboard";
-
-  loginButton.href =
-    "dashboard.html";
+  message.textContent =
+    "";
+}
 
 
-  createLinks.forEach(
-    function(link){
+/* LOGIN FAILURE */
 
-      link.href =
-        "create-event.html";
+function getFailCount(){
 
-    }
+  return Number(
+    localStorage.getItem(
+      FAIL_KEY
+    ) || 0
+  );
+}
+
+
+function updateRecoveryHelp(){
+
+  if(
+    getFailCount() >= 3
+  ){
+    recoveryHelp.classList.add(
+      "show"
+    );
+  }
+  else{
+    recoveryHelp.classList.remove(
+      "show"
+    );
+  }
+}
+
+
+function addLoginFailure(){
+
+  const count =
+    getFailCount() + 1;
+
+  localStorage.setItem(
+    FAIL_KEY,
+    String(count)
   );
 
+  updateRecoveryHelp();
 }
+
+
+function clearLoginFailures(){
+
+  localStorage.removeItem(
+    FAIL_KEY
+  );
+
+  updateRecoveryHelp();
+}
+
+
+/* TABS */
+
+function showLogin(){
+
+  clearMessage();
+
+  loginTab.classList.add(
+    "active"
+  );
+
+  registerTab.classList.remove(
+    "active"
+  );
+
+  loginForm.classList.add(
+    "active"
+  );
+
+  registerForm.classList.remove(
+    "active"
+  );
+
+  title.textContent =
+    "Selamat datang";
+
+  subtitle.textContent =
+    "Masuk untuk melihat dan mengelola acara Anda.";
+
+  updateRecoveryHelp();
+}
+
+
+function showRegister(){
+
+  clearMessage();
+
+  registerTab.classList.add(
+    "active"
+  );
+
+  loginTab.classList.remove(
+    "active"
+  );
+
+  registerForm.classList.add(
+    "active"
+  );
+
+  loginForm.classList.remove(
+    "active"
+  );
+
+  title.textContent =
+    "Buat akun";
+
+  subtitle.textContent =
+    "Daftar untuk membuat event dan menyimpan momen Anda.";
+}
+
+
+loginTab.addEventListener(
+  "click",
+  showLogin
+);
+
+registerTab.addEventListener(
+  "click",
+  showRegister
+);
+
+
+/* SHOW PASSWORD */
+
+document
+.querySelectorAll(
+  ".show-password"
+)
+.forEach(
+  function(button){
+
+    button.addEventListener(
+      "click",
+      function(){
+
+        const target =
+          document.getElementById(
+            button.dataset.target
+          );
+
+        if(
+          target.type ===
+          "password"
+        ){
+          target.type =
+            "text";
+
+          button.textContent =
+            "🙈";
+        }
+        else{
+          target.type =
+            "password";
+
+          button.textContent =
+            "👁";
+        }
+
+      }
+    );
+
+  }
+);
+
+
+/* SESSION */
+
+function saveSession(
+  token,
+  user
+){
+
+  localStorage.setItem(
+    TOKEN_KEY,
+    token
+  );
+
+  localStorage.setItem(
+    USER_KEY,
+    JSON.stringify(user)
+  );
+}
+
+
+async function checkSession(){
+
+  const token =
+    localStorage.getItem(
+      TOKEN_KEY
+    );
+
+  if(!token){
+    return;
+  }
+
+  try{
+
+    const response =
+      await fetch(
+        API_URL +
+        "/api/auth/me",
+        {
+          headers:{
+            "Authorization":
+              "Bearer " +
+              token
+          }
+        }
+      );
+
+    const data =
+      await response.json();
+
+    if(
+      response.ok &&
+      data.success
+    ){
+
+      localStorage.setItem(
+        USER_KEY,
+        JSON.stringify(
+          data.user
+        )
+      );
+
+      window.location.href =
+        "dashboard.html";
+
+      return;
+    }
+
+    localStorage.removeItem(
+      TOKEN_KEY
+    );
+
+    localStorage.removeItem(
+      USER_KEY
+    );
+
+  }
+  catch(error){
+
+    console.error(error);
+
+  }
+}
+
+
+/* LOGIN */
+
+loginForm.addEventListener(
+  "submit",
+  async function(e){
+
+    e.preventDefault();
+
+    clearMessage();
+
+    const button =
+      document.getElementById(
+        "loginButton"
+      );
+
+    button.disabled =
+      true;
+
+    button.textContent =
+      "Memeriksa...";
+
+    try{
+
+      const response =
+        await fetch(
+          API_URL +
+          "/api/auth/login",
+          {
+            method:"POST",
+
+            headers:{
+              "Content-Type":
+                "application/json"
+            },
+
+            body:
+              JSON.stringify({
+
+                email:
+                  document
+                  .getElementById(
+                    "loginEmail"
+                  )
+                  .value
+                  .trim(),
+
+                password:
+                  document
+                  .getElementById(
+                    "loginPassword"
+                  )
+                  .value
+
+              })
+          }
+        );
+
+      const data =
+        await response.json();
+
+      if(
+        !response.ok ||
+        !data.success
+      ){
+
+        addLoginFailure();
+
+        throw new Error(
+          data.error ||
+          "Email atau password salah."
+        );
+      }
+
+      clearLoginFailures();
+
+      saveSession(
+        data.token,
+        data.user
+      );
+
+      showMessage(
+        "Login berhasil. Membuka dashboard...",
+        "success"
+      );
+
+      setTimeout(
+        function(){
+
+          window.location.href =
+            "dashboard.html";
+
+        },
+        500
+      );
+
+    }
+    catch(error){
+
+      showMessage(
+        error.message ||
+        "Login gagal."
+      );
+
+    }
+    finally{
+
+      button.disabled =
+        false;
+
+      button.textContent =
+        "Masuk ke Dashboard";
+    }
+
+  }
+);
+
+
+/* REGISTER - STEP 1 */
+
+registerForm.addEventListener(
+  "submit",
+  function(e){
+
+    e.preventDefault();
+
+    clearMessage();
+
+    const name =
+      document
+      .getElementById(
+        "registerName"
+      )
+      .value
+      .trim();
+
+    const email =
+      document
+      .getElementById(
+        "registerEmail"
+      )
+      .value
+      .trim()
+      .toLowerCase();
+
+    const password =
+      document
+      .getElementById(
+        "registerPassword"
+      )
+      .value;
+
+    const password2 =
+      document
+      .getElementById(
+        "registerPassword2"
+      )
+      .value;
+
+
+    if(
+      password !==
+      password2
+    ){
+
+      showMessage(
+        "Konfirmasi password tidak sama."
+      );
+
+      return;
+    }
+
+
+    if(
+      password.length < 8
+    ){
+
+      showMessage(
+        "Password minimal 8 karakter."
+      );
+
+      return;
+    }
+
+
+    pendingRegistration = {
+      name,
+      email,
+      password
+    };
+
+
+    emailPreview.textContent =
+      email;
+
+
+    emailModal.classList.add(
+      "show"
+    );
+
+  }
+);
+
+
+/* CHANGE EMAIL */
+
+changeEmailButton.addEventListener(
+  "click",
+  function(){
+
+    emailModal.classList.remove(
+      "show"
+    );
+
+    document
+      .getElementById(
+        "registerEmail"
+      )
+      .focus();
+
+  }
+);
+
+
+/* REGISTER - CONFIRMED */
+
+confirmEmailButton.addEventListener(
+  "click",
+  async function(){
+
+    if(!pendingRegistration){
+      return;
+    }
+
+
+    confirmEmailButton.disabled =
+      true;
+
+    changeEmailButton.disabled =
+      true;
+
+    confirmEmailButton.textContent =
+      "Membuat akun...";
+
+
+    try{
+
+      const response =
+        await fetch(
+          API_URL +
+          "/api/auth/register",
+          {
+            method:"POST",
+
+            headers:{
+              "Content-Type":
+                "application/json"
+            },
+
+            body:
+              JSON.stringify(
+                pendingRegistration
+              )
+          }
+        );
+
+
+      const data =
+        await response.json();
+
+
+      if(
+        !response.ok ||
+        !data.success
+      ){
+
+        throw new Error(
+          data.error ||
+          "Gagal membuat akun."
+        );
+      }
+
+
+      emailModal.classList.remove(
+        "show"
+      );
+
+
+      saveSession(
+        data.token,
+        data.user
+      );
+
+
+      showMessage(
+        "Akun berhasil dibuat. Membuka dashboard...",
+        "success"
+      );
+
+
+      setTimeout(
+        function(){
+
+          window.location.href =
+            "dashboard.html";
+
+        },
+        600
+      );
+
+    }
+    catch(error){
+
+      emailModal.classList.remove(
+        "show"
+      );
+
+      showMessage(
+        error.message ||
+        "Gagal membuat akun."
+      );
+
+    }
+    finally{
+
+      confirmEmailButton.disabled =
+        false;
+
+      changeEmailButton.disabled =
+        false;
+
+      confirmEmailButton.textContent =
+        "Ya, Email Sudah Benar";
+
+    }
+
+  }
+);
+
+
+/* CLOSE MODAL WHEN CLICK OUTSIDE */
+
+emailModal.addEventListener(
+  "click",
+  function(event){
+
+    if(
+      event.target ===
+      emailModal
+    ){
+
+      emailModal.classList.remove(
+        "show"
+      );
+
+    }
+
+  }
+);
+
+
+/* START */
+
+updateRecoveryHelp();
+checkSession();
 
 </script>
-
 
 </body>
 </html>
