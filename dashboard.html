@@ -2066,7 +2066,275 @@ function downloadQr(){
 }
 
 
-/* EVENTS */
+/* =====================================================
+   EVENTS
+===================================================== */
+
+function timezoneLabel(timezone){
+
+  if(
+    timezone ===
+    "Asia/Jakarta"
+  ){
+    return "WIB";
+  }
+
+  if(
+    timezone ===
+    "Asia/Jayapura"
+  ){
+    return "WIT";
+  }
+
+  return "WITA";
+}
+
+
+/* =====================================================
+   LABEL STATUS WAKTU
+===================================================== */
+
+function eventPhaseLabel(event){
+
+  if(
+    event.status ===
+    "inactive" ||
+    event.eventPhase ===
+    "inactive"
+  ){
+    return "NONAKTIF";
+  }
+
+
+  if(
+    event.eventPhase ===
+    "waiting"
+  ){
+    return "BELUM DIMULAI";
+  }
+
+
+  if(
+    event.eventPhase ===
+    "active"
+  ){
+    return "BERLANGSUNG";
+  }
+
+
+  if(
+    event.eventPhase ===
+    "finished"
+  ){
+    return "SELESAI";
+  }
+
+
+  return "AKTIF";
+}
+
+
+/* =====================================================
+   STYLE STATUS
+===================================================== */
+
+function styleEventStatus(
+  element,
+  event
+){
+
+  const phase =
+    event.status === "inactive"
+      ?
+      "inactive"
+      :
+      event.eventPhase;
+
+
+  if(
+    phase ===
+    "waiting"
+  ){
+
+    element.style.background =
+      "#fff3dd";
+
+    element.style.color =
+      "#95651f";
+
+
+  }else if(
+    phase ===
+    "active"
+  ){
+
+    element.style.background =
+      "#e8f6ec";
+
+    element.style.color =
+      "#39724a";
+
+
+  }else if(
+    phase ===
+    "finished"
+  ){
+
+    element.style.background =
+      "#eeeae6";
+
+    element.style.color =
+      "#69615b";
+
+
+  }else if(
+    phase ===
+    "inactive"
+  ){
+
+    element.style.background =
+      "#f7e8e7";
+
+    element.style.color =
+      "#984b46";
+  }
+}
+
+
+/* =====================================================
+   AKTIF / NONAKTIF
+===================================================== */
+
+async function changeEventStatus(
+  event,
+  button
+){
+
+  const currentlyActive =
+    event.status ===
+    "active";
+
+
+  const newStatus =
+    currentlyActive
+      ?
+      "inactive"
+      :
+      "active";
+
+
+  const question =
+    currentlyActive
+      ?
+      "Nonaktifkan acara ini?\n\nTamu tidak akan bisa masuk, memakai kamera, atau membuka galeri selama acara nonaktif."
+      :
+      "Aktifkan kembali acara ini?\n\nAkses tamu akan mengikuti tanggal dan jam acara.";
+
+
+  if(
+    !confirm(question)
+  ){
+    return;
+  }
+
+
+  const oldText =
+    button.textContent;
+
+
+  button.disabled =
+    true;
+
+
+  button.textContent =
+    "Memproses...";
+
+
+  try{
+
+    const {
+      response,
+      data
+    } =
+      await apiFetch(
+        "/api/events/status",
+        {
+          method:
+            "POST",
+
+          headers:{
+            "Content-Type":
+              "application/json"
+          },
+
+          body:
+            JSON.stringify({
+
+              eventId:
+                event.id,
+
+              status:
+                newStatus
+            })
+        }
+      );
+
+
+    if(
+      !response.ok ||
+      !data.success
+    ){
+
+      throw new Error(
+        data.error ||
+        "Status acara gagal diubah."
+      );
+    }
+
+
+    showToast(
+      newStatus === "active"
+        ?
+        "Acara berhasil diaktifkan"
+        :
+        "Acara berhasil dinonaktifkan"
+    );
+
+
+    /*
+    Ambil ulang semua data event
+    agar status waktu terbaru tampil.
+    */
+
+    await loadEvents();
+
+
+  }catch(error){
+
+    console.error(
+      error
+    );
+
+
+    alert(
+      error.message ||
+      "Status acara gagal diubah."
+    );
+
+
+    button.disabled =
+      false;
+
+
+    button.textContent =
+      oldText;
+  }
+}
+
+
+/* =====================================================
+   EVENT CARD
+===================================================== */
 
 function createEventCard(event){
 
@@ -2075,8 +2343,21 @@ function createEventCard(event){
       "article"
     );
 
+
   card.className =
     "event-card";
+
+
+  const tz =
+    timezoneLabel(
+      event.timezone
+    );
+
+
+  const isInactive =
+    event.status ===
+    "inactive";
+
 
   card.innerHTML = `
 
@@ -2092,78 +2373,171 @@ function createEventCard(event){
 
       </div>
 
+
       <div class="event-status">
-        ${event.status || "active"}
+        ${eventPhaseLabel(event)}
       </div>
 
     </div>
 
+
     <div class="event-owner"></div>
 
+
     <div class="event-date">
+
       ${formatDate(event.eventDate)}
+
       •
+
       ${event.startTime || "-"}
+
       –
+
       ${event.endTime || "-"}
+
+      ${tz}
+
     </div>
+
 
     <div class="event-stats">
 
       <div class="event-stat">
-        <small>Tamu</small>
+
+        <small>
+          Tamu
+        </small>
+
         <strong>
           ${event.guestCount}
           /
           ${event.maxGuests}
         </strong>
+
       </div>
 
+
       <div class="event-stat">
-        <small>Foto</small>
+
+        <small>
+          Foto
+        </small>
+
         <strong>
           ${event.photoCount}
         </strong>
+
       </div>
 
+
       <div class="event-stat">
-        <small>Jatah</small>
+
+        <small>
+          Jatah
+        </small>
+
         <strong>
           ${event.shotsPerGuest}
         </strong>
+
       </div>
 
     </div>
 
+
     <div class="event-slug"></div>
+
 
     <div class="event-actions">
 
-      <a class="event-button dark open-event">
-        Buka Acara
+
+      <a
+        class="event-button dark open-event"
+      >
+        ${
+          isInactive
+            ?
+            "Lihat Tampilan Publik"
+            :
+            "Buka Acara"
+        }
       </a>
 
-      <a class="event-button open-gallery">
+
+      <a
+        class="event-button open-gallery"
+      >
         Galeri
       </a>
 
-      <button class="event-button qr open-qr">
+
+      <a
+        class="event-button edit-event"
+      >
+        ✎ Edit Acara
+      </a>
+
+
+      <button
+        class="event-button qr open-qr"
+      >
         ▦ QR Code
       </button>
 
-      <button class="event-button copy-event">
+
+      <button
+        class="event-button copy-event"
+      >
         🔗 Salin Link
+      </button>
+
+
+      <button
+        class="event-button toggle-status"
+      >
+        ${
+          isInactive
+            ?
+            "🟢 Aktifkan"
+            :
+            "⏸ Nonaktifkan"
+        }
       </button>
 
     </div>
   `;
 
 
+  /* ==============================
+     NAMA
+  ============================== */
+
   card.querySelector(
     ".event-name"
   ).textContent =
     event.name;
 
+
+  /* ==============================
+     STATUS
+  ============================== */
+
+  const statusBadge =
+    card.querySelector(
+      ".event-status"
+    );
+
+
+  styleEventStatus(
+    statusBadge,
+    event
+  );
+
+
+  /* ==============================
+     PEMILIK
+  ============================== */
 
   const owner =
     card.querySelector(
@@ -2194,6 +2568,7 @@ function createEventCard(event){
           ""
       );
 
+
   }else{
 
     owner.textContent =
@@ -2201,11 +2576,19 @@ function createEventCard(event){
   }
 
 
+  /* ==============================
+     SLUG
+  ============================== */
+
   card.querySelector(
     ".event-slug"
   ).textContent =
     event.slug;
 
+
+  /* ==============================
+     BUKA EVENT
+  ============================== */
 
   card.querySelector(
     ".open-event"
@@ -2215,6 +2598,10 @@ function createEventCard(event){
     );
 
 
+  /* ==============================
+     GALERI
+  ============================== */
+
   card.querySelector(
     ".open-gallery"
   ).href =
@@ -2222,6 +2609,24 @@ function createEventCard(event){
       event.slug
     );
 
+
+  /* ==============================
+     EDIT
+  ============================== */
+
+  card.querySelector(
+    ".edit-event"
+  ).href =
+    "edit-event.html?id="
+    +
+    encodeURIComponent(
+      event.id
+    );
+
+
+  /* ==============================
+     QR
+  ============================== */
 
   card.querySelector(
     ".open-qr"
@@ -2236,6 +2641,10 @@ function createEventCard(event){
   );
 
 
+  /* ==============================
+     COPY LINK
+  ============================== */
+
   card.querySelector(
     ".copy-event"
   ).addEventListener(
@@ -2247,15 +2656,20 @@ function createEventCard(event){
           event.slug
         );
 
+
       try{
 
-        await navigator.clipboard.writeText(
-          link
-        );
+        await navigator
+          .clipboard
+          .writeText(
+            link
+          );
+
 
         showToast(
           "Link acara disalin"
         );
+
 
       }catch(error){
 
@@ -2268,11 +2682,57 @@ function createEventCard(event){
   );
 
 
+  /* ==============================
+     AKTIF / NONAKTIF
+  ============================== */
+
+  const toggleButton =
+    card.querySelector(
+      ".toggle-status"
+    );
+
+
+  if(
+    isInactive
+  ){
+
+    toggleButton.style.background =
+      "#edf7ef";
+
+    toggleButton.style.borderColor =
+      "#bcd9c2";
+
+    toggleButton.style.color =
+      "#39724a";
+
+
+  }else{
+
+    toggleButton.style.background =
+      "#fff3f2";
+
+    toggleButton.style.borderColor =
+      "#ead0cd";
+
+    toggleButton.style.color =
+      "#9a4b45";
+  }
+
+
+  toggleButton.addEventListener(
+    "click",
+    function(){
+
+      changeEventStatus(
+        event,
+        toggleButton
+      );
+    }
+  );
+
+
   return card;
 }
-
-
-function renderEvents(){
 
   eventsList.innerHTML = "";
 
