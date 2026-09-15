@@ -2,499 +2,2108 @@
 <html lang="id">
 <head>
 <meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<meta
+  name="viewport"
+  content="width=device-width, initial-scale=1.0"
+>
 
 <title>Acara | MoreMoments</title>
 
 <style>
+
 *{
-    margin:0;
-    padding:0;
-    box-sizing:border-box;
+  margin:0;
+  padding:0;
+  box-sizing:border-box;
 }
 
 body{
-    min-height:100vh;
-    font-family:Arial, Helvetica, sans-serif;
-    background:#eee7df;
-    color:#27231f;
+  min-height:100vh;
+
+  font-family:
+    Arial,
+    Helvetica,
+    sans-serif;
+
+  background:#eee7df;
+  color:#27231f;
 }
+
+a{
+  color:inherit;
+  text-decoration:none;
+}
+
+button,
+input{
+  font:inherit;
+}
+
+
+/* ================================
+   PAGE
+================================ */
 
 .page{
-    min-height:100vh;
-    display:flex;
-    align-items:center;
-    justify-content:center;
-    padding:25px;
+  min-height:100vh;
+
+  display:flex;
+  align-items:center;
+  justify-content:center;
+
+  padding:25px;
 }
+
+
+/* ================================
+   CARD
+================================ */
 
 .card{
-    width:100%;
-    max-width:420px;
-    background:#fff;
-    border-radius:32px;
-    overflow:hidden;
-    box-shadow:0 30px 80px rgba(65,48,35,.15);
+  width:100%;
+  max-width:430px;
+
+  overflow:hidden;
+
+  background:#fff;
+
+  border-radius:32px;
+
+  box-shadow:
+    0 30px 80px
+    rgba(65,48,35,.15);
 }
+
+
+/* ================================
+   COVER
+================================ */
 
 .cover{
-    height:330px;
-    position:relative;
-    background:
-        linear-gradient(
-            to bottom,
-            rgba(0,0,0,.05),
-            rgba(0,0,0,.5)
-        ),
-        linear-gradient(
-            145deg,
-            #bda58f,
-            #745a48
-        );
+  height:330px;
 
-    display:flex;
-    flex-direction:column;
-    justify-content:flex-end;
-    padding:30px;
-    color:white;
+  position:relative;
+
+  padding:30px;
+
+  display:flex;
+  flex-direction:column;
+  justify-content:flex-end;
+
+  color:white;
+
+  background:
+    linear-gradient(
+      to bottom,
+      rgba(0,0,0,.05),
+      rgba(0,0,0,.55)
+    ),
+    linear-gradient(
+      145deg,
+      #bda58f,
+      #745a48
+    );
 }
+
 
 .logo{
-    position:absolute;
-    top:22px;
-    left:25px;
-    font-size:17px;
-    font-weight:800;
+  position:absolute;
+
+  top:22px;
+  left:25px;
+
+  font-size:17px;
+  font-weight:800;
 }
+
 
 .logo span{
-    opacity:.7;
+  opacity:.72;
 }
+
+
+.event-status{
+  position:absolute;
+
+  top:22px;
+  right:22px;
+
+  padding:7px 11px;
+
+  border-radius:999px;
+
+  background:
+    rgba(255,255,255,.18);
+
+  backdrop-filter:
+    blur(10px);
+
+  font-size:9px;
+  font-weight:800;
+
+  text-transform:uppercase;
+  letter-spacing:.7px;
+}
+
 
 .event-type{
-    font-size:11px;
-    font-weight:700;
-    letter-spacing:2px;
-    text-transform:uppercase;
-    margin-bottom:8px;
+  margin-bottom:8px;
+
+  font-size:11px;
+  font-weight:700;
+
+  letter-spacing:2px;
+
+  text-transform:uppercase;
 }
+
 
 .event-name{
-    font-family:Georgia,serif;
-    font-size:36px;
-    font-weight:normal;
-    line-height:1.1;
-    margin-bottom:10px;
+  margin-bottom:10px;
+
+  font-family:
+    Georgia,
+    serif;
+
+  font-size:36px;
+  font-weight:normal;
+
+  line-height:1.1;
 }
+
 
 .event-date{
-    font-size:13px;
-    opacity:.9;
+  font-size:13px;
+  opacity:.9;
 }
+
+
+/* ================================
+   CONTENT
+================================ */
 
 .content{
-    padding:30px;
+  padding:30px;
 }
+
 
 .welcome{
-    text-align:center;
-    margin-bottom:28px;
+  margin-bottom:24px;
+
+  text-align:center;
 }
+
+
+.welcome-icon{
+  width:58px;
+  height:58px;
+
+  margin:
+    0 auto 15px;
+
+  display:flex;
+  align-items:center;
+  justify-content:center;
+
+  border-radius:18px;
+
+  background:#eee7df;
+
+  font-size:27px;
+}
+
 
 .welcome h2{
-    font-size:24px;
-    margin-bottom:8px;
+  margin-bottom:8px;
+
+  font-size:24px;
 }
+
 
 .welcome p{
-    color:#777;
-    font-size:14px;
-    line-height:1.6;
+  color:#777;
+
+  font-size:14px;
+
+  line-height:1.6;
 }
+
+
+/* ================================
+   INFO
+================================ */
 
 .info{
-    display:grid;
-    grid-template-columns:1fr 1fr;
-    gap:10px;
-    margin-bottom:27px;
+  display:grid;
+
+  grid-template-columns:
+    repeat(3,1fr);
+
+  gap:8px;
+
+  margin-bottom:24px;
 }
+
 
 .info-box{
-    padding:15px;
-    background:#f8f6f3;
-    border-radius:16px;
+  padding:13px 9px;
+
+  background:#f8f6f3;
+
+  border-radius:15px;
+
+  text-align:center;
 }
+
 
 .info-box small{
-    display:block;
-    font-size:11px;
-    color:#999;
-    margin-bottom:5px;
+  display:block;
+
+  margin-bottom:5px;
+
+  color:#999;
+
+  font-size:9px;
 }
+
 
 .info-box strong{
-    font-size:14px;
+  display:block;
+
+  font-size:12px;
 }
+
+
+/* ================================
+   COUNTDOWN
+================================ */
+
+.countdown-area{
+  display:none;
+
+  margin-bottom:18px;
+}
+
+
+.countdown-area.visible{
+  display:block;
+}
+
+
+.countdown-label{
+  margin-bottom:11px;
+
+  color:#9c7457;
+
+  font-size:10px;
+  font-weight:800;
+
+  text-align:center;
+
+  text-transform:uppercase;
+
+  letter-spacing:1.4px;
+}
+
+
+.countdown{
+  display:grid;
+
+  grid-template-columns:
+    repeat(4,1fr);
+
+  gap:7px;
+}
+
+
+.countdown-box{
+  padding:13px 4px;
+
+  border:1px solid #ebe3dc;
+
+  border-radius:15px;
+
+  background:#fff;
+
+  text-align:center;
+}
+
+
+.countdown-box strong{
+  display:block;
+
+  font-family:
+    Georgia,
+    serif;
+
+  font-size:23px;
+  font-weight:normal;
+}
+
+
+.countdown-box span{
+  display:block;
+
+  margin-top:3px;
+
+  color:#999;
+
+  font-size:8px;
+
+  text-transform:uppercase;
+}
+
+
+.start-note{
+  margin-top:14px;
+
+  padding:12px;
+
+  border-radius:13px;
+
+  background:#f8f6f3;
+
+  color:#777;
+
+  font-size:11px;
+
+  line-height:1.5;
+
+  text-align:center;
+}
+
+
+/* ================================
+   FORM
+================================ */
+
+.join-area{
+  display:none;
+}
+
+
+.join-area.visible{
+  display:block;
+}
+
 
 label{
-    display:block;
-    font-size:13px;
-    font-weight:700;
-    margin-bottom:8px;
+  display:block;
+
+  margin-bottom:8px;
+
+  font-size:13px;
+  font-weight:700;
 }
+
 
 input{
-    width:100%;
-    height:54px;
-    border:1px solid #ddd5cd;
-    border-radius:15px;
-    padding:0 16px;
-    font-size:16px;
-    outline:none;
-    margin-bottom:14px;
+  width:100%;
+  height:54px;
+
+  margin-bottom:14px;
+
+  padding:0 16px;
+
+  border:
+    1px solid #ddd5cd;
+
+  border-radius:15px;
+
+  outline:none;
+
+  font-size:16px;
 }
+
 
 input:focus{
-    border-color:#9c7457;
-    box-shadow:0 0 0 3px rgba(156,116,87,.1);
+  border-color:#9c7457;
+
+  box-shadow:
+    0 0 0 3px
+    rgba(156,116,87,.1);
 }
 
-button{
-    width:100%;
-    height:55px;
-    border:0;
-    border-radius:999px;
-    background:#29251f;
-    color:white;
-    font-size:15px;
-    font-weight:700;
-    cursor:pointer;
+
+.main-button{
+  width:100%;
+  height:55px;
+
+  border:0;
+
+  border-radius:999px;
+
+  background:#29251f;
+  color:white;
+
+  font-size:15px;
+  font-weight:700;
+
+  cursor:pointer;
 }
 
-button:disabled{
-    opacity:.6;
-    cursor:not-allowed;
+
+.main-button:disabled{
+  opacity:.55;
+  cursor:not-allowed;
 }
+
 
 .note{
-    text-align:center;
-    margin-top:17px;
-    color:#999;
-    font-size:11px;
-    line-height:1.5;
+  margin-top:17px;
+
+  color:#999;
+
+  font-size:11px;
+
+  line-height:1.5;
+
+  text-align:center;
 }
+
+
+/* ================================
+   FINISHED
+================================ */
+
+.finished-area{
+  display:none;
+}
+
+
+.finished-area.visible{
+  display:block;
+}
+
+
+.gallery-button{
+  width:100%;
+  height:53px;
+
+  display:flex;
+  align-items:center;
+  justify-content:center;
+
+  border-radius:999px;
+
+  background:#29251f;
+  color:#fff;
+
+  font-size:14px;
+  font-weight:700;
+}
+
+
+.secondary-button{
+  width:100%;
+  height:49px;
+
+  margin-top:9px;
+
+  display:flex;
+  align-items:center;
+  justify-content:center;
+
+  border:
+    1px solid #ddd5cd;
+
+  border-radius:999px;
+
+  background:white;
+
+  font-size:12px;
+  font-weight:700;
+}
+
+
+/* ================================
+   RESUME GUEST
+================================ */
+
+.resume-area{
+  display:none;
+
+  margin-bottom:18px;
+
+  padding:15px;
+
+  border-radius:16px;
+
+  background:#f6f2ee;
+}
+
+
+.resume-area.visible{
+  display:block;
+}
+
+
+.resume-title{
+  margin-bottom:5px;
+
+  font-size:12px;
+  font-weight:800;
+}
+
+
+.resume-name{
+  margin-bottom:10px;
+
+  color:#766d66;
+
+  font-size:12px;
+}
+
+
+.resume-button{
+  width:100%;
+  height:44px;
+
+  border:0;
+
+  border-radius:999px;
+
+  background:#9c7457;
+  color:#fff;
+
+  font-size:11px;
+  font-weight:700;
+
+  cursor:pointer;
+}
+
+
+/* ================================
+   ERROR
+================================ */
 
 .error{
-    width:100%;
-    max-width:420px;
-    padding:35px;
-    background:white;
-    border-radius:25px;
-    text-align:center;
+  width:100%;
+  max-width:420px;
+
+  padding:35px;
+
+  background:white;
+
+  border-radius:25px;
+
+  text-align:center;
 }
+
 
 .error h2{
-    margin-bottom:10px;
+  margin-bottom:10px;
 }
+
 
 .error p{
-    color:#777;
-    line-height:1.6;
+  color:#777;
+
+  line-height:1.6;
 }
+
 
 .error a{
-    display:inline-block;
-    margin-top:20px;
-    background:#29251f;
-    color:white;
-    padding:13px 20px;
-    border-radius:999px;
-    text-decoration:none;
+  display:inline-block;
+
+  margin-top:20px;
+
+  padding:13px 20px;
+
+  border-radius:999px;
+
+  background:#29251f;
+  color:white;
 }
+
+
+/* ================================
+   MOBILE
+================================ */
 
 @media(max-width:480px){
-    .page{
-        padding:0;
-        align-items:stretch;
-    }
 
-    .card{
-        max-width:none;
-        min-height:100vh;
-        border-radius:0;
-    }
+  .page{
+    padding:0;
 
-    .cover{
-        height:42vh;
-        min-height:300px;
-    }
+    align-items:stretch;
+  }
 
-    .content{
-        padding:27px 22px 35px;
-    }
+
+  .card{
+    max-width:none;
+
+    min-height:100vh;
+
+    border-radius:0;
+  }
+
+
+  .cover{
+    height:40vh;
+    min-height:290px;
+  }
+
+
+  .content{
+    padding:
+      27px
+      22px
+      35px;
+  }
+
 }
+
 </style>
 </head>
 
 <body>
 
-<div class="page" id="app">
 
-    <div class="card">
+<div
+  class="page"
+  id="app"
+>
 
-        <div class="cover">
+  <div class="card">
 
-            <div class="logo">
-                more<span>moments</span>
-            </div>
 
-            <div class="event-type" id="eventType">
-                THE EVENT
-            </div>
+    <!-- =========================
+         COVER
+    ========================== -->
 
-            <h1 class="event-name" id="eventName">
-                Memuat...
-            </h1>
+    <div class="cover">
 
-            <div class="event-date" id="eventDate">
-                -
-            </div>
+      <div class="logo">
+        more<span>moments</span>
+      </div>
 
-        </div>
 
-        <div class="content">
+      <div
+        class="event-status"
+        id="eventStatus"
+      >
+        MEMUAT
+      </div>
 
-            <div class="welcome">
-                <h2>Selamat datang 👋</h2>
-                <p>
-                    Abadikan momen dari sudut pandang Anda.
-                    Masukkan nama terlebih dahulu untuk mulai memotret.
-                </p>
-            </div>
 
-            <div class="info">
-                <div class="info-box">
-                    <small>Jatah foto</small>
-                    <strong id="shots">-</strong>
-                </div>
+      <div
+        class="event-type"
+        id="eventType"
+      >
+        THE EVENT
+      </div>
 
-                <div class="info-box">
-                    <small>Berakhir</small>
-                    <strong id="endTime">-</strong>
-                </div>
-            </div>
 
-            <form id="guestForm">
-                <label>Nama Anda</label>
+      <h1
+        class="event-name"
+        id="eventName"
+      >
+        Memuat...
+      </h1>
 
-                <input
-                    type="text"
-                    id="guestName"
-                    placeholder="Contoh: Ahmad"
-                    autocomplete="name"
-                    maxlength="80"
-                    required
-                >
 
-                <button type="submit" id="joinButton">
-                    📷 Mulai Memotret
-                </button>
-            </form>
+      <div
+        class="event-date"
+        id="eventDate"
+      >
+        -
+      </div>
 
-            <div class="note">
-                Dengan melanjutkan, foto yang Anda ambil
-                akan menjadi bagian dari galeri acara ini.
-            </div>
-
-        </div>
     </div>
+
+
+
+    <!-- =========================
+         CONTENT
+    ========================== -->
+
+    <div class="content">
+
+
+      <!-- BEFORE EVENT -->
+
+      <div
+        class="countdown-area"
+        id="countdownArea"
+      >
+
+        <div class="welcome">
+
+          <div class="welcome-icon">
+            ⏳
+          </div>
+
+          <h2>
+            Acara belum dimulai
+          </h2>
+
+          <p>
+            QR Code Anda sudah benar.
+            Kamera akan otomatis tersedia
+            saat waktu acara dimulai.
+          </p>
+
+        </div>
+
+
+        <div class="countdown-label">
+          Acara dimulai dalam
+        </div>
+
+
+        <div class="countdown">
+
+          <div class="countdown-box">
+
+            <strong id="countDays">
+              0
+            </strong>
+
+            <span>
+              Hari
+            </span>
+
+          </div>
+
+
+          <div class="countdown-box">
+
+            <strong id="countHours">
+              00
+            </strong>
+
+            <span>
+              Jam
+            </span>
+
+          </div>
+
+
+          <div class="countdown-box">
+
+            <strong id="countMinutes">
+              00
+            </strong>
+
+            <span>
+              Menit
+            </span>
+
+          </div>
+
+
+          <div class="countdown-box">
+
+            <strong id="countSeconds">
+              00
+            </strong>
+
+            <span>
+              Detik
+            </span>
+
+          </div>
+
+        </div>
+
+
+        <div
+          class="start-note"
+          id="startNote"
+        >
+          Kamera akan aktif otomatis.
+        </div>
+
+      </div>
+
+
+
+      <!-- ACTIVE EVENT -->
+
+      <div
+        class="join-area"
+        id="joinArea"
+      >
+
+        <div class="welcome">
+
+          <div class="welcome-icon">
+            📷
+          </div>
+
+          <h2>
+            Selamat datang 👋
+          </h2>
+
+          <p>
+            Acara sedang berlangsung.
+            Masukkan nama Anda dan mulai
+            mengabadikan momen.
+          </p>
+
+        </div>
+
+
+        <div class="info">
+
+          <div class="info-box">
+
+            <small>
+              Jatah
+            </small>
+
+            <strong id="shots">
+              -
+            </strong>
+
+          </div>
+
+
+          <div class="info-box">
+
+            <small>
+              Mulai
+            </small>
+
+            <strong id="startTime">
+              -
+            </strong>
+
+          </div>
+
+
+          <div class="info-box">
+
+            <small>
+              Berakhir
+            </small>
+
+            <strong id="endTime">
+              -
+            </strong>
+
+          </div>
+
+        </div>
+
+
+
+        <!-- GUEST SUDAH PERNAH MASUK -->
+
+        <div
+          class="resume-area"
+          id="resumeArea"
+        >
+
+          <div class="resume-title">
+            Anda sudah bergabung
+          </div>
+
+          <div
+            class="resume-name"
+            id="resumeName"
+          ></div>
+
+          <button
+            class="resume-button"
+            id="resumeButton"
+          >
+            📷 Lanjutkan Memotret
+          </button>
+
+        </div>
+
+
+
+        <form id="guestForm">
+
+          <label>
+            Nama Anda
+          </label>
+
+          <input
+            type="text"
+            id="guestName"
+            placeholder="Contoh: Ahmad"
+            autocomplete="name"
+            maxlength="80"
+            required
+          >
+
+
+          <button
+            type="submit"
+            class="main-button"
+            id="joinButton"
+          >
+            📷 Mulai Memotret
+          </button>
+
+        </form>
+
+
+        <div class="note">
+          Dengan melanjutkan,
+          foto yang Anda ambil
+          akan menjadi bagian
+          dari galeri acara ini.
+        </div>
+
+      </div>
+
+
+
+      <!-- FINISHED -->
+
+      <div
+        class="finished-area"
+        id="finishedArea"
+      >
+
+        <div class="welcome">
+
+          <div class="welcome-icon">
+            🎉
+          </div>
+
+          <h2>
+            Acara telah selesai
+          </h2>
+
+          <p>
+            Waktu mengambil foto sudah berakhir.
+            Terima kasih sudah ikut mengabadikan
+            momen acara ini.
+          </p>
+
+        </div>
+
+
+        <a
+          href="#"
+          class="gallery-button"
+          id="galleryButton"
+        >
+          🖼️ Lihat Galeri Acara
+        </a>
+
+
+        <a
+          href="index.html"
+          class="secondary-button"
+        >
+          Kembali ke MoreMoments
+        </a>
+
+      </div>
+
+
+    </div>
+
+  </div>
+
 </div>
 
-<script>
-const API_URL = "https://moments-api.alavolaadza.workers.dev";
 
-const params = new URLSearchParams(window.location.search);
-const slug = params.get("e");
+
+<script>
+
+/* ==========================================
+   CONFIG
+========================================== */
+
+const API_URL =
+  "https://api.ege.my.id";
+
+
+const params =
+  new URLSearchParams(
+    window.location.search
+  );
+
+
+const slug =
+  params.get("e");
+
 
 let eventData = null;
 
-function showError(message){
-    document.getElementById("app").innerHTML = `
-        <div class="error">
-            <h2>Acara tidak ditemukan</h2>
-            <p>${message}</p>
-            <a href="index.html">Kembali</a>
-        </div>
-    `;
+let countdownTimer = null;
+
+let currentMode = null;
+
+
+/* ==========================================
+   ELEMENTS
+========================================== */
+
+const countdownArea =
+  document.getElementById(
+    "countdownArea"
+  );
+
+
+const joinArea =
+  document.getElementById(
+    "joinArea"
+  );
+
+
+const finishedArea =
+  document.getElementById(
+    "finishedArea"
+  );
+
+
+const eventStatus =
+  document.getElementById(
+    "eventStatus"
+  );
+
+
+const form =
+  document.getElementById(
+    "guestForm"
+  );
+
+
+const joinButton =
+  document.getElementById(
+    "joinButton"
+  );
+
+
+/* ==========================================
+   ERROR
+========================================== */
+
+function showError(
+  message
+){
+
+  if(countdownTimer){
+
+    clearInterval(
+      countdownTimer
+    );
+  }
+
+
+  document.getElementById(
+    "app"
+  ).innerHTML = `
+
+    <div class="error">
+
+      <h2>
+        Acara tidak ditemukan
+      </h2>
+
+      <p>
+        ${escapeHtml(message)}
+      </p>
+
+      <a href="index.html">
+        Kembali
+      </a>
+
+    </div>
+  `;
 }
 
-async function getEvent(){
-    if(!slug){
-        showError("Link acara tidak valid.");
-        return;
-    }
 
-    try{
-        const response = await fetch(
-            API_URL + "/api/events/" + encodeURIComponent(slug)
-        );
+/* ==========================================
+   ESCAPE
+========================================== */
 
-        const data = await response.json();
+function escapeHtml(
+  value
+){
 
-        if(!response.ok || !data.success || !data.event){
-            throw new Error(data.error || "Acara tidak ditemukan.");
-        }
-
-        const raw = data.event;
-
-        eventData = {
-            id: raw.id,
-            slug: raw.slug,
-            name: raw.name,
-            type: raw.event_type,
-            date: raw.event_date,
-            startTime: raw.start_time,
-            endTime: raw.end_time,
-            maxGuests: Number(raw.max_guests),
-            shots: Number(raw.shots_per_guest),
-            filter: raw.filter || "original",
-            status: raw.status,
-            coverKey: raw.cover_key
-        };
-
-        // camera.html masih membaca event dari localStorage.
-        localStorage.setItem(
-            "momentsEvent",
-            JSON.stringify(eventData)
-        );
-
-        loadEvent();
-
-    }catch(error){
-        console.error(error);
-        showError(error.message || "Tidak dapat mengambil data acara.");
-    }
-}
-
-function loadEvent(){
-    document.getElementById("eventName").textContent =
-        eventData.name;
-
-    document.getElementById("eventType").textContent =
-        eventData.type || "ACARA";
-
-    document.getElementById("shots").textContent =
-        eventData.shots + " foto";
-
-    document.getElementById("endTime").textContent =
-        eventData.endTime || "-";
-
-    document.getElementById("eventDate").textContent =
-        formatDate(eventData.date);
-
-    document.title =
-        eventData.name + " | MoreMoments";
-}
-
-function formatDate(date){
-    if(!date) return "-";
-
-    const value = new Date(date + "T00:00:00");
-
-    return value.toLocaleDateString(
-        "id-ID",
-        {
-            weekday:"long",
-            day:"numeric",
-            month:"long",
-            year:"numeric"
-        }
+  return String(
+    value || ""
+  )
+    .replace(
+      /&/g,
+      "&amp;"
+    )
+    .replace(
+      /</g,
+      "&lt;"
+    )
+    .replace(
+      />/g,
+      "&gt;"
+    )
+    .replace(
+      /"/g,
+      "&quot;"
+    )
+    .replace(
+      /'/g,
+      "&#039;"
     );
 }
 
-const form = document.getElementById("guestForm");
-const joinButton = document.getElementById("joinButton");
 
-form.addEventListener("submit", async function(e){
-    e.preventDefault();
+/* ==========================================
+   TIMEZONE
+========================================== */
 
-    if(!eventData){
-        alert("Data acara masih dimuat.");
-        return;
+/*
+MoreMoments saat ini memakai
+Asia/Makassar sebagai timezone default.
+
+Fungsi ini juga kita siapkan
+untuk WIB dan WIT.
+*/
+
+function getTimezoneOffset(
+  timezone
+){
+
+  if(
+    timezone ===
+    "Asia/Jakarta"
+  ){
+
+    return "+07:00";
+  }
+
+
+  if(
+    timezone ===
+    "Asia/Jayapura"
+  ){
+
+    return "+09:00";
+  }
+
+
+  return "+08:00";
+}
+
+
+/* ==========================================
+   CREATE DATE
+========================================== */
+
+function createEventDate(
+  date,
+  time,
+  timezone
+){
+
+  const offset =
+    getTimezoneOffset(
+      timezone
+    );
+
+
+  return new Date(
+    date +
+    "T" +
+    time +
+    ":00" +
+    offset
+  );
+}
+
+
+/* ==========================================
+   EVENT TIMES
+========================================== */
+
+function getEventTimes(){
+
+  const start =
+    createEventDate(
+      eventData.date,
+      eventData.startTime,
+      eventData.timezone
+    );
+
+
+  let end =
+    createEventDate(
+      eventData.date,
+      eventData.endTime,
+      eventData.timezone
+    );
+
+
+  /*
+  Jika jam selesai lebih kecil
+  daripada jam mulai,
+  berarti acara melewati tengah malam.
+  */
+
+  if(
+    end <= start
+  ){
+
+    end =
+      new Date(
+        end.getTime() +
+        24 * 60 * 60 * 1000
+      );
+  }
+
+
+  return {
+    start,
+    end
+  };
+}
+
+
+/* ==========================================
+   EVENT MODE
+========================================== */
+
+function getEventMode(){
+
+  if(
+    !eventData
+  ){
+
+    return "loading";
+  }
+
+
+  if(
+    eventData.status !==
+    "active"
+  ){
+
+    return "finished";
+  }
+
+
+  const now =
+    new Date();
+
+
+  const {
+    start,
+    end
+  } =
+    getEventTimes();
+
+
+  if(
+    now < start
+  ){
+
+    return "waiting";
+  }
+
+
+  if(
+    now >= end
+  ){
+
+    return "finished";
+  }
+
+
+  return "active";
+}
+
+
+/* ==========================================
+   LOAD EVENT
+========================================== */
+
+async function getEvent(){
+
+  if(!slug){
+
+    showError(
+      "Link acara tidak valid."
+    );
+
+    return;
+  }
+
+
+  try{
+
+    const response =
+      await fetch(
+        API_URL +
+        "/api/events/" +
+        encodeURIComponent(
+          slug
+        )
+      );
+
+
+    const data =
+      await response.json();
+
+
+    if(
+      !response.ok ||
+      !data.success ||
+      !data.event
+    ){
+
+      throw new Error(
+        data.error ||
+        "Acara tidak ditemukan."
+      );
     }
 
-    const guestName =
-        document.getElementById("guestName").value.trim();
 
-    if(!guestName){
-        return;
+    const raw =
+      data.event;
+
+
+    eventData = {
+
+      id:
+        raw.id,
+
+      slug:
+        raw.slug,
+
+      name:
+        raw.name,
+
+      type:
+        raw.event_type,
+
+      date:
+        raw.event_date,
+
+      startTime:
+        raw.start_time,
+
+      endTime:
+        raw.end_time,
+
+      timezone:
+        raw.timezone ||
+        "Asia/Makassar",
+
+      maxGuests:
+        Number(
+          raw.max_guests
+        ),
+
+      shots:
+        Number(
+          raw.shots_per_guest
+        ),
+
+      filter:
+        raw.filter ||
+        "original",
+
+      status:
+        raw.status,
+
+      coverKey:
+        raw.cover_key
+    };
+
+
+    /*
+    camera.html membaca data ini.
+    */
+
+    localStorage.setItem(
+      "momentsEvent",
+      JSON.stringify(
+        eventData
+      )
+    );
+
+
+    renderEvent();
+
+    updateEventMode();
+
+
+    countdownTimer =
+      setInterval(
+        updateEventMode,
+        1000
+      );
+
+
+  }catch(error){
+
+    console.error(
+      error
+    );
+
+
+    showError(
+      error.message ||
+      "Tidak dapat mengambil data acara."
+    );
+  }
+}
+
+
+/* ==========================================
+   RENDER EVENT
+========================================== */
+
+function renderEvent(){
+
+  document.getElementById(
+    "eventName"
+  ).textContent =
+    eventData.name;
+
+
+  document.getElementById(
+    "eventType"
+  ).textContent =
+    eventData.type ||
+    "ACARA";
+
+
+  document.getElementById(
+    "eventDate"
+  ).textContent =
+    formatDate(
+      eventData.date
+    )
+    +
+    " • "
+    +
+    eventData.startTime
+    +
+    " – "
+    +
+    eventData.endTime;
+
+
+  document.getElementById(
+    "shots"
+  ).textContent =
+    eventData.shots +
+    " foto";
+
+
+  document.getElementById(
+    "startTime"
+  ).textContent =
+    eventData.startTime;
+
+
+  document.getElementById(
+    "endTime"
+  ).textContent =
+    eventData.endTime;
+
+
+  document.title =
+    eventData.name +
+    " | MoreMoments";
+
+
+  document.getElementById(
+    "galleryButton"
+  ).href =
+    "gallery.html?e=" +
+    encodeURIComponent(
+      eventData.slug
+    );
+
+
+  checkExistingGuest();
+}
+
+
+/* ==========================================
+   UPDATE MODE
+========================================== */
+
+function updateEventMode(){
+
+  if(!eventData){
+    return;
+  }
+
+
+  const mode =
+    getEventMode();
+
+
+  /*
+  Tidak perlu render ulang seluruh
+  tampilan setiap detik.
+  */
+
+  if(
+    mode !==
+    currentMode
+  ){
+
+    currentMode =
+      mode;
+
+
+    countdownArea.classList.remove(
+      "visible"
+    );
+
+
+    joinArea.classList.remove(
+      "visible"
+    );
+
+
+    finishedArea.classList.remove(
+      "visible"
+    );
+
+
+    if(
+      mode ===
+      "waiting"
+    ){
+
+      eventStatus.textContent =
+        "BELUM DIMULAI";
+
+
+      countdownArea.classList.add(
+        "visible"
+      );
+
+    }else if(
+      mode ===
+      "active"
+    ){
+
+      eventStatus.textContent =
+        "SEDANG BERLANGSUNG";
+
+
+      joinArea.classList.add(
+        "visible"
+      );
+
+
+      checkExistingGuest();
+
+    }else{
+
+      eventStatus.textContent =
+        "SELESAI";
+
+
+      finishedArea.classList.add(
+        "visible"
+      );
+    }
+  }
+
+
+  if(
+    mode ===
+    "waiting"
+  ){
+
+    updateCountdown();
+  }
+}
+
+
+/* ==========================================
+   COUNTDOWN
+========================================== */
+
+function updateCountdown(){
+
+  const {
+    start
+  } =
+    getEventTimes();
+
+
+  const now =
+    new Date();
+
+
+  let difference =
+    start.getTime() -
+    now.getTime();
+
+
+  if(
+    difference <= 0
+  ){
+
+    updateEventMode();
+
+    return;
+  }
+
+
+  const day =
+    24 * 60 * 60 * 1000;
+
+
+  const hour =
+    60 * 60 * 1000;
+
+
+  const minute =
+    60 * 1000;
+
+
+  const days =
+    Math.floor(
+      difference /
+      day
+    );
+
+
+  difference %=
+    day;
+
+
+  const hours =
+    Math.floor(
+      difference /
+      hour
+    );
+
+
+  difference %=
+    hour;
+
+
+  const minutes =
+    Math.floor(
+      difference /
+      minute
+    );
+
+
+  difference %=
+    minute;
+
+
+  const seconds =
+    Math.floor(
+      difference /
+      1000
+    );
+
+
+  document.getElementById(
+    "countDays"
+  ).textContent =
+    days;
+
+
+  document.getElementById(
+    "countHours"
+  ).textContent =
+    String(
+      hours
+    ).padStart(
+      2,
+      "0"
+    );
+
+
+  document.getElementById(
+    "countMinutes"
+  ).textContent =
+    String(
+      minutes
+    ).padStart(
+      2,
+      "0"
+    );
+
+
+  document.getElementById(
+    "countSeconds"
+  ).textContent =
+    String(
+      seconds
+    ).padStart(
+      2,
+      "0"
+    );
+
+
+  document.getElementById(
+    "startNote"
+  ).textContent =
+    "Kamera aktif "
+    +
+    formatDate(
+      eventData.date
+    )
+    +
+    " pukul "
+    +
+    eventData.startTime
+    +
+    ".";
+}
+
+
+/* ==========================================
+   FORMAT DATE
+========================================== */
+
+function formatDate(
+  date
+){
+
+  if(!date){
+    return "-";
+  }
+
+
+  const value =
+    new Date(
+      date +
+      "T00:00:00"
+    );
+
+
+  return value.toLocaleDateString(
+    "id-ID",
+    {
+      weekday:
+        "long",
+
+      day:
+        "numeric",
+
+      month:
+        "long",
+
+      year:
+        "numeric"
+    }
+  );
+}
+
+
+/* ==========================================
+   EXISTING GUEST
+========================================== */
+
+function checkExistingGuest(){
+
+  if(
+    !eventData
+  ){
+    return;
+  }
+
+
+  const resumeArea =
+    document.getElementById(
+      "resumeArea"
+    );
+
+
+  const saved =
+    localStorage.getItem(
+      "momentsGuest_" +
+      eventData.slug
+    );
+
+
+  if(!saved){
+
+    resumeArea.classList.remove(
+      "visible"
+    );
+
+    return;
+  }
+
+
+  try{
+
+    const guest =
+      JSON.parse(
+        saved
+      );
+
+
+    if(
+      !guest ||
+      !guest.id ||
+      !guest.guestToken
+    ){
+
+      resumeArea.classList.remove(
+        "visible"
+      );
+
+      return;
     }
 
-    const oldText = joinButton.textContent;
 
-    joinButton.disabled = true;
-    joinButton.textContent = "Menghubungkan...";
+    document.getElementById(
+      "resumeName"
+    ).textContent =
+      "Masuk sebagai "
+      +
+      (
+        guest.name ||
+        "Tamu"
+      );
 
-    try{
-        const response = await fetch(
-            API_URL + "/api/guests",
-            {
-                method:"POST",
-                headers:{
-                    "Content-Type":"application/json"
-                },
-                body:JSON.stringify({
-                    eventId:eventData.id,
-                    name:guestName
-                })
-            }
-        );
 
-        const data = await response.json();
+    resumeArea.classList.add(
+      "visible"
+    );
 
-        if(!response.ok || !data.success || !data.guest){
-            throw new Error(
-                data.error || "Gagal bergabung ke acara."
-            );
+
+    document.getElementById(
+      "resumeButton"
+    ).onclick =
+      function(){
+
+        /*
+        Tetap cek apakah acara masih aktif.
+        */
+
+        if(
+          getEventMode() !==
+          "active"
+        ){
+
+          updateEventMode();
+
+          return;
         }
 
-        // PENTING:
-        // data ini berasal dari D1/Worker, sehingga guest.id dan
-        // guestToken valid saat camera.html meng-upload foto.
-        const guest = {
-            id: data.guest.id,
-            eventId: data.guest.eventId,
-            eventSlug: data.guest.eventSlug,
-            name: data.guest.name,
-            guestToken: data.guest.guestToken,
-            shotsTaken: Number(data.guest.shotsTaken || 0),
-            shotsLimit: Number(data.guest.shotsLimit || eventData.shots)
-        };
-
-        localStorage.setItem(
-            "momentsGuest_" + eventData.slug,
-            JSON.stringify(guest)
-        );
 
         window.location.href =
-            "camera.html?e=" +
-            encodeURIComponent(eventData.slug);
+          "camera.html?e=" +
+          encodeURIComponent(
+            eventData.slug
+          );
+      };
 
-    }catch(error){
-        console.error(error);
 
-        alert(
-            "Gagal bergabung:\n" +
-            error.message
+  }catch(error){
+
+    localStorage.removeItem(
+      "momentsGuest_" +
+      eventData.slug
+    );
+
+
+    resumeArea.classList.remove(
+      "visible"
+    );
+  }
+}
+
+
+/* ==========================================
+   JOIN GUEST
+========================================== */
+
+form.addEventListener(
+  "submit",
+  async function(
+    e
+  ){
+
+    e.preventDefault();
+
+
+    if(!eventData){
+
+      alert(
+        "Data acara masih dimuat."
+      );
+
+      return;
+    }
+
+
+    /*
+    Cegah form dipakai
+    jika waktu berubah.
+    */
+
+    if(
+      getEventMode() !==
+      "active"
+    ){
+
+      updateEventMode();
+
+      return;
+    }
+
+
+    const guestName =
+      document.getElementById(
+        "guestName"
+      )
+      .value
+      .trim();
+
+
+    if(!guestName){
+      return;
+    }
+
+
+    const oldText =
+      joinButton.textContent;
+
+
+    joinButton.disabled =
+      true;
+
+
+    joinButton.textContent =
+      "Menghubungkan...";
+
+
+    try{
+
+      const response =
+        await fetch(
+          API_URL +
+          "/api/guests",
+          {
+
+            method:
+              "POST",
+
+            headers:{
+              "Content-Type":
+                "application/json"
+            },
+
+            body:
+              JSON.stringify({
+
+                eventId:
+                  eventData.id,
+
+                name:
+                  guestName
+              })
+          }
         );
 
+
+      const data =
+        await response.json();
+
+
+      if(
+        !response.ok ||
+        !data.success ||
+        !data.guest
+      ){
+
+        throw new Error(
+          data.error ||
+          "Gagal bergabung ke acara."
+        );
+      }
+
+
+      const guest = {
+
+        id:
+          data.guest.id,
+
+        eventId:
+          data.guest.eventId,
+
+        eventSlug:
+          data.guest.eventSlug,
+
+        name:
+          data.guest.name,
+
+        guestToken:
+          data.guest.guestToken,
+
+        shotsTaken:
+          Number(
+            data.guest.shotsTaken ||
+            0
+          ),
+
+        shotsLimit:
+          Number(
+            data.guest.shotsLimit ||
+            eventData.shots
+          )
+      };
+
+
+      localStorage.setItem(
+        "momentsGuest_" +
+        eventData.slug,
+
+        JSON.stringify(
+          guest
+        )
+      );
+
+
+      window.location.href =
+        "camera.html?e=" +
+        encodeURIComponent(
+          eventData.slug
+        );
+
+
+    }catch(error){
+
+      console.error(
+        error
+      );
+
+
+      alert(
+        "Gagal bergabung:\n"
+        +
+        error.message
+      );
+
+
     }finally{
-        joinButton.disabled = false;
-        joinButton.textContent = oldText;
+
+      joinButton.disabled =
+        false;
+
+
+      joinButton.textContent =
+        oldText;
     }
-});
+  }
+);
+
+
+/* ==========================================
+   START
+========================================== */
 
 getEvent();
+
 </script>
 
 </body>
