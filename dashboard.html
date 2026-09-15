@@ -2,16 +2,11 @@
 <html lang="id">
 <head>
 <meta charset="UTF-8">
-
-<meta
-  name="viewport"
-  content="width=device-width, initial-scale=1.0"
->
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
 
 <title>Dashboard | MoreMoments</title>
 
 <style>
-
 *{
   margin:0;
   padding:0;
@@ -30,45 +25,32 @@ a{
   text-decoration:none;
 }
 
-button{
+button,input{
   font:inherit;
 }
 
-
-/* =========================================
-   HEADER
-========================================= */
+button{
+  cursor:pointer;
+}
 
 .header{
   position:sticky;
   top:0;
   z-index:100;
-
-  border-bottom:
-    1px solid #e3d9d0;
-
-  background:
-    rgba(250,248,245,.94);
-
-  backdrop-filter:
-    blur(14px);
+  border-bottom:1px solid #e3d9d0;
+  background:rgba(250,248,245,.94);
+  backdrop-filter:blur(14px);
 }
 
 .header-inner{
   width:100%;
   max-width:1180px;
-
   min-height:72px;
-
   margin:auto;
-
-  padding:
-    0 20px;
-
+  padding:0 20px;
   display:flex;
   align-items:center;
   justify-content:space-between;
-
   gap:15px;
 }
 
@@ -89,25 +71,15 @@ button{
 
 .button{
   min-height:42px;
-
-  padding:
-    0 16px;
-
+  padding:0 16px;
   display:inline-flex;
   align-items:center;
   justify-content:center;
-
-  border:
-    1px solid #ded3ca;
-
+  border:1px solid #ded3ca;
   border-radius:999px;
-
   background:#fff;
-
   color:#29241f;
-
   cursor:pointer;
-
   font-size:12px;
   font-weight:700;
 }
@@ -118,124 +90,76 @@ button{
   color:#fff;
 }
 
-
-/* =========================================
-   PAGE
-========================================= */
-
 .page{
   width:100%;
   max-width:1180px;
-
   margin:auto;
-
-  padding:
-    42px 20px 90px;
+  padding:42px 20px 90px;
 }
-
-
-/* =========================================
-   HERO
-========================================= */
 
 .hero{
   display:flex;
   justify-content:space-between;
   align-items:flex-start;
-
   gap:20px;
-
   margin-bottom:28px;
 }
 
 .eyebrow{
   margin-bottom:8px;
-
   color:#aa7853;
-
   font-size:10px;
   font-weight:800;
-
   letter-spacing:1.7px;
-
   text-transform:uppercase;
 }
 
 .hero h1{
   margin-bottom:10px;
-
   font-family:Georgia,serif;
-
-  font-size:
-    clamp(
-      38px,
-      5vw,
-      58px
-    );
-
+  font-size:clamp(38px,5vw,58px);
   font-weight:normal;
-
   line-height:1;
 }
 
 .hero p{
   color:#756d66;
-
   font-size:14px;
   line-height:1.6;
 }
 
 .account-badge{
-  max-width:280px;
-
-  padding:
-    14px 16px;
-
-  border:
-    1px solid #dfd5cd;
-
+  max-width:300px;
+  padding:14px 16px;
+  border:1px solid #dfd5cd;
   border-radius:18px;
-
   background:#fff;
 }
 
 .account-name{
   font-weight:800;
   font-size:14px;
-
   margin-bottom:4px;
 }
 
 .account-email{
   overflow:hidden;
   text-overflow:ellipsis;
-
   color:#817971;
-
   font-size:11px;
-
   white-space:nowrap;
 }
 
 .role-badge{
   display:inline-block;
-
   margin-top:8px;
-
-  padding:
-    6px 9px;
-
+  padding:6px 9px;
   border-radius:999px;
-
   background:#eee6df;
-
   color:#79563e;
-
   font-size:9px;
   font-weight:800;
-
   letter-spacing:.7px;
-
   text-transform:uppercase;
 }
 
@@ -244,41 +168,23 @@ button{
   color:#fff;
 }
 
-
-/* =========================================
-   SUMMARY
-========================================= */
-
 .summary{
   display:grid;
-
-  grid-template-columns:
-    repeat(
-      3,
-      minmax(0,1fr)
-    );
-
+  grid-template-columns:repeat(3,minmax(0,1fr));
   gap:12px;
-
   margin-bottom:18px;
 }
 
 .summary-card{
   padding:20px;
-
-  border:
-    1px solid #dfd5cd;
-
+  border:1px solid #dfd5cd;
   border-radius:20px;
-
   background:#fff;
 }
 
 .summary-label{
   margin-bottom:8px;
-
   color:#8a8179;
-
   font-size:11px;
 }
 
@@ -287,119 +193,191 @@ button{
   font-weight:800;
 }
 
-
-/* =========================================
-   STORAGE
-========================================= */
-
 .storage-card{
   margin-bottom:32px;
-
   padding:22px;
-
-  border:
-    1px solid #dfd5cd;
-
+  border:1px solid #dfd5cd;
   border-radius:24px;
-
   background:#fff;
 }
 
 .storage-top{
   display:flex;
-
   align-items:flex-start;
   justify-content:space-between;
-
   gap:20px;
 }
 
 .storage-title{
   font-size:18px;
   font-weight:800;
-
   margin-bottom:5px;
 }
 
 .storage-text{
   color:#817971;
-
   font-size:12px;
   line-height:1.5;
 }
 
 .storage-number{
   margin-top:18px;
-
   font-family:Georgia,serif;
-
   font-size:27px;
 }
 
 .storage-bar{
   width:100%;
   height:10px;
-
   margin-top:13px;
-
   overflow:hidden;
-
   border-radius:999px;
-
   background:#eee8e2;
 }
 
 .storage-progress{
   width:0%;
   height:100%;
-
   border-radius:999px;
-
   background:#9c7457;
-
   transition:.3s;
 }
 
 .storage-meta{
   display:flex;
-
   justify-content:space-between;
-
   gap:10px;
-
   margin-top:8px;
-
   color:#8b827a;
-
   font-size:10px;
 }
 
-.drive-button{
-  flex:0 0 auto;
+.drive-area{
+  margin-top:22px;
+  padding-top:20px;
+  border-top:1px solid #eee5de;
+}
 
-  min-height:42px;
+.drive-card{
+  padding:17px;
+  border-radius:18px;
+  background:#f7f3ef;
+}
 
-  padding:
-    0 16px;
+.drive-head{
+  display:flex;
+  align-items:flex-start;
+  justify-content:space-between;
+  gap:15px;
+}
 
-  border:0;
+.drive-title{
+  font-size:14px;
+  font-weight:800;
+}
 
-  border-radius:999px;
-
-  background:#29241f;
-
-  color:#fff;
-
-  cursor:pointer;
-
+.drive-status{
+  margin-top:5px;
+  color:#80776f;
   font-size:11px;
+  line-height:1.5;
+}
+
+.drive-email{
+  margin-top:4px;
+  font-weight:700;
+  color:#443c36;
+}
+
+.drive-actions{
+  display:flex;
+  gap:7px;
+  flex-wrap:wrap;
+}
+
+.drive-button{
+  min-height:40px;
+  padding:0 14px;
+  border:0;
+  border-radius:999px;
+  background:#29241f;
+  color:#fff;
+  font-size:10px;
   font-weight:700;
 }
 
+.drive-button.light{
+  border:1px solid #d9cec5;
+  background:#fff;
+  color:#29241f;
+}
 
-/* =========================================
-   SECTION
-========================================= */
+.drive-button.danger{
+  border:1px solid #e4d2d0;
+  background:#fff;
+  color:#a14f49;
+}
+
+.drive-quota{
+  margin-top:12px;
+  color:#817971;
+  font-size:10px;
+}
+
+.provider-title{
+  margin-top:20px;
+  margin-bottom:10px;
+  font-size:12px;
+  font-weight:800;
+}
+
+.providers{
+  display:grid;
+  grid-template-columns:repeat(3,minmax(0,1fr));
+  gap:9px;
+}
+
+.provider{
+  position:relative;
+  display:block;
+}
+
+.provider input{
+  position:absolute;
+  opacity:0;
+  pointer-events:none;
+}
+
+.provider-box{
+  height:100%;
+  padding:13px;
+  border:1px solid #ddd2ca;
+  border-radius:15px;
+  background:#fff;
+  cursor:pointer;
+}
+
+.provider input:checked + .provider-box{
+  border-color:#29241f;
+  box-shadow:0 0 0 1px #29241f inset;
+}
+
+.provider input:disabled + .provider-box{
+  opacity:.45;
+  cursor:not-allowed;
+}
+
+.provider-name{
+  margin-bottom:5px;
+  font-size:11px;
+  font-weight:800;
+}
+
+.provider-desc{
+  color:#8a8179;
+  font-size:9px;
+  line-height:1.4;
+}
 
 .section{
   margin-top:34px;
@@ -407,12 +385,9 @@ button{
 
 .section-head{
   display:flex;
-
   align-items:center;
   justify-content:space-between;
-
   gap:12px;
-
   margin-bottom:15px;
 }
 
@@ -426,164 +401,97 @@ button{
   gap:7px;
 }
 
-
-/* =========================================
-   EMPTY / STATUS
-========================================= */
-
 .status-box{
-  padding:
-    34px 20px;
-
-  border:
-    1px solid #dfd5cd;
-
+  padding:34px 20px;
+  border:1px solid #dfd5cd;
   border-radius:22px;
-
   background:#fff;
-
   color:#817971;
-
   text-align:center;
-
   font-size:13px;
 }
 
-
-/* =========================================
-   EVENTS
-========================================= */
-
 .events{
   display:grid;
-
-  grid-template-columns:
-    repeat(
-      2,
-      minmax(0,1fr)
-    );
-
+  grid-template-columns:repeat(2,minmax(0,1fr));
   gap:15px;
 }
 
 .event-card{
   padding:21px;
-
-  border:
-    1px solid #dfd5cd;
-
+  border:1px solid #dfd5cd;
   border-radius:24px;
-
   background:#fff;
 }
 
 .event-top{
   display:flex;
-
   justify-content:space-between;
   align-items:flex-start;
-
   gap:12px;
-
   margin-bottom:17px;
 }
 
 .event-type{
   margin-bottom:6px;
-
   color:#aa7853;
-
   font-size:9px;
   font-weight:800;
-
   letter-spacing:1.3px;
-
   text-transform:uppercase;
 }
 
 .event-name{
   font-family:Georgia,serif;
-
   font-size:24px;
-
   font-weight:normal;
-
   line-height:1.15;
-
   overflow-wrap:anywhere;
 }
 
 .event-status{
   flex:0 0 auto;
-
-  padding:
-    6px 9px;
-
+  padding:6px 9px;
   border-radius:999px;
-
   background:#edf5ee;
-
   color:#3c7148;
-
   font-size:9px;
   font-weight:800;
-
   text-transform:uppercase;
 }
 
 .event-owner{
   margin-bottom:14px;
-
-  padding:
-    9px 10px;
-
+  padding:9px 10px;
   border-radius:11px;
-
   background:#f7f3ef;
-
   color:#766d66;
-
   font-size:10px;
 }
 
 .event-date{
   margin-bottom:16px;
-
   color:#756d66;
-
   font-size:12px;
 }
 
 .event-stats{
   display:grid;
-
-  grid-template-columns:
-    repeat(
-      3,
-      minmax(0,1fr)
-    );
-
+  grid-template-columns:repeat(3,minmax(0,1fr));
   gap:7px;
-
   margin-bottom:15px;
 }
 
 .event-stat{
-  padding:
-    11px 9px;
-
+  padding:11px 9px;
   border-radius:13px;
-
   background:#f7f3ef;
 }
 
 .event-stat small{
   display:block;
-
   margin-bottom:5px;
-
   color:#938981;
-
   font-size:9px;
 }
 
@@ -593,76 +501,46 @@ button{
 
 .event-slug{
   margin-bottom:15px;
-
   overflow:hidden;
   text-overflow:ellipsis;
-
-  padding:
-    10px 11px;
-
+  padding:10px 11px;
   border-radius:11px;
-
   background:#f7f3ef;
-
   color:#81776f;
-
   font-size:10px;
-
   white-space:nowrap;
 }
 
 .event-actions{
   display:grid;
-
-  grid-template-columns:
-    1fr 1fr;
-
+  grid-template-columns:1fr 1fr;
   gap:7px;
 }
 
 .event-button{
   min-height:42px;
-
   display:flex;
-
   align-items:center;
   justify-content:center;
-
-  padding:
-    0 10px;
-
-  border:
-    1px solid #ddd2c9;
-
+  padding:0 10px;
+  border:1px solid #ddd2c9;
   border-radius:999px;
-
   background:#fff;
-
   color:#29241f;
-
   cursor:pointer;
-
   font-size:11px;
   font-weight:700;
 }
 
 .event-button.dark{
   border-color:#29241f;
-
   background:#29241f;
-
   color:#fff;
 }
 
 .event-button.full{
-  grid-column:
-    1 / -1;
+  grid-column:1 / -1;
 }
-
-
-/* =========================================
-   USERS
-========================================= */
 
 .users-section{
   display:none;
@@ -674,105 +552,69 @@ button{
 
 .users-grid{
   display:grid;
-
-  grid-template-columns:
-    repeat(
-      2,
-      minmax(0,1fr)
-    );
-
+  grid-template-columns:repeat(2,minmax(0,1fr));
   gap:14px;
 }
 
 .user-card{
   padding:20px;
-
-  border:
-    1px solid #dfd5cd;
-
+  border:1px solid #dfd5cd;
   border-radius:22px;
-
   background:#fff;
 }
 
 .user-head{
   display:flex;
-
   justify-content:space-between;
   align-items:flex-start;
-
   gap:12px;
-
   margin-bottom:14px;
 }
 
 .user-name{
   margin-bottom:4px;
-
   font-size:17px;
   font-weight:800;
 }
 
 .user-email{
   color:#837a73;
-
   font-size:11px;
-
   overflow-wrap:anywhere;
 }
 
 .user-role{
-  padding:
-    6px 8px;
-
+  padding:6px 8px;
   border-radius:999px;
-
   background:#f0e9e3;
-
   color:#79583f;
-
   font-size:8px;
   font-weight:800;
-
   text-transform:uppercase;
 }
 
 .user-role.superadmin{
   background:#29241f;
-
   color:#fff;
 }
 
 .user-stats{
   display:grid;
-
-  grid-template-columns:
-    repeat(
-      3,
-      minmax(0,1fr)
-    );
-
+  grid-template-columns:repeat(3,minmax(0,1fr));
   gap:7px;
-
   margin-bottom:15px;
 }
 
 .user-stat{
-  padding:
-    10px 8px;
-
+  padding:10px 8px;
   border-radius:12px;
-
   background:#f7f3ef;
 }
 
 .user-stat small{
   display:block;
-
   margin-bottom:4px;
-
   color:#928981;
-
   font-size:9px;
 }
 
@@ -782,150 +624,103 @@ button{
 
 .user-storage{
   margin-bottom:14px;
-
   color:#756d66;
-
   font-size:11px;
+}
+
+.user-drive{
+  margin-top:7px;
+  color:#756d66;
+  font-size:10px;
 }
 
 .user-progress{
   width:100%;
   height:7px;
-
   margin-top:7px;
-
   overflow:hidden;
-
   border-radius:999px;
-
   background:#eee7e1;
 }
 
 .user-progress > div{
   height:100%;
-
   border-radius:999px;
-
   background:#9c7457;
 }
 
 .user-actions{
   display:flex;
-
   gap:7px;
 }
 
 .user-button{
   flex:1;
-
   min-height:39px;
-
-  border:
-    1px solid #ddd2ca;
-
+  border:1px solid #ddd2ca;
   border-radius:999px;
-
   background:#fff;
-
   cursor:pointer;
-
   font-size:10px;
   font-weight:700;
 }
 
-
-/* =========================================
-   FILTER INFO
-========================================= */
-
 .filter-info{
   display:none;
-
   margin-bottom:14px;
-
-  padding:
-    12px 14px;
-
-  border:
-    1px solid #e0d5cc;
-
+  padding:12px 14px;
+  border:1px solid #e0d5cc;
   border-radius:14px;
-
   background:#fff;
 }
 
 .filter-info.visible{
   display:flex;
-
   align-items:center;
   justify-content:space-between;
-
   gap:10px;
 }
 
 .filter-text{
   color:#756d66;
-
   font-size:11px;
 }
 
-
-/* =========================================
-   TOAST
-========================================= */
-
 .toast{
   position:fixed;
-
   left:50%;
   bottom:24px;
-
   z-index:200;
-
-  transform:
-    translate(-50%,20px);
-
-  padding:
-    12px 17px;
-
+  max-width:calc(100% - 30px);
+  transform:translate(-50%,20px);
+  padding:12px 17px;
   border-radius:999px;
-
   background:#29241f;
-
   color:#fff;
-
+  text-align:center;
   font-size:11px;
-
   opacity:0;
-
   pointer-events:none;
-
   transition:.2s;
 }
 
 .toast.show{
   opacity:1;
-
-  transform:
-    translate(-50%,0);
+  transform:translate(-50%,0);
 }
 
-
-/* =========================================
-   MOBILE
-========================================= */
-
 @media(max-width:800px){
-
   .events,
   .users-grid{
     grid-template-columns:1fr;
   }
 
+  .providers{
+    grid-template-columns:1fr;
+  }
 }
 
 @media(max-width:650px){
-
   .hero{
     flex-direction:column;
   }
@@ -936,8 +731,7 @@ button{
   }
 
   .summary{
-    grid-template-columns:
-      repeat(3,1fr);
+    grid-template-columns:repeat(3,1fr);
   }
 
   .summary-card{
@@ -948,32 +742,31 @@ button{
     font-size:21px;
   }
 
-  .storage-top{
+  .storage-top,
+  .drive-head{
     flex-direction:column;
   }
 
-  .drive-button{
+  .drive-actions{
     width:100%;
   }
 
+  .drive-button{
+    flex:1;
+  }
 }
 
 @media(max-width:470px){
-
   .header-inner{
-    padding:
-      0 13px;
+    padding:0 13px;
   }
 
   .page{
-    padding:
-      28px 14px 70px;
+    padding:28px 14px 70px;
   }
 
   .header-actions .button{
-    padding:
-      0 11px;
-
+    padding:0 11px;
     font-size:10px;
   }
 
@@ -982,235 +775,255 @@ button{
   .storage-card{
     padding:17px;
   }
-
 }
-
 </style>
 </head>
 
-
 <body>
 
-
 <header class="header">
-
   <div class="header-inner">
 
-    <a
-      href="index.html"
-      class="logo"
-    >
+    <a href="index.html" class="logo">
       more<span>moments</span>
     </a>
 
-
     <div class="header-actions">
-
-      <a
-        href="create-event.html"
-        class="button dark"
-      >
+      <a href="create-event.html" class="button dark">
         + Buat Acara
       </a>
 
-      <button
-        type="button"
-        class="button"
-        id="logoutButton"
-      >
+      <button type="button" class="button" id="logoutButton">
         Keluar
       </button>
-
     </div>
 
   </div>
-
 </header>
-
 
 
 <main class="page">
 
-
-  <!-- HERO -->
-
   <section class="hero">
 
     <div>
+      <div class="eyebrow">Dashboard</div>
 
-      <div class="eyebrow">
-        Dashboard
-      </div>
-
-      <h1>
-        Acara Anda.
-      </h1>
+      <h1>Acara Anda.</h1>
 
       <p>
-        Kelola acara, tamu,
-        foto, galeri, dan penyimpanan
-        dari satu tempat.
+        Kelola acara, tamu, foto, galeri,
+        Cloudflare R2, dan Google Drive dari satu tempat.
       </p>
-
     </div>
 
-
     <div class="account-badge">
-
-      <div
-        class="account-name"
-        id="accountName"
-      >
+      <div class="account-name" id="accountName">
         Memuat...
       </div>
 
-      <div
-        class="account-email"
-        id="accountEmail"
-      >
+      <div class="account-email" id="accountEmail">
         -
       </div>
 
-      <div
-        class="role-badge"
-        id="roleBadge"
-      >
+      <div class="role-badge" id="roleBadge">
         USER
       </div>
-
     </div>
 
   </section>
 
-
-
-  <!-- SUMMARY -->
 
   <section class="summary">
 
     <div class="summary-card">
-
-      <div class="summary-label">
-        Total acara
-      </div>
-
-      <div
-        class="summary-value"
-        id="totalEvents"
-      >
-        0
-      </div>
-
+      <div class="summary-label">Total acara</div>
+      <div class="summary-value" id="totalEvents">0</div>
     </div>
 
-
     <div class="summary-card">
-
-      <div class="summary-label">
-        Total tamu
-      </div>
-
-      <div
-        class="summary-value"
-        id="totalGuests"
-      >
-        0
-      </div>
-
+      <div class="summary-label">Total tamu</div>
+      <div class="summary-value" id="totalGuests">0</div>
     </div>
 
-
     <div class="summary-card">
-
-      <div class="summary-label">
-        Total foto
-      </div>
-
-      <div
-        class="summary-value"
-        id="totalPhotos"
-      >
-        0
-      </div>
-
+      <div class="summary-label">Total foto</div>
+      <div class="summary-value" id="totalPhotos">0</div>
     </div>
 
   </section>
 
-
-
-  <!-- STORAGE -->
 
   <section class="storage-card">
 
     <div class="storage-top">
 
       <div>
-
         <div class="storage-title">
-          Penyimpanan
+          Cloudflare R2
         </div>
 
-        <div
-          class="storage-text"
-          id="storageDescription"
-        >
+        <div class="storage-text" id="storageDescription">
           Menghitung penyimpanan...
         </div>
 
-
-        <div
-          class="storage-number"
-          id="storageNumber"
-        >
+        <div class="storage-number" id="storageNumber">
           —
+        </div>
+      </div>
+
+    </div>
+
+
+    <div class="storage-bar" id="storageBar">
+      <div class="storage-progress" id="storageProgress"></div>
+    </div>
+
+    <div class="storage-meta">
+      <span id="storagePercent">0% digunakan</span>
+      <span id="storageProvider">Cloudflare R2</span>
+    </div>
+
+
+    <div class="drive-area">
+
+      <div class="drive-card">
+
+        <div class="drive-head">
+
+          <div>
+            <div class="drive-title">
+              Google Drive
+            </div>
+
+            <div class="drive-status" id="driveStatus">
+              Memeriksa koneksi Google Drive...
+            </div>
+
+            <div class="drive-email" id="driveEmail"></div>
+
+            <div class="drive-quota" id="driveQuota"></div>
+          </div>
+
+
+          <div class="drive-actions">
+
+            <button
+              type="button"
+              class="drive-button"
+              id="connectDriveButton"
+            >
+              Hubungkan Google Drive
+            </button>
+
+            <button
+              type="button"
+              class="drive-button light"
+              id="reconnectDriveButton"
+              style="display:none;"
+            >
+              Hubungkan Ulang
+            </button>
+
+            <button
+              type="button"
+              class="drive-button danger"
+              id="disconnectDriveButton"
+              style="display:none;"
+            >
+              Putuskan
+            </button>
+
+          </div>
+
+        </div>
+
+
+        <div class="provider-title">
+          Pilih lokasi penyimpanan foto baru
+        </div>
+
+
+        <div class="providers">
+
+          <label class="provider">
+
+            <input
+              type="radio"
+              name="storageProvider"
+              value="r2"
+              id="providerR2"
+            >
+
+            <div class="provider-box">
+              <div class="provider-name">
+                Cloudflare R2
+              </div>
+
+              <div class="provider-desc">
+                Foto disimpan di Cloudflare.
+                User biasa mendapat kuota 150 MB.
+              </div>
+            </div>
+
+          </label>
+
+
+          <label class="provider">
+
+            <input
+              type="radio"
+              name="storageProvider"
+              value="gdrive"
+              id="providerGdrive"
+              disabled
+            >
+
+            <div class="provider-box">
+              <div class="provider-name">
+                Google Drive
+              </div>
+
+              <div class="provider-desc">
+                Foto baru langsung disimpan
+                ke Google Drive akun Anda.
+              </div>
+            </div>
+
+          </label>
+
+
+          <label class="provider">
+
+            <input
+              type="radio"
+              name="storageProvider"
+              value="both"
+              id="providerBoth"
+              disabled
+            >
+
+            <div class="provider-box">
+              <div class="provider-name">
+                R2 + Google Drive
+              </div>
+
+              <div class="provider-desc">
+                Foto disimpan di kedua tempat
+                sebagai cadangan.
+              </div>
+            </div>
+
+          </label>
+
         </div>
 
       </div>
-
-
-      <button
-        type="button"
-        class="drive-button"
-        id="driveButton"
-      >
-        Hubungkan Google Drive
-      </button>
-
-    </div>
-
-
-    <div
-      class="storage-bar"
-      id="storageBar"
-    >
-      <div
-        class="storage-progress"
-        id="storageProgress"
-      ></div>
-    </div>
-
-
-    <div
-      class="storage-meta"
-      id="storageMeta"
-    >
-
-      <span id="storagePercent">
-        0% digunakan
-      </span>
-
-      <span id="storageProvider">
-        Cloudflare R2
-      </span>
 
     </div>
 
   </section>
 
-
-
-  <!-- EVENTS -->
 
   <section class="section">
 
@@ -1221,59 +1034,33 @@ button{
       </div>
 
       <div class="section-actions">
-
-        <button
-          type="button"
-          class="button"
-          id="refreshButton"
-        >
+        <button type="button" class="button" id="refreshButton">
           ↻ Muat ulang
         </button>
-
       </div>
 
     </div>
 
 
-    <div
-      class="filter-info"
-      id="filterInfo"
-    >
+    <div class="filter-info" id="filterInfo">
 
-      <div
-        class="filter-text"
-        id="filterText"
-      ></div>
+      <div class="filter-text" id="filterText"></div>
 
-      <button
-        type="button"
-        class="button"
-        id="clearFilter"
-      >
+      <button type="button" class="button" id="clearFilter">
         Semua acara
       </button>
 
     </div>
 
 
-    <div
-      class="status-box"
-      id="eventsStatus"
-    >
+    <div class="status-box" id="eventsStatus">
       Memuat acara...
     </div>
 
-
-    <div
-      class="events"
-      id="eventsList"
-    ></div>
+    <div class="events" id="eventsList"></div>
 
   </section>
 
-
-
-  <!-- SUPERADMIN USERS -->
 
   <section
     class="section users-section"
@@ -1283,7 +1070,6 @@ button{
     <div class="section-head">
 
       <div>
-
         <div class="eyebrow">
           Superadmin
         </div>
@@ -1291,48 +1077,29 @@ button{
         <div class="section-title">
           Semua pengguna
         </div>
-
       </div>
 
-
-      <button
-        type="button"
-        class="button"
-        id="refreshUsers"
-      >
+      <button type="button" class="button" id="refreshUsers">
         ↻ Muat ulang
       </button>
 
     </div>
 
 
-    <div
-      class="status-box"
-      id="usersStatus"
-    >
+    <div class="status-box" id="usersStatus">
       Memuat pengguna...
     </div>
 
-
-    <div
-      class="users-grid"
-      id="usersList"
-    ></div>
+    <div class="users-grid" id="usersList"></div>
 
   </section>
-
 
 </main>
 
 
-
-<div
-  class="toast"
-  id="toast"
->
+<div class="toast" id="toast">
   Berhasil
 </div>
-
 
 
 <script>
@@ -1340,72 +1107,57 @@ button{
 const API_URL =
   "https://moments-api.alavolaadza.workers.dev";
 
-
 const TOKEN_KEY =
   "momentsAdminToken";
 
-
 const USER_KEY =
   "momentsUser";
-
 
 const token =
   localStorage.getItem(
     TOKEN_KEY
   );
 
-
 if(!token){
-
   window.location.href =
     "login.html";
-
 }
 
 
 let currentUser = null;
+let currentStorage = null;
+let googleStatus = null;
 
 let allEvents = [];
-
 let allUsers = [];
 
 let activeOwnerFilter = null;
 
-
-
-/* =========================================
-   ELEMENTS
-========================================= */
 
 const eventsList =
   document.getElementById(
     "eventsList"
   );
 
-
 const eventsStatus =
   document.getElementById(
     "eventsStatus"
   );
-
 
 const usersSection =
   document.getElementById(
     "usersSection"
   );
 
-
 const usersList =
   document.getElementById(
     "usersList"
   );
 
-
 const usersStatus =
   document.getElementById(
     "usersStatus"
   );
-
 
 const toast =
   document.getElementById(
@@ -1413,19 +1165,11 @@ const toast =
   );
 
 
-
-/* =========================================
-   HELPERS
-========================================= */
-
 function authHeaders(){
-
   return {
     "Authorization":
-      "Bearer " +
-      token
+      "Bearer " + token
   };
-
 }
 
 
@@ -1434,69 +1178,37 @@ function formatBytes(bytes){
   bytes =
     Number(bytes || 0);
 
-
   if(bytes < 1024){
-
-    return (
-      bytes +
-      " B"
-    );
-
+    return bytes + " B";
   }
 
+  if(bytes < 1024 * 1024){
+    return (
+      bytes / 1024
+    ).toFixed(1) + " KB";
+  }
 
   if(
     bytes <
-    1024 * 1024
+    1024 * 1024 * 1024
   ){
-
     return (
-      (
-        bytes /
-        1024
-      ).toFixed(1)
-      +
-      " KB"
-    );
-
-  }
-
-
-  if(
-    bytes <
-    1024 *
-    1024 *
-    1024
-  ){
-
-    return (
-      (
-        bytes /
-        (
-          1024 *
-          1024
-        )
-      ).toFixed(1)
-      +
-      " MB"
-    );
-
-  }
-
-
-  return (
-    (
       bytes /
       (
         1024 *
-        1024 *
         1024
       )
-    ).toFixed(2)
-    +
-    " GB"
-  );
+    ).toFixed(1) + " MB";
+  }
 
+  return (
+    bytes /
+    (
+      1024 *
+      1024 *
+      1024
+    )
+  ).toFixed(2) + " GB";
 }
 
 
@@ -1506,13 +1218,10 @@ function formatDate(value){
     return "-";
   }
 
-
   const date =
     new Date(
-      value +
-      "T00:00:00"
+      value + "T00:00:00"
     );
-
 
   return date
     .toLocaleDateString(
@@ -1523,52 +1232,35 @@ function formatDate(value){
         year:"numeric"
       }
     );
-
 }
 
 
 function basePath(){
-
   return (
-    window.location.origin
-    +
-    window.location.pathname
-      .replace(
-        "dashboard.html",
-        ""
-      )
+    window.location.origin +
+    window.location.pathname.replace(
+      "dashboard.html",
+      ""
+    )
   );
-
 }
 
 
 function eventUrl(slug){
-
   return (
-    basePath()
-    +
-    "event.html?e="
-    +
-    encodeURIComponent(
-      slug
-    )
+    basePath() +
+    "event.html?e=" +
+    encodeURIComponent(slug)
   );
-
 }
 
 
 function galleryUrl(slug){
-
   return (
-    basePath()
-    +
-    "gallery.html?e="
-    +
-    encodeURIComponent(
-      slug
-    )
+    basePath() +
+    "gallery.html?e=" +
+    encodeURIComponent(slug)
   );
-
 }
 
 
@@ -1577,23 +1269,18 @@ function showToast(message){
   toast.textContent =
     message;
 
-
   toast.classList.add(
     "show"
   );
 
-
   setTimeout(
     function(){
-
       toast.classList.remove(
         "show"
       );
-
     },
-    1800
+    2200
   );
-
 }
 
 
@@ -1607,69 +1294,47 @@ async function apiFetch(
     ...authHeaders()
   };
 
-
   const response =
     await fetch(
-      API_URL +
-      endpoint,
+      API_URL + endpoint,
       options
     );
 
-
   let data;
 
-
   try{
-
     data =
       await response.json();
-
   }catch(error){
-
     throw new Error(
       "Respons server tidak valid."
     );
-
   }
 
-
-  if(
-    response.status === 401
-  ){
+  if(response.status === 401){
 
     localStorage.removeItem(
       TOKEN_KEY
     );
 
-
     localStorage.removeItem(
       USER_KEY
     );
 
-
     window.location.href =
       "login.html";
-
 
     throw new Error(
       "Sesi login berakhir."
     );
-
   }
-
 
   return {
     response,
     data
   };
-
 }
 
-
-
-/* =========================================
-   ACCOUNT
-========================================= */
 
 function renderAccount(user){
 
@@ -1681,7 +1346,6 @@ function renderAccount(user){
     user.name ||
     "Pengguna";
 
-
   document
     .getElementById(
       "accountEmail"
@@ -1690,60 +1354,42 @@ function renderAccount(user){
     user.email ||
     "-";
 
-
   const badge =
     document.getElementById(
       "roleBadge"
     );
-
-
-  badge.textContent =
-    user.role ===
-    "superadmin"
-      ?
-      "SUPERADMIN"
-      :
-      "USER";
-
 
   if(
     user.role ===
     "superadmin"
   ){
 
+    badge.textContent =
+      "SUPERADMIN";
+
     badge.classList.add(
       "superadmin"
     );
 
-
-    usersSection
-      .classList
-      .add(
-        "visible"
-      );
+    usersSection.classList.add(
+      "visible"
+    );
 
   }else{
+
+    badge.textContent =
+      "USER";
 
     badge.classList.remove(
       "superadmin"
     );
 
-
-    usersSection
-      .classList
-      .remove(
-        "visible"
-      );
-
+    usersSection.classList.remove(
+      "visible"
+    );
   }
-
 }
 
-
-
-/* =========================================
-   STORAGE
-========================================= */
 
 function renderStorage(storage){
 
@@ -1751,36 +1397,33 @@ function renderStorage(storage){
     return;
   }
 
+  currentStorage =
+    storage;
 
   const number =
     document.getElementById(
       "storageNumber"
     );
 
-
   const description =
     document.getElementById(
       "storageDescription"
     );
-
 
   const progress =
     document.getElementById(
       "storageProgress"
     );
 
-
   const percent =
     document.getElementById(
       "storagePercent"
     );
 
-
   const provider =
     document.getElementById(
       "storageProvider"
     );
-
 
   const bar =
     document.getElementById(
@@ -1788,31 +1431,24 @@ function renderStorage(storage){
     );
 
 
-  if(
-    storage.unlimited
-  ){
+  if(storage.unlimited){
 
     number.textContent =
       formatBytes(
         storage.usedBytes
       );
 
-
     description.textContent =
-      "Akun Superadmin — tanpa batas kuota aplikasi.";
-
+      "Superadmin • tanpa batas kuota aplikasi.";
 
     progress.style.width =
       "100%";
 
-
     progress.style.opacity =
       ".35";
 
-
     percent.textContent =
       "Unlimited";
-
 
     bar.style.opacity =
       ".55";
@@ -1830,39 +1466,29 @@ function renderStorage(storage){
         storage.quotaBytes
       );
 
-
     description.textContent =
       "Kuota Cloudflare R2 akun Anda.";
-
 
     const usedPercent =
       Number(
         storage.percent || 0
       );
 
-
     progress.style.width =
       Math.min(
         100,
         usedPercent
-      )
-      +
-      "%";
-
+      ) + "%";
 
     progress.style.opacity =
       "1";
 
-
     percent.textContent =
-      usedPercent
-      +
+      usedPercent +
       "% digunakan";
-
 
     bar.style.opacity =
       "1";
-
   }
 
 
@@ -1872,7 +1498,7 @@ function renderStorage(storage){
   ){
 
     provider.textContent =
-      "Google Drive";
+      "Penyimpanan utama: Google Drive";
 
   }else if(
     storage.provider ===
@@ -1880,43 +1506,456 @@ function renderStorage(storage){
   ){
 
     provider.textContent =
-      "R2 + Google Drive";
+      "Penyimpanan: R2 + Google Drive";
 
   }else{
 
     provider.textContent =
-      "Cloudflare R2";
-
+      "Penyimpanan utama: Cloudflare R2";
   }
 
 
-  const driveButton =
+  setProviderSelection(
+    storage.provider || "r2",
+    Boolean(
+      storage.driveConnected
+    )
+  );
+}
+
+
+function setProviderSelection(
+  provider,
+  driveConnected
+){
+
+  const r2 =
     document.getElementById(
-      "driveButton"
+      "providerR2"
+    );
+
+  const gdrive =
+    document.getElementById(
+      "providerGdrive"
+    );
+
+  const both =
+    document.getElementById(
+      "providerBoth"
+    );
+
+  gdrive.disabled =
+    !driveConnected;
+
+  both.disabled =
+    !driveConnected;
+
+  if(
+    provider === "gdrive" &&
+    driveConnected
+  ){
+    gdrive.checked = true;
+  }
+  else if(
+    provider === "both" &&
+    driveConnected
+  ){
+    both.checked = true;
+  }
+  else{
+    r2.checked = true;
+  }
+}
+
+
+function renderGoogleStatus(data){
+
+  googleStatus =
+    data;
+
+  const status =
+    document.getElementById(
+      "driveStatus"
+    );
+
+  const email =
+    document.getElementById(
+      "driveEmail"
+    );
+
+  const quota =
+    document.getElementById(
+      "driveQuota"
+    );
+
+  const connectButton =
+    document.getElementById(
+      "connectDriveButton"
+    );
+
+  const reconnectButton =
+    document.getElementById(
+      "reconnectDriveButton"
+    );
+
+  const disconnectButton =
+    document.getElementById(
+      "disconnectDriveButton"
     );
 
 
   if(
-    storage.driveConnected
+    data.connected
   ){
 
-    driveButton.textContent =
-      "Google Drive Terhubung";
+    status.textContent =
+      "✓ Google Drive terhubung.";
 
-  }else{
+    email.textContent =
+      data.email || "";
 
-    driveButton.textContent =
-      "Hubungkan Google Drive";
+    connectButton.style.display =
+      "none";
+
+    reconnectButton.style.display =
+      "none";
+
+    disconnectButton.style.display =
+      "inline-flex";
+
+
+    if(
+      data.driveStorage
+    ){
+
+      const usage =
+        formatBytes(
+          data.driveStorage
+            .usageBytes
+        );
+
+      if(
+        data.driveStorage
+          .limitBytes
+      ){
+
+        quota.textContent =
+          "Pemakaian akun Google: "
+          +
+          usage
+          +
+          " / "
+          +
+          formatBytes(
+            data.driveStorage
+              .limitBytes
+          );
+
+      }else{
+
+        quota.textContent =
+          "Pemakaian akun Google: "
+          +
+          usage;
+      }
+
+    }else{
+
+      quota.textContent = "";
+    }
+
+
+    setProviderSelection(
+      data.provider || "r2",
+      true
+    );
 
   }
+  else if(
+    data.reconnectRequired
+  ){
 
+    status.textContent =
+      "Koneksi Google Drive perlu diperbarui.";
+
+    email.textContent =
+      data.email || "";
+
+    quota.textContent = "";
+
+    connectButton.style.display =
+      "none";
+
+    reconnectButton.style.display =
+      "inline-flex";
+
+    disconnectButton.style.display =
+      "inline-flex";
+
+    setProviderSelection(
+      "r2",
+      false
+    );
+
+  }
+  else{
+
+    status.textContent =
+      "Belum terhubung. Hubungkan akun Google untuk menyimpan foto ke Drive.";
+
+    email.textContent = "";
+    quota.textContent = "";
+
+    connectButton.style.display =
+      "inline-flex";
+
+    reconnectButton.style.display =
+      "none";
+
+    disconnectButton.style.display =
+      "none";
+
+    setProviderSelection(
+      "r2",
+      false
+    );
+  }
 }
 
 
+async function loadGoogleStatus(){
 
-/* =========================================
-   EVENT CARD
-========================================= */
+  try{
+
+    const {
+      response,
+      data
+    } =
+      await apiFetch(
+        "/api/google/status"
+      );
+
+    if(
+      !response.ok ||
+      !data.success
+    ){
+      throw new Error(
+        data.error ||
+        "Gagal memeriksa Google Drive."
+      );
+    }
+
+    renderGoogleStatus(
+      data
+    );
+
+  }catch(error){
+
+    console.error(error);
+
+    document
+      .getElementById(
+        "driveStatus"
+      )
+      .textContent =
+      error.message ||
+      "Google Drive tidak dapat diperiksa.";
+  }
+}
+
+
+async function connectGoogleDrive(){
+
+  const button =
+    document.getElementById(
+      "connectDriveButton"
+    );
+
+  const reconnect =
+    document.getElementById(
+      "reconnectDriveButton"
+    );
+
+  button.disabled = true;
+  reconnect.disabled = true;
+
+  try{
+
+    const {
+      response,
+      data
+    } =
+      await apiFetch(
+        "/api/google/connect"
+      );
+
+    if(
+      !response.ok ||
+      !data.success ||
+      !data.authorizationUrl
+    ){
+      throw new Error(
+        data.error ||
+        "Tidak dapat membuka Google."
+      );
+    }
+
+    window.location.href =
+      data.authorizationUrl;
+
+  }catch(error){
+
+    button.disabled = false;
+    reconnect.disabled = false;
+
+    alert(
+      error.message ||
+      "Google Drive gagal dibuka."
+    );
+  }
+}
+
+
+async function disconnectGoogleDrive(){
+
+  const yes =
+    confirm(
+      "Putuskan Google Drive dari akun MoreMoments?\n\nFoto yang sudah ada tidak otomatis dihapus."
+    );
+
+  if(!yes){
+    return;
+  }
+
+  try{
+
+    const {
+      response,
+      data
+    } =
+      await apiFetch(
+        "/api/google/disconnect",
+        {
+          method:"POST"
+        }
+      );
+
+    if(
+      !response.ok ||
+      !data.success
+    ){
+      throw new Error(
+        data.error ||
+        "Gagal memutuskan Google Drive."
+      );
+    }
+
+    showToast(
+      "Google Drive diputuskan"
+    );
+
+    await loadEvents();
+    await loadGoogleStatus();
+
+  }catch(error){
+
+    alert(
+      error.message ||
+      "Gagal memutuskan Google Drive."
+    );
+  }
+}
+
+
+async function changeProvider(
+  provider
+){
+
+  try{
+
+    const {
+      response,
+      data
+    } =
+      await apiFetch(
+        "/api/storage/provider",
+        {
+          method:"POST",
+
+          headers:{
+            "Content-Type":
+              "application/json"
+          },
+
+          body:
+            JSON.stringify({
+              provider
+            })
+        }
+      );
+
+    if(
+      !response.ok ||
+      !data.success
+    ){
+      throw new Error(
+        data.error ||
+        "Gagal mengubah penyimpanan."
+      );
+    }
+
+    renderStorage(
+      data.storage
+    );
+
+    if(googleStatus){
+      googleStatus.provider =
+        provider;
+
+      renderGoogleStatus(
+        googleStatus
+      );
+    }
+
+    if(provider === "r2"){
+      showToast(
+        "Penyimpanan diubah ke Cloudflare R2"
+      );
+    }
+
+    if(provider === "gdrive"){
+      showToast(
+        "Penyimpanan diubah ke Google Drive"
+      );
+    }
+
+    if(provider === "both"){
+      showToast(
+        "R2 + Google Drive aktif"
+      );
+    }
+
+  }catch(error){
+
+    alert(
+      error.message ||
+      "Gagal mengubah penyimpanan."
+    );
+
+    if(currentStorage){
+      setProviderSelection(
+        currentStorage.provider ||
+        "r2",
+
+        Boolean(
+          currentStorage
+            .driveConnected
+        )
+      );
+    }
+  }
+}
+
 
 function createEventCard(event){
 
@@ -1925,23 +1964,19 @@ function createEventCard(event){
       "article"
     );
 
-
   card.className =
     "event-card";
-
 
   card.innerHTML = `
 
     <div class="event-top">
 
       <div>
-
         <div class="event-type">
           ${event.eventType || "Acara"}
         </div>
 
         <div class="event-name"></div>
-
       </div>
 
       <div class="event-status">
@@ -1950,90 +1985,54 @@ function createEventCard(event){
 
     </div>
 
-
     <div class="event-owner"></div>
 
-
     <div class="event-date">
-
-      ${formatDate(
-        event.eventDate
-      )}
-
+      ${formatDate(event.eventDate)}
       •
-
       ${event.startTime || "-"}
-
       –
-
       ${event.endTime || "-"}
-
     </div>
-
 
     <div class="event-stats">
 
       <div class="event-stat">
-
-        <small>
-          Tamu
-        </small>
-
+        <small>Tamu</small>
         <strong>
           ${event.guestCount}
           /
           ${event.maxGuests}
         </strong>
-
       </div>
 
-
       <div class="event-stat">
-
-        <small>
-          Foto
-        </small>
-
+        <small>Foto</small>
         <strong>
           ${event.photoCount}
         </strong>
-
       </div>
 
-
       <div class="event-stat">
-
-        <small>
-          Jatah
-        </small>
-
+        <small>Jatah</small>
         <strong>
           ${event.shotsPerGuest}
         </strong>
-
       </div>
 
     </div>
 
-
     <div class="event-slug"></div>
-
 
     <div class="event-actions">
 
-      <a
-        class="event-button dark open-event"
-      >
+      <a class="event-button dark open-event">
         Buka acara
       </a>
 
-
-      <a
-        class="event-button open-gallery"
-      >
+      <a class="event-button open-gallery">
         Galeri
       </a>
-
 
       <button
         type="button"
@@ -2043,7 +2042,6 @@ function createEventCard(event){
       </button>
 
     </div>
-
   `;
 
 
@@ -2088,7 +2086,6 @@ function createEventCard(event){
 
     owner.textContent =
       "Event milik Anda";
-
   }
 
 
@@ -2133,7 +2130,6 @@ function createEventCard(event){
             event.slug
           );
 
-
         try{
 
           await navigator
@@ -2142,11 +2138,9 @@ function createEventCard(event){
               link
             );
 
-
           showToast(
             "Link acara disalin"
           );
-
 
         }catch(error){
 
@@ -2154,59 +2148,42 @@ function createEventCard(event){
             "Salin link acara:",
             link
           );
-
         }
-
       }
     );
 
 
   return card;
-
 }
 
-
-
-/* =========================================
-   RENDER EVENTS
-========================================= */
 
 function renderEvents(){
 
   eventsList.innerHTML =
     "";
 
-
   let events =
     allEvents;
 
 
-  if(
-    activeOwnerFilter
-  ){
+  if(activeOwnerFilter){
 
     events =
       allEvents.filter(
         function(event){
-
           return (
             event.ownerId ===
             activeOwnerFilter
           );
-
         }
       );
-
   }
 
 
-  if(
-    events.length === 0
-  ){
+  if(events.length === 0){
 
     eventsStatus.style.display =
       "block";
-
 
     eventsStatus.textContent =
       activeOwnerFilter
@@ -2215,9 +2192,7 @@ function renderEvents(){
         :
         "Belum ada acara.";
 
-
     return;
-
   }
 
 
@@ -2228,29 +2203,20 @@ function renderEvents(){
   events.forEach(
     function(event){
 
-      eventsList
-        .appendChild(
-          createEventCard(
-            event
-          )
-        );
-
+      eventsList.appendChild(
+        createEventCard(
+          event
+        )
+      );
     }
   );
-
 }
 
-
-
-/* =========================================
-   LOAD EVENTS
-========================================= */
 
 async function loadEvents(){
 
   eventsStatus.style.display =
     "block";
-
 
   eventsStatus.textContent =
     "Memuat acara...";
@@ -2276,23 +2242,22 @@ async function loadEvents(){
         data.error ||
         "Gagal memuat acara."
       );
-
     }
 
 
     currentUser =
       data.currentUser;
 
+    currentStorage =
+      data.storage;
 
     allEvents =
-      data.events ||
-      [];
+      data.events || [];
 
 
     renderAccount(
       currentUser
     );
-
 
     renderStorage(
       data.storage
@@ -2304,8 +2269,7 @@ async function loadEvents(){
         "totalEvents"
       )
       .textContent =
-      data.stats?.events ||
-      0;
+      data.stats?.events || 0;
 
 
     document
@@ -2313,8 +2277,7 @@ async function loadEvents(){
         "totalGuests"
       )
       .textContent =
-      data.stats?.guests ||
-      0;
+      data.stats?.guests || 0;
 
 
     document
@@ -2322,8 +2285,7 @@ async function loadEvents(){
         "totalPhotos"
       )
       .textContent =
-      data.stats?.photos ||
-      0;
+      data.stats?.photos || 0;
 
 
     localStorage.setItem(
@@ -2341,36 +2303,23 @@ async function loadEvents(){
       currentUser.role ===
       "superadmin"
     ){
-
       await loadUsers();
-
     }
 
 
   }catch(error){
 
-    console.error(
-      error
-    );
-
+    console.error(error);
 
     eventsStatus.style.display =
       "block";
 
-
     eventsStatus.textContent =
       error.message ||
       "Gagal memuat dashboard.";
-
   }
-
 }
 
-
-
-/* =========================================
-   USER CARD
-========================================= */
 
 function createUserCard(user){
 
@@ -2378,7 +2327,6 @@ function createUserCard(user){
     document.createElement(
       "article"
     );
-
 
   card.className =
     "user-card";
@@ -2394,14 +2342,10 @@ function createUserCard(user){
 
 
   let storageText;
-
-
   let storagePercent;
 
 
-  if(
-    user.storage.unlimited
-  ){
+  if(user.storage.unlimited){
 
     storageText =
       formatBytes(
@@ -2409,7 +2353,6 @@ function createUserCard(user){
       )
       +
       " • Unlimited";
-
 
     storagePercent =
       100;
@@ -2427,13 +2370,27 @@ function createUserCard(user){
         user.storage.quotaBytes
       );
 
-
     storagePercent =
       Number(
-        user.storage.percent ||
-        0
+        user.storage.percent || 0
       );
+  }
 
+
+  let driveText =
+    "Google Drive: belum terhubung";
+
+
+  if(
+    user.storage.driveConnected
+  ){
+    driveText =
+      "Google Drive: ✓ "
+      +
+      (
+        user.storage.driveEmail ||
+        "Terhubung"
+      );
   }
 
 
@@ -2442,13 +2399,9 @@ function createUserCard(user){
     <div class="user-head">
 
       <div>
-
         <div class="user-name"></div>
-
         <div class="user-email"></div>
-
       </div>
-
 
       <div class="user-role${roleClass}">
         ${user.role}
@@ -2460,41 +2413,18 @@ function createUserCard(user){
     <div class="user-stats">
 
       <div class="user-stat">
-
-        <small>
-          Event
-        </small>
-
-        <strong>
-          ${user.eventCount}
-        </strong>
-
+        <small>Event</small>
+        <strong>${user.eventCount}</strong>
       </div>
 
-
       <div class="user-stat">
-
-        <small>
-          Foto
-        </small>
-
-        <strong>
-          ${user.photoCount}
-        </strong>
-
+        <small>Foto</small>
+        <strong>${user.photoCount}</strong>
       </div>
 
-
       <div class="user-stat">
-
-        <small>
-          Status
-        </small>
-
-        <strong>
-          ${user.status}
-        </strong>
-
+        <small>Status</small>
+        <strong>${user.status}</strong>
       </div>
 
     </div>
@@ -2502,21 +2432,22 @@ function createUserCard(user){
 
     <div class="user-storage">
 
-      Penyimpanan:
+      Cloudflare:
       <strong>
         ${storageText}
       </strong>
 
-
       <div class="user-progress">
-
         <div
           style="width:${Math.min(
             100,
             storagePercent
           )}%"
         ></div>
+      </div>
 
+      <div class="user-drive">
+        ${driveText}
       </div>
 
     </div>
@@ -2532,7 +2463,6 @@ function createUserCard(user){
       </button>
 
     </div>
-
   `;
 
 
@@ -2600,30 +2530,21 @@ function createUserCard(user){
           .scrollIntoView({
             behavior:"smooth"
           });
-
       }
     );
 
 
   return card;
-
 }
 
-
-
-/* =========================================
-   LOAD USERS
-========================================= */
 
 async function loadUsers(){
 
   usersStatus.style.display =
     "block";
 
-
   usersStatus.textContent =
     "Memuat pengguna...";
-
 
   usersList.innerHTML =
     "";
@@ -2649,25 +2570,19 @@ async function loadUsers(){
         data.error ||
         "Gagal memuat pengguna."
       );
-
     }
 
 
     allUsers =
-      data.users ||
-      [];
+      data.users || [];
 
 
-    if(
-      allUsers.length ===
-      0
-    ){
+    if(allUsers.length === 0){
 
       usersStatus.textContent =
         "Belum ada pengguna.";
 
       return;
-
     }
 
 
@@ -2678,41 +2593,128 @@ async function loadUsers(){
     allUsers.forEach(
       function(user){
 
-        usersList
-          .appendChild(
-            createUserCard(
-              user
-            )
-          );
-
+        usersList.appendChild(
+          createUserCard(
+            user
+          )
+        );
       }
     );
 
 
   }catch(error){
 
-    console.error(
-      error
-    );
-
+    console.error(error);
 
     usersStatus.style.display =
       "block";
 
-
     usersStatus.textContent =
       error.message ||
       "Gagal memuat pengguna.";
-
   }
-
 }
 
 
+function handleGoogleCallbackMessage(){
 
-/* =========================================
-   CLEAR FILTER
-========================================= */
+  const params =
+    new URLSearchParams(
+      window.location.search
+    );
+
+  const google =
+    params.get(
+      "google"
+    );
+
+
+  if(!google){
+    return;
+  }
+
+
+  if(google === "connected"){
+
+    showToast(
+      "✓ Google Drive berhasil terhubung"
+    );
+  }
+
+  else if(google === "cancelled"){
+
+    showToast(
+      "Koneksi Google Drive dibatalkan"
+    );
+  }
+
+  else if(google === "error"){
+
+    showToast(
+      "Google Drive gagal dihubungkan"
+    );
+  }
+
+
+  window.history.replaceState(
+    {},
+    document.title,
+    window.location.pathname
+  );
+}
+
+
+document
+  .getElementById(
+    "connectDriveButton"
+  )
+  .addEventListener(
+    "click",
+    connectGoogleDrive
+  );
+
+
+document
+  .getElementById(
+    "reconnectDriveButton"
+  )
+  .addEventListener(
+    "click",
+    connectGoogleDrive
+  );
+
+
+document
+  .getElementById(
+    "disconnectDriveButton"
+  )
+  .addEventListener(
+    "click",
+    disconnectGoogleDrive
+  );
+
+
+document
+  .querySelectorAll(
+    'input[name="storageProvider"]'
+  )
+  .forEach(
+    function(input){
+
+      input.addEventListener(
+        "change",
+        function(){
+
+          if(this.checked){
+            changeProvider(
+              this.value
+            );
+          }
+        }
+      );
+    }
+  );
+
 
 document
   .getElementById(
@@ -2725,7 +2727,6 @@ document
       activeOwnerFilter =
         null;
 
-
       document
         .getElementById(
           "filterInfo"
@@ -2735,39 +2736,10 @@ document
           "visible"
         );
 
-
       renderEvents();
-
     }
   );
 
-
-
-/* =========================================
-   GOOGLE DRIVE
-   tahap berikutnya
-========================================= */
-
-document
-  .getElementById(
-    "driveButton"
-  )
-  .addEventListener(
-    "click",
-    function(){
-
-      alert(
-        "Tombol Google Drive sudah siap. Koneksi Google OAuth akan kita pasang pada tahap berikutnya."
-      );
-
-    }
-  );
-
-
-
-/* =========================================
-   REFRESH
-========================================= */
 
 document
   .getElementById(
@@ -2775,7 +2747,15 @@ document
   )
   .addEventListener(
     "click",
-    loadEvents
+    async function(){
+
+      await loadEvents();
+      await loadGoogleStatus();
+
+      showToast(
+        "Dashboard diperbarui"
+      );
+    }
   );
 
 
@@ -2789,11 +2769,6 @@ document
   );
 
 
-
-/* =========================================
-   LOGOUT
-========================================= */
-
 document
   .getElementById(
     "logoutButton"
@@ -2806,25 +2781,27 @@ document
         TOKEN_KEY
       );
 
-
       localStorage.removeItem(
         USER_KEY
       );
 
-
       window.location.href =
         "login.html";
-
     }
   );
 
 
+async function start(){
 
-/* =========================================
-   START
-========================================= */
+  handleGoogleCallbackMessage();
 
-loadEvents();
+  await loadEvents();
+
+  await loadGoogleStatus();
+}
+
+
+start();
 
 </script>
 
