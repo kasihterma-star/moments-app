@@ -24,17 +24,32 @@ a{
   color:inherit;
 }
 
+button,
+input,
+select{
+  font:inherit;
+}
+
+
+/* ================================
+   HEADER
+================================ */
+
 .header{
   height:75px;
   background:rgba(255,255,255,.9);
   border-bottom:1px solid #e9e3dc;
+
   display:flex;
   align-items:center;
   justify-content:space-between;
+
   padding:0 30px;
+
   position:sticky;
   top:0;
   z-index:100;
+
   backdrop-filter:blur(12px);
 }
 
@@ -47,13 +62,54 @@ a{
   color:#a77852;
 }
 
+.header-right{
+  display:flex;
+  align-items:center;
+  gap:9px;
+}
+
+.account{
+  display:none;
+
+  max-width:220px;
+
+  padding:9px 13px;
+
+  border:1px solid #e1d8d0;
+  border-radius:999px;
+
+  background:#fff;
+
+  font-size:11px;
+}
+
+.account strong{
+  display:block;
+
+  overflow:hidden;
+  text-overflow:ellipsis;
+  white-space:nowrap;
+}
+
+.account span{
+  color:#8b8179;
+}
+
 .back{
   border:1px solid #ddd3ca;
   border-radius:999px;
+
   padding:10px 17px;
-  font-size:14px;
+
+  font-size:13px;
+
   background:white;
 }
+
+
+/* ================================
+   PAGE
+================================ */
 
 .page{
   max-width:850px;
@@ -68,6 +124,7 @@ a{
 .title small{
   color:#9a7255;
   font-weight:700;
+
   text-transform:uppercase;
   letter-spacing:1.5px;
 }
@@ -80,16 +137,72 @@ a{
 
 .title p{
   margin-top:12px;
+
   color:#777;
+
   line-height:1.6;
 }
 
+
+/* ================================
+   LOGIN STATUS
+================================ */
+
+.login-status{
+  display:flex;
+  align-items:center;
+  gap:10px;
+
+  margin-bottom:20px;
+
+  padding:13px 16px;
+
+  border:1px solid #e4ddd6;
+  border-radius:16px;
+
+  background:#fff;
+
+  color:#777;
+
+  font-size:12px;
+}
+
+.login-dot{
+  width:9px;
+  height:9px;
+
+  flex:0 0 auto;
+
+  border-radius:50%;
+
+  background:#d2c8c0;
+}
+
+.login-status.success .login-dot{
+  background:#54a766;
+}
+
+.login-status.error .login-dot{
+  background:#bc5a52;
+}
+
+
+/* ================================
+   CARD
+================================ */
+
 .card{
   background:white;
+
   border:1px solid #ebe4dc;
   border-radius:25px;
+
   padding:30px;
-  box-shadow:0 15px 45px rgba(67,52,39,.06);
+
+  box-shadow:
+    0 15px 45px
+    rgba(67,52,39,.06);
+
   margin-bottom:20px;
 }
 
@@ -100,7 +213,10 @@ a{
 
 .grid{
   display:grid;
-  grid-template-columns:1fr 1fr;
+
+  grid-template-columns:
+    1fr 1fr;
+
   gap:18px;
 }
 
@@ -110,8 +226,10 @@ a{
 
 label{
   display:block;
+
   font-size:13px;
   font-weight:700;
+
   margin-bottom:8px;
 }
 
@@ -119,43 +237,80 @@ input,
 select{
   width:100%;
   height:50px;
+
   border:1px solid #ddd6cf;
   border-radius:13px;
+
   padding:0 14px;
+
   font-size:15px;
+
   outline:none;
+
   background:#fff;
 }
 
 input:focus,
 select:focus{
   border-color:#9b755a;
-  box-shadow:0 0 0 3px rgba(155,117,90,.10);
+
+  box-shadow:
+    0 0 0 3px
+    rgba(155,117,90,.10);
+}
+
+input:disabled,
+select:disabled{
+  opacity:.65;
+  cursor:not-allowed;
 }
 
 .help{
   font-size:12px;
+
   color:#999;
+
   margin-top:7px;
+
   line-height:1.4;
 }
 
+
+/* ================================
+   SLUG
+================================ */
+
 .slug-box{
   background:#f8f6f3;
+
   border-radius:12px;
+
   padding:13px 15px;
+
   margin-top:8px;
+
   color:#777;
+
   font-size:13px;
+
   word-break:break-all;
 }
+
+
+/* ================================
+   COVER
+================================ */
 
 .cover-upload{
   border:2px dashed #d8cec5;
   border-radius:17px;
+
   text-align:center;
+
   padding:30px 20px;
+
   cursor:pointer;
+
   background:#fbfaf8;
 }
 
@@ -181,25 +336,39 @@ select:focus{
 .preview img{
   width:100%;
   max-height:350px;
+
   object-fit:cover;
+
   border-radius:16px;
 }
+
+
+/* ================================
+   BUTTON
+================================ */
 
 .action{
   display:flex;
   justify-content:flex-end;
+
   margin-top:25px;
 }
 
 .create-btn{
   border:none;
+
   min-width:190px;
   height:54px;
+
   border-radius:999px;
+
   background:#29251f;
+
   color:white;
+
   font-size:15px;
   font-weight:700;
+
   cursor:pointer;
 }
 
@@ -207,12 +376,26 @@ select:focus{
   opacity:.9;
 }
 
+.create-btn:disabled{
+  opacity:.5;
+  cursor:not-allowed;
+}
+
+
+/* ================================
+   RESULT
+================================ */
+
 .result{
   display:none;
+
   background:#ecf6ed;
+
   border:1px solid #cbe3ce;
   border-radius:20px;
+
   padding:25px;
+
   margin-top:20px;
 }
 
@@ -223,22 +406,76 @@ select:focus{
 
 .result p{
   color:#617063;
+
   font-size:14px;
+
   line-height:1.5;
 }
 
 .event-link{
   margin-top:15px;
+
   background:white;
+
   padding:13px 15px;
+
   border-radius:12px;
+
   font-size:13px;
+
   word-break:break-all;
 }
 
+.result-actions{
+  display:flex;
+  flex-wrap:wrap;
+
+  gap:8px;
+
+  margin-top:16px;
+}
+
+.result-button{
+  min-height:42px;
+
+  padding:0 15px;
+
+  display:inline-flex;
+  align-items:center;
+  justify-content:center;
+
+  border:1px solid #cbdccb;
+  border-radius:999px;
+
+  background:#fff;
+
+  color:#3e5741;
+
+  font-size:12px;
+  font-weight:700;
+
+  cursor:pointer;
+}
+
+.result-button.dark{
+  border-color:#294430;
+  background:#294430;
+  color:#fff;
+}
+
+
+/* ================================
+   MOBILE
+================================ */
+
 @media(max-width:650px){
+
   .header{
     padding:0 17px;
+  }
+
+  .account{
+    display:none !important;
   }
 
   .page{
@@ -268,36 +505,96 @@ select:focus{
   .create-btn{
     width:100%;
   }
+
+  .result-actions{
+    display:grid;
+    grid-template-columns:1fr;
+  }
+
+  .result-button{
+    width:100%;
+  }
 }
 </style>
 </head>
 
+
 <body>
 
+
 <header class="header">
+
   <a href="index.html" class="logo">
     more<span>moments</span>
   </a>
 
-  <a href="index.html" class="back">
-    ← Kembali
-  </a>
+
+  <div class="header-right">
+
+    <div class="account" id="accountBox">
+
+      <strong id="accountName">
+        Pengguna
+      </strong>
+
+      <span id="accountRole">
+        User
+      </span>
+
+    </div>
+
+
+    <a href="dashboard.html" class="back">
+      ← Dashboard
+    </a>
+
+  </div>
+
 </header>
+
 
 
 <main class="page">
 
+
   <div class="title">
-    <small>Acara baru</small>
-    <h1>Buat momen Anda.</h1>
+
+    <small>
+      Acara baru
+    </small>
+
+    <h1>
+      Buat momen Anda.
+    </h1>
+
     <p>
-      Isi informasi acara. Nantinya setiap acara akan mempunyai
-      link dan QR Code sendiri untuk dibagikan kepada tamu.
+      Isi informasi acara. Setiap acara akan mempunyai
+      link sendiri untuk dibagikan kepada tamu.
     </p>
+
   </div>
 
 
+
+  <div
+    class="login-status"
+    id="loginStatus"
+  >
+
+    <div class="login-dot"></div>
+
+    <div id="loginStatusText">
+      Memeriksa akun...
+    </div>
+
+  </div>
+
+
+
   <form id="eventForm">
+
+
+    <!-- INFORMASI ACARA -->
 
     <div class="card">
 
@@ -305,10 +602,15 @@ select:focus{
         Informasi acara
       </h2>
 
+
       <div class="grid">
 
+
         <div class="full">
-          <label>Nama acara</label>
+
+          <label>
+            Nama acara
+          </label>
 
           <input
             id="eventName"
@@ -316,44 +618,107 @@ select:focus{
             placeholder="Contoh: Pernikahan May & Habi"
             required
           >
+
         </div>
 
 
         <div>
-          <label>Jenis acara</label>
+
+          <label>
+            Jenis acara
+          </label>
 
           <select id="eventType">
-            <option value="Pernikahan">Pernikahan</option>
-            <option value="Ulang Tahun">Ulang Tahun</option>
-            <option value="Wisuda">Wisuda</option>
-            <option value="Reuni">Reuni</option>
-            <option value="Gathering">Gathering</option>
-            <option value="Lainnya">Lainnya</option>
+
+            <option value="Pernikahan">
+              Pernikahan
+            </option>
+
+            <option value="Ulang Tahun">
+              Ulang Tahun
+            </option>
+
+            <option value="Wisuda">
+              Wisuda
+            </option>
+
+            <option value="Reuni">
+              Reuni
+            </option>
+
+            <option value="Gathering">
+              Gathering
+            </option>
+
+            <option value="Keagamaan">
+              Keagamaan
+            </option>
+
+            <option value="Sekolah">
+              Sekolah
+            </option>
+
+            <option value="Lainnya">
+              Lainnya
+            </option>
+
           </select>
+
         </div>
 
 
         <div>
-          <label>Tanggal acara</label>
-          <input id="eventDate" type="date" required>
+
+          <label>
+            Tanggal acara
+          </label>
+
+          <input
+            id="eventDate"
+            type="date"
+            required
+          >
+
         </div>
 
 
         <div>
-          <label>Mulai</label>
-          <input id="startTime" type="time" required>
+
+          <label>
+            Mulai
+          </label>
+
+          <input
+            id="startTime"
+            type="time"
+            required
+          >
+
         </div>
 
 
         <div>
-          <label>Berakhir</label>
-          <input id="endTime" type="time" required>
+
+          <label>
+            Berakhir
+          </label>
+
+          <input
+            id="endTime"
+            type="time"
+            required
+          >
+
         </div>
+
 
       </div>
 
     </div>
 
+
+
+    <!-- PENGATURAN -->
 
     <div class="card">
 
@@ -361,44 +726,81 @@ select:focus{
         Pengaturan tamu & kamera
       </h2>
 
+
       <div class="grid">
 
+
         <div>
-          <label>Maksimal tamu</label>
+
+          <label>
+            Maksimal tamu
+          </label>
 
           <input
             id="maxGuests"
             type="number"
             value="100"
             min="1"
+            max="10000"
             required
           >
 
           <div class="help">
             Maksimal orang yang dapat bergabung.
           </div>
+
         </div>
 
 
         <div>
-          <label>Jatah foto per tamu</label>
+
+          <label>
+            Jatah foto per tamu
+          </label>
 
           <select id="shots">
-            <option value="5">5 foto</option>
-            <option value="10">10 foto</option>
-            <option value="15" selected>15 foto</option>
-            <option value="20">20 foto</option>
-            <option value="25">25 foto</option>
+
+            <option value="5">
+              5 foto
+            </option>
+
+            <option value="10">
+              10 foto
+            </option>
+
+            <option
+              value="15"
+              selected
+            >
+              15 foto
+            </option>
+
+            <option value="20">
+              20 foto
+            </option>
+
+            <option value="25">
+              25 foto
+            </option>
+
+            <option value="30">
+              30 foto
+            </option>
+
           </select>
 
           <div class="help">
             Setiap tamu mempunyai jumlah jepretan sendiri.
           </div>
+
         </div>
 
 
         <div class="full">
-          <label>Link acara</label>
+
+          <label>
+            Link acara
+          </label>
 
           <input
             id="slug"
@@ -407,21 +809,35 @@ select:focus{
             required
           >
 
-          <div class="slug-box" id="slugPreview">
-            .../event/may-habi
+          <div
+            class="slug-box"
+            id="slugPreview"
+          >
+            .../event.html?e=nama-acara
           </div>
+
+          <div class="help">
+            Link otomatis dibuat dari nama acara,
+            tetapi masih bisa Anda ubah.
+          </div>
+
         </div>
+
 
       </div>
 
     </div>
 
 
+
+    <!-- COVER -->
+
     <div class="card">
 
       <h2 class="section-title">
         Cover acara
       </h2>
+
 
       <label class="cover-upload">
 
@@ -431,7 +847,9 @@ select:focus{
           accept="image/*"
         >
 
-        <strong>📷 Upload foto cover</strong>
+        <strong>
+          📷 Pilih foto cover
+        </strong>
 
         <span>
           JPG, PNG atau WebP
@@ -439,193 +857,214 @@ select:focus{
 
       </label>
 
-      <div class="preview" id="preview">
-        <img id="previewImage">
+
+      <div
+        class="preview"
+        id="preview"
+      >
+
+        <img
+          id="previewImage"
+          alt="Preview cover"
+        >
+
+      </div>
+
+
+      <div class="help">
+        Untuk saat ini cover ditampilkan sebagai pratinjau.
+        Foto acara dari kamera tetap mengikuti penyimpanan
+        yang Anda pilih di dashboard.
       </div>
 
     </div>
 
 
+
     <div class="action">
 
-      <button class="create-btn" type="submit">
-        Buat Acara →
+      <button
+        class="create-btn"
+        id="createButton"
+        type="submit"
+        disabled
+      >
+        Memeriksa akun...
       </button>
 
     </div>
 
+
   </form>
 
 
-  <div class="result" id="result">
 
-    <h2>✓ Acara berhasil dibuat</h2>
+  <!-- RESULT -->
+
+  <div
+    class="result"
+    id="result"
+  >
+
+    <h2>
+      ✓ Acara berhasil dibuat
+    </h2>
 
     <p>
-      Untuk sementara data tersimpan di browser.
-      Tahap berikutnya akan kita hubungkan ke database Cloudflare.
+      Acara sudah tersimpan ke database MoreMoments.
+      Bagikan link berikut kepada tamu.
     </p>
 
-    <div class="event-link" id="eventLink"></div>
+
+    <div
+      class="event-link"
+      id="eventLink"
+    ></div>
+
+
+    <div class="result-actions">
+
+      <a
+        href="#"
+        class="result-button dark"
+        id="openEventButton"
+      >
+        Buka Acara
+      </a>
+
+      <a
+        href="#"
+        class="result-button"
+        id="openGalleryButton"
+      >
+        Buka Galeri
+      </a>
+
+      <button
+        type="button"
+        class="result-button"
+        id="copyLinkButton"
+      >
+        Salin Link
+      </button>
+
+      <a
+        href="dashboard.html"
+        class="result-button"
+      >
+        Dashboard
+      </a>
+
+    </div>
 
   </div>
+
 
 </main>
 
 
+
 <script>
 
-const eventName = document.getElementById("eventName");
-const slug = document.getElementById("slug");
-const slugPreview = document.getElementById("slugPreview");
-
-let slugManual = false;
-
-
-/* Membuat slug otomatis */
-
-function makeSlug(text){
-
-  return text
-    .toLowerCase()
-    .trim()
-    .replace(/&/g, "dan")
-    .replace(/[^a-z0-9]+/g, "-")
-    .replace(/^-+|-+$/g, "");
-
-}
-
-
-eventName.addEventListener("input", function(){
-
-  if(!slugManual){
-
-    slug.value = makeSlug(eventName.value);
-
-    updateSlugPreview();
-
-  }
-
-});
-
-
-slug.addEventListener("input", function(){
-
-  slugManual = true;
-
-  slug.value = makeSlug(slug.value);
-
-  updateSlugPreview();
-
-});
-
-
-function updateSlugPreview(){
-
-  let value = slug.value || "nama-acara";
-
-  slugPreview.textContent =
-    window.location.origin +
-    window.location.pathname
-      .replace("create-event.html","") +
-    "event/" +
-    value;
-
-}
-
-
-/* Preview cover */
-
-document
-.getElementById("cover")
-.addEventListener("change", function(e){
-
-  const file = e.target.files[0];
-
-  if(!file) return;
-
-  const url = URL.createObjectURL(file);
-
-  document.getElementById("previewImage").src = url;
-
-  document.getElementById("preview").style.display = "block";
-
-});
-
-
 /* ========================================
-   SIMPAN EVENT KE CLOUDFLARE D1
+   CONFIG
 ======================================== */
 
 const API_URL =
   "https://moments-api.alavolaadza.workers.dev";
 
+const TOKEN_KEY =
+  "momentsAdminToken";
 
-document
-.getElementById("eventForm")
-.addEventListener("submit", async function(e){
+const USER_KEY =
+  "momentsUser";
 
-  e.preventDefault();
-
-
-  const button =
-    document.querySelector(".create-btn");
-
-  const originalText =
-    button.textContent;
+const token =
+  localStorage.getItem(
+    TOKEN_KEY
+  );
 
 
-  button.disabled = true;
-  button.textContent = "Membuat acara...";
+const eventName =
+  document.getElementById(
+    "eventName"
+  );
+
+const slug =
+  document.getElementById(
+    "slug"
+  );
+
+const slugPreview =
+  document.getElementById(
+    "slugPreview"
+  );
+
+const createButton =
+  document.getElementById(
+    "createButton"
+  );
+
+const loginStatus =
+  document.getElementById(
+    "loginStatus"
+  );
+
+const loginStatusText =
+  document.getElementById(
+    "loginStatusText"
+  );
 
 
-  const eventData = {
+let slugManual = false;
 
-    name:
-      document.getElementById("eventName").value.trim(),
-
-    eventType:
-      document.getElementById("eventType").value,
-
-    eventDate:
-      document.getElementById("eventDate").value,
-
-    startTime:
-      document.getElementById("startTime").value,
-
-    endTime:
-      document.getElementById("endTime").value,
-
-    maxGuests:
-      Number(
-        document.getElementById("maxGuests").value
-      ),
-
-    shotsPerGuest:
-      Number(
-        document.getElementById("shots").value
-      ),
-
-    slug:
-      document.getElementById("slug").value.trim()
-
-  };
+let currentEventLink = "";
 
 
-  try {
+/* ========================================
+   LOGIN
+======================================== */
+
+function goToLogin(){
+
+  localStorage.removeItem(
+    TOKEN_KEY
+  );
+
+  localStorage.removeItem(
+    USER_KEY
+  );
+
+  window.location.href =
+    "login.html";
+}
+
+
+async function checkLogin(){
+
+  if(!token){
+
+    goToLogin();
+
+    return false;
+  }
+
+
+  try{
 
     const response =
       await fetch(
-        API_URL + "/api/events",
+        API_URL +
+        "/api/auth/me",
+
         {
-          method: "POST",
+          method:"GET",
 
-          headers: {
-            "Content-Type": "application/json"
-          },
-
-          body:
-            JSON.stringify(eventData)
+          headers:{
+            "Authorization":
+              "Bearer " +
+              token
+          }
         }
       );
 
@@ -634,117 +1073,671 @@ document
       await response.json();
 
 
-    if(!response.ok || !data.success){
+    if(
+      !response.ok ||
+      !data.success ||
+      !data.user
+    ){
 
-      throw new Error(
-        data.error ||
-        "Acara gagal dibuat."
-      );
+      goToLogin();
 
+      return false;
     }
 
 
-    /* sementara untuk kompatibilitas halaman event lama */
-
-    const localEvent = {
-
-      id:
-        data.event.id,
-
-      slug:
-        data.event.slug,
-
-      name:
-        data.event.name,
-
-      type:
-        data.event.eventType,
-
-      date:
-        data.event.eventDate,
-
-      startTime:
-        data.event.startTime,
-
-      endTime:
-        data.event.endTime,
-
-      maxGuests:
-        data.event.maxGuests,
-
-      shots:
-        data.event.shotsPerGuest
-
-    };
-
-
     localStorage.setItem(
-      "momentsEvent",
-      JSON.stringify(localEvent)
+      USER_KEY,
+      JSON.stringify(
+        data.user
+      )
     );
 
 
-    const base =
-      window.location.origin +
-      window.location.pathname
-        .replace("create-event.html","");
-
-
-    const eventLink =
-      base +
-      "event.html?e=" +
-      encodeURIComponent(
-        data.event.slug
-      );
-
-
     document
-      .getElementById("eventLink")
+      .getElementById(
+        "accountName"
+      )
       .textContent =
-      eventLink;
+      data.user.name ||
+      "Pengguna";
 
 
     document
-      .getElementById("result")
+      .getElementById(
+        "accountRole"
+      )
+      .textContent =
+      data.user.role ===
+      "superadmin"
+        ?
+        "Superadmin"
+        :
+        "User";
+
+
+    document
+      .getElementById(
+        "accountBox"
+      )
       .style.display =
       "block";
 
 
-    document
-      .getElementById("result")
-      .scrollIntoView({
-        behavior:"smooth"
-      });
+    loginStatus
+      .classList
+      .add(
+        "success"
+      );
 
 
-    console.log(
-      "Event tersimpan ke D1:",
-      data.event
+    loginStatusText
+      .textContent =
+      "Masuk sebagai "
+      +
+      (
+        data.user.name ||
+        data.user.email
+      )
+      +
+      ". Acara baru akan tersimpan ke akun ini.";
+
+
+    createButton.disabled =
+      false;
+
+
+    createButton.textContent =
+      "Buat Acara →";
+
+
+    return true;
+
+
+  }catch(error){
+
+    console.error(
+      "Gagal memeriksa login:",
+      error
     );
 
 
-  } catch(error) {
+    loginStatus
+      .classList
+      .add(
+        "error"
+      );
 
-    alert(
-      "Gagal membuat acara:\n" +
-      error.message
-    );
 
-    console.error(error);
+    loginStatusText
+      .textContent =
+      "Tidak dapat memeriksa sesi login. Coba muat ulang halaman.";
 
-  } finally {
 
-    button.disabled = false;
+    createButton.disabled =
+      true;
 
-    button.textContent =
-      originalText;
 
+    createButton.textContent =
+      "Tidak dapat membuat acara";
+
+
+    return false;
   }
+}
 
-});
 
+/* ========================================
+   SLUG
+======================================== */
+
+function makeSlug(text){
+
+  return String(
+    text || ""
+  )
+    .toLowerCase()
+    .trim()
+    .replace(/&/g,"dan")
+    .replace(/[^a-z0-9]+/g,"-")
+    .replace(/^-+|-+$/g,"");
+}
+
+
+eventName
+  .addEventListener(
+    "input",
+    function(){
+
+      if(!slugManual){
+
+        slug.value =
+          makeSlug(
+            eventName.value
+          );
+
+        updateSlugPreview();
+      }
+    }
+  );
+
+
+slug
+  .addEventListener(
+    "input",
+    function(){
+
+      slugManual =
+        true;
+
+      slug.value =
+        makeSlug(
+          slug.value
+        );
+
+      updateSlugPreview();
+    }
+  );
+
+
+function updateSlugPreview(){
+
+  const value =
+    slug.value ||
+    "nama-acara";
+
+
+  const base =
+    window.location.origin +
+    window.location.pathname
+      .replace(
+        "create-event.html",
+        ""
+      );
+
+
+  slugPreview.textContent =
+    base +
+    "event.html?e=" +
+    encodeURIComponent(
+      value
+    );
+}
+
+
+/* ========================================
+   COVER PREVIEW
+======================================== */
+
+document
+  .getElementById(
+    "cover"
+  )
+  .addEventListener(
+    "change",
+    function(e){
+
+      const file =
+        e.target.files[0];
+
+
+      if(!file){
+        return;
+      }
+
+
+      if(
+        !file.type.startsWith(
+          "image/"
+        )
+      ){
+
+        alert(
+          "File cover harus berupa gambar."
+        );
+
+        this.value =
+          "";
+
+        return;
+      }
+
+
+      const imageUrl =
+        URL.createObjectURL(
+          file
+        );
+
+
+      document
+        .getElementById(
+          "previewImage"
+        )
+        .src =
+        imageUrl;
+
+
+      document
+        .getElementById(
+          "preview"
+        )
+        .style.display =
+        "block";
+    }
+  );
+
+
+/* ========================================
+   CREATE EVENT
+======================================== */
+
+document
+  .getElementById(
+    "eventForm"
+  )
+  .addEventListener(
+    "submit",
+    async function(e){
+
+      e.preventDefault();
+
+
+      if(!token){
+
+        goToLogin();
+
+        return;
+      }
+
+
+      const originalText =
+        createButton.textContent;
+
+
+      createButton.disabled =
+        true;
+
+      createButton.textContent =
+        "Membuat acara...";
+
+
+      const eventData = {
+
+        name:
+          document
+            .getElementById(
+              "eventName"
+            )
+            .value
+            .trim(),
+
+        eventType:
+          document
+            .getElementById(
+              "eventType"
+            )
+            .value,
+
+        eventDate:
+          document
+            .getElementById(
+              "eventDate"
+            )
+            .value,
+
+        startTime:
+          document
+            .getElementById(
+              "startTime"
+            )
+            .value,
+
+        endTime:
+          document
+            .getElementById(
+              "endTime"
+            )
+            .value,
+
+        maxGuests:
+          Number(
+            document
+              .getElementById(
+                "maxGuests"
+              )
+              .value
+          ),
+
+        shotsPerGuest:
+          Number(
+            document
+              .getElementById(
+                "shots"
+              )
+              .value
+          ),
+
+        slug:
+          document
+            .getElementById(
+              "slug"
+            )
+            .value
+            .trim()
+      };
+
+
+      if(
+        !eventData.name ||
+        !eventData.slug ||
+        !eventData.eventDate ||
+        !eventData.startTime ||
+        !eventData.endTime
+      ){
+
+        alert(
+          "Mohon lengkapi data acara."
+        );
+
+        createButton.disabled =
+          false;
+
+        createButton.textContent =
+          originalText;
+
+        return;
+      }
+
+
+      try{
+
+
+        const response =
+          await fetch(
+            API_URL +
+            "/api/events",
+
+            {
+              method:"POST",
+
+              headers:{
+
+                "Content-Type":
+                  "application/json",
+
+                "Authorization":
+                  "Bearer " +
+                  token
+              },
+
+              body:
+                JSON.stringify(
+                  eventData
+                )
+            }
+          );
+
+
+        let data;
+
+
+        try{
+
+          data =
+            await response.json();
+
+        }catch(error){
+
+          throw new Error(
+            "Respons server tidak valid."
+          );
+        }
+
+
+        if(
+          response.status === 401
+        ){
+
+          localStorage.removeItem(
+            TOKEN_KEY
+          );
+
+          localStorage.removeItem(
+            USER_KEY
+          );
+
+
+          alert(
+            "Sesi login sudah berakhir. Silakan login kembali."
+          );
+
+
+          window.location.href =
+            "login.html";
+
+          return;
+        }
+
+
+        if(
+          !response.ok ||
+          !data.success
+        ){
+
+          throw new Error(
+            data.error ||
+            "Acara gagal dibuat."
+          );
+        }
+
+
+        /* =================================
+           LOCAL EVENT COMPATIBILITY
+        ================================= */
+
+        const localEvent = {
+
+          id:
+            data.event.id,
+
+          slug:
+            data.event.slug,
+
+          name:
+            data.event.name,
+
+          type:
+            eventData.eventType,
+
+          date:
+            eventData.eventDate,
+
+          startTime:
+            eventData.startTime,
+
+          endTime:
+            eventData.endTime,
+
+          maxGuests:
+            eventData.maxGuests,
+
+          shots:
+            eventData.shotsPerGuest
+        };
+
+
+        localStorage.setItem(
+          "momentsEvent",
+
+          JSON.stringify(
+            localEvent
+          )
+        );
+
+
+        /* =================================
+           EVENT LINK
+        ================================= */
+
+        const base =
+          window.location.origin +
+          window.location.pathname
+            .replace(
+              "create-event.html",
+              ""
+            );
+
+
+        currentEventLink =
+          base +
+          "event.html?e=" +
+          encodeURIComponent(
+            data.event.slug
+          );
+
+
+        document
+          .getElementById(
+            "eventLink"
+          )
+          .textContent =
+          currentEventLink;
+
+
+        document
+          .getElementById(
+            "openEventButton"
+          )
+          .href =
+          currentEventLink;
+
+
+        document
+          .getElementById(
+            "openGalleryButton"
+          )
+          .href =
+          base +
+          "gallery.html?e=" +
+          encodeURIComponent(
+            data.event.slug
+          );
+
+
+        document
+          .getElementById(
+            "result"
+          )
+          .style.display =
+          "block";
+
+
+        document
+          .getElementById(
+            "result"
+          )
+          .scrollIntoView({
+            behavior:"smooth",
+            block:"start"
+          });
+
+
+        console.log(
+          "Event tersimpan ke D1:",
+          data.event
+        );
+
+
+      }catch(error){
+
+        console.error(
+          error
+        );
+
+
+        alert(
+          "Gagal membuat acara:\n" +
+          (
+            error.message ||
+            "Terjadi kesalahan."
+          )
+        );
+
+
+      }finally{
+
+        createButton.disabled =
+          false;
+
+        createButton.textContent =
+          "Buat Acara →";
+      }
+    }
+  );
+
+
+/* ========================================
+   COPY LINK
+======================================== */
+
+document
+  .getElementById(
+    "copyLinkButton"
+  )
+  .addEventListener(
+    "click",
+    async function(){
+
+      if(!currentEventLink){
+        return;
+      }
+
+
+      try{
+
+        await navigator
+          .clipboard
+          .writeText(
+            currentEventLink
+          );
+
+
+        const original =
+          this.textContent;
+
+
+        this.textContent =
+          "✓ Link disalin";
+
+
+        setTimeout(
+          () => {
+
+            this.textContent =
+              original;
+
+          },
+          1800
+        );
+
+
+      }catch(error){
+
+        window.prompt(
+          "Salin link acara:",
+          currentEventLink
+        );
+      }
+    }
+  );
+
+
+/* ========================================
+   START
+======================================== */
 
 updateSlugPreview();
+
+checkLogin();
 
 </script>
 
