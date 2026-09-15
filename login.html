@@ -11,7 +11,6 @@
 <title>Masuk | MoreMoments</title>
 
 <style>
-
 *{
   margin:0;
   padding:0;
@@ -20,49 +19,28 @@
 
 body{
   min-height:100vh;
-
   display:flex;
   align-items:center;
   justify-content:center;
-
   padding:24px;
-
   background:#eee7df;
-
-  font-family:
-    Arial,
-    Helvetica,
-    sans-serif;
-
+  font-family:Arial,Helvetica,sans-serif;
   color:#29251f;
 }
 
 .card{
   width:100%;
   max-width:430px;
-
-  padding:
-    34px
-    28px;
-
+  padding:34px 28px;
   background:#fff;
-
   border-radius:30px;
-
-  box-shadow:
-    0
-    30px
-    80px
-    rgba(60,45,34,.14);
+  box-shadow:0 30px 80px rgba(60,45,34,.14);
 }
 
 .logo{
   text-align:center;
-
   font-size:24px;
-
   font-weight:800;
-
   margin-bottom:28px;
 }
 
@@ -73,97 +51,57 @@ body{
 .icon{
   width:68px;
   height:68px;
-
-  margin:
-    0
-    auto
-    18px;
-
+  margin:0 auto 18px;
   display:flex;
   align-items:center;
   justify-content:center;
-
   border-radius:22px;
-
   background:#eee7df;
-
   font-size:29px;
 }
 
 h1{
   text-align:center;
-
   font-size:28px;
-
   margin-bottom:8px;
 }
 
 .subtitle{
   max-width:330px;
-
-  margin:
-    0
-    auto
-    24px;
-
+  margin:0 auto 24px;
   text-align:center;
-
   color:#7c746d;
-
   font-size:13px;
-
   line-height:1.6;
 }
-
 
 /* TAB */
 
 .tabs{
   display:grid;
-
-  grid-template-columns:
-    1fr
-    1fr;
-
+  grid-template-columns:1fr 1fr;
   gap:5px;
-
   margin-bottom:24px;
-
   padding:5px;
-
   background:#f1ede9;
-
   border-radius:999px;
 }
 
 .tab{
   height:42px;
-
   border:0;
-
   border-radius:999px;
-
   background:transparent;
-
   color:#736c66;
-
   font-weight:700;
-
   cursor:pointer;
 }
 
 .tab.active{
   background:#fff;
-
   color:#29251f;
-
-  box-shadow:
-    0
-    3px
-    10px
-    rgba(40,30,20,.08);
+  box-shadow:0 3px 10px rgba(40,30,20,.08);
 }
-
 
 /* FORM */
 
@@ -181,11 +119,8 @@ h1{
 
 label{
   display:block;
-
   margin-bottom:7px;
-
   font-size:12px;
-
   font-weight:700;
 }
 
@@ -195,25 +130,13 @@ label{
 
 input{
   width:100%;
-
   height:53px;
-
-  padding:
-    0
-    15px;
-
-  border:
-    1px solid
-    #ded5ce;
-
+  padding:0 15px;
+  border:1px solid #ded5ce;
   border-radius:15px;
-
   outline:none;
-
   background:#fff;
-
   color:#29251f;
-
   font-size:15px;
 }
 
@@ -223,167 +146,283 @@ input.password{
 
 input:focus{
   border-color:#9b7255;
-
-  box-shadow:
-    0
-    0
-    0
-    3px
-    rgba(155,114,85,.10);
+  box-shadow:0 0 0 3px rgba(155,114,85,.10);
 }
 
 .show-password{
   position:absolute;
-
   right:7px;
   top:6px;
-
   width:41px;
   height:41px;
-
   border:0;
-
   border-radius:12px;
-
   background:transparent;
-
   cursor:pointer;
-
   font-size:17px;
 }
 
 .main-button{
   width:100%;
-
-  height:54px;
-
+  min-height:54px;
   margin-top:3px;
-
   border:0;
-
   border-radius:999px;
-
   background:#29251f;
-
   color:#fff;
-
   font-size:14px;
-
   font-weight:700;
-
   cursor:pointer;
 }
 
 .main-button:disabled{
   opacity:.55;
-
   cursor:not-allowed;
 }
 
 .info{
   margin-top:14px;
-
   color:#918981;
-
   text-align:center;
-
   font-size:11px;
-
   line-height:1.5;
 }
 
+.email-note{
+  margin-top:7px;
+  color:#918981;
+  font-size:11px;
+  line-height:1.5;
+}
+
+/* FORGOT PASSWORD */
+
+.forgot-small{
+  display:block;
+  width:max-content;
+  margin:14px auto 0;
+  color:#72533e;
+  text-decoration:none;
+  font-size:12px;
+  font-weight:700;
+}
+
+.forgot-small:hover{
+  text-decoration:underline;
+}
+
+.recovery-help{
+  display:none;
+  margin-top:17px;
+  padding:15px;
+  border:1px solid #e4d6c9;
+  background:#faf5f0;
+  border-radius:16px;
+}
+
+.recovery-help.show{
+  display:block;
+}
+
+.recovery-title{
+  font-size:13px;
+  font-weight:800;
+  margin-bottom:5px;
+}
+
+.recovery-text{
+  font-size:11px;
+  line-height:1.5;
+  color:#756d66;
+}
+
+.recovery-button{
+  display:flex;
+  align-items:center;
+  justify-content:center;
+  min-height:43px;
+  margin-top:12px;
+  border-radius:999px;
+  background:#29251f;
+  color:white;
+  text-decoration:none;
+  font-size:12px;
+  font-weight:700;
+}
 
 /* MESSAGE */
 
 .message{
   display:none;
-
   margin-top:16px;
-
   padding:13px 14px;
-
   border-radius:13px;
-
   font-size:12px;
-
   line-height:1.5;
 }
 
 .message.error{
   display:block;
-
-  border:
-    1px solid
-    #efcccc;
-
+  border:1px solid #efcccc;
   background:#fff2f2;
-
   color:#9b4242;
 }
 
 .message.success{
   display:block;
-
-  border:
-    1px solid
-    #cce4d0;
-
+  border:1px solid #cce4d0;
   background:#f0faf2;
-
   color:#357044;
 }
 
 .back{
   display:block;
-
   margin-top:23px;
-
   text-align:center;
-
   color:#89817b;
-
   text-decoration:none;
-
   font-size:12px;
 }
 
-@media(max-width:480px){
+/* EMAIL CONFIRM MODAL */
 
+.modal-backdrop{
+  position:fixed;
+  inset:0;
+  z-index:1000;
+  display:none;
+  align-items:center;
+  justify-content:center;
+  padding:20px;
+  background:rgba(30,25,21,.55);
+  backdrop-filter:blur(5px);
+}
+
+.modal-backdrop.show{
+  display:flex;
+}
+
+.modal{
+  width:100%;
+  max-width:420px;
+  background:#fff;
+  border-radius:24px;
+  padding:27px;
+  box-shadow:0 30px 90px rgba(0,0,0,.25);
+}
+
+.modal-icon{
+  width:56px;
+  height:56px;
+  margin:0 auto 16px;
+  display:flex;
+  align-items:center;
+  justify-content:center;
+  border-radius:18px;
+  background:#f2ebe5;
+  font-size:25px;
+}
+
+.modal h2{
+  text-align:center;
+  font-size:22px;
+  margin-bottom:8px;
+}
+
+.modal-text{
+  text-align:center;
+  color:#746b64;
+  font-size:12px;
+  line-height:1.6;
+}
+
+.email-preview{
+  margin:18px 0;
+  padding:14px;
+  border-radius:14px;
+  background:#f5f1ed;
+  text-align:center;
+  font-size:14px;
+  font-weight:800;
+  word-break:break-word;
+}
+
+.modal-warning{
+  padding:12px 13px;
+  border-radius:13px;
+  background:#fff7e7;
+  border:1px solid #eeddb6;
+  color:#77591b;
+  font-size:11px;
+  line-height:1.5;
+}
+
+.modal-actions{
+  display:grid;
+  grid-template-columns:1fr 1fr;
+  gap:9px;
+  margin-top:18px;
+}
+
+.modal-button{
+  min-height:48px;
+  border-radius:999px;
+  border:0;
+  cursor:pointer;
+  font-size:12px;
+  font-weight:800;
+}
+
+.modal-button.secondary{
+  background:#f1ece7;
+  color:#332d28;
+}
+
+.modal-button.primary{
+  background:#29251f;
+  color:#fff;
+}
+
+.modal-button:disabled{
+  opacity:.55;
+  cursor:not-allowed;
+}
+
+@media(max-width:480px){
   body{
     padding:15px;
   }
 
   .card{
-    padding:
-      30px
-      20px;
+    padding:30px 20px;
   }
 
-}
+  .modal{
+    padding:23px 18px;
+  }
 
+  .modal-actions{
+    grid-template-columns:1fr;
+  }
+}
 </style>
 </head>
-
 
 <body>
 
 <div class="card">
 
-
   <div class="logo">
     more<span>moments</span>
   </div>
-
 
   <div class="icon">
     📸
   </div>
 
-
   <h1 id="title">
     Selamat datang
   </h1>
-
 
   <div
     class="subtitle"
@@ -392,8 +431,6 @@ input:focus{
     Masuk untuk melihat dan
     mengelola acara Anda.
   </div>
-
-
 
   <div class="tabs">
 
@@ -404,7 +441,6 @@ input:focus{
     >
       Masuk
     </button>
-
 
     <button
       type="button"
@@ -417,16 +453,12 @@ input:focus{
   </div>
 
 
-
-  <!-- ==============================
-       LOGIN
-  =============================== -->
+  <!-- LOGIN -->
 
   <form
     class="form active"
     id="loginForm"
   >
-
 
     <div class="field">
 
@@ -445,13 +477,11 @@ input:focus{
     </div>
 
 
-
     <div class="field">
 
       <label>
         Password
       </label>
-
 
       <div class="input-wrap">
 
@@ -463,7 +493,6 @@ input:focus{
           autocomplete="current-password"
           required
         >
-
 
         <button
           type="button"
@@ -478,7 +507,6 @@ input:focus{
     </div>
 
 
-
     <button
       type="submit"
       class="main-button"
@@ -486,6 +514,39 @@ input:focus{
     >
       Masuk ke Dashboard
     </button>
+
+
+    <a
+      href="forgot-password.html"
+      class="forgot-small"
+    >
+      Lupa password?
+    </a>
+
+
+    <div
+      id="recoveryHelp"
+      class="recovery-help"
+    >
+
+      <div class="recovery-title">
+        Kesulitan masuk?
+      </div>
+
+      <div class="recovery-text">
+        Password sudah beberapa kali salah.
+        Anda dapat reset lewat email atau
+        mengajukan reset ke superadmin.
+      </div>
+
+      <a
+        href="forgot-password.html"
+        class="recovery-button"
+      >
+        Pulihkan Akun
+      </a>
+
+    </div>
 
 
     <div class="info">
@@ -496,16 +557,12 @@ input:focus{
   </form>
 
 
-
-  <!-- ==============================
-       REGISTER
-  =============================== -->
+  <!-- REGISTER -->
 
   <form
     class="form"
     id="registerForm"
   >
-
 
     <div class="field">
 
@@ -525,7 +582,6 @@ input:focus{
     </div>
 
 
-
     <div class="field">
 
       <label>
@@ -540,8 +596,12 @@ input:focus{
         required
       >
 
-    </div>
+      <div class="email-note">
+        Gunakan email yang benar dan masih
+        bisa Anda akses untuk pemulihan akun.
+      </div>
 
+    </div>
 
 
     <div class="field">
@@ -549,7 +609,6 @@ input:focus{
       <label>
         Password
       </label>
-
 
       <div class="input-wrap">
 
@@ -562,7 +621,6 @@ input:focus{
           minlength="8"
           required
         >
-
 
         <button
           type="button"
@@ -577,13 +635,11 @@ input:focus{
     </div>
 
 
-
     <div class="field">
 
       <label>
         Ulangi Password
       </label>
-
 
       <div class="input-wrap">
 
@@ -596,7 +652,6 @@ input:focus{
           minlength="8"
           required
         >
-
 
         <button
           type="button"
@@ -611,7 +666,6 @@ input:focus{
     </div>
 
 
-
     <button
       type="submit"
       class="main-button"
@@ -622,12 +676,11 @@ input:focus{
 
 
     <div class="info">
-      Dengan mendaftar, Anda dapat
-      membuat dan mengelola acara sendiri.
+      Sebelum akun dibuat, kami akan meminta
+      Anda memastikan email sudah benar.
     </div>
 
   </form>
-
 
 
   <div
@@ -643,23 +696,81 @@ input:focus{
     ← Kembali ke halaman utama
   </a>
 
-
 </div>
 
+
+<!-- EMAIL CONFIRMATION -->
+
+<div
+  id="emailModal"
+  class="modal-backdrop"
+>
+
+  <div class="modal">
+
+    <div class="modal-icon">
+      ✉️
+    </div>
+
+    <h2>
+      Email Anda sudah benar?
+    </h2>
+
+    <div class="modal-text">
+      Pastikan alamat email di bawah benar.
+      Email ini digunakan untuk login dan
+      pemulihan password.
+    </div>
+
+    <div
+      id="emailPreview"
+      class="email-preview"
+    ></div>
+
+    <div class="modal-warning">
+      Jika email salah atau tidak dapat Anda
+      akses, reset password melalui email
+      nantinya tidak akan sampai.
+    </div>
+
+    <div class="modal-actions">
+
+      <button
+        type="button"
+        class="modal-button secondary"
+        id="changeEmailButton"
+      >
+        Ubah Email
+      </button>
+
+      <button
+        type="button"
+        class="modal-button primary"
+        id="confirmEmailButton"
+      >
+        Ya, Email Sudah Benar
+      </button>
+
+    </div>
+
+  </div>
+
+</div>
 
 
 <script>
 
 const API_URL =
-  "https://moments-api.alavolaadza.workers.dev";
-
+  "https://api.ege.my.id";
 
 const TOKEN_KEY =
   "momentsAdminToken";
 
-
 const USER_KEY =
   "momentsUser";
+
+const FAIL_KEY =
+  "momentsLoginFailCount";
 
 
 const loginTab =
@@ -667,153 +778,198 @@ const loginTab =
     "loginTab"
   );
 
-
 const registerTab =
   document.getElementById(
     "registerTab"
   );
-
 
 const loginForm =
   document.getElementById(
     "loginForm"
   );
 
-
 const registerForm =
   document.getElementById(
     "registerForm"
   );
-
 
 const message =
   document.getElementById(
     "message"
   );
 
-
 const title =
   document.getElementById(
     "title"
   );
-
 
 const subtitle =
   document.getElementById(
     "subtitle"
   );
 
+const recoveryHelp =
+  document.getElementById(
+    "recoveryHelp"
+  );
+
+const emailModal =
+  document.getElementById(
+    "emailModal"
+  );
+
+const emailPreview =
+  document.getElementById(
+    "emailPreview"
+  );
+
+const confirmEmailButton =
+  document.getElementById(
+    "confirmEmailButton"
+  );
+
+const changeEmailButton =
+  document.getElementById(
+    "changeEmailButton"
+  );
 
 
-/* =========================================
-   MESSAGE
-========================================= */
+let pendingRegistration = null;
+
+
+/* MESSAGE */
 
 function showMessage(
   text,
   type = "error"
 ){
-
   message.className =
-    "message " +
-    type;
-
+    "message " + type;
 
   message.textContent =
     text;
-
 }
 
 
 function clearMessage(){
-
   message.className =
     "message";
 
-
   message.textContent =
     "";
-
 }
 
 
+/* LOGIN FAILURE */
 
-/* =========================================
-   TAB LOGIN
-========================================= */
+function getFailCount(){
+
+  return Number(
+    localStorage.getItem(
+      FAIL_KEY
+    ) || 0
+  );
+}
+
+
+function updateRecoveryHelp(){
+
+  if(
+    getFailCount() >= 3
+  ){
+    recoveryHelp.classList.add(
+      "show"
+    );
+  }
+  else{
+    recoveryHelp.classList.remove(
+      "show"
+    );
+  }
+}
+
+
+function addLoginFailure(){
+
+  const count =
+    getFailCount() + 1;
+
+  localStorage.setItem(
+    FAIL_KEY,
+    String(count)
+  );
+
+  updateRecoveryHelp();
+}
+
+
+function clearLoginFailures(){
+
+  localStorage.removeItem(
+    FAIL_KEY
+  );
+
+  updateRecoveryHelp();
+}
+
+
+/* TABS */
 
 function showLogin(){
 
   clearMessage();
 
-
   loginTab.classList.add(
     "active"
   );
-
 
   registerTab.classList.remove(
     "active"
   );
 
-
   loginForm.classList.add(
     "active"
   );
-
 
   registerForm.classList.remove(
     "active"
   );
 
-
   title.textContent =
     "Selamat datang";
-
 
   subtitle.textContent =
     "Masuk untuk melihat dan mengelola acara Anda.";
 
+  updateRecoveryHelp();
 }
 
-
-
-/* =========================================
-   TAB REGISTER
-========================================= */
 
 function showRegister(){
 
   clearMessage();
 
-
   registerTab.classList.add(
     "active"
   );
-
 
   loginTab.classList.remove(
     "active"
   );
 
-
   registerForm.classList.add(
     "active"
   );
-
 
   loginForm.classList.remove(
     "active"
   );
 
-
   title.textContent =
     "Buat akun";
 
-
   subtitle.textContent =
     "Daftar untuk membuat event dan menyimpan momen Anda.";
-
 }
 
 
@@ -822,17 +978,13 @@ loginTab.addEventListener(
   showLogin
 );
 
-
 registerTab.addEventListener(
   "click",
   showRegister
 );
 
 
-
-/* =========================================
-   SHOW PASSWORD
-========================================= */
+/* SHOW PASSWORD */
 
 document
 .querySelectorAll(
@@ -850,26 +1002,22 @@ document
             button.dataset.target
           );
 
-
         if(
           target.type ===
           "password"
         ){
-
           target.type =
             "text";
 
           button.textContent =
             "🙈";
-
-        }else{
-
+        }
+        else{
           target.type =
             "password";
 
           button.textContent =
             "👁";
-
         }
 
       }
@@ -879,10 +1027,7 @@ document
 );
 
 
-
-/* =========================================
-   SIMPAN SESSION
-========================================= */
+/* SESSION */
 
 function saveSession(
   token,
@@ -894,21 +1039,12 @@ function saveSession(
     token
   );
 
-
   localStorage.setItem(
     USER_KEY,
-    JSON.stringify(
-      user
-    )
+    JSON.stringify(user)
   );
-
 }
 
-
-
-/* =========================================
-   CEK LOGIN YANG SUDAH ADA
-========================================= */
 
 async function checkSession(){
 
@@ -917,11 +1053,9 @@ async function checkSession(){
       TOKEN_KEY
     );
 
-
   if(!token){
     return;
   }
-
 
   try{
 
@@ -930,20 +1064,16 @@ async function checkSession(){
         API_URL +
         "/api/auth/me",
         {
-
           headers:{
             "Authorization":
               "Bearer " +
               token
           }
-
         }
       );
 
-
     const data =
       await response.json();
-
 
     if(
       response.ok &&
@@ -957,41 +1087,30 @@ async function checkSession(){
         )
       );
 
-
       window.location.href =
         "dashboard.html";
 
-
       return;
-
     }
-
 
     localStorage.removeItem(
       TOKEN_KEY
     );
 
-
     localStorage.removeItem(
       USER_KEY
     );
 
+  }
+  catch(error){
 
-  }catch(error){
-
-    console.error(
-      error
-    );
+    console.error(error);
 
   }
-
 }
 
 
-
-/* =========================================
-   LOGIN
-========================================= */
+/* LOGIN */
 
 loginForm.addEventListener(
   "submit",
@@ -999,23 +1118,18 @@ loginForm.addEventListener(
 
     e.preventDefault();
 
-
     clearMessage();
-
 
     const button =
       document.getElementById(
         "loginButton"
       );
 
-
     button.disabled =
       true;
 
-
     button.textContent =
       "Memeriksa...";
-
 
     try{
 
@@ -1024,9 +1138,7 @@ loginForm.addEventListener(
           API_URL +
           "/api/auth/login",
           {
-
-            method:
-              "POST",
+            method:"POST",
 
             headers:{
               "Content-Type":
@@ -1052,39 +1164,36 @@ loginForm.addEventListener(
                   .value
 
               })
-
           }
         );
 
-
       const data =
         await response.json();
-
 
       if(
         !response.ok ||
         !data.success
       ){
 
+        addLoginFailure();
+
         throw new Error(
           data.error ||
-          "Login gagal."
+          "Email atau password salah."
         );
-
       }
 
+      clearLoginFailures();
 
       saveSession(
         data.token,
         data.user
       );
 
-
       showMessage(
         "Login berhasil. Membuka dashboard...",
         "success"
       );
-
 
       setTimeout(
         function(){
@@ -1096,44 +1205,37 @@ loginForm.addEventListener(
         500
       );
 
-
-    }catch(error){
+    }
+    catch(error){
 
       showMessage(
         error.message ||
         "Login gagal."
       );
 
-
-    }finally{
+    }
+    finally{
 
       button.disabled =
         false;
 
-
       button.textContent =
         "Masuk ke Dashboard";
-
     }
 
   }
 );
 
 
-
-/* =========================================
-   REGISTER
-========================================= */
+/* REGISTER - STEP 1 */
 
 registerForm.addEventListener(
   "submit",
-  async function(e){
+  function(e){
 
     e.preventDefault();
 
-
     clearMessage();
-
 
     const name =
       document
@@ -1143,15 +1245,14 @@ registerForm.addEventListener(
       .value
       .trim();
 
-
     const email =
       document
       .getElementById(
         "registerEmail"
       )
       .value
-      .trim();
-
+      .trim()
+      .toLowerCase();
 
     const password =
       document
@@ -1159,7 +1260,6 @@ registerForm.addEventListener(
         "registerPassword"
       )
       .value;
-
 
     const password2 =
       document
@@ -1179,13 +1279,11 @@ registerForm.addEventListener(
       );
 
       return;
-
     }
 
 
     if(
-      password.length <
-      8
+      password.length < 8
     ){
 
       showMessage(
@@ -1193,21 +1291,66 @@ registerForm.addEventListener(
       );
 
       return;
-
     }
 
 
-    const button =
-      document.getElementById(
-        "registerButton"
-      );
+    pendingRegistration = {
+      name,
+      email,
+      password
+    };
 
 
-    button.disabled =
+    emailPreview.textContent =
+      email;
+
+
+    emailModal.classList.add(
+      "show"
+    );
+
+  }
+);
+
+
+/* CHANGE EMAIL */
+
+changeEmailButton.addEventListener(
+  "click",
+  function(){
+
+    emailModal.classList.remove(
+      "show"
+    );
+
+    document
+      .getElementById(
+        "registerEmail"
+      )
+      .focus();
+
+  }
+);
+
+
+/* REGISTER - CONFIRMED */
+
+confirmEmailButton.addEventListener(
+  "click",
+  async function(){
+
+    if(!pendingRegistration){
+      return;
+    }
+
+
+    confirmEmailButton.disabled =
       true;
 
+    changeEmailButton.disabled =
+      true;
 
-    button.textContent =
+    confirmEmailButton.textContent =
       "Membuat akun...";
 
 
@@ -1218,9 +1361,7 @@ registerForm.addEventListener(
           API_URL +
           "/api/auth/register",
           {
-
-            method:
-              "POST",
+            method:"POST",
 
             headers:{
               "Content-Type":
@@ -1228,19 +1369,9 @@ registerForm.addEventListener(
             },
 
             body:
-              JSON.stringify({
-
-                name:
-                  name,
-
-                email:
-                  email,
-
-                password:
-                  password
-
-              })
-
+              JSON.stringify(
+                pendingRegistration
+              )
           }
         );
 
@@ -1258,8 +1389,12 @@ registerForm.addEventListener(
           data.error ||
           "Gagal membuat akun."
         );
-
       }
+
+
+      emailModal.classList.remove(
+        "show"
+      );
 
 
       saveSession(
@@ -1284,23 +1419,29 @@ registerForm.addEventListener(
         600
       );
 
+    }
+    catch(error){
 
-    }catch(error){
+      emailModal.classList.remove(
+        "show"
+      );
 
       showMessage(
         error.message ||
         "Gagal membuat akun."
       );
 
+    }
+    finally{
 
-    }finally{
-
-      button.disabled =
+      confirmEmailButton.disabled =
         false;
 
+      changeEmailButton.disabled =
+        false;
 
-      button.textContent =
-        "Buat Akun";
+      confirmEmailButton.textContent =
+        "Ya, Email Sudah Benar";
 
     }
 
@@ -1308,7 +1449,30 @@ registerForm.addEventListener(
 );
 
 
+/* CLOSE MODAL WHEN CLICK OUTSIDE */
 
+emailModal.addEventListener(
+  "click",
+  function(event){
+
+    if(
+      event.target ===
+      emailModal
+    ){
+
+      emailModal.classList.remove(
+        "show"
+      );
+
+    }
+
+  }
+);
+
+
+/* START */
+
+updateRecoveryHelp();
 checkSession();
 
 </script>
