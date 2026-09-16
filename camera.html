@@ -1120,6 +1120,42 @@ function formatDate(
 }
 
 
+function formatEventRange(
+  startDate,
+  endDate
+){
+
+  if(!startDate){
+    return "-";
+  }
+
+  const finalEndDate =
+    endDate ||
+    startDate;
+
+  if(
+    finalEndDate ===
+    startDate
+  ){
+    return formatDate(
+      startDate
+    );
+  }
+
+  return (
+    formatDate(
+      startDate
+    )
+    +
+    " – "
+    +
+    formatDate(
+      finalEndDate
+    )
+  );
+}
+
+
 /* =====================================================
    GUEST
 ===================================================== */
@@ -1253,6 +1289,10 @@ async function loadEvent(
         raw.event_type,
 
       date:
+        raw.event_date,
+
+      endDate:
+        raw.end_date ||
         raw.event_date,
 
       startTime:
@@ -1450,6 +1490,20 @@ function setupPage(){
   document.getElementById(
     "eventTime"
   ).textContent =
+    (
+      eventData.endDate &&
+      eventData.endDate !==
+      eventData.date
+        ?
+        formatEventRange(
+          eventData.date,
+          eventData.endDate
+        ) +
+        " • "
+        :
+        ""
+    )
+    +
     eventData.startTime
     +
     "–"
@@ -1846,8 +1900,9 @@ function showLock(
 
 
     time.textContent =
-      formatDate(
-        eventData.date
+      formatEventRange(
+        eventData.date,
+        eventData.endDate
       )
       +
       " • "
