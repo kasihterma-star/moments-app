@@ -162,6 +162,11 @@ button{
   text-transform:uppercase;
 }
 
+.role-badge.admin{
+  background:#efe3d8;
+  color:#8a5b38;
+}
+
 .role-badge.superadmin{
   background:#29241f;
   color:#fff;
@@ -549,6 +554,36 @@ button{
   font-size:11px;
 }
 
+.user-role{
+  display:inline-flex;
+  align-items:center;
+  margin-top:9px;
+  padding:6px 9px;
+  border-radius:999px;
+  background:#f1ece7;
+  color:#6f655e;
+  font-size:9px;
+  font-weight:800;
+  letter-spacing:.5px;
+  text-transform:uppercase;
+}
+
+.user-role.admin{
+  background:#efe3d8;
+  color:#8a5b38;
+}
+
+.user-role.superadmin{
+  background:#29241f;
+  color:#fff;
+}
+
+.user-role-note{
+  margin-top:7px;
+  color:#8b8179;
+  font-size:9px;
+}
+
 .user-stats{
   display:grid;
   grid-template-columns:repeat(3,1fr);
@@ -582,6 +617,23 @@ button{
   background:#fff;
   font-weight:700;
   font-size:10px;
+}
+
+.user-button.role-action{
+  background:#29241f;
+  border-color:#29241f;
+  color:#fff;
+}
+
+.user-button.role-action.demote{
+  background:#fff7f6;
+  border-color:#e8d0cd;
+  color:#9a4b45;
+}
+
+.user-button:disabled{
+  opacity:.55;
+  cursor:not-allowed;
 }
 
 .filter-info{
@@ -1351,6 +1403,11 @@ function renderAccount(user){
       "roleBadge"
     );
 
+  badge.classList.remove(
+    "admin",
+    "superadmin"
+  );
+
   if(user.role === "superadmin"){
 
     badge.textContent =
@@ -1364,14 +1421,25 @@ function renderAccount(user){
       "visible"
     );
 
+  }else if(
+    user.role === "admin"
+  ){
+
+    badge.textContent =
+      "ADMIN";
+
+    badge.classList.add(
+      "admin"
+    );
+
+    usersSection.classList.remove(
+      "visible"
+    );
+
   }else{
 
     badge.textContent =
       "USER";
-
-    badge.classList.remove(
-      "superadmin"
-    );
 
     usersSection.classList.remove(
       "visible"
@@ -2388,6 +2456,15 @@ function createEventCard(event){
 
       ${formatDate(event.eventDate)}
 
+      ${
+        event.endDate &&
+        event.endDate !== event.eventDate
+          ?
+          " – " + formatDate(event.endDate)
+          :
+          ""
+      }
+
       •
 
       ${event.startTime || "-"}
@@ -2881,6 +2958,165 @@ async function loadEvents(){
 
 /* SUPERADMIN USERS */
 
+function userRoleLabel(role){
+
+  if(role === "superadmin"){
+    return "SUPERADMIN";
+  }
+
+  if(role === "admin"){
+    return "ADMIN";
+  }
+
+  return "USER";
+}
+
+
+function userRoleLimitText(role){
+
+  if(role === "superadmin"){
+    return "Maksimal durasi acara: 10 hari";
+  }
+
+  if(role === "admin"){
+    return "Maksimal durasi acara: 5 hari";
+  }
+
+  return "Maksimal durasi acara: 1 hari";
+}
+
+
+async function changeUserRole(
+  user,
+  button
+){
+
+  if(
+    !currentUser ||
+    currentUser.role !== "superadmin"
+  ){
+    return;
+  }
+
+
+  if(
+    user.role === "superadmin"
+  ){
+    alert(
+      "Akun superadmin tidak dapat diubah."
+    );
+    return;
+  }
+
+
+  const newRole =
+    user.role === "admin"
+      ?
+      "user"
+      :
+      "admin";
+
+
+  const question =
+    newRole === "admin"
+      ?
+      `Jadikan ${user.name} sebagai Admin?
+
+Admin dapat membuat acara hingga maksimal 5 hari.`
+      :
+      `Kembalikan ${user.name} menjadi User biasa?
+
+User biasa dapat membuat acara maksimal 1 hari.`;
+
+
+  if(
+    !confirm(question)
+  ){
+    return;
+  }
+
+
+  const oldText =
+    button.textContent;
+
+
+  button.disabled =
+    true;
+
+
+  button.textContent =
+    "Memproses...";
+
+
+  try{
+
+    const {
+      response,
+      data
+    } =
+      await apiFetch(
+        "/api/admin/users/role",
+        {
+          method:
+            "POST",
+
+          headers:{
+            "Content-Type":
+              "application/json"
+          },
+
+          body:
+            JSON.stringify({
+              userId:
+                user.id,
+
+              role:
+                newRole
+            })
+        }
+      );
+
+
+    if(
+      !response.ok ||
+      !data.success
+    ){
+
+      throw new Error(
+        data.error ||
+        "Role pengguna gagal diubah."
+      );
+    }
+
+
+    showToast(
+      newRole === "admin"
+        ?
+        "Pengguna berhasil dijadikan Admin"
+        :
+        "Admin berhasil dikembalikan menjadi User"
+    );
+
+
+    await loadUsers();
+
+
+  }catch(error){
+
+    alert(
+      error.message ||
+      "Role pengguna gagal diubah."
+    );
+
+    button.disabled =
+      false;
+
+    button.textContent =
+      oldText;
+  }
+}
+
+
 function createUserCard(user){
 
   const card =
@@ -2917,10 +3153,35 @@ function createUserCard(user){
   }
 
 
+  const role =
+    user.role ||
+    "user";
+
+
+  const canChangeRole =
+    role !== "superadmin";
+
+
+  const roleButtonText =
+    role === "admin"
+      ?
+      "Jadikan User"
+      :
+      "Jadikan Admin";
+
+
   card.innerHTML = `
 
     <div class="user-name"></div>
     <div class="user-email"></div>
+
+    <div class="user-role ${role}">
+      ${userRoleLabel(role)}
+    </div>
+
+    <div class="user-role-note">
+      ${userRoleLimitText(role)}
+    </div>
 
     <div class="user-stats">
 
@@ -2949,6 +3210,40 @@ function createUserCard(user){
     <button class="user-button show-events">
       Lihat Event
     </button>
+
+    ${
+      canChangeRole
+        ?
+        `
+        <button
+          class="user-button role-action ${
+            role === "admin"
+              ?
+              "demote"
+              :
+              ""
+          }"
+        >
+          ${
+            role === "admin"
+              ?
+              "↩ "
+              :
+              "★ "
+          }
+          ${roleButtonText}
+        </button>
+        `
+        :
+        `
+        <button
+          class="user-button"
+          disabled
+        >
+          Superadmin
+        </button>
+        `
+    }
   `;
 
 
@@ -2998,6 +3293,27 @@ function createUserCard(user){
       });
     }
   );
+
+
+  if(canChangeRole){
+
+    const roleButton =
+      card.querySelector(
+        ".role-action"
+      );
+
+
+    roleButton.addEventListener(
+      "click",
+      function(){
+
+        changeUserRole(
+          user,
+          roleButton
+        );
+      }
+    );
+  }
 
 
   return card;
