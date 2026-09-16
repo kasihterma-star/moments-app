@@ -301,7 +301,17 @@ a{
 
 <script>
 const API_URL =
-    "https://moments-api.alavolaadza.workers.dev";
+    "https://api.ege.my.id";
+
+
+const TOKEN_KEY =
+    "momentsAdminToken";
+
+
+const token =
+    localStorage.getItem(
+        TOKEN_KEY
+    );
 
 const params =
     new URLSearchParams(window.location.search);
@@ -342,6 +352,40 @@ function formatDate(date){
             month:"long",
             year:"numeric"
         }
+    );
+}
+
+function formatEventRange(
+    startDate,
+    endDate
+){
+    if(!startDate){
+        return "";
+    }
+
+    const finalEndDate =
+        endDate ||
+        startDate;
+
+    if(
+        finalEndDate ===
+        startDate
+    ){
+        return formatDate(
+            startDate
+        );
+    }
+
+    return (
+        formatDate(
+            startDate
+        )
+        +
+        " – "
+        +
+        formatDate(
+            finalEndDate
+        )
     );
 }
 
@@ -416,11 +460,23 @@ async function loadGallery(){
     }
 
     try{
+        const headers = {};
+
+        if(token){
+            headers["Authorization"] =
+                "Bearer " +
+                token;
+        }
+
         const response =
             await fetch(
                 API_URL +
                 "/api/gallery/" +
-                encodeURIComponent(slug)
+                encodeURIComponent(slug),
+                {
+                    headers,
+                    cache:"no-store"
+                }
             );
 
         const data =
@@ -440,22 +496,30 @@ async function loadGallery(){
             .textContent =
             data.event.name;
 
+        data.event.endDate =
+            data.event.endDate ||
+            data.event.end_date ||
+            data.event.eventDate;
+
         document.getElementById("eventMeta")
             .textContent =
             [
                 data.event.eventType,
-                formatDate(data.event.eventDate)
+                formatEventRange(
+                    data.event.eventDate,
+                    data.event.endDate
+                )
             ]
             .filter(Boolean)
             .join(" • ");
 
         document.getElementById("photoCount")
             .textContent =
-            data.stats.photos;
+            data.stats?.photos || 0;
 
         document.getElementById("guestCount")
             .textContent =
-            data.stats.guests;
+            data.stats?.guests || 0;
 
         document.title =
             "Galeri " +
