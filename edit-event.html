@@ -230,6 +230,29 @@ h1{
 }
 
 
+/* ROLE / DURATION LIMIT */
+
+.limit-card{
+  margin-bottom:18px;
+  padding:15px 16px;
+  border:1px solid #dfd5cd;
+  border-radius:16px;
+  background:#fff;
+}
+
+.limit-title{
+  margin-bottom:5px;
+  font-size:11px;
+  font-weight:800;
+}
+
+.limit-text{
+  color:#756d66;
+  font-size:10px;
+  line-height:1.55;
+}
+
+
 /* CARD */
 
 .card{
@@ -518,6 +541,14 @@ let eventData =
   null;
 
 
+let currentUser =
+  null;
+
+
+let maxDurationDays =
+  1;
+
+
 /* =====================================================
    LOGIN
 ===================================================== */
@@ -692,6 +723,31 @@ async function loadEvent(){
     }
 
 
+    currentUser =
+      data.currentUser ||
+      null;
+
+
+    if(
+      currentUser?.role ===
+      "superadmin"
+    ){
+
+      maxDurationDays = 10;
+
+    }else if(
+      currentUser?.role ===
+      "admin"
+    ){
+
+      maxDurationDays = 5;
+
+    }else{
+
+      maxDurationDays = 1;
+    }
+
+
     eventData =
       (
         data.events || []
@@ -778,6 +834,62 @@ function showFatal(
 }
 
 
+function roleLabel(role){
+
+  if(role === "superadmin"){
+    return "SUPERADMIN";
+  }
+
+  if(role === "admin"){
+    return "ADMIN";
+  }
+
+  return "USER";
+}
+
+
+function eventDurationMs(
+  eventDate,
+  startTime,
+  endDate,
+  endTime
+){
+
+  if(
+    !eventDate ||
+    !startTime ||
+    !endDate ||
+    !endTime
+  ){
+    return NaN;
+  }
+
+
+  const start =
+    new Date(
+      eventDate +
+      "T" +
+      startTime +
+      ":00"
+    );
+
+
+  const end =
+    new Date(
+      endDate +
+      "T" +
+      endTime +
+      ":00"
+    );
+
+
+  return (
+    end.getTime() -
+    start.getTime()
+  );
+}
+
+
 /* =====================================================
    RENDER
 ===================================================== */
@@ -826,7 +938,7 @@ function render(){
   ){
 
     notice =
-      "Acara sedang berlangsung. Tanggal, jam mulai, dan zona waktu dikunci. Anda dapat memperpanjang jam selesai serta menambah batas tamu dan jatah foto.";
+      "Acara sedang berlangsung. Tanggal mulai, jam mulai, dan zona waktu dikunci. Anda dapat memperpanjang tanggal/jam selesai serta menambah batas tamu dan jatah foto.";
 
 
     dateDisabled =
@@ -855,7 +967,7 @@ function render(){
   ){
 
     notice =
-      "Acara sudah selesai. Untuk membukanya kembali pada hari yang sama, ubah jam selesai menjadi waktu yang lebih lama dari waktu sekarang.";
+      "Acara sudah selesai. Untuk membukanya kembali, perpanjang tanggal atau jam selesai hingga melewati waktu sekarang.";
 
 
     dateDisabled =
@@ -946,6 +1058,26 @@ function render(){
     </div>
 
 
+    <div class="limit-card">
+      <div class="limit-title">
+        Batas durasi akun
+      </div>
+
+      <div class="limit-text">
+        ${escapeHtml(
+          roleLabel(
+            currentUser?.role
+          )
+        )}
+        dapat membuat acara maksimal
+        ${maxDurationDays} hari.
+        Server tetap menjadi pemeriksa akhir,
+        terutama jika superadmin mengedit acara
+        milik akun lain.
+      </div>
+    </div>
+
+
     <form
       class="card"
       id="editForm"
@@ -1019,7 +1151,7 @@ function render(){
         <div class="field">
 
           <label>
-            Tanggal acara
+            Tanggal mulai
           </label>
 
           <input
@@ -1032,6 +1164,32 @@ function render(){
 
             required
           >
+
+        </div>
+
+
+        <div class="field">
+
+          <label>
+            Tanggal selesai
+          </label>
+
+          <input
+            type="date"
+            id="endDate"
+
+            value="${escapeHtml(
+              eventData.endDate ||
+              eventData.eventDate
+            )}"
+
+            required
+          >
+
+          <div class="helper">
+            Saat acara berjalan atau selesai,
+            tanggal selesai hanya boleh diperpanjang.
+          </div>
 
         </div>
 
@@ -1131,7 +1289,7 @@ function render(){
 
           <div class="helper">
             Saat acara berjalan atau selesai,
-            jam ini hanya dapat diperpanjang.
+            tanggal/jam selesai hanya dapat diperpanjang.
           </div>
 
         </div>
@@ -1219,6 +1377,121 @@ function render(){
     "submit",
     saveEvent
   );
+
+
+  updateEditDateLimits();
+
+
+  document.getElementById(
+    "eventDate"
+  ).addEventListener(
+    "change",
+    updateEditDateLimits
+  );
+}
+
+
+function addDays(
+  dateValue,
+  days
+){
+
+  if(!dateValue){
+    return "";
+  }
+
+
+  const date =
+    new Date(
+      dateValue +
+      "T00:00:00"
+    );
+
+
+  date.setDate(
+    date.getDate() +
+    days
+  );
+
+
+  const year =
+    date.getFullYear();
+
+  const month =
+    String(
+      date.getMonth() + 1
+    ).padStart(
+      2,
+      "0"
+    );
+
+  const day =
+    String(
+      date.getDate()
+    ).padStart(
+      2,
+      "0"
+    );
+
+
+  return (
+    year +
+    "-" +
+    month +
+    "-" +
+    day
+  );
+}
+
+
+function updateEditDateLimits(){
+
+  const start =
+    document.getElementById(
+      "eventDate"
+    );
+
+  const end =
+    document.getElementById(
+      "endDate"
+    );
+
+
+  if(
+    !start ||
+    !end ||
+    !start.value
+  ){
+    return;
+  }
+
+
+  end.min =
+    start.value;
+
+
+  end.max =
+    addDays(
+      start.value,
+      maxDurationDays
+    );
+
+
+  if(
+    end.value <
+    start.value
+  ){
+
+    end.value =
+      start.value;
+  }
+
+
+  /*
+    Jangan paksa event lama dipendekkan jika
+    role pemilik berubah. Backend akan menentukan
+    apakah jadwal boleh diubah.
+  */
 }
 
 
@@ -1345,6 +1618,11 @@ async function saveEvent(
           "eventDate"
         ).value,
 
+      endDate:
+        document.getElementById(
+          "endDate"
+        ).value,
+
       startTime:
         document.getElementById(
           "startTime"
@@ -1376,14 +1654,66 @@ async function saveEvent(
     };
 
 
+    const durationMs =
+      eventDurationMs(
+        body.eventDate,
+        body.startTime,
+        body.endDate,
+        body.endTime
+      );
+
+
     if(
-      body.startTime ===
-      body.endTime
+      !Number.isFinite(
+        durationMs
+      ) ||
+      durationMs <= 0
     ){
 
       throw new Error(
-        "Jam mulai dan jam selesai tidak boleh sama."
+        "Waktu selesai harus setelah waktu mulai."
       );
+    }
+
+
+    /*
+      Untuk pemilik biasa, validasi frontend mengikuti role.
+      Jika superadmin mengedit event milik user/admin lain,
+      backend tetap menjadi pemeriksa batas akhir berdasarkan
+      role pemilik event.
+    */
+
+    if(
+      currentUser?.role !== "superadmin"
+    ){
+
+      const maxDurationMs =
+        maxDurationDays *
+        24 *
+        60 *
+        60 *
+        1000;
+
+
+      if(
+        durationMs >
+        maxDurationMs
+      ){
+
+        throw new Error(
+          "Durasi acara maksimal "
+          +
+          maxDurationDays
+          +
+          " hari untuk akun "
+          +
+          roleLabel(
+            currentUser?.role
+          )
+          +
+          "."
+        );
+      }
     }
 
 
