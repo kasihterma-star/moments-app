@@ -1206,6 +1206,42 @@ function formatDate(
 }
 
 
+function formatEventRange(
+  startDate,
+  endDate
+){
+
+  if(!startDate){
+    return "-";
+  }
+
+  const finalEndDate =
+    endDate ||
+    startDate;
+
+  if(
+    finalEndDate ===
+    startDate
+  ){
+    return formatDate(
+      startDate
+    );
+  }
+
+  return (
+    formatDate(
+      startDate
+    )
+    +
+    " – "
+    +
+    formatDate(
+      finalEndDate
+    )
+  );
+}
+
+
 /* =====================================================
    GET EVENT
 ===================================================== */
@@ -1290,6 +1326,10 @@ async function getEvent(
         raw.event_type,
 
       date:
+        raw.event_date,
+
+      endDate:
+        raw.end_date ||
         raw.event_date,
 
       startTime:
@@ -1414,8 +1454,9 @@ function renderEvent(){
   document.getElementById(
     "eventDate"
   ).textContent =
-    formatDate(
-      eventData.date
+    formatEventRange(
+      eventData.date,
+      eventData.endDate
     )
     +
     " • "
@@ -1449,6 +1490,19 @@ function renderEvent(){
   document.getElementById(
     "endTime"
   ).textContent =
+    (
+      eventData.endDate &&
+      eventData.endDate !==
+      eventData.date
+        ?
+        formatDate(
+          eventData.endDate
+        ) +
+        " • "
+        :
+        ""
+    )
+    +
     eventData.endTime +
     " " +
     tz;
