@@ -140,6 +140,41 @@ h1{
 }
 
 
+/* ROLE / DURATION LIMIT */
+
+.limit-card{
+  margin-bottom:20px;
+  padding:16px 18px;
+  border:1px solid #dfd5cd;
+  border-radius:18px;
+  background:#fff;
+}
+
+.limit-title{
+  margin-bottom:5px;
+  font-size:12px;
+  font-weight:800;
+}
+
+.limit-text{
+  color:#756d66;
+  font-size:11px;
+  line-height:1.55;
+}
+
+.limit-badge{
+  display:inline-flex;
+  margin-top:10px;
+  padding:6px 10px;
+  border-radius:999px;
+  background:#f1e8df;
+  color:#8a5b38;
+  font-size:9px;
+  font-weight:800;
+  text-transform:uppercase;
+}
+
+
 /* CARD */
 
 .card{
@@ -500,11 +535,27 @@ select:focus{
   </h1>
 
   <p class="subtitle">
-    Atur tanggal, waktu, zona waktu,
-    jumlah tamu, dan jatah foto.
-    Link acara dapat dibagikan melalui
-    QR Code setelah acara dibuat.
+    Atur tanggal mulai dan selesai, waktu,
+    zona waktu, jumlah tamu, dan jatah foto.
+    Durasi maksimal mengikuti jenis akun Anda.
+    Link acara dapat dibagikan melalui QR Code
+    setelah acara dibuat.
   </p>
+
+
+  <div class="limit-card" id="limitCard">
+    <div class="limit-title">
+      Batas durasi akun
+    </div>
+
+    <div class="limit-text" id="limitText">
+      Memeriksa jenis akun...
+    </div>
+
+    <div class="limit-badge" id="limitBadge">
+      MEMUAT
+    </div>
+  </div>
 
 
   <form
@@ -621,12 +672,12 @@ select:focus{
       </div>
 
 
-      <!-- TANGGAL -->
+      <!-- TANGGAL MULAI -->
 
       <div class="field">
 
         <label for="eventDate">
-          Tanggal acara
+          Tanggal mulai
         </label>
 
         <input
@@ -634,6 +685,27 @@ select:focus{
           id="eventDate"
           required
         >
+
+      </div>
+
+
+      <!-- TANGGAL SELESAI -->
+
+      <div class="field">
+
+        <label for="endDate">
+          Tanggal selesai
+        </label>
+
+        <input
+          type="date"
+          id="endDate"
+          required
+        >
+
+        <div class="helper" id="endDateHelper">
+          Maksimal durasi akan mengikuti jenis akun Anda.
+        </div>
 
       </div>
 
@@ -914,6 +986,18 @@ const linkPreview =
   );
 
 
+const limitText =
+  document.getElementById(
+    "limitText"
+  );
+
+
+const limitBadge =
+  document.getElementById(
+    "limitBadge"
+  );
+
+
 const submitButton =
   document.getElementById(
     "submitButton"
@@ -934,6 +1018,14 @@ let createdEventUrl =
   "";
 
 
+let currentUser =
+  null;
+
+
+let maxDurationDays =
+  1;
+
+
 /* =====================================================
    AUTH CHECK
 ===================================================== */
@@ -951,13 +1043,14 @@ async function checkAuth(){
             "Authorization":
               "Bearer " +
               token
-          }
+          },
+
+          cache:"no-store"
         }
       );
 
 
     if(!response.ok){
-
       throw new Error();
     }
 
@@ -966,10 +1059,39 @@ async function checkAuth(){
       await response.json();
 
 
-    if(!data.success){
-
+    if(
+      !data.success ||
+      !data.user
+    ){
       throw new Error();
     }
+
+
+    currentUser =
+      data.user;
+
+
+    if(
+      currentUser.role ===
+      "superadmin"
+    ){
+
+      maxDurationDays = 10;
+
+    }else if(
+      currentUser.role ===
+      "admin"
+    ){
+
+      maxDurationDays = 5;
+
+    }else{
+
+      maxDurationDays = 1;
+    }
+
+
+    renderAccountLimit();
 
 
   }catch(error){
@@ -982,6 +1104,63 @@ async function checkAuth(){
     window.location.href =
       "login.html";
   }
+}
+
+
+function roleLabel(role){
+
+  if(role === "superadmin"){
+    return "SUPERADMIN";
+  }
+
+  if(role === "admin"){
+    return "ADMIN";
+  }
+
+  return "USER";
+}
+
+
+function renderAccountLimit(){
+
+  if(!currentUser){
+    return;
+  }
+
+
+  limitBadge.textContent =
+    roleLabel(
+      currentUser.role
+    );
+
+
+  limitText.textContent =
+    roleLabel(
+      currentUser.role
+    )
+    +
+    " dapat membuat acara dengan durasi maksimal "
+    +
+    maxDurationDays
+    +
+    " hari ("
+    +
+    maxDurationDays * 24
+    +
+    " jam).";
+
+
+  document.getElementById(
+    "endDateHelper"
+  ).textContent =
+    "Batas akun Anda: maksimal "
+    +
+    maxDurationDays
+    +
+    " hari.";
+
+
+  updateEndDateLimit();
 }
 
 
@@ -1273,39 +1452,223 @@ timezoneSelect.addEventListener(
    DEFAULT DATE
 ===================================================== */
 
-function setDefaultDate(){
-
-  const now =
-    new Date();
-
+function localDateValue(
+  date
+){
 
   const year =
-    now.getFullYear();
-
+    date.getFullYear();
 
   const month =
     String(
-      now.getMonth() + 1
+      date.getMonth() + 1
     ).padStart(
       2,
       "0"
     );
-
 
   const day =
     String(
-      now.getDate()
+      date.getDate()
     ).padStart(
       2,
       "0"
     );
 
-
-  document.getElementById(
-    "eventDate"
-  ).min =
-    `${year}-${month}-${day}`;
+  return (
+    year +
+    "-" +
+    month +
+    "-" +
+    day
+  );
 }
+
+
+function addDays(
+  dateValue,
+  days
+){
+
+  if(!dateValue){
+    return "";
+  }
+
+
+  const date =
+    new Date(
+      dateValue +
+      "T00:00:00"
+    );
+
+
+  date.setDate(
+    date.getDate() +
+    days
+  );
+
+
+  return localDateValue(
+    date
+  );
+}
+
+
+function setDefaultDate(){
+
+  const today =
+    localDateValue(
+      new Date()
+    );
+
+
+  const eventDate =
+    document.getElementById(
+      "eventDate"
+    );
+
+
+  const endDate =
+    document.getElementById(
+      "endDate"
+    );
+
+
+  eventDate.min =
+    today;
+
+
+  endDate.min =
+    today;
+
+
+  if(!eventDate.value){
+    eventDate.value =
+      today;
+  }
+
+
+  if(!endDate.value){
+    endDate.value =
+      eventDate.value;
+  }
+
+
+  updateEndDateLimit();
+}
+
+
+function updateEndDateLimit(){
+
+  const eventDate =
+    document.getElementById(
+      "eventDate"
+    );
+
+
+  const endDate =
+    document.getElementById(
+      "endDate"
+    );
+
+
+  if(
+    !eventDate ||
+    !endDate ||
+    !eventDate.value
+  ){
+    return;
+  }
+
+
+  endDate.min =
+    eventDate.value;
+
+
+  /*
+    Secara kalender, tanggal selesai boleh sampai
+    tanggal mulai + maxDurationDays.
+    Validasi jam di bawah tetap memastikan durasi
+    total tidak melebihi batas jam akun.
+  */
+
+  endDate.max =
+    addDays(
+      eventDate.value,
+      maxDurationDays
+    );
+
+
+  if(
+    !endDate.value ||
+    endDate.value <
+    eventDate.value
+  ){
+
+    endDate.value =
+      eventDate.value;
+  }
+
+
+  if(
+    endDate.value >
+    endDate.max
+  ){
+
+    endDate.value =
+      endDate.max;
+  }
+}
+
+
+function eventDurationMs(
+  eventDate,
+  startTime,
+  endDate,
+  endTime
+){
+
+  if(
+    !eventDate ||
+    !startTime ||
+    !endDate ||
+    !endTime
+  ){
+    return NaN;
+  }
+
+
+  const start =
+    new Date(
+      eventDate +
+      "T" +
+      startTime +
+      ":00"
+    );
+
+
+  const end =
+    new Date(
+      endDate +
+      "T" +
+      endTime +
+      ":00"
+    );
+
+
+  return (
+    end.getTime() -
+    start.getTime()
+  );
+}
+
+
+document.getElementById(
+  "eventDate"
+).addEventListener(
+  "change",
+  updateEndDateLimit
+);
 
 
 /* =====================================================
@@ -1396,6 +1759,12 @@ form.addEventListener(
       ).value;
 
 
+    const endDate =
+      document.getElementById(
+        "endDate"
+      ).value;
+
+
     const startTime =
       document.getElementById(
         "startTime"
@@ -1432,6 +1801,7 @@ form.addEventListener(
       !name ||
       !slug ||
       !eventDate ||
+      !endDate ||
       !startTime ||
       !endTime
     ){
@@ -1445,13 +1815,56 @@ form.addEventListener(
     }
 
 
+    const durationMs =
+      eventDurationMs(
+        eventDate,
+        startTime,
+        endDate,
+        endTime
+      );
+
+
     if(
-      startTime ===
-      endTime
+      !Number.isFinite(
+        durationMs
+      ) ||
+      durationMs <= 0
     ){
 
       showMessage(
-        "Jam mulai dan jam selesai tidak boleh sama.",
+        "Waktu selesai harus setelah waktu mulai.",
+        "error"
+      );
+
+      return;
+    }
+
+
+    const maxDurationMs =
+      maxDurationDays *
+      24 *
+      60 *
+      60 *
+      1000;
+
+
+    if(
+      durationMs >
+      maxDurationMs
+    ){
+
+      showMessage(
+        "Durasi acara untuk akun "
+        +
+        roleLabel(
+          currentUser?.role
+        )
+        +
+        " maksimal "
+        +
+        maxDurationDays
+        +
+        " hari.",
         "error"
       );
 
@@ -1497,6 +1910,8 @@ form.addEventListener(
                 eventType,
 
                 eventDate,
+
+                endDate,
 
                 startTime,
 
@@ -1569,6 +1984,17 @@ form.addEventListener(
       ).textContent =
         formatEventDate(
           eventDate
+        )
+        +
+        (
+          endDate !== eventDate
+            ?
+            " – " +
+            formatEventDate(
+              endDate
+            )
+            :
+            ""
         )
         +
         " • "
@@ -1725,11 +2151,11 @@ async function start(){
 
   detectTimezone();
 
-  setDefaultDate();
-
   updatePreview();
 
   await checkAuth();
+
+  setDefaultDate();
 }
 
 
