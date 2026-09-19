@@ -149,6 +149,56 @@ video{
 }
 
 
+/* FILTER BAR */
+
+.filters{
+  position:absolute;
+  left:0;
+  right:0;
+  bottom:128px;
+  z-index:25;
+  display:flex;
+  gap:8px;
+  padding:0 14px 10px;
+  overflow-x:auto;
+  scrollbar-width:none;
+  -webkit-overflow-scrolling:touch;
+}
+
+.filters::-webkit-scrollbar{
+  display:none;
+}
+
+.filter-button{
+  flex:none;
+  min-width:82px;
+  min-height:42px;
+  padding:8px 12px;
+  border:1px solid rgba(255,255,255,.28);
+  border-radius:999px;
+  background:rgba(0,0,0,.34);
+  backdrop-filter:blur(10px);
+  color:#fff;
+  font-size:10px;
+  font-weight:700;
+  cursor:pointer;
+}
+
+.filter-button.active{
+  background:#fff;
+  color:#211d1a;
+  border-color:#fff;
+}
+
+.filter-button small{
+  display:block;
+  margin-top:2px;
+  font-size:8px;
+  font-weight:400;
+  opacity:.72;
+}
+
+
 /* BOTTOM CONTROLS */
 
 .controls{
@@ -665,6 +715,60 @@ video{
   </div>
 
 
+  <div
+    class="filters"
+    id="filters"
+    aria-label="Pilihan filter kamera"
+  >
+
+    <button class="filter-button active" type="button" data-filter="original">
+      Original
+      <small>Asli</small>
+    </button>
+
+    <button class="filter-button" type="button" data-filter="natural">
+      Natural
+      <small>Lembut</small>
+    </button>
+
+    <button class="filter-button" type="button" data-filter="bright">
+      Bright
+      <small>Lebih cerah</small>
+    </button>
+
+    <button class="filter-button" type="button" data-filter="softwhite">
+      Soft White
+      <small>Putih halus</small>
+    </button>
+
+    <button class="filter-button" type="button" data-filter="beauty">
+      Beauty Glow
+      <small>Cerah manis</small>
+    </button>
+
+    <button class="filter-button" type="button" data-filter="warm">
+      Warm Glow
+      <small>Hangat</small>
+    </button>
+
+    <button class="filter-button" type="button" data-filter="cool">
+      Cool Clean
+      <small>Putih dingin</small>
+    </button>
+
+    <button class="filter-button" type="button" data-filter="bw">
+      B&amp;W
+      <small>Hitam putih</small>
+    </button>
+
+    <button class="filter-button" type="button" data-filter="vintage">
+      Vintage
+      <small>Klasik</small>
+    </button>
+
+  </div>
+
+
   <div class="controls">
 
     <div class="control-row">
@@ -917,6 +1021,60 @@ let currentMode =
   null;
 
 
+let activeFilter =
+  "original";
+
+
+const FILTERS = {
+
+  original:{
+    css:"none",
+    canvas:"none"
+  },
+
+  natural:{
+    css:"brightness(1.06) contrast(.98) saturate(1.05)",
+    canvas:"brightness(1.06) contrast(.98) saturate(1.05)"
+  },
+
+  bright:{
+    css:"brightness(1.16) contrast(1.03) saturate(1.04)",
+    canvas:"brightness(1.16) contrast(1.03) saturate(1.04)"
+  },
+
+  softwhite:{
+    css:"brightness(1.18) contrast(.94) saturate(.94)",
+    canvas:"brightness(1.18) contrast(.94) saturate(.94)"
+  },
+
+  beauty:{
+    css:"brightness(1.14) contrast(.96) saturate(1.08) sepia(.04)",
+    canvas:"brightness(1.14) contrast(.96) saturate(1.08) sepia(.04)"
+  },
+
+  warm:{
+    css:"brightness(1.08) contrast(1.02) saturate(1.1) sepia(.12)",
+    canvas:"brightness(1.08) contrast(1.02) saturate(1.1) sepia(.12)"
+  },
+
+  cool:{
+    css:"brightness(1.12) contrast(1.01) saturate(.92) hue-rotate(4deg)",
+    canvas:"brightness(1.12) contrast(1.01) saturate(.92) hue-rotate(4deg)"
+  },
+
+  bw:{
+    css:"grayscale(1) contrast(1.08) brightness(1.04)",
+    canvas:"grayscale(1) contrast(1.08) brightness(1.04)"
+  },
+
+  vintage:{
+    css:"sepia(.28) saturate(.88) contrast(.96) brightness(1.05)",
+    canvas:"sepia(.28) saturate(.88) contrast(.96) brightness(1.05)"
+  }
+
+};
+
+
 /*
 Jam server.
 */
@@ -1002,6 +1160,12 @@ const lockScreen =
 const loadingScreen =
   document.getElementById(
     "loadingScreen"
+  );
+
+
+const filtersBar =
+  document.getElementById(
+    "filters"
   );
 
 
@@ -2124,6 +2288,102 @@ function updateCounter(){
 
 
 /* =====================================================
+   FILTER CAMERA
+===================================================== */
+
+function applyFilterPreview(){
+
+  const config =
+    FILTERS[
+      activeFilter
+    ]
+    ||
+    FILTERS.original;
+
+
+  video.style.filter =
+    config.css;
+
+
+  document
+    .querySelectorAll(
+      ".filter-button"
+    )
+    .forEach(
+      button => {
+
+        button.classList.toggle(
+          "active",
+          button.dataset.filter ===
+          activeFilter
+        );
+      }
+    );
+
+
+  localStorage.setItem(
+    "momentsCameraFilter",
+    activeFilter
+  );
+}
+
+
+function loadSavedFilter(){
+
+  const saved =
+    localStorage.getItem(
+      "momentsCameraFilter"
+    );
+
+
+  if(
+    saved &&
+    FILTERS[saved]
+  ){
+
+    activeFilter =
+      saved;
+  }
+
+
+  applyFilterPreview();
+}
+
+
+filtersBar.addEventListener(
+  "click",
+  function(event){
+
+    const button =
+      event.target.closest(
+        ".filter-button"
+      );
+
+
+    if(!button){
+      return;
+    }
+
+
+    const name =
+      button.dataset.filter;
+
+
+    if(!FILTERS[name]){
+      return;
+    }
+
+
+    activeFilter =
+      name;
+
+
+    applyFilterPreview();
+  }
+);
+
+
+/* =====================================================
    START CAMERA
 ===================================================== */
 
@@ -2220,6 +2480,9 @@ async function startCamera(){
 
 
     await video.play();
+
+
+    applyFilterPreview();
 
 
     permissionScreen.style.display =
@@ -2441,6 +2704,18 @@ async function capturePhoto(){
       );
 
 
+    const selectedFilter =
+      FILTERS[
+        activeFilter
+      ]
+      ||
+      FILTERS.original;
+
+
+    ctx.filter =
+      selectedFilter.canvas;
+
+
     /* MIRROR KAMERA DEPAN */
 
     if(
@@ -2486,6 +2761,10 @@ async function capturePhoto(){
         height
       );
     }
+
+
+    ctx.filter =
+      "none";
 
 
     /* WEBP */
@@ -2604,6 +2883,12 @@ async function capturePhoto(){
       String(
         height
       )
+    );
+
+
+    formData.append(
+      "filter",
+      activeFilter
     );
 
 
@@ -2743,6 +3028,9 @@ window.addEventListener(
 ===================================================== */
 
 async function start(){
+
+  loadSavedFilter();
+
 
   /*
   Kamera hanya untuk tamu
