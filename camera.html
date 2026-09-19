@@ -149,6 +149,32 @@ video{
 }
 
 
+/* MIRROR CONTROL */
+.mirror-control{
+  position:absolute;
+  right:16px;
+  bottom:184px;
+  z-index:35;
+}
+.mirror-button{
+  min-height:42px;
+  padding:0 14px;
+  border:1px solid rgba(255,255,255,.35);
+  border-radius:999px;
+  background:rgba(0,0,0,.52);
+  backdrop-filter:blur(12px);
+  color:#fff;
+  font-size:11px;
+  font-weight:800;
+  cursor:pointer;
+  white-space:nowrap;
+}
+.mirror-button.active{
+  background:#fff;
+  color:#211d1a;
+  border-color:#fff;
+}
+
 /* FILTER BAR */
 
 .filters{
@@ -728,6 +754,18 @@ video{
   </div>
 
 
+  <div class="mirror-control">
+    <button
+      class="mirror-button active"
+      id="mirrorToggle"
+      type="button"
+      aria-pressed="true"
+      title="Mode cermin aktif"
+    >
+      🪞 Cermin ON
+    </button>
+  </div>
+
   <div
     class="filters"
     id="filters"
@@ -785,17 +823,7 @@ video{
 
 
       <div class="switch-wrap">
-
-        <button
-          class="mirror-toggle active"
-          id="mirrorToggle"
-          aria-label="Mode cermin"
-          title="Mode cermin aktif"
-        >
-          ⇆
-        </button>
-
-        <button
+<button
           class="switch"
           id="switchCamera"
           aria-label="Ganti kamera"
@@ -2460,48 +2488,38 @@ function updateCounter(){
 
 function applyMirrorPreview(){
 
+  if(!video || !mirrorToggle){
+    return;
+  }
+
   video.style.transform =
     mirrorMode
-      ?
-      "scaleX(-1)"
-      :
-      "scaleX(1)";
+      ? "scaleX(-1)"
+      : "scaleX(1)";
 
+  video.style.transformOrigin =
+    "center center";
 
   mirrorToggle.classList.toggle(
     "active",
     mirrorMode
   );
 
-
-  mirrorToggle.title =
+  mirrorToggle.textContent =
     mirrorMode
-      ?
-      "Mode cermin aktif"
-      :
-      "Mode cermin nonaktif";
-
+      ? "🪞 Cermin ON"
+      : "🪞 Cermin OFF";
 
   mirrorToggle.setAttribute(
     "aria-pressed",
-    mirrorMode
-      ?
-      "true"
-      :
-      "false"
+    mirrorMode ? "true" : "false"
   );
-
 
   localStorage.setItem(
     "momentsMirrorMode",
-    mirrorMode
-      ?
-      "1"
-      :
-      "0"
+    mirrorMode ? "1" : "0"
   );
 }
-
 
 function loadMirrorMode(){
 
@@ -2510,23 +2528,13 @@ function loadMirrorMode(){
       "momentsMirrorMode"
     );
 
-
-  /*
-    Default SELALU cermin.
-    Kalau user pernah mematikannya,
-    pilihan terakhir tetap diingat.
-  */
   mirrorMode =
     saved === null
-      ?
-      true
-      :
-      saved === "1";
-
+      ? true
+      : saved === "1";
 
   applyMirrorPreview();
 }
-
 
 mirrorToggle.addEventListener(
   "click",
@@ -2534,7 +2542,6 @@ mirrorToggle.addEventListener(
 
     mirrorMode =
       !mirrorMode;
-
 
     applyMirrorPreview();
   }
@@ -3077,6 +3084,17 @@ switchButton.addEventListener(
       "user"
       :
       "environment";
+
+
+    if(
+      facingMode ===
+      "user"
+    ){
+      mirrorMode =
+        true;
+
+      applyMirrorPreview();
+    }
 
 
     await startCamera();
