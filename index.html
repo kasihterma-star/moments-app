@@ -2,61 +2,13 @@
 <html lang="id">
 <head>
 <meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-
-<title>MoreMoments — Abadikan Momen Bersama</title>
-<title>Masuk | MoreMoments</title>
-
-<!-- Preview saat link dibagikan -->
-<meta property="og:type" content="website">
-<meta property="og:site_name" content="MoreMoments">
-
-<meta property="og:title" content="MoreMoments — Abadi dalam Setiap Momen">
 
 <meta
-  property="og:description"
-  content="Buat event, undang tamu, bagikan foto, dan simpan kenangan bersama dengan mudah."
+  name="viewport"
+  content="width=device-width, initial-scale=1.0, viewport-fit=cover"
 >
 
-<meta
-  property="og:url"
-  content="https://moments-app.ege.my.id/"
->
-
-<meta
-  property="og:image"
-  content="https://moments-app.ege.my.id/awal.png"
->
-
-<meta
-  property="og:image:secure_url"
-  content="https://moments-app.ege.my.id/awal.png"
->
-
-<meta property="og:image:type" content="image/png">
-
-<meta name="twitter:card" content="summary_large_image">
-
-<meta
-  name="twitter:title"
-  content="MoreMoments — Abadi dalam Setiap Momen"
->
-
-<meta
-  name="twitter:description"
-  content="Buat event, undang tamu, bagikan foto, dan simpan kenangan bersama dengan mudah."
->
-
-<meta
-  name="twitter:image"
-  content="https://moments-app.ege.my.id/awal.png"
->
-
-<style>
-<meta
-  name="description"
-  content="Bagikan dan abadikan momen acara bersama teman dan keluarga."
->
+<title>Kamera | MoreMoments</title>
 
 <style>
 
@@ -66,1263 +18,3591 @@
   box-sizing:border-box;
 }
 
-html{
-  scroll-behavior:smooth;
+html,
+body{
+  width:100%;
+  height:100%;
+  background:#000;
+  font-family:Arial,Helvetica,sans-serif;
 }
 
 body{
-  font-family:Arial,Helvetica,sans-serif;
-  background:#faf9f7;
-  color:#222;
+  overflow:hidden;
 }
 
-a{
-  text-decoration:none;
-  color:inherit;
-}
-
-
-/* ===============================
-   NAVBAR
-================================ */
-
-.navbar{
+.camera-app{
   width:100%;
+  height:100%;
+  position:relative;
+  background:#000;
+}
 
-  padding:18px 24px;
+
+/* VIDEO */
+
+.video-box{
+  position:absolute;
+  inset:0;
+  overflow:hidden;
+  background:#111;
+}
+
+video{
+  width:100%;
+  height:100%;
+  object-fit:cover;
+}
+
+
+/* TOP */
+
+.topbar{
+  position:absolute;
+  top:0;
+  left:0;
+  right:0;
+  z-index:10;
+
+  padding:
+    max(18px, env(safe-area-inset-top))
+    20px
+    20px;
 
   display:flex;
   justify-content:space-between;
   align-items:center;
 
-  background:
-    rgba(250,249,247,.94);
-
-  backdrop-filter:
-    blur(12px);
-
-  position:fixed;
-  top:0;
-  left:0;
-
-  z-index:1000;
-
-  border-bottom:
-    1px solid rgba(0,0,0,.06);
-}
-
-.logo{
-  font-size:24px;
-  font-weight:800;
-  letter-spacing:-1px;
-}
-
-.logo span{
-  color:#a77852;
-}
-
-.nav-actions{
-  display:flex;
-  gap:9px;
-  align-items:center;
-}
-
-.btn-login{
-  display:inline-flex;
-  align-items:center;
-  justify-content:center;
-
-  min-height:42px;
-
-  padding:0 16px;
-
-  border-radius:999px;
-
-  font-size:14px;
-  font-weight:700;
-
-  cursor:pointer;
-}
-
-.btn-login:hover{
-  background:#eee9e4;
-}
-
-.btn-create-small{
-  display:inline-flex;
-  align-items:center;
-  justify-content:center;
-
-  min-height:42px;
-
-  background:#222;
-  color:white;
-
-  padding:0 18px;
-
-  border-radius:999px;
-
-  font-size:14px;
-  font-weight:700;
-
-  cursor:pointer;
-}
-
-
-/* ===============================
-   HERO
-================================ */
-
-.hero{
-  min-height:100vh;
-
-  display:flex;
-  align-items:center;
-  justify-content:center;
-
-  padding:
-    120px 24px 60px;
-}
-
-.hero-inner{
-  max-width:1100px;
-  width:100%;
-
-  display:grid;
-
-  grid-template-columns:
-    1fr 1fr;
-
-  gap:60px;
-
-  align-items:center;
-}
-
-.hero-text .tag{
-  display:inline-block;
-
-  background:#eee7df;
-  color:#7a5539;
-
-  padding:8px 14px;
-
-  border-radius:999px;
-
-  font-size:13px;
-  font-weight:700;
-
-  margin-bottom:24px;
-}
-
-.hero-text h1{
-  font-size:
-    clamp(
-      42px,
-      6vw,
-      78px
-    );
-
-  line-height:.98;
-
-  letter-spacing:-4px;
-
-  margin-bottom:24px;
-}
-
-.hero-text h1 span{
-  color:#a77852;
-}
-
-.hero-text p{
-  max-width:520px;
-
-  font-size:18px;
-
-  line-height:1.7;
-
-  color:#666;
-
-  margin-bottom:32px;
-}
-
-.hero-buttons{
-  display:flex;
-
-  gap:12px;
-
-  flex-wrap:wrap;
-}
-
-.btn-primary{
-  display:inline-flex;
-
-  align-items:center;
-  justify-content:center;
-
-  min-height:54px;
-
-  padding:0 26px;
-
-  background:#222;
-  color:#fff;
-
-  border-radius:999px;
-
-  font-size:16px;
-  font-weight:700;
-
-  border:none;
-
-  cursor:pointer;
-}
-
-.btn-primary:hover{
-  opacity:.9;
-}
-
-.btn-secondary{
-  display:inline-flex;
-
-  align-items:center;
-  justify-content:center;
-
-  min-height:54px;
-
-  padding:0 26px;
-
-  background:white;
-
-  border:1px solid #ddd;
-
-  border-radius:999px;
-
-  font-size:16px;
-  font-weight:700;
-}
-
-
-/* ===============================
-   PHONE MOCKUP
-================================ */
-
-.phone-wrapper{
-  display:flex;
-  justify-content:center;
-}
-
-.phone{
-  width:300px;
-  height:610px;
-
-  background:#111;
-
-  border-radius:42px;
-
-  padding:10px;
-
-  box-shadow:
-    0 30px 70px
-    rgba(0,0,0,.18);
-
-  transform:
-    rotate(3deg);
-}
-
-.phone-screen{
-  width:100%;
-  height:100%;
-
-  border-radius:34px;
-
-  overflow:hidden;
-
-  background:
-    linear-gradient(
-      rgba(0,0,0,.15),
-      rgba(0,0,0,.15)
-    ),
-    linear-gradient(
-      145deg,
-      #ceb69f,
-      #8d6f59
-    );
-
-  position:relative;
-
-  display:flex;
-
-  flex-direction:column;
-
-  justify-content:
-    space-between;
-
-  padding:
-    25px 20px;
+  background:linear-gradient(
+    rgba(0,0,0,.58),
+    transparent
+  );
 
   color:white;
-}
-
-.camera-top{
-  display:flex;
-
-  justify-content:
-    space-between;
-
-  font-size:13px;
-
-  font-weight:600;
-}
-
-.event-info{
-  text-align:center;
-
-  margin-top:auto;
-
-  margin-bottom:32px;
 }
 
 .event-info small{
-  font-size:12px;
-
-  opacity:.85;
+  display:block;
+  margin-bottom:3px;
+  font-size:11px;
+  opacity:.75;
 }
 
-.event-info h2{
-  margin-top:7px;
-
-  font-family:
-    Georgia,serif;
-
-  font-size:32px;
-
-  font-weight:normal;
+.event-info strong{
+  display:block;
+  max-width:260px;
+  overflow:hidden;
+  text-overflow:ellipsis;
+  white-space:nowrap;
+  font-size:16px;
 }
 
-.shot-count{
-  font-size:13px;
-
-  opacity:.9;
-
-  margin-top:9px;
+.event-time{
+  margin-top:3px;
+  font-size:9px;
+  opacity:.7;
 }
 
-.camera-controls{
+.exit{
+  width:42px;
+  height:42px;
+
   display:flex;
-
+  align-items:center;
   justify-content:center;
 
-  align-items:center;
+  border-radius:50%;
 
-  position:relative;
+  background:rgba(0,0,0,.35);
+
+  backdrop-filter:blur(10px);
+
+  color:#fff;
+  text-decoration:none;
+
+  font-size:21px;
+}
+
+
+/* COUNTER */
+
+.counter{
+  position:absolute;
+  top:105px;
+  left:50%;
+  z-index:10;
+
+  transform:translateX(-50%);
+
+  padding:9px 15px;
+
+  border-radius:999px;
+
+  background:rgba(0,0,0,.46);
+
+  backdrop-filter:blur(10px);
+
+  color:#fff;
+
+  font-size:12px;
+
+  white-space:nowrap;
+}
+
+
+/* FILTER BAR */
+
+.filters{
+  position:absolute;
+  left:0;
+  right:0;
+  bottom:128px;
+  z-index:25;
+  display:flex;
+  gap:8px;
+  padding:0 14px 10px;
+  overflow-x:auto;
+  scrollbar-width:none;
+  -webkit-overflow-scrolling:touch;
+}
+
+.filters::-webkit-scrollbar{
+  display:none;
+}
+
+.filter-button{
+  flex:none;
+  min-width:82px;
+  min-height:42px;
+  padding:8px 12px;
+  border:1px solid rgba(255,255,255,.28);
+  border-radius:999px;
+  background:rgba(0,0,0,.34);
+  backdrop-filter:blur(10px);
+  color:#fff;
+  font-size:10px;
+  font-weight:700;
+  cursor:pointer;
+}
+
+.filter-button.active{
+  background:#fff;
+  color:#211d1a;
+  border-color:#fff;
+}
+
+.filter-button small{
+  display:block;
+  margin-top:2px;
+  font-size:8px;
+  font-weight:400;
+  opacity:.72;
+}
+
+
+/* BOTTOM CONTROLS */
+
+.controls{
+  position:absolute;
+  bottom:0;
+  left:0;
+  right:0;
+  z-index:20;
+
+  padding:
+    25px
+    24px
+    max(28px, env(safe-area-inset-bottom));
+
+  background:linear-gradient(
+    transparent,
+    rgba(0,0,0,.78)
+  );
+}
+
+.control-row{
+  display:grid;
+  grid-template-columns:1fr auto 1fr;
+  align-items:center;
+}
+
+
+/* LAST PHOTO */
+
+.last-photo{
+  width:52px;
+  height:52px;
+
+  overflow:hidden;
+
+  border:2px solid rgba(255,255,255,.65);
+  border-radius:12px;
+
+  background:rgba(255,255,255,.15);
+}
+
+.last-photo img{
+  width:100%;
+  height:100%;
+  object-fit:cover;
+  display:none;
+}
+
+
+/* SHUTTER */
+
+.shutter-wrap{
+  display:flex;
+  justify-content:center;
 }
 
 .shutter{
-  width:72px;
-  height:72px;
+  width:78px;
+  height:78px;
 
+  padding:5px;
+
+  border:5px solid #fff;
   border-radius:50%;
 
-  border:
-    5px solid white;
+  background:transparent;
 
-  position:relative;
+  cursor:pointer;
 }
 
-.shutter::after{
-  content:"";
-
-  position:absolute;
-
-  inset:5px;
-
-  background:white;
+.shutter-inner{
+  width:100%;
+  height:100%;
 
   border-radius:50%;
-}
-
-.switch-camera{
-  position:absolute;
-
-  right:12px;
-
-  width:46px;
-  height:46px;
-
-  border-radius:50%;
-
-  background:
-    rgba(255,255,255,.18);
-
-  display:flex;
-
-  align-items:center;
-
-  justify-content:center;
-
-  font-size:20px;
-}
-
-
-/* ===============================
-   FEATURES
-================================ */
-
-.features{
-  padding:
-    90px 24px;
 
   background:#fff;
+
+  transition:.12s;
 }
 
-.section-inner{
-  max-width:1100px;
-
-  margin:auto;
+.shutter:active .shutter-inner{
+  transform:scale(.88);
 }
 
-.section-title{
-  text-align:center;
-
-  margin-bottom:50px;
+.shutter:disabled{
+  opacity:.5;
+  cursor:not-allowed;
 }
 
-.section-title small{
-  color:#a77852;
 
-  text-transform:
-    uppercase;
+/* SWITCH */
 
-  letter-spacing:2px;
-
-  font-weight:700;
+.switch-wrap{
+  display:flex;
+  justify-content:flex-end;
+  align-items:center;
+  gap:8px;
 }
 
-.section-title h2{
-  font-size:
-    clamp(
-      32px,
-      5vw,
-      50px
-    );
+.switch,
+.mirror-toggle{
+  width:52px;
+  height:52px;
 
-  margin-top:12px;
+  border:0;
+  border-radius:50%;
 
-  letter-spacing:-2px;
+  background:rgba(255,255,255,.18);
+
+  backdrop-filter:blur(10px);
+
+  color:#fff;
+
+  font-size:22px;
+
+  cursor:pointer;
 }
 
-.feature-grid{
-  display:grid;
-
-  grid-template-columns:
-    repeat(
-      3,
-      1fr
-    );
-
-  gap:18px;
+.mirror-toggle{
+  font-size:18px;
+  font-weight:800;
 }
 
-.feature-card{
-  background:#faf9f7;
-
-  border:
-    1px solid #eee;
-
-  padding:30px;
-
-  border-radius:24px;
+.mirror-toggle.active{
+  background:#fff;
+  color:#211d1a;
 }
 
-.feature-icon{
-  width:48px;
-  height:48px;
+
+/* FLASH */
+
+.flash{
+  position:absolute;
+  inset:0;
+  z-index:100;
+
+  background:#fff;
+
+  pointer-events:none;
+
+  opacity:0;
+}
+
+.flash.active{
+  animation:flash .25s ease;
+}
+
+@keyframes flash{
+  0%{opacity:0;}
+  40%{opacity:.9;}
+  100%{opacity:0;}
+}
+
+
+/* PERMISSION */
+
+.permission{
+  position:absolute;
+  inset:0;
+  z-index:200;
+
+  padding:25px;
 
   display:flex;
-
   align-items:center;
-
   justify-content:center;
+
+  background:#f7f4f0;
+}
+
+.permission-card{
+  width:100%;
+  max-width:390px;
+
+  padding:38px 28px;
+
+  border-radius:28px;
+
+  background:#fff;
+
+  text-align:center;
+
+  box-shadow:
+    0 30px 80px
+    rgba(0,0,0,.15);
+}
+
+.camera-icon{
+  width:75px;
+  height:75px;
+
+  margin:0 auto 22px;
+
+  display:flex;
+  align-items:center;
+  justify-content:center;
+
+  border-radius:22px;
 
   background:#eee7df;
 
-  border-radius:14px;
-
-  font-size:23px;
-
-  margin-bottom:20px;
+  font-size:34px;
 }
 
-.feature-card h3{
-  font-size:20px;
-
+.permission h1{
   margin-bottom:10px;
+  font-size:25px;
 }
 
-.feature-card p{
+.permission p{
+  margin-bottom:25px;
+
   color:#777;
 
+  font-size:14px;
   line-height:1.6;
-
-  font-size:14px;
 }
 
+.permission button{
+  width:100%;
+  height:53px;
 
-/* ===============================
-   HOW
-================================ */
+  border:0;
+  border-radius:999px;
 
-.how{
-  padding:
-    100px 24px;
-}
+  background:#29251f;
+  color:#fff;
 
-.steps{
-  max-width:850px;
-
-  margin:auto;
-
-  display:grid;
-
-  gap:18px;
-}
-
-.step{
-  display:flex;
-
-  gap:20px;
-
-  align-items:center;
-
-  background:white;
-
-  padding:22px;
-
-  border-radius:20px;
-
-  border:
-    1px solid #eee;
-}
-
-.number{
-  min-width:50px;
-
-  height:50px;
-
-  border-radius:50%;
-
-  background:#222;
-
-  color:white;
-
-  display:flex;
-
-  align-items:center;
-
-  justify-content:center;
-
+  font-size:15px;
   font-weight:700;
+
+  cursor:pointer;
 }
 
-.step h3{
-  margin-bottom:5px;
-}
+.permission-error{
+  margin-top:16px;
 
-.step p{
-  color:#777;
+  color:#b34f4f;
 
-  font-size:14px;
-
+  font-size:12px;
   line-height:1.5;
 }
 
 
-/* ===============================
-   CTA
-================================ */
+/* LIMIT */
 
-.cta{
-  max-width:1050px;
+.limit-screen{
+  display:none;
 
-  margin:
-    30px auto 90px;
+  position:absolute;
+  inset:0;
+  z-index:300;
 
-  background:#222;
+  padding:25px;
 
-  color:white;
+  align-items:center;
+  justify-content:center;
 
-  padding:
-    70px 30px;
+  background:#f7f4f0;
+}
 
-  border-radius:35px;
+.limit-card{
+  width:100%;
+  max-width:380px;
+
+  padding:35px;
+
+  border-radius:28px;
+
+  background:#fff;
 
   text-align:center;
 }
 
-.cta h2{
-  font-size:
-    clamp(
-      32px,
-      5vw,
-      54px
-    );
-
-  margin-bottom:15px;
-
-  letter-spacing:-2px;
+.limit-card h2{
+  margin-bottom:10px;
 }
 
-.cta p{
-  color:#bbb;
+.limit-card p{
+  margin-bottom:22px;
 
-  margin-bottom:28px;
+  color:#777;
+
+  font-size:14px;
+  line-height:1.6;
 }
 
-.cta .btn-primary{
-  background:white;
+.limit-card a{
+  display:inline-flex;
+  align-items:center;
+  justify-content:center;
 
-  color:#222;
+  min-height:48px;
+
+  padding:0 23px;
+
+  border-radius:999px;
+
+  background:#29251f;
+  color:#fff;
+
+  text-decoration:none;
+
+  font-size:13px;
+  font-weight:700;
 }
 
 
-/* ===============================
-   FOOTER
-================================ */
+/* EVENT LOCK */
 
-footer{
+.lock-screen{
+  display:none;
+
+  position:absolute;
+  inset:0;
+  z-index:500;
+
+  padding:25px;
+
+  align-items:center;
+  justify-content:center;
+
+  background:#f7f4f0;
+}
+
+.lock-screen.visible{
+  display:flex;
+}
+
+.lock-card{
+  width:100%;
+  max-width:390px;
+
+  padding:36px 28px;
+
+  border-radius:30px;
+
+  background:#fff;
+
   text-align:center;
 
-  padding:
-    30px 20px 45px;
+  box-shadow:
+    0 30px 80px
+    rgba(0,0,0,.12);
+}
 
-  color:#999;
+.lock-icon{
+  width:72px;
+  height:72px;
 
+  margin:0 auto 20px;
+
+  display:flex;
+  align-items:center;
+  justify-content:center;
+
+  border-radius:22px;
+
+  background:#eee7df;
+
+  font-size:32px;
+}
+
+.lock-label{
+  margin-bottom:8px;
+
+  color:#9c7457;
+
+  font-size:10px;
+  font-weight:800;
+
+  letter-spacing:1.4px;
+  text-transform:uppercase;
+}
+
+.lock-card h2{
+  margin-bottom:10px;
+  font-size:25px;
+}
+
+.lock-card p{
+  color:#777;
+
+  font-size:13px;
+  line-height:1.65;
+}
+
+.lock-time{
+  margin-top:18px;
+
+  padding:14px;
+
+  border-radius:15px;
+
+  background:#f7f3ef;
+
+  font-size:12px;
+  line-height:1.65;
+}
+
+.lock-button{
+  width:100%;
+  min-height:50px;
+
+  margin-top:18px;
+
+  display:flex;
+  align-items:center;
+  justify-content:center;
+
+  border-radius:999px;
+
+  background:#29251f;
+  color:#fff;
+
+  text-decoration:none;
+
+  font-size:13px;
+  font-weight:700;
+}
+
+.lock-button.light{
+  margin-top:8px;
+
+  border:1px solid #ddd5cd;
+
+  background:#fff;
+  color:#29251f;
+}
+
+
+/* LOADING */
+
+.loading-screen{
+  position:absolute;
+  inset:0;
+  z-index:600;
+
+  display:flex;
+  align-items:center;
+  justify-content:center;
+
+  padding:25px;
+
+  background:#f7f4f0;
+}
+
+.loading-card{
+  color:#756d66;
+  text-align:center;
   font-size:13px;
 }
 
-.footer-links{
-  display:flex;
 
-  justify-content:center;
+/* DESKTOP */
 
-  gap:18px;
+@media(min-width:700px){
 
-  flex-wrap:wrap;
-
-  margin-bottom:12px;
-}
-
-.footer-links a{
-  color:#665d56;
-
-  font-weight:600;
-}
-
-
-/* ===============================
-   MOBILE
-================================ */
-
-@media(max-width:800px){
-
-  .navbar{
-    padding:
-      14px 16px;
+  .camera-app{
+    max-width:500px;
+    margin:auto;
   }
 
-  /*
-    LOGIN TIDAK LAGI DISEMBUNYIKAN
-  */
-
-  .logo{
-    font-size:21px;
-  }
-
-  .nav-actions{
-    gap:5px;
-  }
-
-  .btn-login{
-    display:inline-flex;
-
-    min-height:40px;
-
-    padding:
-      0 10px;
-
-    font-size:12px;
-  }
-
-  .btn-create-small{
-    min-height:40px;
-
-    padding:
-      0 14px;
-
-    font-size:12px;
-  }
-
-  .hero{
-    padding-top:110px;
-  }
-
-  .hero-inner{
-    grid-template-columns:
-      1fr;
-
-    text-align:center;
-
-    gap:55px;
-  }
-
-  .hero-text p{
-    margin-left:auto;
-
-    margin-right:auto;
-  }
-
-  .hero-buttons{
-    justify-content:center;
-  }
-
-  .hero-text h1{
-    letter-spacing:-2px;
-  }
-
-  .phone{
-    width:260px;
-
-    height:530px;
-  }
-
-  .feature-grid{
-    grid-template-columns:1fr;
-  }
-
-  .cta{
-    margin-left:16px;
-
-    margin-right:16px;
-  }
-}
-
-
-@media(max-width:430px){
-
-  .navbar{
-    padding:
-      12px 13px;
-  }
-
-  .logo{
-    font-size:19px;
-  }
-
-  .btn-login{
-    padding:
-      0 8px;
-
-    font-size:11px;
-  }
-
-  .btn-create-small{
-    padding:
-      0 11px;
-
-    font-size:11px;
-  }
-
-  .hero{
-    padding-left:17px;
-
-    padding-right:17px;
-  }
-
-  .hero-text .tag{
-    font-size:12px;
-  }
-
-  .hero-text p{
-    font-size:17px;
-  }
-
-  .hero-buttons{
-    display:grid;
-
-    grid-template-columns:
-      1fr 1fr;
-  }
-
-  .btn-primary,
-  .btn-secondary{
-    padding:
-      0 14px;
-
-    font-size:14px;
+  body{
+    background:#111;
   }
 }
 
 </style>
 </head>
 
-
 <body>
 
 
-<header class="navbar">
-
-  <a
-    href="index.html"
-    class="logo"
-  >
-    more<span>moments</span>
-  </a>
+<div class="camera-app">
 
 
-  <div class="nav-actions">
+  <div class="video-box">
 
-    <a
-      href="login.html"
-      class="btn-login"
-      id="loginButton"
-    >
-      Masuk
-    </a>
-
-
-    <a
-      href="login.html"
-      class="btn-create-small create-link"
-    >
-      Buat Acara
-    </a>
+    <video
+      id="video"
+      autoplay
+      playsinline
+      muted
+    ></video>
 
   </div>
 
-</header>
 
+  <div class="topbar">
 
+    <div class="event-info">
 
-<main class="hero">
-
-  <div class="hero-inner">
-
-
-    <div class="hero-text">
-
-      <div class="tag">
-        📸 Disposable Camera untuk Acara
-      </div>
-
-
-      <h1>
-        Semua tamu.<br>
-        Semua <span>momen.</span>
-      </h1>
-
-
-      <p>
-        Biarkan teman dan keluarga
-        mengabadikan momen acara langsung
-        dari kamera HP mereka.
-        Tanpa install aplikasi.
-        Cukup scan QR, jepret,
-        dan simpan kenangan bersama.
-      </p>
-
-
-      <div class="hero-buttons">
-
-        <a
-          href="login.html"
-          class="btn-primary create-link"
-        >
-          Buat Acara
-        </a>
-
-
-        <a
-          href="#cara-kerja"
-          class="btn-secondary"
-        >
-          Cara Kerja
-        </a>
-
-      </div>
-
-    </div>
-
-
-
-    <div class="phone-wrapper">
-
-      <div class="phone">
-
-        <div class="phone-screen">
-
-
-          <div class="camera-top">
-
-            <span>
-              May & Habi
-            </span>
-
-            <span>
-              ⋯
-            </span>
-
-          </div>
-
-
-          <div class="event-info">
-
-            <small>
-              THE WEDDING OF
-            </small>
-
-            <h2>
-              May & Habi
-            </h2>
-
-            <div class="shot-count">
-              8 dari 15 foto
-            </div>
-
-          </div>
-
-
-          <div class="camera-controls">
-
-            <div class="shutter"></div>
-
-            <div class="switch-camera">
-              ↻
-            </div>
-
-          </div>
-
-
-        </div>
-
-      </div>
-
-    </div>
-
-
-  </div>
-
-</main>
-
-
-
-<section class="features">
-
-  <div class="section-inner">
-
-
-    <div class="section-title">
-
-      <small>
-        Semua jadi mudah
+      <small id="guestName">
+        Tamu
       </small>
 
-      <h2>
-        Satu QR untuk semua momen.
-      </h2>
+      <strong id="eventName">
+        MoreMoments
+      </strong>
+
+      <div
+        class="event-time"
+        id="eventTime"
+      ></div>
 
     </div>
 
 
-    <div class="feature-grid">
-
-
-      <div class="feature-card">
-
-        <div class="feature-icon">
-          ▦
-        </div>
-
-        <h3>
-          Scan QR
-        </h3>
-
-        <p>
-          Tamu cukup scan QR acara
-          tanpa perlu download atau
-          install aplikasi.
-        </p>
-
-      </div>
-
-
-      <div class="feature-card">
-
-        <div class="feature-icon">
-          📷
-        </div>
-
-        <h3>
-          Jepret Foto
-        </h3>
-
-        <p>
-          Kamera langsung terbuka
-          di browser dan tamu bisa
-          mulai mengambil foto.
-        </p>
-
-      </div>
-
-
-      <div class="feature-card">
-
-        <div class="feature-icon">
-          🖼️
-        </div>
-
-        <h3>
-          Galeri Bersama
-        </h3>
-
-        <p>
-          Semua foto terkumpul
-          menjadi satu galeri
-          kenangan setelah acara selesai.
-        </p>
-
-      </div>
-
-
-    </div>
-
-  </div>
-
-</section>
-
-
-
-<section
-  class="how"
-  id="cara-kerja"
->
-
-  <div class="section-title">
-
-    <small>
-      Cara kerja
-    </small>
-
-    <h2>
-      Hanya tiga langkah.
-    </h2>
-
-  </div>
-
-
-  <div class="steps">
-
-
-    <div class="step">
-
-      <div class="number">
-        1
-      </div>
-
-      <div>
-
-        <h3>
-          Buat acara
-        </h3>
-
-        <p>
-          Tentukan nama acara,
-          tanggal, jumlah tamu,
-          dan jumlah jepretan.
-        </p>
-
-      </div>
-
-    </div>
-
-
-    <div class="step">
-
-      <div class="number">
-        2
-      </div>
-
-      <div>
-
-        <h3>
-          Bagikan QR
-        </h3>
-
-        <p>
-          Letakkan QR di meja,
-          undangan atau layar agar
-          tamu dapat mengakses kamera.
-        </p>
-
-      </div>
-
-    </div>
-
-
-    <div class="step">
-
-      <div class="number">
-        3
-      </div>
-
-      <div>
-
-        <h3>
-          Nikmati galerinya
-        </h3>
-
-        <p>
-          Setelah acara selesai,
-          semua momen dapat dinikmati
-          bersama dalam satu galeri.
-        </p>
-
-      </div>
-
-    </div>
-
-
-  </div>
-
-</section>
-
-
-
-<section class="cta">
-
-  <h2>
-    Siap mengabadikan momen?
-  </h2>
-
-  <p>
-    Buat acara pertama Anda
-    dan biarkan para tamu
-    mengisi album dengan sudut
-    pandang mereka.
-  </p>
-
-
-  <a
-    href="login.html"
-    class="btn-primary create-link"
-  >
-    Buat Acara
-  </a>
-
-</section>
-
-
-
-<footer>
-
-  <div class="footer-links">
-
-    <!-- nanti kita buat halaman ini
-         untuk verifikasi Google -->
-
-    <a href="privacy.html">
-      Kebijakan Privasi
+    <a
+      href="#"
+      class="exit"
+      id="exitButton"
+    >
+      ×
     </a>
 
   </div>
 
-  © 2026 MoreMoments.
-  Dibuat untuk mengabadikan setiap cerita.
 
-</footer>
+  <div
+    class="counter"
+    id="counter"
+  >
+    0 dari 15 foto
+  </div>
 
+
+  <div
+    class="filters"
+    id="filters"
+    aria-label="Pilihan filter kamera"
+  >
+
+    <button class="filter-button active" type="button" data-filter="original">Original<small>Asli</small></button>
+    <button class="filter-button" type="button" data-filter="natural">Natural<small>Lembut</small></button>
+    <button class="filter-button" type="button" data-filter="bright">Bright<small>Lebih cerah</small></button>
+    <button class="filter-button" type="button" data-filter="softwhite">Soft White<small>Putih halus</small></button>
+    <button class="filter-button" type="button" data-filter="beauty">Beauty Glow<small>Cerah manis</small></button>
+    <button class="filter-button" type="button" data-filter="creamy">Creamy<small>Putih creamy</small></button>
+    <button class="filter-button" type="button" data-filter="rosy">Rosy<small>Pink lembut</small></button>
+    <button class="filter-button" type="button" data-filter="peach">Peach<small>Fresh hangat</small></button>
+    <button class="filter-button" type="button" data-filter="warm">Warm Glow<small>Hangat</small></button>
+    <button class="filter-button" type="button" data-filter="cool">Cool Clean<small>Putih dingin</small></button>
+    <button class="filter-button" type="button" data-filter="latte">Latte<small>Coklat lembut</small></button>
+    <button class="filter-button" type="button" data-filter="dreamy">Dreamy<small>Soft airy</small></button>
+    <button class="filter-button" type="button" data-filter="film">Film<small>Analog</small></button>
+    <button class="filter-button" type="button" data-filter="moody">Moody<small>Dramatis</small></button>
+    <button class="filter-button" type="button" data-filter="bw">B&amp;W<small>Hitam putih</small></button>
+    <button class="filter-button" type="button" data-filter="vintage">Vintage<small>Klasik</small></button>
+
+  </div>
+
+
+  <div class="controls">
+
+    <div class="control-row">
+
+
+      <div class="last-photo">
+
+        <img
+          id="lastPhoto"
+          alt="Foto terakhir"
+        >
+
+      </div>
+
+
+      <div class="shutter-wrap">
+
+        <button
+          class="shutter"
+          id="captureButton"
+          aria-label="Ambil foto"
+        >
+
+          <div class="shutter-inner"></div>
+
+        </button>
+
+      </div>
+
+
+      <div class="switch-wrap">
+
+        <button
+          class="mirror-toggle active"
+          id="mirrorToggle"
+          aria-label="Mode cermin"
+          title="Mode cermin aktif"
+        >
+          ⇆
+        </button>
+
+        <button
+          class="switch"
+          id="switchCamera"
+          aria-label="Ganti kamera"
+        >
+          ↻
+        </button>
+
+      </div>
+
+
+    </div>
+
+  </div>
+
+
+  <div
+    class="flash"
+    id="flash"
+  ></div>
+
+
+  <!-- IZIN KAMERA -->
+
+  <div
+    class="permission"
+    id="permissionScreen"
+  >
+
+    <div class="permission-card">
+
+      <div class="camera-icon">
+        📷
+      </div>
+
+      <h1>
+        Izinkan kamera
+      </h1>
+
+      <p>
+        MoreMoments memerlukan akses kamera
+        agar Anda dapat mengabadikan momen acara.
+      </p>
+
+      <button id="startCamera">
+        Buka Kamera
+      </button>
+
+      <div
+        class="permission-error"
+        id="permissionError"
+      ></div>
+
+    </div>
+
+  </div>
+
+
+  <!-- JATAH HABIS -->
+
+  <div
+    class="limit-screen"
+    id="limitScreen"
+  >
+
+    <div class="limit-card">
+
+      <h2>
+        Semua foto sudah diambil 🎉
+      </h2>
+
+      <p>
+        Anda sudah menggunakan seluruh
+        jatah foto untuk acara ini.
+      </p>
+
+      <a
+        href="#"
+        id="backEvent"
+      >
+        Kembali ke Acara
+      </a>
+
+    </div>
+
+  </div>
+
+
+  <!-- EVENT LOCK -->
+
+  <div
+    class="lock-screen"
+    id="lockScreen"
+  >
+
+    <div class="lock-card">
+
+      <div
+        class="lock-icon"
+        id="lockIcon"
+      >
+        ⏳
+      </div>
+
+      <div
+        class="lock-label"
+        id="lockLabel"
+      >
+        MOREMOMENTS
+      </div>
+
+      <h2 id="lockTitle">
+        Acara belum dimulai
+      </h2>
+
+      <p id="lockText">
+        Kamera belum tersedia.
+      </p>
+
+      <div
+        class="lock-time"
+        id="lockTime"
+      ></div>
+
+      <a
+        href="#"
+        class="lock-button"
+        id="lockMainButton"
+      >
+        Kembali ke Acara
+      </a>
+
+      <a
+        href="#"
+        class="lock-button light"
+        id="lockGalleryButton"
+        style="display:none"
+      >
+        Lihat Galeri
+      </a>
+
+    </div>
+
+  </div>
+
+
+  <!-- LOADING -->
+
+  <div
+    class="loading-screen"
+    id="loadingScreen"
+  >
+
+    <div class="loading-card">
+      Memeriksa waktu acara...
+    </div>
+
+  </div>
+
+
+  <canvas
+    id="canvas"
+    hidden
+  ></canvas>
+
+</div>
 
 
 <script>
 
-const TOKEN_KEY =
-  "momentsAdminToken";
+/* =====================================================
+   CONFIG
+===================================================== */
 
-const token =
-  localStorage.getItem(
-    TOKEN_KEY
+const API_URL =
+  "https://api.ege.my.id";
+
+
+const params =
+  new URLSearchParams(
+    window.location.search
   );
 
 
-const loginButton =
+const slug =
+  params.get("e");
+
+
+/* =====================================================
+   DATA
+===================================================== */
+
+let eventData =
+  null;
+
+
+let guest =
+  null;
+
+
+let stream =
+  null;
+
+
+let facingMode =
+  "environment";
+
+
+let mirrorMode =
+  true;
+
+
+let eventTimer =
+  null;
+
+
+let refreshTimer =
+  null;
+
+
+let currentMode =
+  null;
+
+
+let activeFilter =
+  "original";
+
+
+const FILTERS = {
+
+  original:{
+    label:"Original",
+    css:"none",
+    brightness:1,
+    contrast:1,
+    saturation:1,
+    warmth:0,
+    tint:0,
+    fade:0,
+    grayscale:0,
+    sepia:0
+  },
+
+  natural:{
+    label:"Natural",
+    css:"brightness(1.05) contrast(.98) saturate(1.04)",
+    brightness:1.05,
+    contrast:.98,
+    saturation:1.04,
+    warmth:2,
+    tint:1,
+    fade:.01,
+    grayscale:0,
+    sepia:0
+  },
+
+  bright:{
+    label:"Bright",
+    css:"brightness(1.14) contrast(1.03) saturate(1.04)",
+    brightness:1.14,
+    contrast:1.03,
+    saturation:1.04,
+    warmth:1,
+    tint:0,
+    fade:0,
+    grayscale:0,
+    sepia:0
+  },
+
+  softwhite:{
+    label:"Soft White",
+    css:"brightness(1.18) contrast(.94) saturate(.94)",
+    brightness:1.18,
+    contrast:.94,
+    saturation:.94,
+    warmth:1,
+    tint:1,
+    fade:.035,
+    grayscale:0,
+    sepia:0
+  },
+
+  beauty:{
+    label:"Beauty Glow",
+    css:"brightness(1.16) contrast(.95) saturate(1.08)",
+    brightness:1.16,
+    contrast:.95,
+    saturation:1.08,
+    warmth:4,
+    tint:3,
+    fade:.025,
+    grayscale:0,
+    sepia:.02
+  },
+
+  creamy:{
+    label:"Creamy",
+    css:"brightness(1.12) contrast(.92) saturate(.98) sepia(.06)",
+    brightness:1.12,
+    contrast:.92,
+    saturation:.98,
+    warmth:8,
+    tint:2,
+    fade:.055,
+    grayscale:0,
+    sepia:.06
+  },
+
+  rosy:{
+    label:"Rosy",
+    css:"brightness(1.10) contrast(.96) saturate(1.08)",
+    brightness:1.10,
+    contrast:.96,
+    saturation:1.08,
+    warmth:3,
+    tint:9,
+    fade:.025,
+    grayscale:0,
+    sepia:.02
+  },
+
+  peach:{
+    label:"Peach",
+    css:"brightness(1.10) contrast(.97) saturate(1.10) sepia(.05)",
+    brightness:1.10,
+    contrast:.97,
+    saturation:1.10,
+    warmth:9,
+    tint:5,
+    fade:.02,
+    grayscale:0,
+    sepia:.05
+  },
+
+  warm:{
+    label:"Warm Glow",
+    css:"brightness(1.08) contrast(1.02) saturate(1.10) sepia(.10)",
+    brightness:1.08,
+    contrast:1.02,
+    saturation:1.10,
+    warmth:12,
+    tint:2,
+    fade:0,
+    grayscale:0,
+    sepia:.10
+  },
+
+  cool:{
+    label:"Cool Clean",
+    css:"brightness(1.11) contrast(1.01) saturate(.94)",
+    brightness:1.11,
+    contrast:1.01,
+    saturation:.94,
+    warmth:-10,
+    tint:0,
+    fade:.01,
+    grayscale:0,
+    sepia:0
+  },
+
+  latte:{
+    label:"Latte",
+    css:"brightness(1.06) contrast(.94) saturate(.90) sepia(.13)",
+    brightness:1.06,
+    contrast:.94,
+    saturation:.90,
+    warmth:10,
+    tint:1,
+    fade:.07,
+    grayscale:0,
+    sepia:.13
+  },
+
+  dreamy:{
+    label:"Dreamy",
+    css:"brightness(1.14) contrast(.90) saturate(.92)",
+    brightness:1.14,
+    contrast:.90,
+    saturation:.92,
+    warmth:2,
+    tint:4,
+    fade:.08,
+    grayscale:0,
+    sepia:.02
+  },
+
+  film:{
+    label:"Film",
+    css:"brightness(1.03) contrast(1.08) saturate(.88) sepia(.06)",
+    brightness:1.03,
+    contrast:1.08,
+    saturation:.88,
+    warmth:5,
+    tint:0,
+    fade:.03,
+    grayscale:.03,
+    sepia:.06
+  },
+
+  moody:{
+    label:"Moody",
+    css:"brightness(.92) contrast(1.13) saturate(.86)",
+    brightness:.92,
+    contrast:1.13,
+    saturation:.86,
+    warmth:-2,
+    tint:0,
+    fade:0,
+    grayscale:.05,
+    sepia:0
+  },
+
+  bw:{
+    label:"B&W",
+    css:"grayscale(1) contrast(1.08) brightness(1.04)",
+    brightness:1.04,
+    contrast:1.08,
+    saturation:1,
+    warmth:0,
+    tint:0,
+    fade:0,
+    grayscale:1,
+    sepia:0
+  },
+
+  vintage:{
+    label:"Vintage",
+    css:"sepia(.28) saturate(.88) contrast(.96) brightness(1.05)",
+    brightness:1.05,
+    contrast:.96,
+    saturation:.88,
+    warmth:8,
+    tint:1,
+    fade:.05,
+    grayscale:0,
+    sepia:.28
+  }
+
+};
+
+
+/*
+Jam server.
+*/
+
+let serverEpochMs =
+  null;
+
+
+let performanceBaseline =
+  null;
+
+
+/* =====================================================
+   ELEMENT
+===================================================== */
+
+const video =
   document.getElementById(
-    "loginButton"
+    "video"
   );
 
 
-const createLinks =
-  document.querySelectorAll(
-    ".create-link"
+const canvas =
+  document.getElementById(
+    "canvas"
   );
 
 
-/*
-========================================
-BELUM LOGIN
-========================================
-Masuk       -> login.html
-Buat Acara  -> login.html
-*/
-
-if(!token){
-
-  loginButton.textContent =
-    "Masuk";
-
-  loginButton.href =
-    "login.html";
-
-
-  createLinks.forEach(
-    function(link){
-
-      link.href =
-        "login.html";
-
-    }
+const captureButton =
+  document.getElementById(
+    "captureButton"
   );
 
+
+const switchButton =
+  document.getElementById(
+    "switchCamera"
+  );
+
+
+const mirrorToggle =
+  document.getElementById(
+    "mirrorToggle"
+  );
+
+
+const permissionScreen =
+  document.getElementById(
+    "permissionScreen"
+  );
+
+
+const permissionError =
+  document.getElementById(
+    "permissionError"
+  );
+
+
+const lastPhoto =
+  document.getElementById(
+    "lastPhoto"
+  );
+
+
+const counter =
+  document.getElementById(
+    "counter"
+  );
+
+
+const flash =
+  document.getElementById(
+    "flash"
+  );
+
+
+const limitScreen =
+  document.getElementById(
+    "limitScreen"
+  );
+
+
+const lockScreen =
+  document.getElementById(
+    "lockScreen"
+  );
+
+
+const loadingScreen =
+  document.getElementById(
+    "loadingScreen"
+  );
+
+
+const filtersBar =
+  document.getElementById(
+    "filters"
+  );
+
+
+/* =====================================================
+   TIMEZONE
+===================================================== */
+
+function timezoneLabel(
+  timezone
+){
+
+  if(
+    timezone ===
+    "Asia/Jakarta"
+  ){
+    return "WIB";
+  }
+
+
+  if(
+    timezone ===
+    "Asia/Jayapura"
+  ){
+    return "WIT";
+  }
+
+
+  return "WITA";
 }
 
 
-/*
-========================================
-SUDAH LOGIN
-========================================
-Masuk berubah menjadi Dashboard
-Buat Acara langsung ke create-event
-*/
+/* =====================================================
+   SERVER CLOCK
+===================================================== */
 
-else{
+function syncServerClock(
+  serverTime
+){
 
-  loginButton.textContent =
-    "Dashboard";
-
-  loginButton.href =
-    "dashboard.html";
+  const parsed =
+    Date.parse(
+      serverTime
+    );
 
 
-  createLinks.forEach(
-    function(link){
+  if(
+    Number.isNaN(
+      parsed
+    )
+  ){
+    return false;
+  }
 
-      link.href =
-        "create-event.html";
 
+  serverEpochMs =
+    parsed;
+
+
+  performanceBaseline =
+    performance.now();
+
+
+  return true;
+}
+
+
+function getServerNow(){
+
+  if(
+    serverEpochMs === null ||
+    performanceBaseline === null
+  ){
+
+    return null;
+  }
+
+
+  return (
+    serverEpochMs
+    +
+    (
+      performance.now()
+      -
+      performanceBaseline
+    )
+  );
+}
+
+
+/* =====================================================
+   FORMAT DATE
+===================================================== */
+
+function formatDate(
+  value
+){
+
+  if(!value){
+    return "-";
+  }
+
+
+  return new Date(
+    value +
+    "T00:00:00"
+  )
+  .toLocaleDateString(
+    "id-ID",
+    {
+      weekday:"long",
+      day:"numeric",
+      month:"long",
+      year:"numeric"
     }
   );
-
 }
+
+
+function formatEventRange(
+  startDate,
+  endDate
+){
+
+  if(!startDate){
+    return "-";
+  }
+
+  const finalEndDate =
+    endDate ||
+    startDate;
+
+  if(
+    finalEndDate ===
+    startDate
+  ){
+    return formatDate(
+      startDate
+    );
+  }
+
+  return (
+    formatDate(
+      startDate
+    )
+    +
+    " – "
+    +
+    formatDate(
+      finalEndDate
+    )
+  );
+}
+
+
+/* =====================================================
+   GUEST
+===================================================== */
+
+function loadGuest(){
+
+  if(!slug){
+    return false;
+  }
+
+
+  const saved =
+    localStorage.getItem(
+      "momentsGuest_" +
+      slug
+    );
+
+
+  if(!saved){
+    return false;
+  }
+
+
+  try{
+
+    guest =
+      JSON.parse(
+        saved
+      );
+
+
+    if(
+      !guest ||
+      !guest.id ||
+      !guest.guestToken
+    ){
+      return false;
+    }
+
+
+    return true;
+
+
+  }catch(error){
+
+    console.error(
+      error
+    );
+
+
+    return false;
+  }
+}
+
+
+/* =====================================================
+   LOAD EVENT FROM SERVER
+===================================================== */
+
+async function loadEvent(
+  quiet = false
+){
+
+  if(!slug){
+
+    window.location.href =
+      "index.html";
+
+    return false;
+  }
+
+
+  try{
+
+    const response =
+      await fetch(
+        API_URL +
+        "/api/events/" +
+        encodeURIComponent(
+          slug
+        ),
+        {
+          cache:"no-store"
+        }
+      );
+
+
+    const data =
+      await response.json();
+
+
+    if(
+      !response.ok ||
+      !data.success ||
+      !data.event
+    ){
+
+      throw new Error(
+        data.error ||
+        "Acara tidak ditemukan."
+      );
+    }
+
+
+    if(
+      data.serverTime
+    ){
+
+      syncServerClock(
+        data.serverTime
+      );
+    }
+
+
+    const raw =
+      data.event;
+
+
+    eventData = {
+
+      id:
+        raw.id,
+
+      slug:
+        raw.slug,
+
+      name:
+        raw.name,
+
+      type:
+        raw.event_type,
+
+      date:
+        raw.event_date,
+
+      endDate:
+        raw.end_date ||
+        raw.event_date,
+
+      startTime:
+        raw.start_time,
+
+      endTime:
+        raw.end_time,
+
+      timezone:
+        raw.timezone ||
+        "Asia/Makassar",
+
+      maxGuests:
+        Number(
+          raw.max_guests ||
+          0
+        ),
+
+      shots:
+        Number(
+          raw.shots_per_guest ||
+          15
+        ),
+
+      filter:
+        raw.filter ||
+        "original",
+
+      status:
+        raw.status,
+
+      phase:
+        data.eventPhase ||
+        raw.event_phase ||
+        "invalid",
+
+      startAt:
+        raw.start_at
+          ?
+          Date.parse(
+            raw.start_at
+          )
+          :
+          null,
+
+      endAt:
+        raw.end_at
+          ?
+          Date.parse(
+            raw.end_at
+          )
+          :
+          null
+    };
+
+
+    /*
+    Kalau jatah foto diedit pemilik,
+    guest yang sudah masuk juga mengikuti
+    batas terbaru.
+    */
+
+    if(guest){
+
+      guest.shotsLimit =
+        eventData.shots;
+
+
+      localStorage.setItem(
+        "momentsGuest_" +
+        slug,
+
+        JSON.stringify(
+          guest
+        )
+      );
+    }
+
+
+    localStorage.setItem(
+      "momentsEvent",
+      JSON.stringify(
+        eventData
+      )
+    );
+
+
+    setupPage();
+
+
+    loadingScreen.style.display =
+      "none";
+
+
+    checkEventAccess();
+
+
+    return true;
+
+
+  }catch(error){
+
+    console.error(
+      error
+    );
+
+
+    if(!quiet){
+
+      loadingScreen.innerHTML = `
+
+        <div class="lock-card">
+
+          <div class="lock-icon">
+            ⚠️
+          </div>
+
+          <h2>
+            Acara tidak tersedia
+          </h2>
+
+          <p>
+            ${escapeHtml(
+              error.message
+            )}
+          </p>
+
+          <a
+            class="lock-button"
+            href="index.html"
+          >
+            Kembali
+          </a>
+
+        </div>
+      `;
+    }
+
+
+    return false;
+  }
+}
+
+
+/* =====================================================
+   ESCAPE
+===================================================== */
+
+function escapeHtml(
+  value
+){
+
+  return String(
+    value || ""
+  )
+  .replace(/&/g,"&amp;")
+  .replace(/</g,"&lt;")
+  .replace(/>/g,"&gt;")
+  .replace(/"/g,"&quot;")
+  .replace(/'/g,"&#039;");
+}
+
+
+/* =====================================================
+   SETUP PAGE
+===================================================== */
+
+function setupPage(){
+
+  if(!eventData){
+    return;
+  }
+
+
+  const tz =
+    timezoneLabel(
+      eventData.timezone
+    );
+
+
+  document.getElementById(
+    "eventName"
+  ).textContent =
+    eventData.name ||
+    "MoreMoments";
+
+
+  document.getElementById(
+    "guestName"
+  ).textContent =
+    guest?.name ||
+    "Tamu";
+
+
+  document.getElementById(
+    "eventTime"
+  ).textContent =
+    (
+      eventData.endDate &&
+      eventData.endDate !==
+      eventData.date
+        ?
+        formatEventRange(
+          eventData.date,
+          eventData.endDate
+        ) +
+        " • "
+        :
+        ""
+    )
+    +
+    eventData.startTime
+    +
+    "–"
+    +
+    eventData.endTime
+    +
+    " "
+    +
+    tz;
+
+
+  document.getElementById(
+    "exitButton"
+  ).href =
+    "event.html?e="
+    +
+    encodeURIComponent(
+      slug
+    );
+
+
+  document.getElementById(
+    "backEvent"
+  ).href =
+    "event.html?e="
+    +
+    encodeURIComponent(
+      slug
+    );
+
+
+  document.getElementById(
+    "lockMainButton"
+  ).href =
+    "event.html?e="
+    +
+    encodeURIComponent(
+      slug
+    );
+
+
+  document.getElementById(
+    "lockGalleryButton"
+  ).href =
+    "gallery.html?e="
+    +
+    encodeURIComponent(
+      slug
+    );
+
+
+  document.title =
+    "Kamera "
+    +
+    eventData.name
+    +
+    " | MoreMoments";
+
+
+  updateCounter();
+}
+
+
+/* =====================================================
+   EVENT MODE - SERVER TIME
+===================================================== */
+
+function getEventMode(){
+
+  if(!eventData){
+    return "loading";
+  }
+
+
+  if(
+    eventData.status !==
+    "active"
+  ){
+    return "inactive";
+  }
+
+
+  const now =
+    getServerNow();
+
+
+  /*
+  Kalau belum ada clock server,
+  percaya phase dari Worker.
+  */
+
+  if(
+    now === null
+  ){
+
+    return (
+      eventData.phase ||
+      "invalid"
+    );
+  }
+
+
+  if(
+    !Number.isFinite(
+      eventData.startAt
+    ) ||
+    !Number.isFinite(
+      eventData.endAt
+    )
+  ){
+
+    return (
+      eventData.phase ||
+      "invalid"
+    );
+  }
+
+
+  if(
+    now <
+    eventData.startAt
+  ){
+
+    return "waiting";
+  }
+
+
+  if(
+    now >=
+    eventData.endAt
+  ){
+
+    return "finished";
+  }
+
+
+  return "active";
+}
+
+
+/* =====================================================
+   COUNTDOWN TEXT
+===================================================== */
+
+function getCountdownText(){
+
+  if(
+    !eventData ||
+    !Number.isFinite(
+      eventData.startAt
+    )
+  ){
+
+    return "";
+  }
+
+
+  const now =
+    getServerNow();
+
+
+  if(
+    now === null
+  ){
+    return "";
+  }
+
+
+  let diff =
+    Math.max(
+      0,
+      eventData.startAt -
+      now
+    );
+
+
+  const day =
+    86400000;
+
+
+  const hour =
+    3600000;
+
+
+  const minute =
+    60000;
+
+
+  const days =
+    Math.floor(
+      diff /
+      day
+    );
+
+
+  diff %=
+    day;
+
+
+  const hours =
+    Math.floor(
+      diff /
+      hour
+    );
+
+
+  diff %=
+    hour;
+
+
+  const minutes =
+    Math.floor(
+      diff /
+      minute
+    );
+
+
+  diff %=
+    minute;
+
+
+  const seconds =
+    Math.floor(
+      diff /
+      1000
+    );
+
+
+  return (
+    days
+    +
+    " hari "
+    +
+    String(
+      hours
+    ).padStart(
+      2,
+      "0"
+    )
+    +
+    " jam "
+    +
+    String(
+      minutes
+    ).padStart(
+      2,
+      "0"
+    )
+    +
+    " menit "
+    +
+    String(
+      seconds
+    ).padStart(
+      2,
+      "0"
+    )
+    +
+    " detik"
+  );
+}
+
+
+/* =====================================================
+   LOCK
+===================================================== */
+
+function showLock(
+  mode
+){
+
+  stopCamera();
+
+
+  permissionScreen.style.display =
+    "none";
+
+
+  lockScreen.classList.add(
+    "visible"
+  );
+
+
+  const icon =
+    document.getElementById(
+      "lockIcon"
+    );
+
+
+  const label =
+    document.getElementById(
+      "lockLabel"
+    );
+
+
+  const title =
+    document.getElementById(
+      "lockTitle"
+    );
+
+
+  const text =
+    document.getElementById(
+      "lockText"
+    );
+
+
+  const time =
+    document.getElementById(
+      "lockTime"
+    );
+
+
+  const gallery =
+    document.getElementById(
+      "lockGalleryButton"
+    );
+
+
+  gallery.style.display =
+    "none";
+
+
+  const tz =
+    timezoneLabel(
+      eventData.timezone
+    );
+
+
+  if(
+    mode ===
+    "waiting"
+  ){
+
+    icon.textContent =
+      "⏳";
+
+
+    label.textContent =
+      "BELUM DIMULAI";
+
+
+    title.textContent =
+      "Acara belum dimulai";
+
+
+    text.textContent =
+      "QR Code Anda sudah benar. Kamera akan otomatis tersedia saat waktu acara dimulai.";
+
+
+    time.innerHTML =
+      "<strong>"
+      +
+      getCountdownText()
+      +
+      "</strong><br>"
+      +
+      "Kamera aktif "
+      +
+      formatDate(
+        eventData.date
+      )
+      +
+      " pukul "
+      +
+      eventData.startTime
+      +
+      " "
+      +
+      tz
+      +
+      ".";
+
+
+  }else if(
+    mode ===
+    "finished"
+  ){
+
+    icon.textContent =
+      "🎉";
+
+
+    label.textContent =
+      "SELESAI";
+
+
+    title.textContent =
+      "Acara telah selesai";
+
+
+    text.textContent =
+      "Waktu mengambil foto sudah berakhir. Terima kasih sudah ikut mengabadikan momen acara ini.";
+
+
+    time.textContent =
+      formatEventRange(
+        eventData.date,
+        eventData.endDate
+      )
+      +
+      " • "
+      +
+      eventData.startTime
+      +
+      " – "
+      +
+      eventData.endTime
+      +
+      " "
+      +
+      tz;
+
+
+    gallery.style.display =
+      "flex";
+
+
+  }else if(
+    mode ===
+    "inactive"
+  ){
+
+    icon.textContent =
+      "🔒";
+
+
+    label.textContent =
+      "NONAKTIF";
+
+
+    title.textContent =
+      "Acara tidak aktif";
+
+
+    text.textContent =
+      "Acara ini sedang dinonaktifkan oleh penyelenggara.";
+
+
+    time.textContent =
+      "Kamera untuk tamu sedang ditutup.";
+
+
+  }else{
+
+    icon.textContent =
+      "⚠️";
+
+
+    label.textContent =
+      "TIDAK TERSEDIA";
+
+
+    title.textContent =
+      "Kamera tidak tersedia";
+
+
+    text.textContent =
+      "Status acara tidak dapat ditentukan.";
+
+
+    time.textContent =
+      "";
+  }
+}
+
+
+/* =====================================================
+   CHECK ACCESS
+===================================================== */
+
+function checkEventAccess(){
+
+  if(!eventData){
+    return;
+  }
+
+
+  const mode =
+    getEventMode();
+
+
+  if(
+    mode !==
+    currentMode
+  ){
+
+    currentMode =
+      mode;
+  }
+
+
+  if(
+    mode ===
+    "active"
+  ){
+
+    lockScreen.classList.remove(
+      "visible"
+    );
+
+
+    const taken =
+      Number(
+        guest?.shotsTaken ||
+        0
+      );
+
+
+    const limit =
+      Number(
+        eventData.shots ||
+        15
+      );
+
+
+    if(
+      taken >= limit
+    ){
+
+      limitScreen.style.display =
+        "flex";
+
+
+      permissionScreen.style.display =
+        "none";
+
+
+      stopCamera();
+
+
+      return;
+    }
+
+
+    limitScreen.style.display =
+      "none";
+
+
+    /*
+    Jangan tampilkan izin ulang
+    kalau kamera sudah hidup.
+    */
+
+    if(!stream){
+
+      permissionScreen.style.display =
+        "flex";
+    }
+
+
+  }else{
+
+    limitScreen.style.display =
+      "none";
+
+
+    showLock(
+      mode
+    );
+  }
+}
+
+
+/* =====================================================
+   COUNTER
+===================================================== */
+
+function updateCounter(){
+
+  if(
+    !guest ||
+    !eventData
+  ){
+    return;
+  }
+
+
+  const taken =
+    Number(
+      guest.shotsTaken ||
+      0
+    );
+
+
+  const max =
+    Number(
+      eventData.shots ||
+      15
+    );
+
+
+  counter.textContent =
+    taken
+    +
+    " dari "
+    +
+    max
+    +
+    " foto";
+
+
+  if(
+    taken >= max
+  ){
+
+    limitScreen.style.display =
+      "flex";
+
+
+    permissionScreen.style.display =
+      "none";
+
+
+    stopCamera();
+  }
+}
+
+
+/* =====================================================
+   MODE CERMIN
+===================================================== */
+
+function applyMirrorPreview(){
+
+  video.style.transform =
+    mirrorMode
+      ?
+      "scaleX(-1)"
+      :
+      "scaleX(1)";
+
+
+  mirrorToggle.classList.toggle(
+    "active",
+    mirrorMode
+  );
+
+
+  mirrorToggle.title =
+    mirrorMode
+      ?
+      "Mode cermin aktif"
+      :
+      "Mode cermin nonaktif";
+
+
+  mirrorToggle.setAttribute(
+    "aria-pressed",
+    mirrorMode
+      ?
+      "true"
+      :
+      "false"
+  );
+
+
+  localStorage.setItem(
+    "momentsMirrorMode",
+    mirrorMode
+      ?
+      "1"
+      :
+      "0"
+  );
+}
+
+
+function loadMirrorMode(){
+
+  const saved =
+    localStorage.getItem(
+      "momentsMirrorMode"
+    );
+
+
+  /*
+    Default SELALU cermin.
+    Kalau user pernah mematikannya,
+    pilihan terakhir tetap diingat.
+  */
+  mirrorMode =
+    saved === null
+      ?
+      true
+      :
+      saved === "1";
+
+
+  applyMirrorPreview();
+}
+
+
+mirrorToggle.addEventListener(
+  "click",
+  function(){
+
+    mirrorMode =
+      !mirrorMode;
+
+
+    applyMirrorPreview();
+  }
+);
+
+
+/* =====================================================
+   FILTER CAMERA
+===================================================== */
+
+function applyFilterPreview(){
+
+  const config =
+    FILTERS[
+      activeFilter
+    ]
+    ||
+    FILTERS.original;
+
+
+  video.style.filter =
+    config.css;
+
+
+  document
+    .querySelectorAll(
+      ".filter-button"
+    )
+    .forEach(
+      button => {
+
+        button.classList.toggle(
+          "active",
+          button.dataset.filter ===
+          activeFilter
+        );
+      }
+    );
+
+
+  localStorage.setItem(
+    "momentsCameraFilter",
+    activeFilter
+  );
+}
+
+
+function loadSavedFilter(){
+
+  const saved =
+    localStorage.getItem(
+      "momentsCameraFilter"
+    );
+
+
+  if(
+    saved &&
+    FILTERS[saved]
+  ){
+
+    activeFilter =
+      saved;
+  }
+
+
+  applyFilterPreview();
+}
+
+
+filtersBar.addEventListener(
+  "click",
+  function(event){
+
+    const button =
+      event.target.closest(
+        ".filter-button"
+      );
+
+
+    if(!button){
+      return;
+    }
+
+
+    const name =
+      button.dataset.filter;
+
+
+    if(!FILTERS[name]){
+      return;
+    }
+
+
+    activeFilter =
+      name;
+
+
+    applyFilterPreview();
+  }
+);
+
+
+/* =====================================================
+   FILTER HASIL FOTO
+   Diproses langsung per pixel agar hasil tersimpan
+   sama dengan preview, termasuk di browser yang tidak
+   mendukung CanvasRenderingContext2D.filter.
+===================================================== */
+
+function clamp255(value){
+  return Math.max(
+    0,
+    Math.min(
+      255,
+      value
+    )
+  );
+}
+
+
+function applySavedPhotoFilter(
+  ctx,
+  width,
+  height,
+  filterName
+){
+
+  const preset =
+    FILTERS[filterName] ||
+    FILTERS.original;
+
+
+  if(filterName === "original"){
+    return;
+  }
+
+
+  const imageData =
+    ctx.getImageData(
+      0,
+      0,
+      width,
+      height
+    );
+
+
+  const data =
+    imageData.data;
+
+
+  const brightness =
+    preset.brightness ?? 1;
+
+
+  const contrast =
+    preset.contrast ?? 1;
+
+
+  const saturation =
+    preset.saturation ?? 1;
+
+
+  const warmth =
+    preset.warmth ?? 0;
+
+
+  const tint =
+    preset.tint ?? 0;
+
+
+  const fade =
+    preset.fade ?? 0;
+
+
+  const grayscale =
+    preset.grayscale ?? 0;
+
+
+  const sepia =
+    preset.sepia ?? 0;
+
+
+  for(
+    let i = 0;
+    i < data.length;
+    i += 4
+  ){
+
+    let r =
+      data[i];
+
+    let g =
+      data[i + 1];
+
+    let b =
+      data[i + 2];
+
+
+    /* brightness */
+
+    r *= brightness;
+    g *= brightness;
+    b *= brightness;
+
+
+    /* contrast */
+
+    r =
+      (r - 128) *
+      contrast +
+      128;
+
+    g =
+      (g - 128) *
+      contrast +
+      128;
+
+    b =
+      (b - 128) *
+      contrast +
+      128;
+
+
+    /* saturation */
+
+    const luma =
+      0.299 * r +
+      0.587 * g +
+      0.114 * b;
+
+
+    r =
+      luma +
+      (r - luma) *
+      saturation;
+
+    g =
+      luma +
+      (g - luma) *
+      saturation;
+
+    b =
+      luma +
+      (b - luma) *
+      saturation;
+
+
+    /* warmth */
+
+    r += warmth;
+    b -= warmth;
+
+
+    /* pink / magenta tint */
+
+    r += tint;
+    b += tint * 0.45;
+    g -= tint * 0.18;
+
+
+    /* sepia */
+
+    if(sepia > 0){
+
+      const sr =
+        r * .393 +
+        g * .769 +
+        b * .189;
+
+      const sg =
+        r * .349 +
+        g * .686 +
+        b * .168;
+
+      const sb =
+        r * .272 +
+        g * .534 +
+        b * .131;
+
+
+      r =
+        r * (1 - sepia) +
+        sr * sepia;
+
+      g =
+        g * (1 - sepia) +
+        sg * sepia;
+
+      b =
+        b * (1 - sepia) +
+        sb * sepia;
+    }
+
+
+    /* grayscale */
+
+    if(grayscale > 0){
+
+      const gray =
+        0.299 * r +
+        0.587 * g +
+        0.114 * b;
+
+
+      r =
+        r * (1 - grayscale) +
+        gray * grayscale;
+
+      g =
+        g * (1 - grayscale) +
+        gray * grayscale;
+
+      b =
+        b * (1 - grayscale) +
+        gray * grayscale;
+    }
+
+
+    /* fade menuju putih */
+
+    if(fade > 0){
+
+      r =
+        r * (1 - fade) +
+        255 * fade;
+
+      g =
+        g * (1 - fade) +
+        255 * fade;
+
+      b =
+        b * (1 - fade) +
+        255 * fade;
+    }
+
+
+    data[i] =
+      clamp255(r);
+
+    data[i + 1] =
+      clamp255(g);
+
+    data[i + 2] =
+      clamp255(b);
+  }
+
+
+  ctx.putImageData(
+    imageData,
+    0,
+    0
+  );
+}
+
+
+/* =====================================================
+   START CAMERA
+===================================================== */
+
+async function startCamera(){
+
+  /*
+  Selalu cek server state lokal
+  sebelum meminta izin kamera.
+  */
+
+  if(
+    getEventMode() !==
+    "active"
+  ){
+
+    checkEventAccess();
+
+    return;
+  }
+
+
+  permissionError.textContent =
+    "";
+
+
+  if(
+    !navigator.mediaDevices ||
+    !navigator.mediaDevices.getUserMedia
+  ){
+
+    permissionError.textContent =
+      "Browser ini tidak mendukung akses kamera.";
+
+    return;
+  }
+
+
+  try{
+
+    stopCamera();
+
+
+    const constraints = {
+
+      audio:false,
+
+      video:{
+
+        facingMode:{
+          ideal:
+            facingMode
+        },
+
+        width:{
+          ideal:
+            1920
+        },
+
+        height:{
+          ideal:
+            1080
+        }
+      }
+    };
+
+
+    stream =
+      await navigator
+        .mediaDevices
+        .getUserMedia(
+          constraints
+        );
+
+
+    /*
+    Cek lagi setelah permission selesai.
+    */
+
+    if(
+      getEventMode() !==
+      "active"
+    ){
+
+      stopCamera();
+
+      checkEventAccess();
+
+      return;
+    }
+
+
+    video.srcObject =
+      stream;
+
+
+    await video.play();
+
+
+    applyMirrorPreview();
+
+    applyFilterPreview();
+
+
+    permissionScreen.style.display =
+      "none";
+
+
+  }catch(error){
+
+    console.error(
+      error
+    );
+
+
+    permissionError.innerHTML =
+      "Kamera tidak dapat dibuka.<br>"
+      +
+      "Pastikan izin kamera sudah diberikan pada browser.";
+  }
+}
+
+
+/* =====================================================
+   STOP CAMERA
+===================================================== */
+
+function stopCamera(){
+
+  if(stream){
+
+    stream
+      .getTracks()
+      .forEach(
+        track =>
+          track.stop()
+      );
+
+
+    stream =
+      null;
+  }
+
+
+  video.srcObject =
+    null;
+}
+
+
+/* =====================================================
+   CAMERA BUTTON
+===================================================== */
+
+document.getElementById(
+  "startCamera"
+).addEventListener(
+  "click",
+  startCamera
+);
+
+
+/* =====================================================
+   SWITCH CAMERA
+===================================================== */
+
+switchButton.addEventListener(
+  "click",
+  async function(){
+
+    if(
+      getEventMode() !==
+      "active"
+    ){
+
+      checkEventAccess();
+
+      return;
+    }
+
+
+    facingMode =
+      facingMode ===
+      "environment"
+      ?
+      "user"
+      :
+      "environment";
+
+
+    await startCamera();
+  }
+);
+
+
+/* =====================================================
+   CAPTURE
+===================================================== */
+
+captureButton.addEventListener(
+  "click",
+  capturePhoto
+);
+
+
+async function capturePhoto(){
+
+  if(
+    getEventMode() !==
+    "active"
+  ){
+
+    await loadEvent(
+      true
+    );
+
+
+    checkEventAccess();
+
+    return;
+  }
+
+
+  const max =
+    Number(
+      eventData.shots ||
+      15
+    );
+
+
+  if(
+    Number(
+      guest.shotsTaken ||
+      0
+    ) >= max
+  ){
+
+    updateCounter();
+
+    return;
+  }
+
+
+  if(
+    !video.videoWidth ||
+    !video.videoHeight
+  ){
+
+    return;
+  }
+
+
+  captureButton.disabled =
+    true;
+
+
+  try{
+
+
+    /* FLASH */
+
+    flash.classList.remove(
+      "active"
+    );
+
+
+    void flash.offsetWidth;
+
+
+    flash.classList.add(
+      "active"
+    );
+
+
+    /* FOTO SIZE */
+
+    const maxWidth =
+      1600;
+
+
+    let width =
+      video.videoWidth;
+
+
+    let height =
+      video.videoHeight;
+
+
+    if(
+      width >
+      maxWidth
+    ){
+
+      const ratio =
+        maxWidth /
+        width;
+
+
+      width =
+        maxWidth;
+
+
+      height =
+        Math.round(
+          height *
+          ratio
+        );
+    }
+
+
+    canvas.width =
+      width;
+
+
+    canvas.height =
+      height;
+
+
+    const ctx =
+      canvas.getContext(
+        "2d"
+      );
+    /* MODE CERMIN PADA HASIL FOTO */
+
+    if(
+      mirrorMode
+    ){
+
+      ctx.save();
+
+
+      ctx.translate(
+        width,
+        0
+      );
+
+
+      ctx.scale(
+        -1,
+        1
+      );
+
+
+      ctx.drawImage(
+        video,
+        0,
+        0,
+        width,
+        height
+      );
+
+
+      ctx.restore();
+
+
+    }else{
+
+
+      ctx.drawImage(
+        video,
+        0,
+        0,
+        width,
+        height
+      );
+    }
+
+
+    applySavedPhotoFilter(
+      ctx,
+      width,
+      height,
+      activeFilter
+    );
+
+
+    /* WEBP */
+
+    const photoBlob =
+      await new Promise(
+        (
+          resolve,
+          reject
+        ) => {
+
+          canvas.toBlob(
+            blob => {
+
+              if(blob){
+
+                resolve(
+                  blob
+                );
+
+              }else{
+
+                reject(
+                  new Error(
+                    "Foto gagal diproses."
+                  )
+                );
+              }
+            },
+
+            "image/webp",
+
+            0.82
+          );
+        }
+      );
+
+
+    /*
+    Cek ulang waktu sebelum upload.
+    */
+
+    if(
+      getEventMode() !==
+      "active"
+    ){
+
+      await loadEvent(
+        true
+      );
+
+
+      checkEventAccess();
+
+      return;
+    }
+
+
+    /* PREVIEW */
+
+    const previewUrl =
+      URL.createObjectURL(
+        photoBlob
+      );
+
+
+    lastPhoto.src =
+      previewUrl;
+
+
+    lastPhoto.style.display =
+      "block";
+
+
+    /* FORM */
+
+    const formData =
+      new FormData();
+
+
+    formData.append(
+      "photo",
+      photoBlob,
+      "photo.webp"
+    );
+
+
+    formData.append(
+      "eventId",
+      eventData.id
+    );
+
+
+    formData.append(
+      "guestId",
+      guest.id
+    );
+
+
+    formData.append(
+      "guestToken",
+      guest.guestToken
+    );
+
+
+    formData.append(
+      "width",
+      String(
+        width
+      )
+    );
+
+
+    formData.append(
+      "height",
+      String(
+        height
+      )
+    );
+
+
+    formData.append(
+      "filter",
+      activeFilter
+    );
+
+
+    /* UPLOAD */
+
+    const response =
+      await fetch(
+        API_URL +
+        "/api/photos",
+        {
+          method:
+            "POST",
+
+          body:
+            formData
+        }
+      );
+
+
+    const data =
+      await response.json();
+
+
+    if(
+      !response.ok ||
+      !data.success
+    ){
+
+      /*
+      Kalau Worker menolak karena waktu/status,
+      refresh event agar layar kamera
+      langsung menyesuaikan.
+      */
+
+      if(
+        data.eventPhase
+      ){
+
+        await loadEvent(
+          true
+        );
+
+
+        checkEventAccess();
+      }
+
+
+      throw new Error(
+        data.error ||
+        "Foto gagal disimpan."
+      );
+    }
+
+
+    guest.shotsTaken =
+      Number(
+        data.shotsTaken ||
+        0
+      );
+
+
+    guest.shotsLimit =
+      Number(
+        data.shotsLimit ||
+        eventData.shots
+      );
+
+
+    localStorage.setItem(
+      "momentsGuest_" +
+      slug,
+
+      JSON.stringify(
+        guest
+      )
+    );
+
+
+    updateCounter();
+
+
+  }catch(error){
+
+    console.error(
+      error
+    );
+
+
+    alert(
+      error.message ||
+      "Foto gagal di-upload."
+    );
+
+
+  }finally{
+
+    captureButton.disabled =
+      false;
+  }
+}
+
+
+/* =====================================================
+   CLEANUP
+===================================================== */
+
+function cleanup(){
+
+  stopCamera();
+
+
+  if(eventTimer){
+
+    clearInterval(
+      eventTimer
+    );
+  }
+
+
+  if(refreshTimer){
+
+    clearInterval(
+      refreshTimer
+    );
+  }
+}
+
+
+window.addEventListener(
+  "beforeunload",
+  cleanup
+);
+
+
+/* =====================================================
+   START
+===================================================== */
+
+async function start(){
+
+  loadMirrorMode();
+
+  loadSavedFilter();
+
+
+  /*
+  Kamera hanya untuk tamu
+  yang sudah bergabung.
+  */
+
+  if(
+    !slug ||
+    !loadGuest()
+  ){
+
+    window.location.href =
+      "event.html?e="
+      +
+      encodeURIComponent(
+        slug || ""
+      );
+
+    return;
+  }
+
+
+  const loaded =
+    await loadEvent();
+
+
+  if(!loaded){
+    return;
+  }
+
+
+  /*
+  Cek perubahan waktu setiap detik
+  berdasarkan clock server.
+  */
+
+  eventTimer =
+    setInterval(
+      checkEventAccess,
+      1000
+    );
+
+
+  /*
+  Sinkron ke Cloudflare setiap 30 detik.
+
+  Jika pemilik:
+  - memperpanjang waktu
+  - menambah jatah foto
+  - menonaktifkan acara
+  - mengaktifkan kembali acara
+
+  perubahan otomatis masuk ke HP tamu.
+  */
+
+  refreshTimer =
+    setInterval(
+      async function(){
+
+        await loadEvent(
+          true
+        );
+
+      },
+      30000
+    );
+}
+
+
+start();
 
 </script>
-
 
 </body>
 </html>
