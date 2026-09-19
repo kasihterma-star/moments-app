@@ -295,9 +295,12 @@ video{
 .switch-wrap{
   display:flex;
   justify-content:flex-end;
+  align-items:center;
+  gap:8px;
 }
 
-.switch{
+.switch,
+.mirror-toggle{
   width:52px;
   height:52px;
 
@@ -310,9 +313,19 @@ video{
 
   color:#fff;
 
-  font-size:23px;
+  font-size:22px;
 
   cursor:pointer;
+}
+
+.mirror-toggle{
+  font-size:18px;
+  font-weight:800;
+}
+
+.mirror-toggle.active{
+  background:#fff;
+  color:#211d1a;
 }
 
 
@@ -774,6 +787,15 @@ video{
       <div class="switch-wrap">
 
         <button
+          class="mirror-toggle active"
+          id="mirrorToggle"
+          aria-label="Mode cermin"
+          title="Mode cermin aktif"
+        >
+          ⇆
+        </button>
+
+        <button
           class="switch"
           id="switchCamera"
           aria-label="Ganti kamera"
@@ -979,6 +1001,10 @@ let stream =
 
 let facingMode =
   "environment";
+
+
+let mirrorMode =
+  true;
 
 
 let eventTimer =
@@ -1247,6 +1273,12 @@ const captureButton =
 const switchButton =
   document.getElementById(
     "switchCamera"
+  );
+
+
+const mirrorToggle =
+  document.getElementById(
+    "mirrorToggle"
   );
 
 
@@ -2423,6 +2455,93 @@ function updateCounter(){
 
 
 /* =====================================================
+   MODE CERMIN
+===================================================== */
+
+function applyMirrorPreview(){
+
+  video.style.transform =
+    mirrorMode
+      ?
+      "scaleX(-1)"
+      :
+      "scaleX(1)";
+
+
+  mirrorToggle.classList.toggle(
+    "active",
+    mirrorMode
+  );
+
+
+  mirrorToggle.title =
+    mirrorMode
+      ?
+      "Mode cermin aktif"
+      :
+      "Mode cermin nonaktif";
+
+
+  mirrorToggle.setAttribute(
+    "aria-pressed",
+    mirrorMode
+      ?
+      "true"
+      :
+      "false"
+  );
+
+
+  localStorage.setItem(
+    "momentsMirrorMode",
+    mirrorMode
+      ?
+      "1"
+      :
+      "0"
+  );
+}
+
+
+function loadMirrorMode(){
+
+  const saved =
+    localStorage.getItem(
+      "momentsMirrorMode"
+    );
+
+
+  /*
+    Default SELALU cermin.
+    Kalau user pernah mematikannya,
+    pilihan terakhir tetap diingat.
+  */
+  mirrorMode =
+    saved === null
+      ?
+      true
+      :
+      saved === "1";
+
+
+  applyMirrorPreview();
+}
+
+
+mirrorToggle.addEventListener(
+  "click",
+  function(){
+
+    mirrorMode =
+      !mirrorMode;
+
+
+    applyMirrorPreview();
+  }
+);
+
+
+/* =====================================================
    FILTER CAMERA
 ===================================================== */
 
@@ -2870,6 +2989,8 @@ async function startCamera(){
     await video.play();
 
 
+    applyMirrorPreview();
+
     applyFilterPreview();
 
 
@@ -3090,11 +3211,10 @@ async function capturePhoto(){
       canvas.getContext(
         "2d"
       );
-    /* MIRROR KAMERA DEPAN */
+    /* MODE CERMIN PADA HASIL FOTO */
 
     if(
-      facingMode ===
-      "user"
+      mirrorMode
     ){
 
       ctx.save();
@@ -3406,6 +3526,8 @@ window.addEventListener(
 ===================================================== */
 
 async function start(){
+
+  loadMirrorMode();
 
   loadSavedFilter();
 
