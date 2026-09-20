@@ -149,32 +149,6 @@ video{
 }
 
 
-/* MIRROR CONTROL */
-.mirror-control{
-  position:absolute;
-  right:16px;
-  bottom:184px;
-  z-index:35;
-}
-.mirror-button{
-  min-height:42px;
-  padding:0 14px;
-  border:1px solid rgba(255,255,255,.35);
-  border-radius:999px;
-  background:rgba(0,0,0,.52);
-  backdrop-filter:blur(12px);
-  color:#fff;
-  font-size:11px;
-  font-weight:800;
-  cursor:pointer;
-  white-space:nowrap;
-}
-.mirror-button.active{
-  background:#fff;
-  color:#211d1a;
-  border-color:#fff;
-}
-
 /* FILTER BAR */
 
 .filters{
@@ -326,7 +300,8 @@ video{
 }
 
 .switch,
-.mirror-toggle{
+.mirror-toggle,
+.timer-toggle{
   width:52px;
   height:52px;
 
@@ -349,9 +324,47 @@ video{
   font-weight:800;
 }
 
-.mirror-toggle.active{
+.timer-toggle{
+  font-size:13px;
+  font-weight:800;
+}
+
+.mirror-toggle.active,
+.timer-toggle.active{
   background:#fff;
   color:#211d1a;
+}
+
+.timer-countdown{
+  display:none;
+  position:absolute;
+  inset:0;
+  z-index:450;
+  align-items:center;
+  justify-content:center;
+  pointer-events:none;
+  background:rgba(0,0,0,.18);
+}
+
+.timer-countdown.visible{
+  display:flex;
+}
+
+.timer-countdown-number{
+  width:126px;
+  height:126px;
+  display:flex;
+  align-items:center;
+  justify-content:center;
+  border:4px solid rgba(255,255,255,.9);
+  border-radius:50%;
+  background:rgba(0,0,0,.38);
+  backdrop-filter:blur(8px);
+  color:#fff;
+  font-family:Georgia,serif;
+  font-size:64px;
+  line-height:1;
+  box-shadow:0 18px 50px rgba(0,0,0,.25);
 }
 
 
@@ -754,18 +767,6 @@ video{
   </div>
 
 
-  <div class="mirror-control">
-    <button
-      class="mirror-button active"
-      id="mirrorToggle"
-      type="button"
-      aria-pressed="true"
-      title="Mode cermin aktif"
-    >
-      🪞 Cermin ON
-    </button>
-  </div>
-
   <div
     class="filters"
     id="filters"
@@ -823,7 +824,26 @@ video{
 
 
       <div class="switch-wrap">
-<button
+
+        <button
+          class="timer-toggle"
+          id="timerToggle"
+          aria-label="Timer kamera"
+          title="Timer mati"
+        >
+          0s
+        </button>
+
+        <button
+          class="mirror-toggle active"
+          id="mirrorToggle"
+          aria-label="Mode cermin"
+          title="Mode cermin aktif"
+        >
+          ⇆
+        </button>
+
+        <button
           class="switch"
           id="switchCamera"
           aria-label="Ganti kamera"
@@ -838,6 +858,18 @@ video{
 
   </div>
 
+
+  <div
+    class="timer-countdown"
+    id="timerCountdown"
+  >
+    <div
+      class="timer-countdown-number"
+      id="timerCountdownNumber"
+    >
+      3
+    </div>
+  </div>
 
   <div
     class="flash"
@@ -1033,6 +1065,19 @@ let facingMode =
 
 let mirrorMode =
   true;
+
+let timerSeconds =
+  0;
+
+let timerRunning =
+  false;
+
+const TIMER_OPTIONS = [
+  0,
+  3,
+  5,
+  10
+];
 
 
 let eventTimer =
@@ -1307,6 +1352,21 @@ const switchButton =
 const mirrorToggle =
   document.getElementById(
     "mirrorToggle"
+  );
+
+const timerToggle =
+  document.getElementById(
+    "timerToggle"
+  );
+
+const timerCountdown =
+  document.getElementById(
+    "timerCountdown"
+  );
+
+const timerCountdownNumber =
+  document.getElementById(
+    "timerCountdownNumber"
   );
 
 
@@ -2488,38 +2548,48 @@ function updateCounter(){
 
 function applyMirrorPreview(){
 
-  if(!video || !mirrorToggle){
-    return;
-  }
-
   video.style.transform =
     mirrorMode
-      ? "scaleX(-1)"
-      : "scaleX(1)";
+      ?
+      "scaleX(-1)"
+      :
+      "scaleX(1)";
 
-  video.style.transformOrigin =
-    "center center";
 
   mirrorToggle.classList.toggle(
     "active",
     mirrorMode
   );
 
-  mirrorToggle.textContent =
+
+  mirrorToggle.title =
     mirrorMode
-      ? "🪞 Cermin ON"
-      : "🪞 Cermin OFF";
+      ?
+      "Mode cermin aktif"
+      :
+      "Mode cermin nonaktif";
+
 
   mirrorToggle.setAttribute(
     "aria-pressed",
-    mirrorMode ? "true" : "false"
+    mirrorMode
+      ?
+      "true"
+      :
+      "false"
   );
+
 
   localStorage.setItem(
     "momentsMirrorMode",
-    mirrorMode ? "1" : "0"
+    mirrorMode
+      ?
+      "1"
+      :
+      "0"
   );
 }
+
 
 function loadMirrorMode(){
 
@@ -2528,13 +2598,23 @@ function loadMirrorMode(){
       "momentsMirrorMode"
     );
 
+
+  /*
+    Default SELALU cermin.
+    Kalau user pernah mematikannya,
+    pilihan terakhir tetap diingat.
+  */
   mirrorMode =
     saved === null
-      ? true
-      : saved === "1";
+      ?
+      true
+      :
+      saved === "1";
+
 
   applyMirrorPreview();
 }
+
 
 mirrorToggle.addEventListener(
   "click",
@@ -2542,6 +2622,7 @@ mirrorToggle.addEventListener(
 
     mirrorMode =
       !mirrorMode;
+
 
     applyMirrorPreview();
   }
@@ -3047,6 +3128,188 @@ function stopCamera(){
 
 
 /* =====================================================
+   TIMER KAMERA
+===================================================== */
+
+function renderTimerButton(){
+
+  timerToggle.textContent =
+    timerSeconds === 0
+      ?
+      "0s"
+      :
+      timerSeconds + "s";
+
+  timerToggle.classList.toggle(
+    "active",
+    timerSeconds > 0
+  );
+
+  timerToggle.title =
+    timerSeconds === 0
+      ?
+      "Timer mati"
+      :
+      "Timer " +
+      timerSeconds +
+      " detik";
+
+  localStorage.setItem(
+    "momentsCameraTimer",
+    String(
+      timerSeconds
+    )
+  );
+}
+
+
+function loadTimerSetting(){
+
+  const saved =
+    Number(
+      localStorage.getItem(
+        "momentsCameraTimer"
+      )
+    );
+
+  timerSeconds =
+    TIMER_OPTIONS.includes(
+      saved
+    )
+      ?
+      saved
+      :
+      0;
+
+  renderTimerButton();
+}
+
+
+timerToggle.addEventListener(
+  "click",
+  function(){
+
+    if(timerRunning){
+      return;
+    }
+
+    const index =
+      TIMER_OPTIONS.indexOf(
+        timerSeconds
+      );
+
+    timerSeconds =
+      TIMER_OPTIONS[
+        (
+          index + 1
+        )
+        %
+        TIMER_OPTIONS.length
+      ];
+
+    renderTimerButton();
+  }
+);
+
+
+async function runCaptureTimer(){
+
+  if(
+    timerSeconds <= 0
+  ){
+    return true;
+  }
+
+  timerRunning =
+    true;
+
+  captureButton.disabled =
+    true;
+
+  timerToggle.disabled =
+    true;
+
+  switchButton.disabled =
+    true;
+
+  mirrorToggle.disabled =
+    true;
+
+  timerCountdown.classList.add(
+    "visible"
+  );
+
+  try{
+
+    for(
+      let remaining =
+        timerSeconds;
+      remaining >= 1;
+      remaining--
+    ){
+
+      if(
+        getEventMode() !==
+        "active"
+      ){
+        return false;
+      }
+
+      timerCountdownNumber.textContent =
+        String(
+          remaining
+        );
+
+      await new Promise(
+        resolve =>
+          setTimeout(
+            resolve,
+            1000
+          )
+      );
+    }
+
+    timerCountdownNumber.textContent =
+      "📷";
+
+    await new Promise(
+      resolve =>
+        setTimeout(
+          resolve,
+          180
+        )
+    );
+
+    return (
+      getEventMode() ===
+      "active"
+    );
+
+  }finally{
+
+    timerCountdown.classList.remove(
+      "visible"
+    );
+
+    timerRunning =
+      false;
+
+    captureButton.disabled =
+      false;
+
+    timerToggle.disabled =
+      false;
+
+    switchButton.disabled =
+      false;
+
+    mirrorToggle.disabled =
+      false;
+  }
+}
+
+
+/* =====================================================
    CAMERA BUTTON
 ===================================================== */
 
@@ -3086,17 +3349,6 @@ switchButton.addEventListener(
       "environment";
 
 
-    if(
-      facingMode ===
-      "user"
-    ){
-      mirrorMode =
-        true;
-
-      applyMirrorPreview();
-    }
-
-
     await startCamera();
   }
 );
@@ -3108,7 +3360,42 @@ switchButton.addEventListener(
 
 captureButton.addEventListener(
   "click",
-  capturePhoto
+  async function(){
+
+    if(timerRunning){
+      return;
+    }
+
+    if(
+      getEventMode() !==
+      "active"
+    ){
+
+      await loadEvent(
+        true
+      );
+
+      checkEventAccess();
+
+      return;
+    }
+
+    const ready =
+      await runCaptureTimer();
+
+    if(!ready){
+
+      await loadEvent(
+        true
+      );
+
+      checkEventAccess();
+
+      return;
+    }
+
+    await capturePhoto();
+  }
 );
 
 
@@ -3546,6 +3833,8 @@ window.addEventListener(
 async function start(){
 
   loadMirrorMode();
+
+  loadTimerSetting();
 
   loadSavedFilter();
 
