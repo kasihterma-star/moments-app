@@ -159,6 +159,18 @@ video{
   gap:10px;
 }
 
+.mirror-status{
+  padding:8px 12px;
+  border-radius:999px;
+  background:rgba(0,0,0,.36);
+  backdrop-filter:blur(10px);
+  color:#fff;
+  font-size:11px;
+  font-weight:700;
+  line-height:1.2;
+  white-space:nowrap;
+}
+
 
 /* FILTER BAR */
 
@@ -818,11 +830,18 @@ video{
 
   <div class="utility-actions">
 
+    <div
+      class="mirror-status"
+      id="mirrorStatus"
+    >
+      Mode cermin tidak aktif
+    </div>
+
     <button
-      class="mirror-toggle active"
+      class="mirror-toggle"
       id="mirrorToggle"
       aria-label="Mode cermin"
-      title="Mode cermin aktif"
+      title="Mode cermin tidak aktif"
       type="button"
     >
       🪞
@@ -1110,7 +1129,7 @@ let facingMode =
 
 
 let mirrorMode =
-  true;
+  false;
 
 let timerSeconds =
   0;
@@ -1398,6 +1417,11 @@ const switchButton =
 const mirrorToggle =
   document.getElementById(
     "mirrorToggle"
+  );
+
+const mirrorStatus =
+  document.getElementById(
+    "mirrorStatus"
   );
 
 const timerToggle =
@@ -2613,7 +2637,7 @@ function applyMirrorPreview(){
       ?
       "Mode cermin aktif"
       :
-      "Mode cermin nonaktif";
+      "Mode cermin tidak aktif";
 
 
   mirrorToggle.setAttribute(
@@ -2626,36 +2650,25 @@ function applyMirrorPreview(){
   );
 
 
-  localStorage.setItem(
-    "momentsMirrorMode",
+  mirrorStatus.textContent =
     mirrorMode
       ?
-      "1"
+      "Mode cermin aktif"
       :
-      "0"
-  );
+      "Mode cermin tidak aktif";
 }
 
 
 function loadMirrorMode(){
 
-  const saved =
-    localStorage.getItem(
-      "momentsMirrorMode"
-    );
-
-
   /*
-    Default SELALU cermin.
-    Kalau user pernah mematikannya,
-    pilihan terakhir tetap diingat.
+    Default:
+    kamera belakang = tidak cermin
+    kamera depan    = cermin aktif
   */
   mirrorMode =
-    saved === null
-      ?
-      true
-      :
-      saved === "1";
+    facingMode ===
+    "user";
 
 
   applyMirrorPreview();
@@ -3385,6 +3398,11 @@ switchButton.addEventListener(
       "user"
       :
       "environment";
+
+
+    mirrorMode =
+      facingMode ===
+      "user";
 
 
     await startCamera();
