@@ -148,6 +148,17 @@ video{
   white-space:nowrap;
 }
 
+.utility-actions{
+  position:absolute;
+  top:155px;
+  right:24px;
+  z-index:10;
+
+  display:flex;
+  align-items:center;
+  gap:10px;
+}
+
 
 /* FILTER BAR */
 
@@ -805,6 +816,21 @@ video{
   </div>
 
 
+  <div class="utility-actions">
+
+    <button
+      class="mirror-toggle active"
+      id="mirrorToggle"
+      aria-label="Mode cermin"
+      title="Mode cermin aktif"
+      type="button"
+    >
+      ⇆
+    </button>
+
+  </div>
+
+
   <div
     class="filters"
     id="filters"
@@ -862,15 +888,6 @@ video{
 
 
       <div class="switch-wrap">
-
-        <button
-          class="mirror-toggle active"
-          id="mirrorToggle"
-          aria-label="Mode cermin"
-          title="Mode cermin aktif"
-        >
-          ⇆
-        </button>
 
         <button
           class="switch"
@@ -3165,7 +3182,7 @@ function renderTimerButton(){
   timerToggle.textContent =
     timerSeconds === 0
       ?
-      "⏱ 0s"
+      "⏱ Timer"
       :
       "⏱ " +
       timerSeconds +
@@ -3196,21 +3213,11 @@ function renderTimerButton(){
 
 function loadTimerSetting(){
 
-  const saved =
-    Number(
-      localStorage.getItem(
-        "momentsCameraTimer"
-      )
-    );
+  timerSeconds = 0;
 
-  timerSeconds =
-    TIMER_OPTIONS.includes(
-      saved
-    )
-      ?
-      saved
-      :
-      0;
+  localStorage.removeItem(
+    "momentsCameraTimer"
+  );
 
   renderTimerButton();
 }
