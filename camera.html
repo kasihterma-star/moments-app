@@ -300,8 +300,7 @@ video{
 }
 
 .switch,
-.mirror-toggle,
-.timer-toggle{
+.mirror-toggle{
   width:52px;
   height:52px;
 
@@ -324,12 +323,38 @@ video{
   font-weight:800;
 }
 
-.timer-toggle{
-  font-size:13px;
-  font-weight:800;
+.mirror-toggle.active{
+  background:#fff;
+  color:#211d1a;
 }
 
-.mirror-toggle.active,
+.topbar-actions{
+  display:flex;
+  align-items:center;
+  gap:10px;
+}
+
+.timer-toggle{
+  min-width:64px;
+  height:42px;
+  padding:0 14px;
+
+  border:0;
+  border-radius:999px;
+
+  background:rgba(0,0,0,.35);
+
+  backdrop-filter:blur(10px);
+
+  color:#fff;
+
+  font-size:13px;
+  font-weight:800;
+  letter-spacing:.2px;
+
+  cursor:pointer;
+}
+
 .timer-toggle.active{
   background:#fff;
   color:#211d1a;
@@ -747,14 +772,27 @@ video{
 
     </div>
 
+    <div class="topbar-actions">
 
-    <a
-      href="#"
-      class="exit"
-      id="exitButton"
-    >
-      ×
-    </a>
+      <button
+        class="timer-toggle"
+        id="timerToggle"
+        aria-label="Timer kamera"
+        title="Timer mati"
+        type="button"
+      >
+        0s
+      </button>
+
+      <a
+        href="#"
+        class="exit"
+        id="exitButton"
+      >
+        ×
+      </a>
+
+    </div>
 
   </div>
 
@@ -824,15 +862,6 @@ video{
 
 
       <div class="switch-wrap">
-
-        <button
-          class="timer-toggle"
-          id="timerToggle"
-          aria-label="Timer kamera"
-          title="Timer mati"
-        >
-          0s
-        </button>
 
         <button
           class="mirror-toggle active"
@@ -3136,9 +3165,11 @@ function renderTimerButton(){
   timerToggle.textContent =
     timerSeconds === 0
       ?
-      "0s"
+      "⏱ 0s"
       :
-      timerSeconds + "s";
+      "⏱ " +
+      timerSeconds +
+      "s";
 
   timerToggle.classList.toggle(
     "active",
