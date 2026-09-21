@@ -175,7 +175,121 @@ a{
     opacity:1;
 }
 
+
+/* OWNER PHOTO MANAGEMENT */
+
+.owner-tools{
+    display:none;
+    align-items:center;
+    gap:10px;
+    flex-wrap:wrap;
+    margin:0 0 24px;
+}
+
+.owner-tools.show{
+    display:flex;
+}
+
+.owner-note{
+    width:100%;
+    color:#766f68;
+    font-size:12px;
+    line-height:1.5;
+    margin-bottom:2px;
+}
+
+.filter-tab{
+    border:1px solid #ddd3ca;
+    border-radius:999px;
+    background:#fff;
+    color:#4b4540;
+    padding:10px 15px;
+    font-size:12px;
+    font-weight:800;
+    cursor:pointer;
+}
+
+.filter-tab.active{
+    background:#2d2926;
+    border-color:#2d2926;
+    color:#fff;
+}
+
+.photo-card.hidden-photo{
+    opacity:.62;
+}
+
+.hidden-badge{
+    position:absolute;
+    top:12px;
+    left:12px;
+    z-index:3;
+    padding:7px 10px;
+    border-radius:999px;
+    background:rgba(20,18,16,.78);
+    color:#fff;
+    font-size:10px;
+    font-weight:800;
+    backdrop-filter:blur(8px);
+}
+
+.manage-photo{
+    position:absolute;
+    top:10px;
+    right:10px;
+    z-index:4;
+    min-width:42px;
+    height:42px;
+    padding:0 12px;
+    border:0;
+    border-radius:999px;
+    background:rgba(20,18,16,.78);
+    color:#fff;
+    font-size:11px;
+    font-weight:800;
+    cursor:pointer;
+    backdrop-filter:blur(8px);
+    box-shadow:0 5px 16px rgba(0,0,0,.16);
+}
+
+.manage-photo:hover{
+    background:#1d1a18;
+}
+
+.manage-photo:disabled{
+    opacity:.6;
+    cursor:not-allowed;
+}
+
+.owner-empty{
+    column-span:all;
+    background:#fff;
+    border:1px solid #e6ddd5;
+    border-radius:22px;
+    padding:35px;
+    text-align:center;
+    color:#777;
+}
+
+.lightbox-manage{
+    display:none;
+    border:0;
+    border-radius:999px;
+    padding:10px 16px;
+    background:#fff;
+    color:#2d2926;
+    font-size:12px;
+    font-weight:800;
+    cursor:pointer;
+}
+
+.lightbox-manage.show{
+    display:inline-block;
+}
+
+
 /* LIGHTBOX */
+
 
 .lightbox{
     position:fixed;
@@ -249,6 +363,20 @@ a{
     .caption{
         display:none;
     }
+
+    .manage-photo{
+        top:7px;
+        right:7px;
+        min-width:38px;
+        height:38px;
+        padding:0 10px;
+        font-size:10px;
+    }
+
+    .hidden-badge{
+        top:8px;
+        left:8px;
+    }
 }
 </style>
 </head>
@@ -283,6 +411,20 @@ a{
         </div>
     </section>
 
+    <div class="owner-tools" id="ownerTools">
+        <div class="owner-note">
+            Kelola foto acara. Foto yang disembunyikan tidak terlihat oleh tamu, tetapi file aslinya tetap tersimpan di penyimpanan.
+        </div>
+
+        <button class="filter-tab active" id="tabVisible" type="button">
+            Foto tampil
+        </button>
+
+        <button class="filter-tab" id="tabHidden" type="button">
+            Disembunyikan (<span id="hiddenCount">0</span>)
+        </button>
+    </div>
+
     <div class="loading" id="loading">
         Memuat foto...
     </div>
@@ -296,17 +438,17 @@ a{
     <div class="lightbox-content">
         <img id="lightboxImage" alt="Foto acara">
         <div class="lightbox-info" id="lightboxInfo"></div>
+        <button class="lightbox-manage" id="lightboxManage" type="button"></button>
     </div>
 </div>
+
 
 <script>
 const API_URL =
     "https://api.ege.my.id";
 
-
 const TOKEN_KEY =
     "momentsAdminToken";
-
 
 const token =
     localStorage.getItem(
@@ -314,35 +456,93 @@ const token =
     );
 
 const params =
-    new URLSearchParams(window.location.search);
+    new URLSearchParams(
+        window.location.search
+    );
 
 const slug =
     params.get("e");
 
 const gallery =
-    document.getElementById("gallery");
+    document.getElementById(
+        "gallery"
+    );
 
 const loading =
-    document.getElementById("loading");
+    document.getElementById(
+        "loading"
+    );
 
 const lightbox =
-    document.getElementById("lightbox");
+    document.getElementById(
+        "lightbox"
+    );
 
 const lightboxImage =
-    document.getElementById("lightboxImage");
+    document.getElementById(
+        "lightboxImage"
+    );
 
 const lightboxInfo =
-    document.getElementById("lightboxInfo");
+    document.getElementById(
+        "lightboxInfo"
+    );
 
-document.getElementById("backEvent").href =
+const lightboxManage =
+    document.getElementById(
+        "lightboxManage"
+    );
+
+const ownerTools =
+    document.getElementById(
+        "ownerTools"
+    );
+
+const tabVisible =
+    document.getElementById(
+        "tabVisible"
+    );
+
+const tabHidden =
+    document.getElementById(
+        "tabHidden"
+    );
+
+const hiddenCount =
+    document.getElementById(
+        "hiddenCount"
+    );
+
+let ownerView =
+    false;
+
+let allPhotos =
+    [];
+
+let currentTab =
+    "visible";
+
+let currentLightboxPhoto =
+    null;
+
+document.getElementById(
+    "backEvent"
+).href =
     "event.html?e=" +
-    encodeURIComponent(slug || "");
+    encodeURIComponent(
+        slug || ""
+    );
 
 function formatDate(date){
-    if(!date) return "";
+    if(!date){
+        return "";
+    }
 
     const value =
-        new Date(date + "T00:00:00");
+        new Date(
+            date +
+            "T00:00:00"
+        );
 
     return value.toLocaleDateString(
         "id-ID",
@@ -390,15 +590,17 @@ function formatEventRange(
 }
 
 function formatPhotoTime(value){
-    if(!value) return "";
+    if(!value){
+        return "";
+    }
 
-    // SQLite CURRENT_TIMESTAMP tersimpan dalam UTC.
     const normalized =
         value.includes("T")
         ? value
         : value.replace(" ", "T") + "Z";
 
-    const date = new Date(normalized);
+    const date =
+        new Date(normalized);
 
     if(Number.isNaN(date.getTime())){
         return value;
@@ -414,48 +616,502 @@ function formatPhotoTime(value){
 }
 
 function showError(message){
-    loading.className = "error";
-    loading.textContent = message;
+    loading.style.display =
+        "block";
+
+    loading.className =
+        "error";
+
+    loading.textContent =
+        message;
+}
+
+function updateStats(){
+    const visiblePhotos =
+        allPhotos.filter(
+            photo =>
+                !photo.isHidden
+        );
+
+    const hiddenPhotos =
+        allPhotos.filter(
+            photo =>
+                photo.isHidden
+        );
+
+    document.getElementById(
+        "photoCount"
+    ).textContent =
+        ownerView
+        ? visiblePhotos.length
+        : allPhotos.length;
+
+    const guestNames =
+        new Set(
+            (
+                ownerView
+                ? visiblePhotos
+                : allPhotos
+            )
+            .map(
+                photo =>
+                    String(
+                        photo.guestName ||
+                        ""
+                    ).trim()
+            )
+            .filter(Boolean)
+        );
+
+    document.getElementById(
+        "guestCount"
+    ).textContent =
+        guestNames.size;
+
+    hiddenCount.textContent =
+        hiddenPhotos.length;
+}
+
+function getDisplayedPhotos(){
+    if(!ownerView){
+        return allPhotos;
+    }
+
+    if(
+        currentTab ===
+        "hidden"
+    ){
+        return allPhotos.filter(
+            photo =>
+                photo.isHidden
+        );
+    }
+
+    return allPhotos.filter(
+        photo =>
+            !photo.isHidden
+    );
 }
 
 function openPhoto(photo){
-    lightboxImage.src = photo.url;
+    currentLightboxPhoto =
+        photo;
+
+    lightboxImage.src =
+        photo.url;
+
     lightboxInfo.textContent =
         "📷 " +
         photo.guestName +
-        (photo.createdAt
+        (
+            photo.createdAt
             ? " • " + formatPhotoTime(photo.createdAt)
-            : "");
+            : ""
+        );
 
-    lightbox.classList.add("open");
-    document.body.style.overflow = "hidden";
+    if(ownerView){
+        lightboxManage.classList.add(
+            "show"
+        );
+
+        lightboxManage.textContent =
+            photo.isHidden
+            ? "👁 Tampilkan kembali"
+            : "🙈 Sembunyikan dari galeri";
+    }else{
+        lightboxManage.classList.remove(
+            "show"
+        );
+    }
+
+    lightbox.classList.add(
+        "open"
+    );
+
+    document.body.style.overflow =
+        "hidden";
 }
 
 function closePhoto(){
-    lightbox.classList.remove("open");
-    lightboxImage.src = "";
-    document.body.style.overflow = "";
+    lightbox.classList.remove(
+        "open"
+    );
+
+    lightboxImage.src =
+        "";
+
+    currentLightboxPhoto =
+        null;
+
+    document.body.style.overflow =
+        "";
 }
 
+async function setPhotoVisibility(
+    photo,
+    isHidden,
+    button = null
+){
+    if(
+        !ownerView ||
+        !token
+    ){
+        return;
+    }
+
+    if(button){
+        button.disabled =
+            true;
+    }
+
+    try{
+        const response =
+            await fetch(
+                API_URL +
+                "/api/photos/visibility",
+                {
+                    method:"POST",
+                    headers:{
+                        "Content-Type":
+                            "application/json",
+                        "Authorization":
+                            "Bearer " +
+                            token
+                    },
+                    body:
+                        JSON.stringify({
+                            photoId:
+                                photo.id,
+                            isHidden
+                        })
+                }
+            );
+
+        const data =
+            await response.json();
+
+        if(
+            !response.ok ||
+            !data.success
+        ){
+            throw new Error(
+                data.error ||
+                "Status foto gagal diubah."
+            );
+        }
+
+        photo.isHidden =
+            Boolean(
+                data.photo?.isHidden
+            );
+
+        updateStats();
+        renderGallery();
+
+        if(
+            currentLightboxPhoto &&
+            currentLightboxPhoto.id ===
+            photo.id
+        ){
+            closePhoto();
+        }
+
+    }catch(error){
+        alert(
+            error.message ||
+            "Status foto gagal diubah."
+        );
+    }finally{
+        if(button){
+            button.disabled =
+                false;
+        }
+    }
+}
+
+function createPhotoCard(photo){
+    const card =
+        document.createElement(
+            "div"
+        );
+
+    card.className =
+        "photo-card";
+
+    if(photo.isHidden){
+        card.classList.add(
+            "hidden-photo"
+        );
+    }
+
+    const img =
+        document.createElement(
+            "img"
+        );
+
+    img.src =
+        photo.url;
+
+    img.alt =
+        "Foto oleh " +
+        photo.guestName;
+
+    img.loading =
+        "lazy";
+
+    if(
+        photo.width &&
+        photo.height
+    ){
+        img.width =
+            photo.width;
+
+        img.height =
+            photo.height;
+    }
+
+    img.addEventListener(
+        "click",
+        () => openPhoto(photo)
+    );
+
+    const caption =
+        document.createElement(
+            "div"
+        );
+
+    caption.className =
+        "caption";
+
+    caption.textContent =
+        photo.guestName;
+
+    card.appendChild(img);
+    card.appendChild(caption);
+
+    if(
+        ownerView &&
+        photo.isHidden
+    ){
+        const badge =
+            document.createElement(
+                "div"
+            );
+
+        badge.className =
+            "hidden-badge";
+
+        badge.textContent =
+            "Disembunyikan";
+
+        card.appendChild(
+            badge
+        );
+    }
+
+    if(ownerView){
+        const manageButton =
+            document.createElement(
+                "button"
+            );
+
+        manageButton.className =
+            "manage-photo";
+
+        manageButton.type =
+            "button";
+
+        manageButton.textContent =
+            photo.isHidden
+            ? "👁 Tampilkan"
+            : "🙈 Sembunyikan";
+
+        manageButton.addEventListener(
+            "click",
+            async event => {
+                event.stopPropagation();
+
+                const nextHidden =
+                    !photo.isHidden;
+
+                if(nextHidden){
+                    const confirmed =
+                        confirm(
+                            "Sembunyikan foto ini dari galeri tamu?\n\nFile aslinya tetap tersimpan di Google Drive/R2."
+                        );
+
+                    if(!confirmed){
+                        return;
+                    }
+                }
+
+                await setPhotoVisibility(
+                    photo,
+                    nextHidden,
+                    manageButton
+                );
+            }
+        );
+
+        card.appendChild(
+            manageButton
+        );
+    }
+
+    return card;
+}
+
+function renderGallery(){
+    gallery.innerHTML =
+        "";
+
+    const displayedPhotos =
+        getDisplayedPhotos();
+
+    loading.style.display =
+        "none";
+
+    if(
+        displayedPhotos.length ===
+        0
+    ){
+        const empty =
+            document.createElement(
+                "div"
+            );
+
+        empty.className =
+            "owner-empty";
+
+        if(
+            ownerView &&
+            currentTab ===
+            "hidden"
+        ){
+            empty.textContent =
+                "Belum ada foto yang disembunyikan.";
+        }else{
+            empty.textContent =
+                "Belum ada foto di acara ini.";
+        }
+
+        gallery.appendChild(
+            empty
+        );
+
+        return;
+    }
+
+    displayedPhotos.forEach(
+        photo => {
+            gallery.appendChild(
+                createPhotoCard(
+                    photo
+                )
+            );
+        }
+    );
+}
+
+function setTab(tab){
+    currentTab =
+        tab;
+
+    tabVisible.classList.toggle(
+        "active",
+        tab === "visible"
+    );
+
+    tabHidden.classList.toggle(
+        "active",
+        tab === "hidden"
+    );
+
+    renderGallery();
+}
+
+tabVisible.addEventListener(
+    "click",
+    () => setTab("visible")
+);
+
+tabHidden.addEventListener(
+    "click",
+    () => setTab("hidden")
+);
+
 document
-    .getElementById("closeLightbox")
-    .addEventListener("click", closePhoto);
+    .getElementById(
+        "closeLightbox"
+    )
+    .addEventListener(
+        "click",
+        closePhoto
+    );
 
-lightbox.addEventListener("click", function(e){
-    if(e.target === lightbox){
-        closePhoto();
+lightbox.addEventListener(
+    "click",
+    function(event){
+        if(
+            event.target ===
+            lightbox
+        ){
+            closePhoto();
+        }
     }
-});
+);
 
-document.addEventListener("keydown", function(e){
-    if(e.key === "Escape"){
-        closePhoto();
+document.addEventListener(
+    "keydown",
+    function(event){
+        if(
+            event.key ===
+            "Escape"
+        ){
+            closePhoto();
+        }
     }
-});
+);
+
+lightboxManage.addEventListener(
+    "click",
+    async function(){
+        if(
+            !currentLightboxPhoto
+        ){
+            return;
+        }
+
+        const photo =
+            currentLightboxPhoto;
+
+        const nextHidden =
+            !photo.isHidden;
+
+        if(nextHidden){
+            const confirmed =
+                confirm(
+                    "Sembunyikan foto ini dari galeri tamu?\n\nFile aslinya tetap tersimpan di Google Drive/R2."
+                );
+
+            if(!confirmed){
+                return;
+            }
+        }
+
+        await setPhotoVisibility(
+            photo,
+            nextHidden,
+            lightboxManage
+        );
+    }
+);
 
 async function loadGallery(){
     if(!slug){
-        showError("Link galeri tidak valid.");
+        showError(
+            "Link galeri tidak valid."
+        );
         return;
     }
 
@@ -492,8 +1148,28 @@ async function loadGallery(){
             );
         }
 
-        document.getElementById("eventName")
-            .textContent =
+        ownerView =
+            Boolean(
+                data.ownerView
+            );
+
+        allPhotos =
+            (
+                data.photos ||
+                []
+            ).map(
+                photo => ({
+                    ...photo,
+                    isHidden:
+                        Boolean(
+                            photo.isHidden
+                        )
+                })
+            );
+
+        document.getElementById(
+            "eventName"
+        ).textContent =
             data.event.name;
 
         data.event.endDate =
@@ -501,8 +1177,9 @@ async function loadGallery(){
             data.event.end_date ||
             data.event.eventDate;
 
-        document.getElementById("eventMeta")
-            .textContent =
+        document.getElementById(
+            "eventMeta"
+        ).textContent =
             [
                 data.event.eventType,
                 formatEventRange(
@@ -513,82 +1190,23 @@ async function loadGallery(){
             .filter(Boolean)
             .join(" • ");
 
-        document.getElementById("photoCount")
-            .textContent =
-            data.stats?.photos || 0;
-
-        document.getElementById("guestCount")
-            .textContent =
-            data.stats?.guests || 0;
-
         document.title =
             "Galeri " +
             data.event.name +
             " | MoreMoments";
 
-        loading.style.display = "none";
-
-        if(!data.photos.length){
-            loading.style.display = "block";
-            loading.className = "empty";
-            loading.textContent =
-                "Belum ada foto di acara ini.";
-            return;
+        if(ownerView){
+            ownerTools.classList.add(
+                "show"
+            );
+        }else{
+            ownerTools.classList.remove(
+                "show"
+            );
         }
 
-        data.photos.forEach(photo => {
-            const button =
-                document.createElement("button");
-
-            button.className =
-                "photo-card";
-
-            button.type =
-                "button";
-
-            const img =
-                document.createElement("img");
-
-            img.src =
-                photo.url;
-
-            img.alt =
-                "Foto oleh " +
-                photo.guestName;
-
-            img.loading =
-                "lazy";
-
-            if(
-                photo.width &&
-                photo.height
-            ){
-                img.width =
-                    photo.width;
-
-                img.height =
-                    photo.height;
-            }
-
-            const caption =
-                document.createElement("div");
-
-            caption.className =
-                "caption";
-
-            caption.textContent =
-                photo.guestName;
-
-            button.appendChild(img);
-            button.appendChild(caption);
-
-            button.addEventListener(
-                "click",
-                () => openPhoto(photo)
-            );
-
-            gallery.appendChild(button);
-        });
+        updateStats();
+        renderGallery();
 
     }catch(error){
         console.error(error);
@@ -602,6 +1220,7 @@ async function loadGallery(){
 
 loadGallery();
 </script>
+
 
 </body>
 </html>
