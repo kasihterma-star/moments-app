@@ -756,42 +756,9 @@ video{
 }
 
 </style>
-<script>
-(function(){
-  try{
-    var t=localStorage.getItem("moremomentsTheme");
-    if(!t && window.matchMedia && window.matchMedia("(prefers-color-scheme: dark)").matches){
-      t="dark";
-    }
-    document.documentElement.setAttribute("data-theme",t||"light");
-  }catch(e){
-    document.documentElement.setAttribute("data-theme","light");
-  }
-})();
-</script>
-<link rel="stylesheet" href="brown-black-liquid-glass.css?v=7">
-<style id="camera-glass-ui-fix-v1">
-body.camera-body .mm-theme-switch{display:none !important}
-.camera-app .topbar{background:linear-gradient(to bottom,rgba(255,255,255,.18),rgba(255,255,255,.06),transparent) !important;border-bottom:0 !important;-webkit-backdrop-filter:blur(18px) saturate(150%) !important;backdrop-filter:blur(18px) saturate(150%) !important}
-html[data-theme="dark"] .camera-app .topbar{background:linear-gradient(to bottom,rgba(13,10,9,.66),rgba(13,10,9,.24),transparent) !important}
-.counter,.timer-toggle,.exit,.mirror-status,.mirror-toggle,.filter-button,.switch{border:1px solid rgba(255,255,255,.28) !important;-webkit-backdrop-filter:blur(18px) saturate(150%) !important;backdrop-filter:blur(18px) saturate(150%) !important;box-shadow:inset 0 1px 0 rgba(255,255,255,.18),0 8px 24px rgba(0,0,0,.12) !important}
-html[data-theme="light"] .counter,html[data-theme="light"] .timer-toggle,html[data-theme="light"] .exit,html[data-theme="light"] .mirror-status,html[data-theme="light"] .mirror-toggle,html[data-theme="light"] .filter-button,html[data-theme="light"] .switch{background:rgba(255,255,255,.16) !important;color:#fff !important}
-html[data-theme="dark"] .counter,html[data-theme="dark"] .timer-toggle,html[data-theme="dark"] .exit,html[data-theme="dark"] .mirror-status,html[data-theme="dark"] .mirror-toggle,html[data-theme="dark"] .filter-button,html[data-theme="dark"] .switch{background:rgba(15,12,11,.52) !important;color:#fff !important;border-color:rgba(255,255,255,.15) !important}
-.filter-button.active,.timer-toggle.active,.mirror-toggle.active{background:rgba(255,255,255,.94) !important;color:#241c18 !important;border-color:rgba(255,255,255,.88) !important}
-.controls{background:linear-gradient(to top,rgba(0,0,0,.46),rgba(0,0,0,.12),transparent) !important;-webkit-backdrop-filter:blur(10px) !important;backdrop-filter:blur(10px) !important}
-html[data-theme="dark"] .controls{background:linear-gradient(to top,rgba(8,6,5,.76),rgba(8,6,5,.26),transparent) !important}
-.filters{background:linear-gradient(to top,rgba(0,0,0,.16),transparent) !important}
-.utility-actions{bottom:190px !important;right:16px !important}
-html[data-theme="dark"] .permission,html[data-theme="dark"] .lock-screen,html[data-theme="dark"] .limit-screen,html[data-theme="dark"] .loading-screen{background:#0b0908 !important}
-html[data-theme="dark"] .permission-card,html[data-theme="dark"] .lock-card,html[data-theme="dark"] .limit-card{background:#1b1714 !important;border:1px solid rgba(255,255,255,.10) !important;color:#fff8f2 !important}
-html[data-theme="dark"] .permission-card h1,html[data-theme="dark"] .lock-card h2,html[data-theme="dark"] .limit-card h2{color:#fff8f2 !important}
-html[data-theme="dark"] .permission-card p,html[data-theme="dark"] .lock-card p,html[data-theme="dark"] .limit-card p{color:#d7c6ba !important}
-html[data-theme="dark"] .lock-time{background:rgba(255,255,255,.92) !important;color:#2b211b !important}
-@media(max-width:480px){.topbar{padding-left:14px !important;padding-right:14px !important}.topbar-actions{gap:8px !important}.timer-toggle{min-width:60px !important;padding:0 12px !important}}
-</style>
 </head>
 
-<body class="camera-body">
+<body>
 
 
 <div class="camera-app">
@@ -4000,6 +3967,5 @@ start();
 
 </script>
 
-<script src="theme-toggle.js?v=1"></script>
 </body>
 </html>
