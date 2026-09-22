@@ -756,6 +756,19 @@ video{
 }
 
 </style>
+
+<style id="camera-upload-status-v1">
+.upload-status{display:none;position:absolute;inset:0;z-index:520;align-items:center;justify-content:center;padding:24px;pointer-events:auto;background:rgba(12,10,9,.24);backdrop-filter:blur(4px);-webkit-backdrop-filter:blur(4px)}
+.upload-status.visible{display:flex}
+.upload-status-card{width:min(88vw,320px);padding:22px 20px;border:1px solid rgba(255,255,255,.30);border-radius:24px;background:rgba(255,255,255,.84);color:#2b211b;text-align:center;box-shadow:0 18px 55px rgba(0,0,0,.18);backdrop-filter:blur(18px);-webkit-backdrop-filter:blur(18px)}
+.upload-spinner{width:38px;height:38px;margin:0 auto 14px;border:4px solid rgba(107,72,49,.18);border-top-color:#7b4a2e;border-radius:50%;animation:mmUploadSpin .85s linear infinite}
+.upload-status-card strong{display:block;margin-bottom:6px;font-size:16px}.upload-status-card span{display:block;color:#75685f;font-size:12px;line-height:1.5}
+@keyframes mmUploadSpin{to{transform:rotate(360deg)}}
+html[data-theme="dark"] .upload-status-card{background:rgba(29,24,21,.88);color:#fff8f2;border-color:rgba(255,255,255,.12)}
+html[data-theme="dark"] .upload-status-card span{color:#d2c0b4}
+html[data-theme="dark"] .upload-spinner{border-color:rgba(255,255,255,.15);border-top-color:#f4d2b4}
+</style>
+
 </head>
 
 <body>
@@ -940,6 +953,15 @@ video{
     class="flash"
     id="flash"
   ></div>
+
+
+  <div class="upload-status" id="uploadStatus" aria-live="polite">
+    <div class="upload-status-card">
+      <div class="upload-spinner"></div>
+      <strong>Menyimpan foto...</strong>
+      <span>Tunggu sebentar sebelum mengambil foto berikutnya.</span>
+    </div>
+  </div>
 
 
   <!-- IZIN KAMERA -->
@@ -1485,6 +1507,11 @@ const lockScreen =
 const loadingScreen =
   document.getElementById(
     "loadingScreen"
+  );
+
+const uploadStatus =
+  document.getElementById(
+    "uploadStatus"
   );
 
 
@@ -3410,6 +3437,59 @@ switchButton.addEventListener(
 );
 
 
+
+/* =====================================================
+   FOTO ENCODING
+   WebP diprioritaskan. Jika browser iPhone/Safari
+   tidak benar-benar menghasilkan WebP dan mengembalikan
+   PNG, gunakan JPEG agar ukuran tidak membengkak.
+===================================================== */
+
+async function canvasToOptimizedBlob(
+  canvas,
+  webpQuality = 0.76,
+  jpegQuality = 0.78
+){
+  const webpBlob =
+    await new Promise(
+      resolve => {
+        canvas.toBlob(resolve,"image/webp",webpQuality);
+      }
+    );
+
+  if(webpBlob && webpBlob.type === "image/webp"){
+    return {blob:webpBlob,filename:"photo.webp"};
+  }
+
+  const jpegBlob =
+    await new Promise(
+      resolve => {
+        canvas.toBlob(resolve,"image/jpeg",jpegQuality);
+      }
+    );
+
+  if(jpegBlob && jpegBlob.type === "image/jpeg"){
+    return {blob:jpegBlob,filename:"photo.jpg"};
+  }
+
+  if(webpBlob){
+    return {
+      blob:webpBlob,
+      filename:webpBlob.type === "image/png" ? "photo.png" : "photo.bin"
+    };
+  }
+
+  throw new Error("Foto gagal diproses.");
+}
+
+function setUploadBusy(busy){
+  uploadStatus.classList.toggle("visible",busy);
+  captureButton.disabled = busy;
+  timerToggle.disabled = busy;
+  switchButton.disabled = busy;
+  mirrorToggle.disabled = busy;
+}
+
 /* =====================================================
    CAPTURE
 ===================================================== */
@@ -3527,7 +3607,7 @@ async function capturePhoto(){
     /* FOTO SIZE */
 
     const maxWidth =
-      1600;
+      1280;
 
 
     let width =
@@ -3626,40 +3706,24 @@ async function capturePhoto(){
     );
 
 
-    /* WEBP */
+    /* FORMAT FOTO RINGAN
+       Android/desktop biasanya WebP.
+       Jika Safari/iPhone mengembalikan PNG,
+       otomatis fallback ke JPEG agar tetap ringan.
+    */
+
+    const encodedPhoto =
+      await canvasToOptimizedBlob(
+        canvas,
+        0.76,
+        0.78
+      );
 
     const photoBlob =
-      await new Promise(
-        (
-          resolve,
-          reject
-        ) => {
+      encodedPhoto.blob;
 
-          canvas.toBlob(
-            blob => {
-
-              if(blob){
-
-                resolve(
-                  blob
-                );
-
-              }else{
-
-                reject(
-                  new Error(
-                    "Foto gagal diproses."
-                  )
-                );
-              }
-            },
-
-            "image/webp",
-
-            0.82
-          );
-        }
-      );
+    const photoFilename =
+      encodedPhoto.filename;
 
 
     /*
@@ -3707,7 +3771,7 @@ async function capturePhoto(){
     formData.append(
       "photo",
       photoBlob,
-      "photo.webp"
+      photoFilename
     );
 
 
@@ -3752,6 +3816,10 @@ async function capturePhoto(){
 
 
     /* UPLOAD */
+
+    setUploadBusy(
+      true
+    );
 
     const response =
       await fetch(
@@ -3843,6 +3911,10 @@ async function capturePhoto(){
 
 
   }finally{
+
+    setUploadBusy(
+      false
+    );
 
     captureButton.disabled =
       false;
