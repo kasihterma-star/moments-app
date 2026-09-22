@@ -604,6 +604,32 @@ html[data-theme="dark"] .error a:visited{
 }
 </style>
 
+
+<style id="event-secondary-button-dark-text-fix">
+/* Tombol sekunder memakai background terang,
+   jadi teks harus selalu gelap di mode terang maupun gelap. */
+.secondary-button,
+.secondary-button:link,
+.secondary-button:visited,
+html[data-theme="light"] .secondary-button,
+html[data-theme="light"] .secondary-button:link,
+html[data-theme="light"] .secondary-button:visited,
+html[data-theme="dark"] .secondary-button,
+html[data-theme="dark"] .secondary-button:link,
+html[data-theme="dark"] .secondary-button:visited{
+  background:#f8f6f3 !important;
+  color:#2b211b !important;
+  -webkit-text-fill-color:#2b211b !important;
+  border:1px solid #ddd4cc !important;
+  opacity:1 !important;
+}
+
+.secondary-button *{
+  color:#2b211b !important;
+  -webkit-text-fill-color:#2b211b !important;
+}
+</style>
+
 </head>
 
 <body>
