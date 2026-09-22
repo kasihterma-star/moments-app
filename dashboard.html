@@ -861,6 +861,451 @@ button{
 })();
 </script>
 <link rel="stylesheet" href="brown-black-liquid-glass.css?v=7">
+
+<style id="dashboard-final-contrast-fix">
+/* =========================================================
+   DASHBOARD FINAL FIX
+   Fokus: keterbacaan teks light/dark, tombol, Google Drive,
+   dan hero agar efek glass tidak menutupi tulisan.
+========================================================= */
+
+/* ---------- HERO / JUDUL DASHBOARD ---------- */
+.hero{
+  position:relative !important;
+  z-index:2 !important;
+  overflow:visible !important;
+  padding:20px 24px 22px !important;
+  border-radius:26px !important;
+}
+
+/* Hilangkan sheen/efek kaca yang melintas di atas tulisan */
+.hero::before,
+.hero::after{
+  display:none !important;
+}
+
+.hero > div,
+.hero .account-badge{
+  position:relative !important;
+  z-index:3 !important;
+}
+
+.hero .eyebrow{
+  color:#9a6744 !important;
+  -webkit-text-fill-color:#9a6744 !important;
+  opacity:1 !important;
+}
+
+.hero h1{
+  color:#3a2a21 !important;
+  -webkit-text-fill-color:#3a2a21 !important;
+  opacity:1 !important;
+}
+
+.hero p{
+  color:#6f6259 !important;
+  -webkit-text-fill-color:#6f6259 !important;
+  opacity:1 !important;
+}
+
+html[data-theme="dark"] .hero .eyebrow{
+  color:#d6aa83 !important;
+  -webkit-text-fill-color:#d6aa83 !important;
+}
+
+html[data-theme="dark"] .hero h1{
+  color:#fff8f2 !important;
+  -webkit-text-fill-color:#fff8f2 !important;
+}
+
+html[data-theme="dark"] .hero p{
+  color:#d8c7ba !important;
+  -webkit-text-fill-color:#d8c7ba !important;
+}
+
+/* ---------- ACCOUNT BADGE ---------- */
+.account-badge{
+  position:relative !important;
+  z-index:4 !important;
+}
+
+.account-name{
+  color:#2d241f !important;
+}
+
+.account-email{
+  color:#756a62 !important;
+}
+
+html[data-theme="dark"] .account-name{
+  color:#fff8f2 !important;
+}
+
+html[data-theme="dark"] .account-email{
+  color:#d6c4b7 !important;
+}
+
+/* SUPERADMIN wajib terbaca di dua mode */
+.role-badge.superadmin,
+.user-role.superadmin{
+  background:#29241f !important;
+  color:#ffffff !important;
+  -webkit-text-fill-color:#ffffff !important;
+  opacity:1 !important;
+}
+
+/* ---------- HEADER BUTTONS ---------- */
+.header-actions .button.dark,
+.header-actions a.button.dark{
+  background:linear-gradient(135deg,#8a5632,#6c3e25 55%,#c99565) !important;
+  color:#fffaf6 !important;
+  -webkit-text-fill-color:#fffaf6 !important;
+  border-color:rgba(255,255,255,.28) !important;
+}
+
+.header-actions .button.dark *,
+.header-actions a.button.dark *{
+  color:#fffaf6 !important;
+}
+
+/* tombol keluar tetap terbaca */
+.header-actions .button:not(.dark){
+  color:#2b211b !important;
+}
+
+html[data-theme="dark"] .header-actions .button:not(.dark){
+  color:#fff8f2 !important;
+}
+
+/* ---------- SUMMARY ---------- */
+.summary-card{
+  overflow:hidden !important;
+}
+
+.summary-label{
+  color:#75695f !important;
+}
+
+.summary-value{
+  color:#2c221c !important;
+}
+
+html[data-theme="dark"] .summary-label{
+  color:#d0bfb3 !important;
+}
+
+html[data-theme="dark"] .summary-value{
+  color:#fff8f2 !important;
+}
+
+/* ---------- GOOGLE DRIVE ---------- */
+.drive-card{
+  overflow:hidden !important;
+}
+
+.drive-actions{
+  display:flex !important;
+  align-items:center !important;
+  justify-content:flex-end !important;
+  gap:8px !important;
+}
+
+/* semua tombol Drive punya ukuran konsisten dan teks center */
+#connectDriveButton,
+#reconnectDriveButton,
+#disconnectDriveButton{
+  min-width:172px !important;
+  min-height:46px !important;
+  padding:0 20px !important;
+
+  display:inline-flex !important;
+  align-items:center !important;
+  justify-content:center !important;
+
+  text-align:center !important;
+  line-height:1.15 !important;
+
+  background:linear-gradient(
+    135deg,
+    #8a5632,
+    #6c3e25 55%,
+    #c99565
+  ) !important;
+
+  color:#fffaf6 !important;
+  -webkit-text-fill-color:#fffaf6 !important;
+
+  border:1px solid rgba(255,255,255,.28) !important;
+  border-radius:999px !important;
+
+  box-shadow:
+    inset 0 1px 0 rgba(255,255,255,.35),
+    0 10px 26px rgba(88,55,34,.22) !important;
+
+  opacity:1 !important;
+}
+
+#connectDriveButton *,
+#reconnectDriveButton *,
+#disconnectDriveButton *{
+  color:#fffaf6 !important;
+}
+
+/* ---------- PROVIDER BOX ---------- */
+/* box terang/silver => teks gelap, termasuk dark mode */
+.provider-box{
+  background:#f7f4f1 !important;
+  color:#2b211b !important;
+}
+
+.provider-name{
+  color:#2b211b !important;
+}
+
+.provider-desc{
+  color:#6b5f56 !important;
+}
+
+.provider input:checked + .provider-box{
+  border-color:#5e493a !important;
+  box-shadow:0 0 0 1px #5e493a inset !important;
+}
+
+/* ---------- EVENT CARD ---------- */
+.event-card{
+  overflow:hidden !important;
+}
+
+/* text utama mengikuti permukaan card */
+html[data-theme="light"] .event-card{
+  color:#2b211b !important;
+}
+
+html[data-theme="dark"] .event-card{
+  color:#fff8f2 !important;
+}
+
+.event-name{
+  color:inherit !important;
+}
+
+html[data-theme="light"] .event-date{
+  color:#75695f !important;
+}
+
+html[data-theme="dark"] .event-date{
+  color:#cab9ad !important;
+}
+
+/* permukaan terang dalam event card => teks selalu gelap */
+.event-owner,
+.event-stat,
+.event-slug{
+  background:#f7f4f1 !important;
+  color:#2b211b !important;
+}
+
+.event-owner *,
+.event-stat *,
+.event-slug *{
+  color:#2b211b !important;
+  -webkit-text-fill-color:#2b211b !important;
+}
+
+.event-stat small{
+  color:#75695f !important;
+  -webkit-text-fill-color:#75695f !important;
+}
+
+/* ---------- EVENT BUTTONS ---------- */
+/* tombol terang => teks gelap */
+.event-button,
+.event-button:link,
+.event-button:visited{
+  background:#f7f4f1 !important;
+  color:#241c18 !important;
+  -webkit-text-fill-color:#241c18 !important;
+  border-color:#d8cec6 !important;
+}
+
+.event-button *,
+.event-button:link *,
+.event-button:visited *{
+  color:#241c18 !important;
+}
+
+/* tombol Buka Acara gelap => teks putih */
+.event-button.dark,
+.event-button.dark:link,
+.event-button.dark:visited,
+.open-event{
+  background:linear-gradient(145deg,#302c29,#1f1d1b) !important;
+  color:#ffffff !important;
+  -webkit-text-fill-color:#ffffff !important;
+  border-color:#302c29 !important;
+}
+
+.event-button.dark *,
+.open-event *{
+  color:#ffffff !important;
+}
+
+/* tombol QR tetap cream dengan teks gelap */
+.event-button.qr{
+  background:#eee6dd !important;
+  color:#241c18 !important;
+  -webkit-text-fill-color:#241c18 !important;
+}
+
+/* ---------- USER CARD ---------- */
+.user-card{
+  overflow:hidden !important;
+}
+
+.user-stat{
+  background:#f7f4f1 !important;
+  color:#2b211b !important;
+}
+
+.user-stat *,
+.user-stat small{
+  color:#2b211b !important;
+}
+
+.user-button{
+  background:#f7f4f1 !important;
+  color:#241c18 !important;
+}
+
+.user-button.role-action{
+  background:#29241f !important;
+  color:#fff !important;
+  -webkit-text-fill-color:#fff !important;
+}
+
+/* ---------- MODAL / QR ---------- */
+.modal-card,
+.qr-box,
+.qr-link{
+  color:#2b211b !important;
+}
+
+.qr-action{
+  background:#f7f4f1 !important;
+  color:#241c18 !important;
+}
+
+.qr-action.dark{
+  background:#29241f !important;
+  color:#fff !important;
+  -webkit-text-fill-color:#fff !important;
+}
+
+/* ---------- THEME ANIMATION SAFETY ---------- */
+html.mm-theme-changing
+:is(
+  .hero h1,
+  .hero p,
+  .hero .eyebrow,
+  .role-badge,
+  .event-button,
+  .event-owner,
+  .event-stat,
+  .event-slug,
+  .provider-box,
+  .drive-button
+){
+  transition-property:
+    background,
+    border-color,
+    box-shadow,
+    transform,
+    opacity !important;
+}
+
+/* ---------- MOBILE ---------- */
+@media(max-width:650px){
+  .hero{
+    padding:18px 18px 20px !important;
+  }
+
+  .drive-actions{
+    justify-content:flex-start !important;
+    width:100% !important;
+  }
+
+  #connectDriveButton,
+  #reconnectDriveButton,
+  #disconnectDriveButton{
+    width:100% !important;
+    min-width:0 !important;
+  }
+}
+</style>
+
+
+<style id="dashboard-dark-text-fix-v2">
+/* Perbaikan tambahan: elemen ber-background terang harus tetap pakai teks gelap di mode gelap */
+.account-badge{
+  background:#ffffff !important;
+}
+.account-name,
+.account-email{
+  color:#2d241f !important;
+  -webkit-text-fill-color:#2d241f !important;
+  opacity:1 !important;
+}
+.account-email{
+  color:#6e625a !important;
+  -webkit-text-fill-color:#6e625a !important;
+}
+html[data-theme="dark"] .account-badge .account-name,
+html[data-theme="dark"] .account-badge .account-email,
+html[data-theme="light"] .account-badge .account-name,
+html[data-theme="light"] .account-badge .account-email{
+  opacity:1 !important;
+}
+html[data-theme="dark"] .account-badge .account-name{
+  color:#2d241f !important;
+  -webkit-text-fill-color:#2d241f !important;
+}
+html[data-theme="dark"] .account-badge .account-email{
+  color:#6e625a !important;
+  -webkit-text-fill-color:#6e625a !important;
+}
+
+.drive-card{
+  background:#f7f4f1 !important;
+}
+.drive-card .drive-title,
+.drive-card .provider-title,
+.drive-card .provider-name,
+.drive-card .drive-email{
+  color:#2d241f !important;
+  -webkit-text-fill-color:#2d241f !important;
+  opacity:1 !important;
+}
+.drive-card .drive-status,
+.drive-card .drive-quota,
+.drive-card .provider-desc{
+  color:#6e625a !important;
+  -webkit-text-fill-color:#6e625a !important;
+  opacity:1 !important;
+}
+html[data-theme="dark"] .drive-card .drive-title,
+html[data-theme="dark"] .drive-card .provider-title,
+html[data-theme="dark"] .drive-card .provider-name,
+html[data-theme="dark"] .drive-card .drive-email{
+  color:#2d241f !important;
+  -webkit-text-fill-color:#2d241f !important;
+}
+html[data-theme="dark"] .drive-card .drive-status,
+html[data-theme="dark"] .drive-card .drive-quota,
+html[data-theme="dark"] .drive-card .provider-desc{
+  color:#6e625a !important;
+  -webkit-text-fill-color:#6e625a !important;
+}
+</style>
 </head>
 
 <body>
