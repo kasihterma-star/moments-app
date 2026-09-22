@@ -876,6 +876,399 @@ footer{
 })();
 </script>
 <link rel="stylesheet" href="brown-black-liquid-glass.css?v=7">
+
+<style id="index-contrast-fix">
+/* INDEX ONLY — PERBAIKAN KONTRAS */
+
+/* 1. Tombol Buat Acara di pojok kanan: teks putih saat mode terang */
+html[data-theme="light"] body .navbar .btn-create-small,
+html[data-theme="light"] body .navbar a.btn-create-small,
+body .navbar .btn-create-small{
+  color:#fffaf6 !important;
+  -webkit-text-fill-color:#fffaf6 !important;
+  opacity:1 !important;
+}
+
+/* 2. Bagian putih/silver: teks gelap di kedua mode */
+body .features{
+  background:#fff !important;
+}
+
+body .features .section-title small{
+  color:#9b6540 !important;
+  -webkit-text-fill-color:#9b6540 !important;
+  opacity:1 !important;
+}
+
+body .features .section-title h2{
+  color:#281a13 !important;
+  -webkit-text-fill-color:#281a13 !important;
+  opacity:1 !important;
+}
+
+body .features .feature-card{
+  background:linear-gradient(145deg,rgba(239,238,236,.98),rgba(211,209,206,.96)) !important;
+  border-color:rgba(255,255,255,.72) !important;
+  color:#241c18 !important;
+}
+
+body .features .feature-card h3{
+  color:#241c18 !important;
+  -webkit-text-fill-color:#241c18 !important;
+  opacity:1 !important;
+}
+
+body .features .feature-card p{
+  color:#5b5049 !important;
+  -webkit-text-fill-color:#5b5049 !important;
+  opacity:1 !important;
+}
+
+body .features .feature-icon{
+  background:rgba(250,248,245,.94) !important;
+  color:#423228 !important;
+  -webkit-text-fill-color:#423228 !important;
+}
+
+/* Bagian Hanya tiga langkah: kartu putih = teks gelap di kedua mode */
+body .how .step{
+  background:#f7f5f2 !important;
+  border-color:#e7dfd8 !important;
+  color:#241c18 !important;
+}
+
+body .how .step h3{
+  color:#241c18 !important;
+  -webkit-text-fill-color:#241c18 !important;
+  opacity:1 !important;
+}
+
+body .how .step p{
+  color:#65584f !important;
+  -webkit-text-fill-color:#65584f !important;
+  opacity:1 !important;
+}
+
+body .how .number{
+  background:#242220 !important;
+  color:#fff !important;
+  -webkit-text-fill-color:#fff !important;
+}
+
+html[data-theme="dark"] body .how .section-title h2{
+  color:#fffaf6 !important;
+  -webkit-text-fill-color:#fffaf6 !important;
+}
+
+html[data-theme="dark"] body .how .section-title small{
+  color:#d7aa80 !important;
+  -webkit-text-fill-color:#d7aa80 !important;
+}
+
+/* Jangan biarkan teks memudar ketika tema berganti */
+html.mm-theme-changing body .features .section-title h2,
+html.mm-theme-changing body .features .feature-card h3,
+html.mm-theme-changing body .features .feature-card p,
+html.mm-theme-changing body .how .step h3,
+html.mm-theme-changing body .how .step p,
+html.mm-theme-changing body .navbar .btn-create-small{
+  transition-property:background,border-color,box-shadow,transform,opacity !important;
+}
+</style>
+
+
+<style id="index-number-dark-fix">
+/* Dark mode: nomor pada kartu putih harus tetap terlihat jelas */
+html[data-theme="dark"] body .how .step .number,
+html[data-theme="dark"] body .steps .step .number{
+  background:#242220 !important;
+  color:#ffffff !important;
+  -webkit-text-fill-color:#ffffff !important;
+  border:1px solid rgba(255,255,255,.10) !important;
+  opacity:1 !important;
+  box-shadow:none !important;
+}
+
+html[data-theme="light"] body .how .step .number,
+html[data-theme="light"] body .steps .step .number{
+  background:#242220 !important;
+  color:#ffffff !important;
+  -webkit-text-fill-color:#ffffff !important;
+  opacity:1 !important;
+}
+</style>
+
+
+<style id="index-final-v2-fix">
+/* =========================================================
+   INDEX FINAL v2
+   - Tombol Buat Acara hero disamakan gaya premium coklat
+   - Tag Disposable Camera terbaca di mode gelap
+   - Tombol kanan atas diberi jarak dari tepi
+========================================================= */
+
+/* 1) Tombol Buat Acara di hero: samakan gaya dengan tombol CTA */
+.hero-buttons .btn-primary,
+.hero-buttons a.btn-primary{
+  background:
+    linear-gradient(
+      135deg,
+      #8a5632,
+      #6c3e25 55%,
+      #c99565
+    ) !important;
+
+  color:#fffaf6 !important;
+  -webkit-text-fill-color:#fffaf6 !important;
+
+  border:1px solid rgba(255,255,255,.28) !important;
+
+  box-shadow:
+    inset 0 1px 0 rgba(255,255,255,.34),
+    0 10px 28px rgba(99,61,36,.22),
+    0 0 24px rgba(184,125,75,.14) !important;
+}
+
+/* pastikan tetap putih di mode terang */
+html[data-theme="light"] .hero-buttons .btn-primary,
+html[data-theme="light"] .hero-buttons a.btn-primary{
+  color:#fffaf6 !important;
+  -webkit-text-fill-color:#fffaf6 !important;
+}
+
+/* 2) Tag Disposable Camera: background-nya terang, jadi teks harus gelap */
+html[data-theme="dark"] .hero-text .tag{
+  background:rgba(244,241,237,.92) !important;
+
+  color:#49372c !important;
+  -webkit-text-fill-color:#49372c !important;
+
+  border:1px solid rgba(255,255,255,.22) !important;
+
+  opacity:1 !important;
+}
+
+/* mode terang juga dipertahankan jelas */
+html[data-theme="light"] .hero-text .tag{
+  color:#6d4b35 !important;
+  -webkit-text-fill-color:#6d4b35 !important;
+  opacity:1 !important;
+}
+
+/* 3) Beri jarak tombol pojok kanan dari tepi */
+.nav-actions{
+  margin-right:18px !important;
+}
+
+/* supaya tetap rapi di layar kecil */
+@media(max-width:800px){
+  .nav-actions{
+    margin-right:4px !important;
+  }
+}
+</style>
+
+
+<style id="index-visual-polish-v3">
+.navbar{
+  padding-left:30px !important;
+  padding-right:52px !important;
+}
+.nav-actions{
+  margin-right:0 !important;
+  gap:12px !important;
+}
+.btn-create-small{
+  background:linear-gradient(135deg,#8a5632,#6c3e25 55%,#c99565) !important;
+  color:#fffaf6 !important;
+  -webkit-text-fill-color:#fffaf6 !important;
+  box-shadow:
+    inset 0 1px 0 rgba(255,255,255,.34),
+    0 9px 24px rgba(92,55,33,.20) !important;
+}
+.hero{
+  padding-top:128px !important;
+  padding-bottom:70px !important;
+}
+.hero-inner{
+  max-width:1180px !important;
+  grid-template-columns:.92fr 1.08fr !important;
+  gap:56px !important;
+}
+.hero-text{position:relative;z-index:2;}
+.hero-text h1{max-width:610px;}
+.hero-buttons{margin-bottom:22px;}
+.hero-benefits{
+  display:flex;
+  flex-wrap:wrap;
+  gap:12px 22px;
+  font-size:12px;
+  font-weight:700;
+  color:#806957;
+}
+html[data-theme="dark"] .hero-benefits{color:#d8c4b6;}
+.phone-wrapper{
+  position:relative;
+  min-height:680px;
+  align-items:center;
+}
+.phone-wrapper::before{
+  content:"";
+  position:absolute;
+  width:470px;
+  height:470px;
+  border-radius:50%;
+  background:radial-gradient(circle,rgba(207,153,103,.28) 0%,rgba(207,153,103,.10) 44%,transparent 72%);
+  filter:blur(4px);
+  z-index:0;
+}
+.phone{
+  position:relative;
+  z-index:2;
+  width:338px !important;
+  height:675px !important;
+  padding:7px !important;
+  border-radius:52px !important;
+  background:linear-gradient(145deg,#544337,#1c1815 28%,#6e5949 58%,#181512) !important;
+  border:1px solid rgba(255,255,255,.42);
+  box-shadow:0 38px 80px rgba(83,50,29,.24),0 12px 24px rgba(0,0,0,.16),inset 0 0 0 1px rgba(255,255,255,.24) !important;
+  transform:perspective(1100px) rotateY(-7deg) rotateZ(4deg) !important;
+  transition:transform .35s ease,box-shadow .35s ease !important;
+}
+.phone:hover{
+  transform:perspective(1100px) rotateY(-3deg) rotateZ(2deg) translateY(-4px) !important;
+}
+.phone::before{
+  content:"";
+  position:absolute;
+  top:110px;
+  right:-5px;
+  width:4px;
+  height:82px;
+  border-radius:5px;
+  background:#7a6454;
+  box-shadow:0 90px 0 #7a6454;
+}
+.phone-screen{
+  position:relative;
+  border-radius:45px !important;
+  overflow:hidden !important;
+  padding:25px 22px 27px !important;
+  background:
+    linear-gradient(rgba(255,248,239,.72),rgba(255,244,233,.72)),
+    radial-gradient(circle at 18% 26%,rgba(190,133,83,.14),transparent 32%),
+    radial-gradient(circle at 88% 82%,rgba(231,197,162,.34),transparent 34%),
+    linear-gradient(145deg,#f8ede1,#e9d4bf) !important;
+  color:#34261e !important;
+  box-shadow:inset 0 0 0 1px rgba(255,255,255,.65),inset 0 -30px 90px rgba(190,135,88,.08) !important;
+}
+html[data-theme="dark"] .phone-screen{
+  background:
+    radial-gradient(circle at 55% 60%,rgba(139,84,48,.18),transparent 28%),
+    radial-gradient(circle at 30% 30%,rgba(119,70,41,.12),transparent 24%),
+    linear-gradient(145deg,#211711,#0e0c0a 72%) !important;
+  color:#fff7ef !important;
+  box-shadow:inset 0 0 0 1px rgba(224,181,145,.16),inset 0 -30px 90px rgba(0,0,0,.30) !important;
+}
+.phone-screen::before{
+  content:"";
+  position:absolute;
+  inset:-18% 44% 20% -28%;
+  transform:rotate(24deg);
+  background:linear-gradient(100deg,transparent,rgba(255,255,255,.24),transparent);
+  pointer-events:none;
+  z-index:0;
+}
+.phone-screen::after{
+  content:"";
+  position:absolute;
+  width:210px;
+  height:210px;
+  left:-72px;
+  top:150px;
+  border-radius:50%;
+  background:radial-gradient(circle,rgba(188,128,77,.12),transparent 70%);
+  pointer-events:none;
+}
+.dynamic-island{
+  position:absolute;
+  top:14px;
+  left:50%;
+  transform:translateX(-50%);
+  width:92px;
+  height:24px;
+  border-radius:999px;
+  background:#171412;
+  box-shadow:inset 0 1px 0 rgba(255,255,255,.09);
+  z-index:4;
+}
+html[data-theme="dark"] .dynamic-island{background:#050505;}
+.camera-top,.event-info,.camera-controls{position:relative;z-index:2;}
+.camera-top{padding-top:12px;color:inherit !important;}
+.camera-top span,.event-info small,.event-info h2,.shot-count{color:inherit !important;}
+.event-info h2{font-size:36px !important;}
+.shutter{
+  width:72px !important;height:72px !important;
+  border:5px solid rgba(255,255,255,.98) !important;
+  box-shadow:0 7px 22px rgba(0,0,0,.12);
+}
+.shutter::after{background:rgba(255,255,255,.97) !important;}
+.switch-camera{
+  background:rgba(255,255,255,.52) !important;
+  color:#4b3628 !important;
+  border:1px solid rgba(255,255,255,.48);
+  backdrop-filter:blur(14px);
+}
+html[data-theme="dark"] .switch-camera{
+  background:rgba(255,255,255,.16) !important;
+  color:#fff7ef !important;
+  border-color:rgba(255,255,255,.12);
+}
+.how{
+  position:relative;
+  padding:105px 24px 115px !important;
+}
+.steps{
+  max-width:1120px !important;
+  grid-template-columns:repeat(3,1fr) !important;
+  gap:18px !important;
+}
+.step{
+  min-height:205px;
+  display:block !important;
+  position:relative;
+  padding:30px !important;
+}
+.step .number{margin-bottom:24px;}
+.step h3{font-size:20px;margin-bottom:10px !important;}
+.step p{line-height:1.65 !important;}
+.cta{
+  max-width:1100px !important;
+  box-shadow:0 20px 55px rgba(0,0,0,.15);
+}
+@media(max-width:800px){
+  .navbar{
+    padding-left:16px !important;
+    padding-right:20px !important;
+  }
+  .hero-inner{grid-template-columns:1fr !important;}
+  .phone-wrapper{min-height:580px;}
+  .phone{width:286px !important;height:572px !important;}
+  .steps{grid-template-columns:1fr !important;max-width:850px !important;}
+  .step{min-height:auto;display:flex !important;padding:22px !important;}
+  .step .number{margin-bottom:0;}
+  .hero-benefits{justify-content:center;}
+}
+@media(max-width:430px){
+  .navbar{padding-right:14px !important;}
+  .nav-actions{gap:5px !important;}
+  .phone-wrapper{min-height:520px;}
+  .phone{width:258px !important;height:516px !important;}
+  .dynamic-island{width:74px;height:20px;}
+  .hero-benefits{gap:8px 13px;font-size:11px;}
+}
+</style>
+
 </head>
 
 
@@ -963,6 +1356,12 @@ footer{
 
       </div>
 
+      <div class="hero-benefits" aria-label="Keunggulan MoreMoments">
+        <span>✓ Tanpa download</span>
+        <span>✓ Mudah digunakan</span>
+        <span>✓ Kenangan tersimpan</span>
+      </div>
+
     </div>
 
 
@@ -973,6 +1372,7 @@ footer{
 
         <div class="phone-screen">
 
+          <div class="dynamic-island" aria-hidden="true"></div>
 
           <div class="camera-top">
 
