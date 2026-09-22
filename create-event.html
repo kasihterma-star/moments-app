@@ -496,6 +496,20 @@ select:focus{
 }
 
 </style>
+<script>
+(function(){
+  try{
+    var t=localStorage.getItem("moremomentsTheme");
+    if(!t && window.matchMedia && window.matchMedia("(prefers-color-scheme: dark)").matches){
+      t="dark";
+    }
+    document.documentElement.setAttribute("data-theme",t||"light");
+  }catch(e){
+    document.documentElement.setAttribute("data-theme","light");
+  }
+})();
+</script>
+<link rel="stylesheet" href="brown-black-liquid-glass.css?v=7">
 </head>
 
 <body>
@@ -2163,5 +2177,6 @@ start();
 
 </script>
 
+<script src="theme-toggle.js?v=1"></script>
 </body>
 </html>
