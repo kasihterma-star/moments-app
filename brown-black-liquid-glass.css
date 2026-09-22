@@ -1,0 +1,2218 @@
+
+/* =========================================================
+   MoreMoments — BROWN / BLACK LIQUID GLASS
+   Animated Light + Dark Mode
+========================================================= */
+
+:root{
+  --bg-1:#fffaf5;
+  --bg-2:#f5e9dc;
+  --bg-3:#ead4bd;
+
+  --text:#3a251a;
+  --muted:#816b5d;
+
+  --glass:rgba(255,255,255,.15);
+  --glass-strong:rgba(255,255,255,.32);
+  --glass-edge:rgba(255,255,255,.70);
+
+  --accent:#8a5632;
+  --accent-deep:#6c3e25;
+  --accent-light:#c99565;
+
+  --shadow:0 20px 55px rgba(92,61,39,.16);
+  --shadow-soft:0 10px 28px rgba(92,61,39,.10);
+  --glow:0 0 28px rgba(184,125,75,.20);
+
+  --transition-theme:
+    background .55s cubic-bezier(.2,.8,.2,1),
+    color .42s ease,
+    border-color .42s ease,
+    box-shadow .42s ease;
+}
+
+html[data-theme="dark"]{
+  --bg-1:#050505;
+  --bg-2:#0a0908;
+  --bg-3:#15100d;
+
+  --text:#fff8f2;
+  --muted:#c8b7aa;
+
+  --glass:rgba(28,24,21,.24);
+  --glass-strong:rgba(43,34,29,.34);
+  --glass-edge:rgba(237,205,177,.16);
+
+  --accent:#d19661;
+  --accent-deep:#9b6239;
+  --accent-light:#f0bd86;
+
+  --shadow:0 24px 70px rgba(0,0,0,.54);
+  --shadow-soft:0 12px 34px rgba(0,0,0,.36);
+  --glow:0 0 34px rgba(218,154,93,.22);
+}
+
+html,
+body{
+  min-height:100%;
+}
+
+html{
+  background:var(--bg-1);
+  transition:background .55s ease;
+}
+
+body{
+  transition:var(--transition-theme);
+}
+
+body:not(.camera-body){
+  color:var(--text) !important;
+  background:
+    radial-gradient(circle at 10% 10%,rgba(255,255,255,.96),transparent 24%),
+    radial-gradient(circle at 88% 14%,rgba(224,186,149,.40),transparent 31%),
+    radial-gradient(circle at 76% 86%,rgba(194,132,83,.16),transparent 32%),
+    radial-gradient(circle at 14% 88%,rgba(226,198,169,.20),transparent 30%),
+    linear-gradient(145deg,var(--bg-1),var(--bg-2) 48%,var(--bg-3)) !important;
+  background-attachment:fixed !important;
+  overflow-x:hidden;
+}
+
+html[data-theme="dark"] body:not(.camera-body){
+  background:
+    radial-gradient(circle at 82% 10%,rgba(164,104,59,.12),transparent 30%),
+    radial-gradient(circle at 15% 88%,rgba(105,66,43,.10),transparent 34%),
+    linear-gradient(145deg,var(--bg-1),var(--bg-2) 50%,var(--bg-3)) !important;
+}
+
+/* animated liquid blobs */
+body:not(.camera-body)::before,
+body:not(.camera-body)::after{
+  content:"";
+  position:fixed;
+  z-index:-1;
+  pointer-events:none;
+  border-radius:42% 58% 55% 45% / 45% 42% 58% 55%;
+  filter:blur(1px);
+  transition:all .7s cubic-bezier(.2,.8,.2,1);
+  animation:liquidFloat 11s ease-in-out infinite alternate;
+}
+
+body:not(.camera-body)::before{
+  width:300px;
+  height:230px;
+  left:-82px;
+  top:14%;
+  background:
+    radial-gradient(circle at 30% 20%,rgba(255,255,255,.90),transparent 25%),
+    linear-gradient(135deg,rgba(255,255,255,.30),rgba(186,126,78,.11));
+  border:1px solid rgba(255,255,255,.74);
+  box-shadow:
+    inset 18px 20px 36px rgba(255,255,255,.50),
+    inset -18px -18px 38px rgba(157,106,70,.09),
+    0 28px 60px rgba(97,65,43,.12);
+}
+
+body:not(.camera-body)::after{
+  width:350px;
+  height:270px;
+  right:-118px;
+  bottom:7%;
+  background:
+    radial-gradient(circle at 28% 20%,rgba(255,255,255,.60),transparent 22%),
+    linear-gradient(135deg,rgba(197,145,96,.20),rgba(230,206,180,.08));
+  border:1px solid rgba(255,255,255,.48);
+  box-shadow:
+    inset 16px 18px 34px rgba(255,255,255,.26),
+    inset -20px -18px 36px rgba(128,86,57,.11),
+    0 24px 58px rgba(94,61,40,.13);
+  animation-delay:-4s;
+}
+
+html[data-theme="dark"] body:not(.camera-body)::before,
+html[data-theme="dark"] body:not(.camera-body)::after{
+  border-color:rgba(224,186,154,.11);
+  background:
+    radial-gradient(circle at 28% 20%,rgba(226,181,143,.08),transparent 24%),
+    linear-gradient(135deg,rgba(121,76,48,.16),rgba(31,22,18,.16));
+  box-shadow:
+    inset 12px 14px 30px rgba(218,168,126,.06),
+    inset -20px -20px 38px rgba(0,0,0,.22),
+    0 28px 70px rgba(0,0,0,.34);
+}
+
+@keyframes liquidFloat{
+  0%{transform:translate3d(0,0,0) rotate(-2deg) scale(1);}
+  50%{transform:translate3d(16px,-12px,0) rotate(3deg) scale(1.035);}
+  100%{transform:translate3d(-8px,14px,0) rotate(-1deg) scale(.985);}
+}
+
+/* liquid glass surfaces */
+.header,
+.navbar,
+.topbar,
+.card,
+.hero,
+.summary-card,
+.storage-card,
+.event-card,
+.user-card,
+.limit-card,
+.status-card,
+.info-box,
+.timezone-box,
+.link-preview,
+.options,
+.recovery-help,
+.highlight,
+.contact,
+.owner-tools,
+.loading,
+.empty,
+.error,
+.form-card,
+.feature-card,
+.step-card,
+.cta-box,
+.footer-inner,
+.admin-status,
+.phone,
+.phone-screen{
+  color:var(--text) !important;
+  background:linear-gradient(145deg,var(--glass-strong),var(--glass)) !important;
+  border:1px solid var(--glass-edge) !important;
+  -webkit-backdrop-filter:blur(28px) saturate(180%) !important;
+  backdrop-filter:blur(28px) saturate(180%) !important;
+  box-shadow:
+    inset 0 1px 0 rgba(255,255,255,.52),
+    inset 0 -1px 0 rgba(255,255,255,.08),
+    var(--shadow) !important;
+  transition:var(--transition-theme), transform .22s ease !important;
+}
+
+html[data-theme="dark"] .header,
+html[data-theme="dark"] .navbar,
+html[data-theme="dark"] .topbar,
+html[data-theme="dark"] .card,
+html[data-theme="dark"] .hero,
+html[data-theme="dark"] .summary-card,
+html[data-theme="dark"] .storage-card,
+html[data-theme="dark"] .event-card,
+html[data-theme="dark"] .user-card,
+html[data-theme="dark"] .limit-card,
+html[data-theme="dark"] .status-card,
+html[data-theme="dark"] .info-box,
+html[data-theme="dark"] .timezone-box,
+html[data-theme="dark"] .link-preview,
+html[data-theme="dark"] .options,
+html[data-theme="dark"] .owner-tools,
+html[data-theme="dark"] .loading,
+html[data-theme="dark"] .empty,
+html[data-theme="dark"] .error,
+html[data-theme="dark"] .form-card{
+  box-shadow:
+    inset 0 1px 0 rgba(255,255,255,.08),
+    inset 0 -1px 0 rgba(255,255,255,.02),
+    var(--shadow) !important;
+}
+
+.header,
+.navbar,
+.topbar{
+  background:rgba(255,255,255,.12) !important;
+  border-bottom:1px solid var(--glass-edge) !important;
+  -webkit-backdrop-filter:blur(32px) saturate(185%) !important;
+  backdrop-filter:blur(32px) saturate(185%) !important;
+}
+
+html[data-theme="dark"] .header,
+html[data-theme="dark"] .navbar,
+html[data-theme="dark"] .topbar{
+  background:rgba(4,4,4,.56) !important;
+}
+
+/* subtle glass sheen */
+.card,
+.summary-card,
+.storage-card,
+.event-card,
+.user-card,
+.feature-card,
+.step-card,
+.hero{
+  border-radius:26px !important;
+  position:relative;
+  overflow:hidden;
+}
+
+.card::before,
+.summary-card::before,
+.storage-card::before,
+.event-card::before,
+.user-card::before,
+.feature-card::before,
+.step-card::before,
+.hero::before{
+  content:"";
+  position:absolute;
+  inset:-45% -90%;
+  pointer-events:none;
+  border-radius:inherit;
+  background:linear-gradient(
+    115deg,
+    transparent 35%,
+    rgba(255,255,255,.00) 43%,
+    rgba(255,255,255,.24) 49%,
+    rgba(255,255,255,.06) 55%,
+    transparent 63%
+  );
+  transform:translateX(-18%) rotate(2deg);
+  transition:transform .9s cubic-bezier(.2,.8,.2,1);
+}
+
+.card:hover::before,
+.summary-card:hover::before,
+.storage-card:hover::before,
+.event-card:hover::before,
+.user-card:hover::before,
+.feature-card:hover::before,
+.step-card:hover::before,
+.hero:hover::before{
+  transform:translateX(34%) rotate(2deg);
+}
+
+h1,h2,h3,h4,h5,h6,.logo,.brand,strong,label{
+  color:var(--text) !important;
+  transition:color .42s ease;
+}
+
+p,.meta,.muted,small,.helper,.note,.owner-note,.subtitle{
+  color:var(--muted) !important;
+  transition:color .42s ease;
+}
+
+/* form controls */
+input,
+select,
+textarea{
+  color:var(--text) !important;
+  background:rgba(255,255,255,.16) !important;
+  border:1px solid var(--glass-edge) !important;
+  -webkit-backdrop-filter:blur(18px) saturate(165%) !important;
+  backdrop-filter:blur(18px) saturate(165%) !important;
+  box-shadow:
+    inset 0 1px 0 rgba(255,255,255,.48),
+    0 8px 22px rgba(94,62,41,.07) !important;
+  transition:var(--transition-theme) !important;
+}
+
+html[data-theme="dark"] input,
+html[data-theme="dark"] select,
+html[data-theme="dark"] textarea{
+  background:rgba(20,17,15,.56) !important;
+  box-shadow:
+    inset 0 1px 0 rgba(255,255,255,.04),
+    0 8px 24px rgba(0,0,0,.24) !important;
+}
+
+input::placeholder,
+textarea::placeholder{
+  color:var(--muted) !important;
+  opacity:.82;
+}
+
+/* buttons */
+button,
+.button,
+.btn,
+.back,
+.btn-login,
+.btn-primary,
+.btn-secondary,
+.primary,
+.secondary,
+.filter-tab,
+.tab,
+.show-password,
+.toggle,
+.exit,
+.switch,
+.timer-toggle,
+.mirror-toggle{
+  border:1px solid var(--glass-edge) !important;
+  -webkit-backdrop-filter:blur(18px) saturate(175%) !important;
+  backdrop-filter:blur(18px) saturate(175%) !important;
+  transition:
+    transform .18s ease,
+    background .35s ease,
+    color .35s ease,
+    box-shadow .35s ease,
+    border-color .35s ease !important;
+}
+
+.button,
+.btn-secondary,
+.secondary,
+.back,
+.filter-tab:not(.active),
+.tab:not(.active){
+  color:var(--text) !important;
+  background:rgba(255,255,255,.17) !important;
+}
+
+html[data-theme="dark"] .button,
+html[data-theme="dark"] .btn-secondary,
+html[data-theme="dark"] .secondary,
+html[data-theme="dark"] .back,
+html[data-theme="dark"] .filter-tab:not(.active),
+html[data-theme="dark"] .tab:not(.active){
+  background:rgba(18,16,14,.50) !important;
+}
+
+.btn-primary,
+.primary,
+.button.dark,
+.main-button,
+.submit,
+.login-button,
+.reset-button,
+.tab.active,
+.filter-tab.active{
+  color:#fff !important;
+  background:linear-gradient(
+    135deg,
+    var(--accent),
+    var(--accent-deep) 52%,
+    var(--accent-light)
+  ) !important;
+  border-color:rgba(255,255,255,.28) !important;
+  box-shadow:
+    inset 0 1px 0 rgba(255,255,255,.38),
+    0 10px 28px rgba(105,68,43,.24),
+    var(--glow) !important;
+}
+
+button:active,
+.button:active,
+.btn:active{
+  transform:scale(.975);
+}
+
+/* gallery */
+.photo-card{
+  background:rgba(255,255,255,.10) !important;
+  border:1px solid var(--glass-edge) !important;
+  -webkit-backdrop-filter:blur(20px) saturate(175%) !important;
+  backdrop-filter:blur(20px) saturate(175%) !important;
+  box-shadow:var(--shadow-soft) !important;
+  transition:var(--transition-theme), transform .22s ease !important;
+}
+
+html[data-theme="dark"] .photo-card{
+  background:rgba(15,13,12,.50) !important;
+}
+
+.manage-photo,
+.hidden-badge{
+  background:rgba(55,35,24,.46) !important;
+  border:1px solid rgba(255,255,255,.18) !important;
+  color:#fff !important;
+  -webkit-backdrop-filter:blur(18px) saturate(155%) !important;
+  backdrop-filter:blur(18px) saturate(155%) !important;
+}
+
+/* lightbox */
+.lightbox{
+  background:rgba(0,0,0,.68) !important;
+  -webkit-backdrop-filter:blur(28px) saturate(120%) !important;
+  backdrop-filter:blur(28px) saturate(120%) !important;
+}
+
+.lightbox-content{
+  background:rgba(17,14,12,.52) !important;
+  border:1px solid rgba(229,195,165,.14) !important;
+  -webkit-backdrop-filter:blur(34px) saturate(140%) !important;
+  backdrop-filter:blur(34px) saturate(140%) !important;
+  box-shadow:0 30px 90px rgba(0,0,0,.44) !important;
+}
+
+/* camera keeps dark preview */
+body.camera-body,
+.camera-app{
+  background:#050505 !important;
+}
+
+.camera-app .topbar{
+  background:linear-gradient(
+    to bottom,
+    rgba(20,13,10,.64),
+    rgba(20,13,10,.08)
+  ) !important;
+  border-bottom:0 !important;
+}
+
+.camera-app .filters,
+.camera-app .counter,
+.camera-app .mirror-status,
+.camera-app .filter-button,
+.camera-app .timer-toggle,
+.camera-app .mirror-toggle,
+.camera-app .switch,
+.camera-app .exit{
+  background:rgba(50,32,23,.34) !important;
+  border:1px solid rgba(228,196,168,.16) !important;
+  color:#fff !important;
+  -webkit-backdrop-filter:blur(22px) saturate(150%) !important;
+  backdrop-filter:blur(22px) saturate(150%) !important;
+  box-shadow:0 10px 26px rgba(0,0,0,.24) !important;
+}
+
+.camera-app .filter-button.active,
+.camera-app .timer-toggle.active,
+.camera-app .mirror-toggle.active{
+  background:rgba(250,240,231,.92) !important;
+  color:#472b1b !important;
+}
+
+/* =========================================================
+   Animated Theme Switch
+========================================================= */
+
+.mm-theme-switch{
+  position:fixed;
+  right:18px;
+  bottom:18px;
+  z-index:9999;
+
+  width:112px;
+  height:54px;
+  padding:5px;
+
+  display:flex;
+  align-items:center;
+
+  border:1px solid var(--glass-edge);
+  border-radius:999px;
+
+  background:linear-gradient(
+    145deg,
+    var(--glass-strong),
+    var(--glass)
+  );
+
+  -webkit-backdrop-filter:blur(28px) saturate(190%);
+  backdrop-filter:blur(28px) saturate(190%);
+
+  box-shadow:
+    inset 0 1px 0 rgba(255,255,255,.52),
+    var(--shadow-soft);
+
+  cursor:pointer;
+  user-select:none;
+
+  transition:
+    background .45s ease,
+    border-color .45s ease,
+    box-shadow .45s ease,
+    transform .18s ease;
+}
+
+.mm-theme-switch:active{
+  transform:scale(.97);
+}
+
+.mm-theme-knob{
+  position:absolute;
+  left:5px;
+  top:5px;
+
+  width:44px;
+  height:44px;
+
+  border-radius:50%;
+
+  display:grid;
+  place-items:center;
+
+  color:#fff;
+  font-size:20px;
+
+  background:
+    radial-gradient(circle at 32% 22%,rgba(255,255,255,.55),transparent 28%),
+    linear-gradient(
+      145deg,
+      var(--accent-light),
+      var(--accent)
+    );
+
+  box-shadow:
+    inset 0 1px 1px rgba(255,255,255,.46),
+    0 8px 20px rgba(104,66,41,.24),
+    var(--glow);
+
+  transform:translateX(0);
+  transition:
+    transform .52s cubic-bezier(.22,1,.36,1),
+    background .45s ease,
+    box-shadow .45s ease;
+}
+
+html[data-theme="dark"] .mm-theme-knob{
+  transform:translateX(58px);
+  background:
+    radial-gradient(circle at 32% 22%,rgba(255,255,255,.12),transparent 28%),
+    linear-gradient(145deg,#171411,#050505);
+  box-shadow:
+    inset 0 1px 1px rgba(255,255,255,.10),
+    0 8px 24px rgba(0,0,0,.58),
+    0 0 24px rgba(209,145,86,.14);
+}
+
+.mm-theme-icon{
+  position:absolute;
+  width:44px;
+  height:44px;
+  display:grid;
+  place-items:center;
+  top:5px;
+  font-size:18px;
+  opacity:.72;
+  transition:
+    opacity .35s ease,
+    transform .52s cubic-bezier(.22,1,.36,1);
+}
+
+.mm-theme-sun{
+  left:5px;
+  color:#fff;
+}
+
+.mm-theme-moon{
+  right:5px;
+  color:var(--text);
+}
+
+html[data-theme="light"] .mm-theme-sun{
+  opacity:0;
+}
+
+html[data-theme="dark"] .mm-theme-moon{
+  opacity:0;
+}
+
+.mm-theme-switch::before{
+  content:"";
+  position:absolute;
+  inset:2px;
+  border-radius:inherit;
+  pointer-events:none;
+  background:linear-gradient(
+    115deg,
+    transparent 20%,
+    rgba(255,255,255,.24) 44%,
+    transparent 62%
+  );
+  transform:translateX(-65%);
+  transition:transform .8s cubic-bezier(.22,1,.36,1);
+}
+
+.mm-theme-switch:hover::before{
+  transform:translateX(65%);
+}
+
+/* animate whole page theme change */
+html.mm-theme-changing *,
+html.mm-theme-changing *::before,
+html.mm-theme-changing *::after{
+  transition-duration:.52s !important;
+}
+
+@media (hover:hover){
+  .card:hover,
+  .summary-card:hover,
+  .storage-card:hover,
+  .event-card:hover,
+  .user-card:hover,
+  .feature-card:hover,
+  .step-card:hover{
+    transform:translateY(-2px);
+  }
+
+  button:hover,
+  .button:hover,
+  .btn:hover{
+    transform:translateY(-1px);
+  }
+}
+
+@media(max-width:700px){
+  body:not(.camera-body)::before{
+    width:195px;
+    height:150px;
+  }
+
+  body:not(.camera-body)::after{
+    width:225px;
+    height:180px;
+  }
+
+  .mm-theme-switch{
+    right:12px;
+    bottom:12px;
+    width:102px;
+    height:50px;
+  }
+
+  .mm-theme-knob{
+    width:40px;
+    height:40px;
+  }
+
+  html[data-theme="dark"] .mm-theme-knob{
+    transform:translateX(52px);
+  }
+
+  .mm-theme-icon{
+    width:40px;
+    height:40px;
+  }
+}
+
+@media(prefers-reduced-motion:reduce){
+  *,
+  *::before,
+  *::after{
+    animation-duration:.001ms !important;
+    animation-iteration-count:1 !important;
+    scroll-behavior:auto !important;
+  }
+}
+
+@supports not ((backdrop-filter:blur(1px)) or (-webkit-backdrop-filter:blur(1px))){
+  .header,
+  .navbar,
+  .topbar,
+  .card,
+  .hero,
+  .summary-card,
+  .storage-card,
+  .event-card,
+  .user-card,
+  .owner-tools{
+    background:rgba(250,243,236,.96) !important;
+  }
+
+  html[data-theme="dark"] .header,
+  html[data-theme="dark"] .navbar,
+  html[data-theme="dark"] .topbar,
+  html[data-theme="dark"] .card,
+  html[data-theme="dark"] .hero,
+  html[data-theme="dark"] .summary-card,
+  html[data-theme="dark"] .storage-card,
+  html[data-theme="dark"] .event-card,
+  html[data-theme="dark"] .user-card,
+  html[data-theme="dark"] .owner-tools{
+    background:rgba(8,8,8,.96) !important;
+  }
+}
+
+
+/* =========================================================
+   TEXT CONTRAST FIX v2
+   Menjaga semua tulisan tetap terbaca di mode terang/gelap
+   dan selama animasi perpindahan tema.
+========================================================= */
+
+/* Default text colors */
+body,
+main,
+section,
+article,
+header,
+footer,
+nav,
+div,
+span,
+li,
+td,
+th{
+  color:var(--text);
+}
+
+/* Regular text that must stay readable */
+a,
+a:visited,
+.nav-link,
+.menu-link,
+.event-name,
+.user-name,
+.account-name,
+.card-title,
+.section-title,
+.title,
+.name,
+.value,
+.stat-value,
+.stat-number,
+.count,
+.photo-count,
+.guest-count,
+.storage-value,
+.event-count,
+label{
+  color:var(--text) !important;
+}
+
+/* Secondary copy */
+.description,
+.desc,
+.subtitle,
+.meta,
+.helper,
+.note,
+.hint,
+.caption-text,
+.event-meta,
+.user-meta,
+.date,
+.time,
+.email,
+small{
+  color:var(--muted) !important;
+}
+
+/* Light mode: force text away from washed-out gray/brown */
+html[data-theme="light"] body,
+html[data-theme="light"] main,
+html[data-theme="light"] section,
+html[data-theme="light"] article,
+html[data-theme="light"] .card,
+html[data-theme="light"] .hero,
+html[data-theme="light"] .event-card,
+html[data-theme="light"] .user-card,
+html[data-theme="light"] .summary-card,
+html[data-theme="light"] .storage-card,
+html[data-theme="light"] .form-card,
+html[data-theme="light"] .owner-tools{
+  color:#352218 !important;
+}
+
+html[data-theme="light"] h1,
+html[data-theme="light"] h2,
+html[data-theme="light"] h3,
+html[data-theme="light"] h4,
+html[data-theme="light"] h5,
+html[data-theme="light"] h6,
+html[data-theme="light"] strong,
+html[data-theme="light"] label,
+html[data-theme="light"] a:not(.btn):not(.button):not(.primary):not(.btn-primary),
+html[data-theme="light"] .title,
+html[data-theme="light"] .name,
+html[data-theme="light"] .event-name,
+html[data-theme="light"] .user-name,
+html[data-theme="light"] .stat-value,
+html[data-theme="light"] .stat-number,
+html[data-theme="light"] .count{
+  color:#2d1b12 !important;
+}
+
+html[data-theme="light"] p,
+html[data-theme="light"] .meta,
+html[data-theme="light"] .muted,
+html[data-theme="light"] .helper,
+html[data-theme="light"] .note,
+html[data-theme="light"] .hint,
+html[data-theme="light"] small{
+  color:#755f52 !important;
+}
+
+/* Dark mode: stronger white text */
+html[data-theme="dark"] body,
+html[data-theme="dark"] main,
+html[data-theme="dark"] section,
+html[data-theme="dark"] article,
+html[data-theme="dark"] .card,
+html[data-theme="dark"] .hero,
+html[data-theme="dark"] .event-card,
+html[data-theme="dark"] .user-card,
+html[data-theme="dark"] .summary-card,
+html[data-theme="dark"] .storage-card,
+html[data-theme="dark"] .form-card,
+html[data-theme="dark"] .owner-tools{
+  color:#fff8f2 !important;
+}
+
+html[data-theme="dark"] h1,
+html[data-theme="dark"] h2,
+html[data-theme="dark"] h3,
+html[data-theme="dark"] h4,
+html[data-theme="dark"] h5,
+html[data-theme="dark"] h6,
+html[data-theme="dark"] strong,
+html[data-theme="dark"] label,
+html[data-theme="dark"] a:not(.btn):not(.button):not(.primary):not(.btn-primary),
+html[data-theme="dark"] .title,
+html[data-theme="dark"] .name,
+html[data-theme="dark"] .event-name,
+html[data-theme="dark"] .user-name,
+html[data-theme="dark"] .stat-value,
+html[data-theme="dark"] .stat-number,
+html[data-theme="dark"] .count{
+  color:#fffaf6 !important;
+}
+
+html[data-theme="dark"] p,
+html[data-theme="dark"] .meta,
+html[data-theme="dark"] .muted,
+html[data-theme="dark"] .helper,
+html[data-theme="dark"] .note,
+html[data-theme="dark"] .hint,
+html[data-theme="dark"] small{
+  color:#cdbbae !important;
+}
+
+/* Buttons keep intentional contrast */
+.btn-primary,
+.primary,
+.button.dark,
+.main-button,
+.submit,
+.login-button,
+.reset-button,
+.tab.active,
+.filter-tab.active{
+  color:#fff !important;
+}
+
+html[data-theme="light"] .button:not(.dark),
+html[data-theme="light"] .btn-secondary,
+html[data-theme="light"] .secondary,
+html[data-theme="light"] .back,
+html[data-theme="light"] .filter-tab:not(.active),
+html[data-theme="light"] .tab:not(.active){
+  color:#352218 !important;
+}
+
+html[data-theme="dark"] .button:not(.dark),
+html[data-theme="dark"] .btn-secondary,
+html[data-theme="dark"] .secondary,
+html[data-theme="dark"] .back,
+html[data-theme="dark"] .filter-tab:not(.active),
+html[data-theme="dark"] .tab:not(.active){
+  color:#fff7ef !important;
+}
+
+/* Form text and dropdown options */
+html[data-theme="light"] input,
+html[data-theme="light"] select,
+html[data-theme="light"] textarea{
+  color:#2d1b12 !important;
+}
+
+html[data-theme="dark"] input,
+html[data-theme="dark"] select,
+html[data-theme="dark"] textarea{
+  color:#fff8f2 !important;
+}
+
+html[data-theme="light"] select option{
+  background:#fffaf5;
+  color:#2d1b12;
+}
+
+html[data-theme="dark"] select option{
+  background:#15100d;
+  color:#fff8f2;
+}
+
+/* Prevent text from fading into the background while switching */
+html.mm-theme-changing body,
+html.mm-theme-changing h1,
+html.mm-theme-changing h2,
+html.mm-theme-changing h3,
+html.mm-theme-changing h4,
+html.mm-theme-changing h5,
+html.mm-theme-changing h6,
+html.mm-theme-changing p,
+html.mm-theme-changing a,
+html.mm-theme-changing span,
+html.mm-theme-changing label,
+html.mm-theme-changing small,
+html.mm-theme-changing strong,
+html.mm-theme-changing input,
+html.mm-theme-changing select,
+html.mm-theme-changing textarea,
+html.mm-theme-changing button{
+  transition-property:
+    background,
+    border-color,
+    box-shadow,
+    transform,
+    opacity !important;
+}
+
+/* Status/badges often have their own old text colors */
+.status,
+.status-badge,
+.role-badge,
+.account-badge,
+.badge,
+.chip,
+.pill{
+  color:var(--text) !important;
+}
+
+html[data-theme="dark"] .status,
+html[data-theme="dark"] .status-badge,
+html[data-theme="dark"] .role-badge,
+html[data-theme="dark"] .account-badge,
+html[data-theme="dark"] .badge,
+html[data-theme="dark"] .chip,
+html[data-theme="dark"] .pill{
+  color:#fff8f2 !important;
+}
+
+/* Keep captions on photos white */
+.caption,
+.photo-card .caption,
+.lightbox-info,
+.manage-photo,
+.hidden-badge{
+  color:#fff !important;
+}
+
+
+/* =========================================================
+   TEXT CONTRAST FIX v3
+   Perbaikan spesifik landing page + navbar + mode switch
+========================================================= */
+
+/* Tombol header */
+.btn-create-small,
+.btn-create-small:link,
+.btn-create-small:visited,
+.nav-actions .btn-create-small,
+a.btn-create-small{
+  color:#fffaf6 !important;
+}
+
+.btn-login,
+.btn-login:link,
+.btn-login:visited,
+a.btn-login{
+  color:#352218 !important;
+}
+html[data-theme="dark"] .btn-login,
+html[data-theme="dark"] .btn-login:link,
+html[data-theme="dark"] .btn-login:visited,
+html[data-theme="dark"] a.btn-login{
+  color:#fff8f2 !important;
+}
+
+/* Landing page hero */
+.hero-text h1,
+.hero-text h1 span,
+.hero .hero-text h1,
+.hero .hero-text h1 span{
+  color:var(--text) !important;
+  text-shadow:0 1px 0 rgba(255,255,255,.05);
+}
+
+.hero-text p,
+.hero .hero-text p{
+  color:var(--muted) !important;
+}
+
+html[data-theme="light"] .hero-text h1,
+html[data-theme="light"] .hero .hero-text h1{
+  color:#2c1a10 !important;
+}
+html[data-theme="light"] .hero-text h1 span,
+html[data-theme="light"] .hero .hero-text h1 span{
+  color:#8a5632 !important;
+}
+html[data-theme="light"] .hero-text p,
+html[data-theme="light"] .hero .hero-text p{
+  color:#6c594d !important;
+}
+
+html[data-theme="dark"] .hero-text h1,
+html[data-theme="dark"] .hero .hero-text h1,
+html[data-theme="dark"] .hero-text h1 span,
+html[data-theme="dark"] .hero .hero-text h1 span{
+  color:#fffaf6 !important;
+  text-shadow:0 2px 20px rgba(0,0,0,.22);
+}
+html[data-theme="dark"] .hero-text p,
+html[data-theme="dark"] .hero .hero-text p{
+  color:#dbc7ba !important;
+}
+
+/* Section titles */
+.section-title small{
+  color:var(--accent) !important;
+}
+.section-title h1,
+.section-title h2,
+.section-title h3{
+  color:var(--text) !important;
+}
+html[data-theme="light"] .section-title small{
+  color:#9a6540 !important;
+}
+html[data-theme="light"] .section-title h1,
+html[data-theme="light"] .section-title h2,
+html[data-theme="light"] .section-title h3{
+  color:#2d1b12 !important;
+}
+html[data-theme="dark"] .section-title small{
+  color:#d9ac83 !important;
+}
+html[data-theme="dark"] .section-title h1,
+html[data-theme="dark"] .section-title h2,
+html[data-theme="dark"] .section-title h3{
+  color:#fffaf6 !important;
+}
+
+/* Feature cards on homepage */
+.feature-card,
+.step-card,
+.feature-card h3,
+.feature-card p,
+.step-card h3,
+.step-card p{
+  color:var(--text) !important;
+}
+.feature-card p,
+.step-card p{
+  color:var(--muted) !important;
+}
+html[data-theme="light"] .feature-card h3,
+html[data-theme="light"] .step-card h3{
+  color:#2d1b12 !important;
+}
+html[data-theme="light"] .feature-card p,
+html[data-theme="light"] .step-card p{
+  color:#705d51 !important;
+}
+html[data-theme="dark"] .feature-card h3,
+html[data-theme="dark"] .step-card h3{
+  color:#fffaf6 !important;
+}
+html[data-theme="dark"] .feature-card p,
+html[data-theme="dark"] .step-card p{
+  color:#d3c0b3 !important;
+}
+
+/* Small muted texts often become too faint */
+html[data-theme="light"] .tag,
+html[data-theme="light"] .subtitle,
+html[data-theme="light"] .number,
+html[data-theme="light"] .shot-count,
+html[data-theme="light"] .event-info,
+html[data-theme="light"] .footer-links a{
+  color:#6f5c50 !important;
+}
+html[data-theme="dark"] .tag,
+html[data-theme="dark"] .subtitle,
+html[data-theme="dark"] .number,
+html[data-theme="dark"] .shot-count,
+html[data-theme="dark"] .event-info,
+html[data-theme="dark"] .footer-links a{
+  color:#e6d8ce !important;
+}
+
+/* During theme animation force readable endpoint colors */
+html.mm-theme-changing[data-theme="light"] .hero-text h1,
+html.mm-theme-changing[data-theme="light"] .section-title h1,
+html.mm-theme-changing[data-theme="light"] .section-title h2,
+html.mm-theme-changing[data-theme="light"] .feature-card h3,
+html.mm-theme-changing[data-theme="light"] .btn-login{
+  color:#2d1b12 !important;
+}
+html.mm-theme-changing[data-theme="light"] .hero-text p,
+html.mm-theme-changing[data-theme="light"] .feature-card p{
+  color:#6f5c50 !important;
+}
+html.mm-theme-changing[data-theme="dark"] .hero-text h1,
+html.mm-theme-changing[data-theme="dark"] .hero-text h1 span,
+html.mm-theme-changing[data-theme="dark"] .section-title h1,
+html.mm-theme-changing[data-theme="dark"] .section-title h2,
+html.mm-theme-changing[data-theme="dark"] .feature-card h3,
+html.mm-theme-changing[data-theme="dark"] .btn-login{
+  color:#fffaf6 !important;
+}
+html.mm-theme-changing[data-theme="dark"] .hero-text p,
+html.mm-theme-changing[data-theme="dark"] .feature-card p{
+  color:#dbc7ba !important;
+}
+
+
+/* =========================================================
+   TEXT CONTRAST FIX v4
+   Perbaikan CTA, feature section, steps, dan mode terang/gelap
+========================================================= */
+
+/* CTA section uses a dark card in both modes, so text must stay light */
+.cta h1,
+.cta h2,
+.cta h3,
+.cta .title,
+.cta strong{
+  color:#fffaf6 !important;
+  text-shadow:0 2px 24px rgba(0,0,0,.18);
+}
+.cta p,
+.cta .subtitle,
+.cta .description,
+.cta .desc{
+  color:#e7d5c8 !important;
+}
+.cta .btn-primary,
+.cta .create-link,
+.cta a.btn-primary,
+.cta a.create-link{
+  color:#fffaf6 !important;
+}
+
+/* Feature section title */
+.features .section-title small,
+.features .section-title .eyebrow{
+  color:#a66d45 !important;
+}
+.features .section-title h1,
+.features .section-title h2,
+.features .section-title h3{
+  color:#2b1a12 !important;
+}
+html[data-theme="dark"] .features .section-title small,
+html[data-theme="dark"] .features .section-title .eyebrow{
+  color:#d7ab84 !important;
+}
+html[data-theme="dark"] .features .section-title h1,
+html[data-theme="dark"] .features .section-title h2,
+html[data-theme="dark"] .features .section-title h3{
+  color:#fffaf6 !important;
+}
+
+/* Feature cards */
+.features .feature-card,
+.features .feature-card h3,
+.features .feature-card .title,
+.features .feature-card strong{
+  color:#2f1d14 !important;
+}
+.features .feature-card p,
+.features .feature-card .description,
+.features .feature-card .desc{
+  color:#6d5a4f !important;
+}
+.features .feature-icon{
+  color:#6f462b !important;
+  background:rgba(255,255,255,.55) !important;
+  box-shadow:inset 0 1px 0 rgba(255,255,255,.55), 0 8px 20px rgba(92,61,39,.08) !important;
+}
+html[data-theme="dark"] .features .feature-card,
+html[data-theme="dark"] .features .feature-card h3,
+html[data-theme="dark"] .features .feature-card .title,
+html[data-theme="dark"] .features .feature-card strong{
+  color:#fffaf6 !important;
+}
+html[data-theme="dark"] .features .feature-card p,
+html[data-theme="dark"] .features .feature-card .description,
+html[data-theme="dark"] .features .feature-card .desc{
+  color:#dbc8bc !important;
+}
+html[data-theme="dark"] .features .feature-icon{
+  color:#fffaf6 !important;
+  background:rgba(255,255,255,.09) !important;
+  box-shadow:inset 0 1px 0 rgba(255,255,255,.10), 0 10px 24px rgba(0,0,0,.24) !important;
+}
+
+/* How-it-works steps */
+.how .section-title small{
+  color:#a66d45 !important;
+}
+.how .section-title h1,
+.how .section-title h2,
+.how .section-title h3,
+.how .step h3{
+  color:#2b1a12 !important;
+}
+.how .step p,
+.how .step .description,
+.how .step .desc{
+  color:#69574c !important;
+}
+.how .number{
+  color:#ffffff !important;
+  background:#272423 !important;
+}
+html[data-theme="dark"] .how .section-title small{
+  color:#d7ab84 !important;
+}
+html[data-theme="dark"] .how .section-title h1,
+html[data-theme="dark"] .how .section-title h2,
+html[data-theme="dark"] .how .section-title h3,
+html[data-theme="dark"] .how .step h3{
+  color:#fffaf6 !important;
+}
+html[data-theme="dark"] .how .step p,
+html[data-theme="dark"] .how .step .description,
+html[data-theme="dark"] .how .step .desc{
+  color:#d6c4b8 !important;
+}
+html[data-theme="dark"] .how .number{
+  color:#130e0b !important;
+  background:#fff7f1 !important;
+}
+
+/* Better readability while theme is animating */
+html.mm-theme-changing .cta h1,
+html.mm-theme-changing .cta h2,
+html.mm-theme-changing .cta h3{
+  color:#fffaf6 !important;
+}
+html.mm-theme-changing .cta p{
+  color:#e7d5c8 !important;
+}
+html.mm-theme-changing[data-theme="light"] .features .section-title h1,
+html.mm-theme-changing[data-theme="light"] .features .section-title h2,
+html.mm-theme-changing[data-theme="light"] .features .section-title h3,
+html.mm-theme-changing[data-theme="light"] .features .feature-card h3,
+html.mm-theme-changing[data-theme="light"] .how .step h3{
+  color:#2b1a12 !important;
+}
+html.mm-theme-changing[data-theme="light"] .features .feature-card p,
+html.mm-theme-changing[data-theme="light"] .how .step p{
+  color:#6d5a4f !important;
+}
+html.mm-theme-changing[data-theme="dark"] .features .section-title h1,
+html.mm-theme-changing[data-theme="dark"] .features .section-title h2,
+html.mm-theme-changing[data-theme="dark"] .features .section-title h3,
+html.mm-theme-changing[data-theme="dark"] .features .feature-card h3,
+html.mm-theme-changing[data-theme="dark"] .how .step h3{
+  color:#fffaf6 !important;
+}
+html.mm-theme-changing[data-theme="dark"] .features .feature-card p,
+html.mm-theme-changing[data-theme="dark"] .how .step p{
+  color:#dbc8bc !important;
+}
+
+
+/* =========================================================
+   TEXT CONTRAST FIX v5 — exact landing/dashboard overrides
+========================================================= */
+
+/* HOMEPAGE CTA: card is dark in both themes */
+html[data-theme="light"] body .cta h2,
+html[data-theme="dark"] body .cta h2,
+body .cta h2{
+  color:#fffaf6 !important;
+  opacity:1 !important;
+}
+
+html[data-theme="light"] body .cta p,
+html[data-theme="dark"] body .cta p,
+body .cta p{
+  color:#ead8ca !important;
+  opacity:1 !important;
+}
+
+html[data-theme="light"] body .cta a.btn-primary,
+html[data-theme="dark"] body .cta a.btn-primary,
+body .cta a.btn-primary{
+  color:#fffaf6 !important;
+  opacity:1 !important;
+}
+
+/* EXACT "Semua jadi mudah / Satu QR..." section */
+html[data-theme="light"] body .features .section-title small{
+  color:#98623e !important;
+  opacity:1 !important;
+}
+html[data-theme="light"] body .features .section-title h2{
+  color:#2b1a12 !important;
+  opacity:1 !important;
+}
+html[data-theme="light"] body .features .feature-card h3{
+  color:#2b1a12 !important;
+  opacity:1 !important;
+}
+html[data-theme="light"] body .features .feature-card p{
+  color:#665348 !important;
+  opacity:1 !important;
+}
+
+html[data-theme="dark"] body .features .section-title small{
+  color:#d9ad85 !important;
+  opacity:1 !important;
+}
+html[data-theme="dark"] body .features .section-title h2{
+  color:#fffaf6 !important;
+  opacity:1 !important;
+}
+html[data-theme="dark"] body .features .feature-card h3{
+  color:#fffaf6 !important;
+  opacity:1 !important;
+}
+html[data-theme="dark"] body .features .feature-card p{
+  color:#dfccbf !important;
+  opacity:1 !important;
+}
+
+/* EXACT how-it-works cards */
+html[data-theme="light"] body .how .step h3{
+  color:#2b1a12 !important;
+  opacity:1 !important;
+}
+html[data-theme="light"] body .how .step p{
+  color:#665348 !important;
+  opacity:1 !important;
+}
+html[data-theme="dark"] body .how .step h3{
+  color:#fffaf6 !important;
+  opacity:1 !important;
+}
+html[data-theme="dark"] body .how .step p{
+  color:#dfccbf !important;
+  opacity:1 !important;
+}
+
+/* Navbar create button must always be readable */
+html[data-theme="light"] body .btn-create-small,
+html[data-theme="dark"] body .btn-create-small,
+body .btn-create-small{
+  color:#fffaf6 !important;
+  opacity:1 !important;
+}
+
+/* Dashboard dark action buttons */
+html[data-theme="light"] body .event-card .btn-primary,
+html[data-theme="light"] body .event-card .primary,
+html[data-theme="light"] body .event-card button.primary,
+html[data-theme="light"] body .event-card a.primary,
+html[data-theme="dark"] body .event-card .btn-primary,
+html[data-theme="dark"] body .event-card .primary,
+html[data-theme="dark"] body .event-card button.primary,
+html[data-theme="dark"] body .event-card a.primary{
+  color:#fffaf6 !important;
+  opacity:1 !important;
+}
+
+/* During switch animation keep text at readable endpoint colors */
+html.mm-theme-changing[data-theme="light"] body .features .section-title h2,
+html.mm-theme-changing[data-theme="light"] body .features .feature-card h3,
+html.mm-theme-changing[data-theme="light"] body .how .step h3{
+  color:#2b1a12 !important;
+}
+html.mm-theme-changing[data-theme="light"] body .features .feature-card p,
+html.mm-theme-changing[data-theme="light"] body .how .step p{
+  color:#665348 !important;
+}
+html.mm-theme-changing[data-theme="dark"] body .features .section-title h2,
+html.mm-theme-changing[data-theme="dark"] body .features .feature-card h3,
+html.mm-theme-changing[data-theme="dark"] body .how .step h3{
+  color:#fffaf6 !important;
+}
+html.mm-theme-changing[data-theme="dark"] body .features .feature-card p,
+html.mm-theme-changing[data-theme="dark"] body .how .step p{
+  color:#dfccbf !important;
+}
+
+/* Google Drive buttons — emphasize connect/reconnect, soften disconnect */
+.drive-button,
+#connectDriveButton,
+#reconnectDriveButton{
+  background:linear-gradient(135deg,var(--accent),var(--accent-deep) 55%,var(--accent-light)) !important;
+  color:#fffaf6 !important;
+  border-color:rgba(255,255,255,.28) !important;
+  box-shadow:
+    inset 0 1px 0 rgba(255,255,255,.35),
+    0 10px 26px rgba(105,68,43,.22),
+    var(--glow) !important;
+}
+
+#disconnectDriveButton{
+  background:rgba(255,255,255,.12) !important;
+  color:var(--muted) !important;
+  border-color:var(--glass-edge) !important;
+  box-shadow:none !important;
+  opacity:.78;
+}
+
+
+/* =========================================================
+   CONTRAST SYSTEM v6
+   Aturan utama:
+   - Permukaan terang / silver => teks gelap
+   - Permukaan gelap => teks terang
+========================================================= */
+
+/* ---------- LIGHT / SILVER SURFACES ---------- */
+/* Bagian-bagian ini memang tampil putih/silver, termasuk saat dark mode. */
+.event-stat,
+.event-owner,
+.event-slug,
+.user-stat,
+.provider-box,
+.gallery .stat,
+.stat{
+  background:rgba(246,243,239,.92) !important;
+  border-color:rgba(211,201,192,.78) !important;
+  color:#2b211b !important;
+  -webkit-backdrop-filter:blur(16px) saturate(135%) !important;
+  backdrop-filter:blur(16px) saturate(135%) !important;
+}
+
+.event-stat *,
+.event-owner *,
+.event-slug *,
+.user-stat *,
+.provider-box *,
+.gallery .stat *,
+.stat *{
+  color:#2b211b !important;
+}
+
+/* label kecil di permukaan silver */
+.event-stat small,
+.user-stat small,
+.provider-desc,
+.event-owner,
+.event-slug{
+  color:#6f6259 !important;
+}
+
+/* ---------- EVENT BUTTONS ---------- */
+/* Tombol terang => teks gelap */
+.event-button{
+  background:rgba(250,248,245,.94) !important;
+  border-color:rgba(215,205,197,.88) !important;
+  color:#241d18 !important;
+}
+
+.event-button *,
+.event-button:link,
+.event-button:visited{
+  color:#241d18 !important;
+}
+
+/* Tombol Buka Acara memang gelap => teks harus putih */
+.event-button.dark,
+a.event-button.dark,
+button.event-button.dark{
+  background:#292623 !important;
+  border-color:#292623 !important;
+  color:#fffaf6 !important;
+  box-shadow:
+    inset 0 1px 0 rgba(255,255,255,.09),
+    0 10px 24px rgba(0,0,0,.18) !important;
+}
+
+.event-button.dark *,
+.event-button.dark:link,
+.event-button.dark:visited{
+  color:#fffaf6 !important;
+}
+
+/* Tombol QR yang warnanya cream/silver => teks gelap */
+.event-button.qr{
+  background:#eee7df !important;
+  border-color:#d7c8bb !important;
+  color:#2b211b !important;
+}
+
+/* ---------- DASHBOARD DRIVE ---------- */
+/* Hubungkan Google Drive paling menonjol */
+#connectDriveButton,
+#reconnectDriveButton{
+  background:linear-gradient(
+    135deg,
+    var(--accent),
+    var(--accent-deep) 54%,
+    var(--accent-light)
+  ) !important;
+  color:#fffaf6 !important;
+  border-color:rgba(255,255,255,.26) !important;
+  opacity:1 !important;
+  box-shadow:
+    inset 0 1px 0 rgba(255,255,255,.34),
+    0 10px 26px rgba(88,55,34,.24),
+    var(--glow) !important;
+}
+
+#connectDriveButton *,
+#reconnectDriveButton *{
+  color:#fffaf6 !important;
+}
+
+/* Putuskan harus tetap jelas, tetapi tidak lebih dominan dari Hubungkan */
+#disconnectDriveButton{
+  background:#fff1ef !important;
+  color:#9a3f39 !important;
+  border:1px solid #e3bdb8 !important;
+  opacity:1 !important;
+  box-shadow:0 7px 18px rgba(116,46,41,.09) !important;
+}
+
+html[data-theme="dark"] #disconnectDriveButton{
+  background:#3a1715 !important;
+  color:#ffd9d4 !important;
+  border-color:#7d3934 !important;
+}
+
+#disconnectDriveButton *{
+  color:inherit !important;
+}
+
+/* ---------- GALLERY ---------- */
+/* Counter foto/tamu memakai pil putih/silver, jadi teks selalu gelap */
+.gallery + *,
+.stats .stat,
+.hero .stat{
+  color:#2b211b !important;
+}
+
+html[data-theme="dark"] .gallery .stat,
+html[data-theme="dark"] .stats .stat,
+html[data-theme="dark"] .hero .stat{
+  background:rgba(247,244,240,.94) !important;
+  color:#2b211b !important;
+}
+
+html[data-theme="dark"] .gallery .stat *,
+html[data-theme="dark"] .stats .stat *,
+html[data-theme="dark"] .hero .stat *{
+  color:#2b211b !important;
+}
+
+/* ---------- FEATURE CARDS ON INDEX ---------- */
+/* Kartu silver di dark mode tetap teks hitam seperti pola yang Anda minta */
+html[data-theme="dark"] body .features .feature-card{
+  background:rgba(220,218,215,.88) !important;
+  border-color:rgba(245,241,236,.35) !important;
+  color:#231c18 !important;
+  box-shadow:
+    inset 0 1px 0 rgba(255,255,255,.42),
+    0 18px 42px rgba(0,0,0,.30) !important;
+}
+
+html[data-theme="dark"] body .features .feature-card h3,
+html[data-theme="dark"] body .features .feature-card strong{
+  color:#231c18 !important;
+}
+
+html[data-theme="dark"] body .features .feature-card p{
+  color:#5e5149 !important;
+}
+
+html[data-theme="dark"] body .features .feature-icon{
+  background:rgba(250,248,245,.76) !important;
+  color:#4d392c !important;
+}
+
+/* Judul section berada di background gelap, jadi tetap terang */
+html[data-theme="dark"] body .features .section-title h2{
+  color:#fffaf6 !important;
+}
+
+html[data-theme="dark"] body .features .section-title small{
+  color:#d8aa80 !important;
+}
+
+/* ---------- CTA ---------- */
+/* CTA gelap di light maupun dark mode => selalu teks terang */
+body .cta{
+  color:#fffaf6 !important;
+}
+
+body .cta h2{
+  color:#fffaf6 !important;
+}
+
+body .cta p{
+  color:#ead8ca !important;
+}
+
+body .cta .btn-primary,
+body .cta .create-link{
+  color:#fffaf6 !important;
+}
+
+/* ---------- THEME TRANSITION ---------- */
+/* Jangan ikut tween warna teks sampai melebur dengan background */
+html.mm-theme-changing .event-stat *,
+html.mm-theme-changing .event-owner,
+html.mm-theme-changing .event-slug,
+html.mm-theme-changing .user-stat *,
+html.mm-theme-changing .provider-box *,
+html.mm-theme-changing .event-button,
+html.mm-theme-changing .event-button *,
+html.mm-theme-changing #connectDriveButton,
+html.mm-theme-changing #reconnectDriveButton,
+html.mm-theme-changing #disconnectDriveButton,
+html.mm-theme-changing .features .feature-card h3,
+html.mm-theme-changing .features .feature-card p,
+html.mm-theme-changing .cta h2,
+html.mm-theme-changing .cta p{
+  transition-property:
+    background,
+    border-color,
+    box-shadow,
+    transform,
+    opacity !important;
+}
+
+
+/* =========================================================
+   UI POLISH v7 — FINAL SURFACE / TEXT CONTRAST SYSTEM
+   Prinsip:
+   1. Permukaan terang / silver = teks gelap.
+   2. Permukaan gelap / coklat = teks terang.
+   3. Tombol selalu mengikuti warna permukaannya.
+   4. Tidak ada teks yang "tenggelam" di panel.
+========================================================= */
+
+:root{
+  --surface-light:rgba(249,247,244,.94);
+  --surface-light-2:rgba(238,233,228,.94);
+  --surface-light-text:#261d18;
+  --surface-light-muted:#6c5f56;
+
+  --surface-dark:#292623;
+  --surface-dark-2:#171513;
+  --surface-dark-text:#fffaf6;
+  --surface-dark-muted:#dfcfc3;
+
+  --surface-brown-1:#8a5632;
+  --surface-brown-2:#6c3e25;
+  --surface-brown-3:#c99565;
+}
+
+
+/* =========================================================
+   DASHBOARD — CARDS / STATS / EVENT ACTIONS
+========================================================= */
+
+.summary-card,
+.storage-card,
+.event-card,
+.user-card,
+.drive-card{
+  overflow:hidden;
+}
+
+/* silver stat cells always use dark text */
+.event-stat,
+.user-stat,
+.provider-box,
+.event-owner,
+.event-slug{
+  background:var(--surface-light) !important;
+  border:1px solid rgba(205,195,187,.78) !important;
+  color:var(--surface-light-text) !important;
+}
+
+.event-stat *,
+.user-stat *,
+.provider-box *,
+.event-owner *,
+.event-slug *{
+  color:var(--surface-light-text) !important;
+}
+
+.event-stat small,
+.user-stat small,
+.provider-desc,
+.event-owner,
+.event-slug{
+  color:var(--surface-light-muted) !important;
+}
+
+
+/* Event buttons: default silver */
+.event-button,
+.event-button:link,
+.event-button:visited{
+  background:var(--surface-light) !important;
+  border:1px solid rgba(207,197,189,.88) !important;
+  color:var(--surface-light-text) !important;
+  box-shadow:
+    inset 0 1px 0 rgba(255,255,255,.72),
+    0 6px 15px rgba(65,48,38,.06) !important;
+}
+
+.event-button *,
+.event-button:link *,
+.event-button:visited *{
+  color:var(--surface-light-text) !important;
+}
+
+/* Main event action stays dark */
+.event-button.dark,
+.event-button.dark:link,
+.event-button.dark:visited,
+.open-event{
+  background:linear-gradient(145deg,#302c29,#1f1d1b) !important;
+  border-color:#302c29 !important;
+  color:var(--surface-dark-text) !important;
+  box-shadow:
+    inset 0 1px 0 rgba(255,255,255,.10),
+    0 8px 20px rgba(0,0,0,.16) !important;
+}
+
+.event-button.dark *,
+.open-event *{
+  color:var(--surface-dark-text) !important;
+}
+
+/* QR gets warm cream but text remains dark */
+.event-button.qr{
+  background:#eee6dd !important;
+  border-color:#d8c8ba !important;
+  color:#2c211a !important;
+}
+
+/* status toggle and copy/link buttons */
+.toggle-status,
+.copy-event,
+.open-gallery,
+.edit-event{
+  color:var(--surface-light-text) !important;
+}
+
+/* user management */
+.user-button,
+.user-button:link,
+.user-button:visited{
+  background:var(--surface-light) !important;
+  color:var(--surface-light-text) !important;
+  border-color:rgba(207,197,189,.88) !important;
+}
+
+.user-button.role-action{
+  background:linear-gradient(145deg,#302c29,#1f1d1b) !important;
+  color:var(--surface-dark-text) !important;
+  border-color:#302c29 !important;
+}
+
+.user-button.role-action.demote{
+  background:#fff2ef !important;
+  color:#8d3934 !important;
+  border-color:#e4bdb7 !important;
+}
+
+
+/* =========================================================
+   GOOGLE DRIVE — ALL THREE BUTTONS SAME PREMIUM STYLE
+========================================================= */
+
+.drive-button,
+#connectDriveButton,
+#reconnectDriveButton,
+#disconnectDriveButton{
+  background:linear-gradient(
+    135deg,
+    var(--surface-brown-1),
+    var(--surface-brown-2) 55%,
+    var(--surface-brown-3)
+  ) !important;
+
+  color:#fffaf6 !important;
+  border:1px solid rgba(255,255,255,.28) !important;
+  opacity:1 !important;
+
+  box-shadow:
+    inset 0 1px 0 rgba(255,255,255,.38),
+    0 10px 28px rgba(99,61,36,.23),
+    0 0 26px rgba(184,125,75,.15) !important;
+}
+
+.drive-button *,
+#connectDriveButton *,
+#reconnectDriveButton *,
+#disconnectDriveButton *{
+  color:#fffaf6 !important;
+}
+
+.drive-button:hover,
+#connectDriveButton:hover,
+#reconnectDriveButton:hover,
+#disconnectDriveButton:hover{
+  filter:brightness(1.05);
+  transform:translateY(-1px);
+}
+
+
+/* =========================================================
+   GALLERY — HERO / COUNTERS / OWNER CONTROLS
+========================================================= */
+
+/* Hero adopts theme; text never collides with its surface */
+.gallery-page .hero,
+body .page > .hero{
+  overflow:hidden;
+}
+
+html[data-theme="light"] body .page > .hero{
+  background:linear-gradient(
+    145deg,
+    rgba(255,255,255,.55),
+    rgba(246,232,216,.42)
+  ) !important;
+  color:#2b1d15 !important;
+}
+
+html[data-theme="light"] body .page > .hero h1{
+  color:#2b1d15 !important;
+}
+
+html[data-theme="light"] body .page > .hero .meta{
+  color:#6b594d !important;
+}
+
+html[data-theme="dark"] body .page > .hero{
+  background:linear-gradient(
+    145deg,
+    rgba(34,29,26,.80),
+    rgba(18,16,14,.72)
+  ) !important;
+  color:#fffaf6 !important;
+}
+
+html[data-theme="dark"] body .page > .hero h1{
+  color:#fffaf6 !important;
+}
+
+html[data-theme="dark"] body .page > .hero .meta{
+  color:#d7c5b8 !important;
+}
+
+/* stats are intentionally light/silver in BOTH themes => black text */
+.stats .stat,
+.hero .stat{
+  background:var(--surface-light) !important;
+  border:1px solid rgba(207,197,189,.84) !important;
+  color:var(--surface-light-text) !important;
+  box-shadow:
+    inset 0 1px 0 rgba(255,255,255,.76),
+    0 6px 16px rgba(58,44,35,.07) !important;
+}
+
+.stats .stat *,
+.hero .stat *{
+  color:var(--surface-light-text) !important;
+}
+
+/* gallery owner panel */
+.owner-tools{
+  padding:16px !important;
+  border-radius:22px !important;
+  align-items:center !important;
+  row-gap:12px !important;
+}
+
+html[data-theme="light"] .owner-tools{
+  background:rgba(248,241,233,.88) !important;
+  border-color:rgba(213,195,179,.82) !important;
+}
+
+html[data-theme="dark"] .owner-tools{
+  background:rgba(28,23,20,.86) !important;
+  border-color:rgba(229,196,166,.16) !important;
+}
+
+/* owner note sits clearly above the tabs */
+.owner-note{
+  width:100% !important;
+  margin:0 0 3px !important;
+  padding:0 2px !important;
+  line-height:1.55 !important;
+  font-size:12px !important;
+  font-weight:600 !important;
+}
+
+html[data-theme="light"] .owner-note{
+  color:#655349 !important;
+}
+
+html[data-theme="dark"] .owner-note{
+  color:#dcc9bc !important;
+}
+
+/* gallery tabs */
+.filter-tab{
+  min-height:42px !important;
+  padding:0 16px !important;
+  background:var(--surface-light) !important;
+  color:var(--surface-light-text) !important;
+  border-color:rgba(207,197,189,.84) !important;
+}
+
+.filter-tab *{
+  color:inherit !important;
+}
+
+.filter-tab.active{
+  background:linear-gradient(
+    135deg,
+    var(--surface-brown-1),
+    var(--surface-brown-2) 55%,
+    var(--surface-brown-3)
+  ) !important;
+  color:#fffaf6 !important;
+  border-color:rgba(255,255,255,.20) !important;
+}
+
+/* photo management buttons */
+.manage-photo{
+  background:rgba(68,59,52,.80) !important;
+  color:#fffaf6 !important;
+  border-color:rgba(255,255,255,.20) !important;
+}
+
+.manage-photo *{
+  color:#fffaf6 !important;
+}
+
+.hidden-badge{
+  background:rgba(28,25,22,.80) !important;
+  color:#fffaf6 !important;
+}
+
+
+/* =========================================================
+   INDEX — SILVER CARDS / CTA / HOW STEPS
+========================================================= */
+
+/* Dark mode feature cards are silver, therefore dark text */
+html[data-theme="dark"] body .features .feature-card{
+  background:linear-gradient(
+    145deg,
+    rgba(226,224,221,.94),
+    rgba(202,199,195,.90)
+  ) !important;
+  border-color:rgba(255,255,255,.34) !important;
+  color:#221b17 !important;
+}
+
+html[data-theme="dark"] body .features .feature-card h3{
+  color:#221b17 !important;
+}
+
+html[data-theme="dark"] body .features .feature-card p{
+  color:#5d5149 !important;
+}
+
+html[data-theme="dark"] body .features .feature-icon{
+  background:rgba(250,248,245,.82) !important;
+  color:#4a382d !important;
+}
+
+/* Light mode feature cards remain light and readable */
+html[data-theme="light"] body .features .feature-card{
+  background:linear-gradient(
+    145deg,
+    rgba(255,255,255,.55),
+    rgba(239,235,231,.82)
+  ) !important;
+  color:#2b1d15 !important;
+}
+
+html[data-theme="light"] body .features .feature-card h3{
+  color:#2b1d15 !important;
+}
+
+html[data-theme="light"] body .features .feature-card p{
+  color:#68564b !important;
+}
+
+/* How steps are light surfaces, so use dark text in both themes */
+.how .step{
+  background:var(--surface-light) !important;
+  border-color:rgba(207,197,189,.82) !important;
+  color:var(--surface-light-text) !important;
+}
+
+.how .step h3{
+  color:var(--surface-light-text) !important;
+}
+
+.how .step p{
+  color:var(--surface-light-muted) !important;
+}
+
+.how .number{
+  background:#272421 !important;
+  color:#fffaf6 !important;
+}
+
+/* CTA dark surface always white text */
+.cta,
+.cta h2{
+  color:#fffaf6 !important;
+}
+
+.cta p{
+  color:#e8d6c8 !important;
+}
+
+.cta .btn-primary,
+.cta .create-link{
+  color:#fffaf6 !important;
+}
+
+
+/* =========================================================
+   EVENT PAGE BUTTONS / INFO CARDS
+========================================================= */
+
+.info-box,
+.countdown-box{
+  color:var(--text) !important;
+}
+
+/* bright info surfaces => dark text */
+html[data-theme="light"] .info-box,
+html[data-theme="light"] .countdown-box{
+  color:#2b1d15 !important;
+}
+
+html[data-theme="light"] .info-box *,
+html[data-theme="light"] .countdown-box *{
+  color:#2b1d15 !important;
+}
+
+/* dark-mode glass surfaces => light text */
+html[data-theme="dark"] .info-box,
+html[data-theme="dark"] .countdown-box{
+  color:#fffaf6 !important;
+}
+
+html[data-theme="dark"] .info-box *,
+html[data-theme="dark"] .countdown-box *{
+  color:#fffaf6 !important;
+}
+
+/* primary event buttons */
+.main-button,
+.gallery-button,
+.resume-button{
+  background:linear-gradient(
+    135deg,
+    var(--surface-brown-1),
+    var(--surface-brown-2) 55%,
+    var(--surface-brown-3)
+  ) !important;
+  color:#fffaf6 !important;
+  border-color:rgba(255,255,255,.24) !important;
+}
+
+.main-button *,
+.gallery-button *,
+.resume-button *{
+  color:#fffaf6 !important;
+}
+
+/* secondary event button */
+.secondary-button{
+  background:var(--surface-light) !important;
+  color:var(--surface-light-text) !important;
+  border-color:rgba(207,197,189,.84) !important;
+}
+
+
+/* =========================================================
+   QR MODAL / GENERIC BUTTONS
+========================================================= */
+
+.qr-action{
+  background:var(--surface-light) !important;
+  color:var(--surface-light-text) !important;
+  border-color:rgba(207,197,189,.84) !important;
+}
+
+.qr-action.dark{
+  background:linear-gradient(145deg,#302c29,#1f1d1b) !important;
+  color:#fffaf6 !important;
+  border-color:#302c29 !important;
+}
+
+.qr-action *{
+  color:inherit !important;
+}
+
+
+/* =========================================================
+   ANIMATION SAFETY — TEXT DOES NOT FADE INTO THE SURFACE
+========================================================= */
+
+html.mm-theme-changing
+:is(
+  .event-stat,
+  .user-stat,
+  .provider-box,
+  .event-owner,
+  .event-slug,
+  .event-button,
+  .drive-button,
+  .stat,
+  .filter-tab,
+  .feature-card,
+  .step,
+  .secondary-button,
+  .qr-action
+) *,
+html.mm-theme-changing
+:is(
+  .event-stat,
+  .user-stat,
+  .provider-box,
+  .event-owner,
+  .event-slug,
+  .event-button,
+  .drive-button,
+  .stat,
+  .filter-tab,
+  .feature-card,
+  .step,
+  .secondary-button,
+  .qr-action
+){
+  transition-property:
+    background,
+    border-color,
+    box-shadow,
+    transform,
+    opacity !important;
+}
+
+
+/* =========================================================
+   MOBILE POLISH
+========================================================= */
+
+@media(max-width:700px){
+  .owner-tools{
+    padding:14px !important;
+  }
+
+  .filter-tab{
+    min-height:40px !important;
+    padding:0 14px !important;
+  }
+
+  .drive-actions{
+    gap:8px !important;
+  }
+
+  .drive-button{
+    min-height:42px !important;
+    padding:0 14px !important;
+  }
+
+  .event-button{
+    min-height:43px !important;
+  }
+}
