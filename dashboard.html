@@ -1345,6 +1345,203 @@ html[data-theme="dark"] .user-button.role-action.demote *{
 }
 </style>
 
+
+<style id="dashboard-password-reset-panel-v1">
+/* =========================================================
+   SUPERADMIN — PERMINTAAN RESET PASSWORD
+========================================================= */
+
+.reset-section{
+  display:none;
+}
+
+.reset-section.visible{
+  display:block;
+}
+
+.reset-list{
+  display:grid;
+  gap:12px;
+}
+
+.reset-card{
+  border:1px solid rgba(255,255,255,.72);
+  border-radius:22px;
+  padding:18px;
+  background:
+    linear-gradient(
+      145deg,
+      rgba(255,255,255,.70),
+      rgba(244,235,226,.88)
+    );
+  box-shadow:
+    inset 0 1px 0 rgba(255,255,255,.72),
+    0 10px 26px rgba(70,48,34,.06);
+}
+
+html[data-theme="dark"] .reset-card{
+  background:
+    linear-gradient(
+      145deg,
+      rgba(42,34,29,.92),
+      rgba(25,21,18,.92)
+    );
+  border-color:rgba(255,255,255,.10);
+}
+
+.reset-card-top{
+  display:flex;
+  align-items:flex-start;
+  justify-content:space-between;
+  gap:14px;
+}
+
+.reset-user-name{
+  font-size:17px;
+  font-weight:800;
+  color:#2b211b;
+}
+
+.reset-user-email{
+  margin-top:3px;
+  font-size:13px;
+  color:#71655d;
+  word-break:break-word;
+}
+
+html[data-theme="dark"] .reset-user-name{
+  color:#fff8f2;
+}
+
+html[data-theme="dark"] .reset-user-email{
+  color:#d0bfb3;
+}
+
+.reset-status{
+  flex:0 0 auto;
+  padding:7px 11px;
+  border-radius:999px;
+  font-size:11px;
+  font-weight:900;
+  letter-spacing:.04em;
+  border:1px solid transparent;
+}
+
+.reset-status.pending{
+  background:#fff1c9;
+  color:#6f4b08;
+  border-color:#ead69a;
+}
+
+.reset-status.approved{
+  background:#e8f6eb;
+  color:#246437;
+  border-color:#cbe7d2;
+}
+
+.reset-status.rejected,
+.reset-status.expired{
+  background:#fdeceb;
+  color:#8f2f2a;
+  border-color:#efcfcc;
+}
+
+.reset-status.used{
+  background:#ece8e4;
+  color:#5e5148;
+  border-color:#d8d0c9;
+}
+
+.reset-meta{
+  margin-top:13px;
+  display:flex;
+  flex-wrap:wrap;
+  gap:8px 16px;
+  font-size:12px;
+  color:#786b62;
+}
+
+html[data-theme="dark"] .reset-meta{
+  color:#c8b7aa;
+}
+
+.reset-actions{
+  margin-top:15px;
+  display:flex;
+  gap:10px;
+}
+
+.reset-button{
+  min-height:42px;
+  padding:0 16px;
+  border-radius:999px;
+  border:1px solid transparent;
+  font-weight:800;
+  cursor:pointer;
+}
+
+.reset-button.approve{
+  background:linear-gradient(135deg,#8a5632,#6c3e25 55%,#c99565);
+  color:#fff;
+  border-color:rgba(255,255,255,.24);
+}
+
+.reset-button.reject{
+  background:#fff2ef;
+  color:#8f3d37;
+  border-color:#e4bdb7;
+}
+
+.reset-button:disabled{
+  opacity:.58;
+  cursor:not-allowed;
+}
+
+.reset-empty{
+  padding:20px;
+  border-radius:18px;
+  background:rgba(255,255,255,.62);
+  border:1px solid rgba(255,255,255,.72);
+  color:#6d6158;
+  text-align:center;
+}
+
+html[data-theme="dark"] .reset-empty{
+  background:rgba(255,255,255,.05);
+  border-color:rgba(255,255,255,.10);
+  color:#cdbbaf;
+}
+
+.reset-count-badge{
+  display:inline-flex;
+  align-items:center;
+  justify-content:center;
+  min-width:28px;
+  height:28px;
+  padding:0 8px;
+  margin-left:8px;
+  border-radius:999px;
+  background:#29241f;
+  color:#fff;
+  font-size:12px;
+  font-weight:900;
+}
+
+@media(max-width:650px){
+  .reset-card-top{
+    flex-direction:column;
+  }
+
+  .reset-actions{
+    flex-direction:column;
+  }
+
+  .reset-button{
+    width:100%;
+  }
+}
+</style>
+
 </head>
 
 <body>
@@ -1586,6 +1783,39 @@ html[data-theme="dark"] .user-button.role-action.demote *{
   </section>
 
 
+
+  <section class="section reset-section" id="resetSection">
+
+    <div class="section-head">
+
+      <div>
+
+        <div class="eyebrow">
+          Superadmin
+        </div>
+
+        <div class="section-title">
+          Permintaan Reset Password
+          <span class="reset-count-badge" id="resetPendingCount">0</span>
+        </div>
+
+      </div>
+
+      <button class="button" id="refreshResetRequests">
+        ↻ Muat ulang
+      </button>
+
+    </div>
+
+    <div class="status-box" id="resetStatus">
+      Memuat permintaan reset...
+    </div>
+
+    <div class="reset-list" id="resetList"></div>
+
+  </section>
+
+
   <section class="section users-section" id="usersSection">
 
     <div class="section-head">
@@ -1708,6 +1938,7 @@ let googleStatus = null;
 
 let allEvents = [];
 let allUsers = [];
+let allResetRequests = [];
 
 let activeOwnerFilter = null;
 
@@ -1723,6 +1954,18 @@ const eventsStatus =
 
 const usersSection =
   document.getElementById("usersSection");
+
+const resetSection =
+  document.getElementById("resetSection");
+
+const resetList =
+  document.getElementById("resetList");
+
+const resetStatus =
+  document.getElementById("resetStatus");
+
+const resetPendingCount =
+  document.getElementById("resetPendingCount");
 
 const usersList =
   document.getElementById("usersList");
@@ -1919,6 +2162,10 @@ function renderAccount(user){
       "visible"
     );
 
+    resetSection.classList.add(
+      "visible"
+    );
+
   }else if(
     user.role === "admin"
   ){
@@ -1934,12 +2181,20 @@ function renderAccount(user){
       "visible"
     );
 
+    resetSection.classList.remove(
+      "visible"
+    );
+
   }else{
 
     badge.textContent =
       "USER";
 
     usersSection.classList.remove(
+      "visible"
+    );
+
+    resetSection.classList.remove(
       "visible"
     );
   }
@@ -3443,6 +3698,7 @@ async function loadEvents(){
       "superadmin"
     ){
 
+      await loadResetRequests();
       await loadUsers();
     }
 
@@ -3818,6 +4074,338 @@ function createUserCard(user){
 }
 
 
+
+function resetStatusLabel(status){
+
+  const labels = {
+    pending: "MENUNGGU",
+    approved: "DISETUJUI",
+    rejected: "DITOLAK",
+    expired: "KEDALUWARSA",
+    used: "SELESAI"
+  };
+
+  return labels[status] || String(status || "-").toUpperCase();
+}
+
+
+function formatResetDate(value){
+
+  if(!value){
+    return "-";
+  }
+
+  const date = new Date(value);
+
+  if(Number.isNaN(date.getTime())){
+    return value;
+  }
+
+  return new Intl.DateTimeFormat(
+    "id-ID",
+    {
+      dateStyle:"medium",
+      timeStyle:"short"
+    }
+  ).format(date);
+}
+
+
+function createResetCard(item){
+
+  const card =
+    document.createElement("div");
+
+  card.className =
+    "reset-card";
+
+  const status =
+    String(item.status || "pending")
+      .toLowerCase();
+
+  card.innerHTML = `
+    <div class="reset-card-top">
+
+      <div>
+        <div class="reset-user-name">
+          ${escapeHtml(item.name || "Pengguna")}
+        </div>
+
+        <div class="reset-user-email">
+          ${escapeHtml(item.email || "-")}
+        </div>
+      </div>
+
+      <span class="reset-status ${escapeHtml(status)}">
+        ${escapeHtml(resetStatusLabel(status))}
+      </span>
+
+    </div>
+
+    <div class="reset-meta">
+      <span>
+        Diajukan:
+        <strong>${escapeHtml(formatResetDate(item.created_at))}</strong>
+      </span>
+
+      <span>
+        Berlaku sampai:
+        <strong>${escapeHtml(formatResetDate(item.expires_at))}</strong>
+      </span>
+    </div>
+
+    ${
+      status === "pending"
+        ? `
+          <div class="reset-actions">
+            <button
+              class="reset-button approve"
+              data-action="approve"
+            >
+              ✓ Setujui
+            </button>
+
+            <button
+              class="reset-button reject"
+              data-action="reject"
+            >
+              ✕ Tolak
+            </button>
+          </div>
+        `
+        : ""
+    }
+  `;
+
+
+  if(status === "pending"){
+
+    const approveButton =
+      card.querySelector(
+        '[data-action="approve"]'
+      );
+
+    const rejectButton =
+      card.querySelector(
+        '[data-action="reject"]'
+      );
+
+
+    approveButton.addEventListener(
+      "click",
+      function(){
+
+        processResetRequest(
+          item,
+          "approve",
+          approveButton,
+          rejectButton
+        );
+      }
+    );
+
+
+    rejectButton.addEventListener(
+      "click",
+      function(){
+
+        processResetRequest(
+          item,
+          "reject",
+          approveButton,
+          rejectButton
+        );
+      }
+    );
+  }
+
+
+  return card;
+}
+
+
+function renderResetRequests(){
+
+  resetList.innerHTML = "";
+
+  const pendingCount =
+    allResetRequests.filter(
+      item =>
+        String(item.status)
+          .toLowerCase() ===
+        "pending"
+    ).length;
+
+  resetPendingCount.textContent =
+    pendingCount;
+
+
+  if(allResetRequests.length === 0){
+
+    resetStatus.style.display =
+      "none";
+
+    resetList.innerHTML = `
+      <div class="reset-empty">
+        Belum ada permintaan reset password melalui admin.
+      </div>
+    `;
+
+    return;
+  }
+
+
+  resetStatus.style.display =
+    "none";
+
+
+  allResetRequests.forEach(
+    item => {
+
+      resetList.appendChild(
+        createResetCard(item)
+      );
+    }
+  );
+}
+
+
+async function processResetRequest(
+  item,
+  action,
+  approveButton,
+  rejectButton
+){
+
+  const isApprove =
+    action === "approve";
+
+  const question =
+    isApprove
+      ? `Setujui reset password untuk ${item.email}?`
+      : `Tolak reset password untuk ${item.email}?`;
+
+
+  if(!confirm(question)){
+    return;
+  }
+
+
+  approveButton.disabled = true;
+  rejectButton.disabled = true;
+
+
+  try{
+
+    const {
+      response,
+      data
+    } =
+      await apiFetch(
+        `/api/admin/password-resets/${action}`,
+        {
+          method:"POST",
+          body:JSON.stringify({
+            requestId:item.id
+          })
+        }
+      );
+
+
+    if(
+      !response.ok ||
+      !data.success
+    ){
+      throw new Error(
+        data.error ||
+        "Permintaan reset gagal diproses."
+      );
+    }
+
+
+    showToast(
+      data.message ||
+      (
+        isApprove
+          ? "Permintaan reset disetujui."
+          : "Permintaan reset ditolak."
+      )
+    );
+
+
+    await loadResetRequests();
+
+  }catch(error){
+
+    approveButton.disabled = false;
+    rejectButton.disabled = false;
+
+    showToast(
+      error.message ||
+      "Gagal memproses permintaan reset."
+    );
+  }
+}
+
+
+async function loadResetRequests(){
+
+  if(
+    !currentUser ||
+    currentUser.role !== "superadmin"
+  ){
+    return;
+  }
+
+
+  resetStatus.style.display =
+    "block";
+
+  resetStatus.textContent =
+    "Memuat permintaan reset...";
+
+  resetList.innerHTML = "";
+
+
+  try{
+
+    const {
+      response,
+      data
+    } =
+      await apiFetch(
+        "/api/admin/password-resets"
+      );
+
+
+    if(
+      !response.ok ||
+      !data.success
+    ){
+      throw new Error(
+        data.error ||
+        "Gagal memuat permintaan reset."
+      );
+    }
+
+
+    allResetRequests =
+      data.requests || [];
+
+
+    renderResetRequests();
+
+  }catch(error){
+
+    resetStatus.style.display =
+      "block";
+
+    resetStatus.textContent =
+      error.message;
+  }
+}
+
+
 async function loadUsers(){
 
   usersStatus.style.display =
@@ -4017,6 +4605,15 @@ document.getElementById(
       "Dashboard diperbarui"
     );
   }
+);
+
+
+
+document.getElementById(
+  "refreshResetRequests"
+).addEventListener(
+  "click",
+  loadResetRequests
 );
 
 
