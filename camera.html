@@ -69,8 +69,9 @@ video{
     20px;
 
   display:flex;
-  justify-content:space-between;
+  justify-content:flex-start;
   align-items:center;
+  gap:12px;
 
   background:linear-gradient(
     rgba(0,0,0,.58),
@@ -100,6 +101,49 @@ video{
   margin-top:3px;
   font-size:9px;
   opacity:.7;
+}
+
+.topbar-left{
+  display:flex;
+  align-items:center;
+  flex:0 0 auto;
+}
+
+.event-info{
+  flex:1;
+  min-width:0;
+}
+
+.flash-toggle{
+  width:42px;
+  height:42px;
+  display:flex;
+  align-items:center;
+  justify-content:center;
+  border:1px solid rgba(255,255,255,.22);
+  border-radius:50%;
+  background:rgba(0,0,0,.35);
+  backdrop-filter:blur(10px);
+  -webkit-backdrop-filter:blur(10px);
+  color:#fff;
+  font-size:18px;
+  font-weight:800;
+  cursor:pointer;
+  transition:.18s ease;
+}
+
+.flash-toggle.active{
+  background:#fff;
+  border-color:#fff;
+  color:#211d1a;
+  box-shadow:0 0 20px rgba(255,226,138,.42);
+}
+
+.flash-toggle.unsupported,
+.flash-toggle:disabled{
+  opacity:.42;
+  cursor:not-allowed;
+  box-shadow:none;
 }
 
 .exit{
@@ -355,6 +399,7 @@ video{
   display:flex;
   align-items:center;
   gap:10px;
+  margin-left:auto;
 }
 
 .timer-toggle{
@@ -791,6 +836,16 @@ html[data-theme="dark"] .upload-spinner{border-color:rgba(255,255,255,.15);borde
 
   <div class="topbar">
 
+    <div class="topbar-left">
+      <button
+        class="flash-toggle"
+        id="flashToggle"
+        aria-label="Flash mati"
+        title="Flash mati"
+        type="button"
+      >⚡</button>
+    </div>
+
     <div class="event-info">
 
       <small id="guestName">
@@ -1183,6 +1238,13 @@ let activeFilter =
   "original";
 
 
+let torchSupported =
+  false;
+
+let torchEnabled =
+  false;
+
+
 const FILTERS = {
 
   original:{
@@ -1492,6 +1554,12 @@ const flash =
   );
 
 
+const flashToggle =
+  document.getElementById(
+    "flashToggle"
+  );
+
+
 const limitScreen =
   document.getElementById(
     "limitScreen"
@@ -1519,6 +1587,122 @@ const filtersBar =
   document.getElementById(
     "filters"
   );
+
+
+/* =====================================================
+   FLASH / TORCH
+   Default mati. Aktif hanya jika browser + kamera
+   mendukung torch hardware.
+===================================================== */
+
+function getActiveVideoTrack(){
+  if(
+    !stream ||
+    !stream.getVideoTracks
+  ){
+    return null;
+  }
+
+  return stream.getVideoTracks()[0] || null;
+}
+
+function renderFlashButton(){
+  if(!flashToggle){
+    return;
+  }
+
+  const available =
+    Boolean(torchSupported);
+
+  flashToggle.classList.toggle(
+    "active",
+    available && torchEnabled
+  );
+
+  flashToggle.classList.toggle(
+    "unsupported",
+    !available
+  );
+
+  flashToggle.disabled =
+    !available;
+
+  const label =
+    !available
+    ? "Flash tidak tersedia pada kamera ini"
+    : (torchEnabled ? "Flash aktif" : "Flash mati");
+
+  flashToggle.title = label;
+  flashToggle.setAttribute("aria-label",label);
+}
+
+async function setTorchEnabled(nextState){
+  const track = getActiveVideoTrack();
+
+  if(
+    !track ||
+    !torchSupported
+  ){
+    torchEnabled = false;
+    renderFlashButton();
+    return false;
+  }
+
+  try{
+    await track.applyConstraints({
+      advanced:[{
+        torch:Boolean(nextState)
+      }]
+    });
+
+    torchEnabled = Boolean(nextState);
+    renderFlashButton();
+    return true;
+
+  }catch(error){
+    console.warn("Flash tidak dapat diubah:",error);
+    torchEnabled = false;
+    renderFlashButton();
+    return false;
+  }
+}
+
+async function refreshTorchSupport(){
+  torchSupported = false;
+  torchEnabled = false;
+
+  const track = getActiveVideoTrack();
+
+  if(
+    track &&
+    typeof track.getCapabilities === "function"
+  ){
+    const capabilities = track.getCapabilities();
+    torchSupported = Boolean(capabilities?.torch);
+  }
+
+  renderFlashButton();
+
+  if(torchSupported){
+    await setTorchEnabled(false);
+  }
+}
+
+flashToggle.addEventListener(
+  "click",
+  async function(){
+    if(
+      !torchSupported ||
+      !stream
+    ){
+      return;
+    }
+
+    flashToggle.disabled = true;
+    await setTorchEnabled(!torchEnabled);
+    renderFlashButton();
+  }
+);
 
 
 /* =====================================================
@@ -3167,6 +3351,8 @@ async function startCamera(){
 
     applyFilterPreview();
 
+    await refreshTorchSupport();
+
 
     permissionScreen.style.display =
       "none";
@@ -3210,6 +3396,10 @@ function stopCamera(){
 
   video.srcObject =
     null;
+
+  torchSupported = false;
+  torchEnabled = false;
+  renderFlashButton();
 }
 
 
@@ -3313,6 +3503,9 @@ async function runCaptureTimer(){
   mirrorToggle.disabled =
     true;
 
+  flashToggle.disabled =
+    true;
+
   timerCountdown.classList.add(
     "visible"
   );
@@ -3383,6 +3576,8 @@ async function runCaptureTimer(){
 
     mirrorToggle.disabled =
       false;
+
+    renderFlashButton();
   }
 }
 
@@ -3488,6 +3683,12 @@ function setUploadBusy(busy){
   timerToggle.disabled = busy;
   switchButton.disabled = busy;
   mirrorToggle.disabled = busy;
+
+  if(busy){
+    flashToggle.disabled = true;
+  }else{
+    renderFlashButton();
+  }
 }
 
 /* =====================================================
